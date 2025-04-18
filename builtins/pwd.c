@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_echo.c                                          :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 14:37:25 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/17 17:57:04 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/04/11 17:48:05 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/04/11 17:55:04 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtins.h"
 
-void    my_echo(char *op, char *string)
+void get_pwd()
 {
-    printf("%s", string);
-    if (op && *op)
-        printf("\n");
-        
+    char *pwd;
+
+    pwd = getcwd(NULL, 0);
+    if (pwd == NULL)
+        perror("pwd");
+    else
+        printf("%s\n", pwd);
+    free(pwd);
 }

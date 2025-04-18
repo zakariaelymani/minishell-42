@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_echo.c                                          :+:      :+:    :+:   */
+/*   putuHEX.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 14:37:25 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/17 17:57:04 by zel-yama         ###   ########.fr       */
+/*   Created: 2024/12/03 11:24:41 by zel-yama          #+#    #+#             */
+/*   Updated: 2024/12/06 20:41:54 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "ft_printf.h"
 
-void    my_echo(char *op, char *string)
+void	ft_put_upercase(unsigned int nb, int *count)
 {
-    printf("%s", string);
-    if (op && *op)
-        printf("\n");
-        
+	if (nb >= 16)
+	{
+		ft_put_upercase(nb / 16, count);
+		ft_putchar("0123456789ABCDEF"[nb % 16], count);
+	}
+	else
+	{
+		ft_putchar("0123456789ABCDEF"[nb % 16], count);
+	}
 }

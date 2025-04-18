@@ -1,0 +1,65 @@
+bash-3.2$ ls <> t.txt 
+Makefile                builtins                exit.c                  export.o                file_of_content.txt     minishell               minishell_cmd.o         my_echo.c               my_pwd.o                t.txt                   unset.c
+README.md               env.c                   exit.o                  file.txt                main.c                  minishell.h             my_cd.c                 my_echo.o               print                   text.c                  unset.o
+a.out                   env.o                   export.c                file.txyt               main.o                  minishell_cmd.c         my_cd.o                 my_pwd.c                struct.h                tools
+
+bash-3.2$ ls  <<  t
+> ef
+> ls  <<  tde
+> eds
+> ls  <<  t
+> eef
+> ls  <<  te
+> e
+> ls >> <<  t
+> ls  <<  tese
+> ls  <<  te
+> t
+Makefile                builtins                exit.c                  export.o                file_of_content.txt     minishell               minishell_cmd.o         my_echo.c               my_pwd.o                t.txt                   unset.c
+README.md               env.c                   exit.o                  file.txt                main.c                  minishell.h             my_cd.c                 my_echo.o               print                   text.c                  unset.o
+a.out
+i don't know but the herodoc is excuting first and ls  but some times command excuting first 
+bash-3.2$ cat text.c << t
+> ls
+> ls
+> ls
+> i
+> t
+#include <stdlib.h>
+#include <stdio.h>
+//char *getenv(const char *name);
+
+int main(int argc, char *argv[])
+{
+    char *var;
+
+    var = getenv(argv[1]);
+    printf("%s \n", var);
+    return (0);}
+here we don't see the out put of herdoc  althout  cat take many file and same time 
+
+ cat << t my_echo.c 
+> tkef
+> tie
+> t
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   my_echo.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/15 14:37:25 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/04/17 17:57:04 by zel-yama         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+void    my_echo(char *op, char *string)
+{
+    printf("%s", string);
+    if (op && *op)
+        printf("\n");
+}
+i don't know here cat do this 

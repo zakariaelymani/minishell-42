@@ -1,21 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_echo.c                                          :+:      :+:    :+:   */
+/*   putnber.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 14:37:25 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/17 17:57:04 by zel-yama         ###   ########.fr       */
+/*   Created: 2024/12/03 09:44:20 by zel-yama          #+#    #+#             */
+/*   Updated: 2024/12/08 13:27:20 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "ft_printf.h"
 
-void    my_echo(char *op, char *string)
+void	ft_putnbr(int nb, int *count)
 {
-    printf("%s", string);
-    if (op && *op)
-        printf("\n");
-        
+	if (nb == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		*count += 11;
+	}
+	else if (nb < 0)
+	{
+		ft_putchar('-', count);
+		nb = -nb;
+		ft_putnbr (nb, count);
+	}
+	else if (nb > 9)
+	{
+		ft_putnbr (nb / 10, count);
+		ft_putchar ((nb % 10 + '0'), count);
+	}
+	else
+	{
+		ft_putchar ((nb + '0'), count);
+	}
 }

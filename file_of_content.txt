@@ -1,0 +1,128 @@
+	📂 opendir()
+Purpose: Opens a directory so you can read its contents.
+
+	✅ Return:
+On success: Returns a pointer to a DIR stream.
+
+On failure: Returns NULL.
+
+	❌ Failure Reasons:
+ENOENT → The directory does not exist
+
+EACCES → You don’t have permission to open it
+
+ENOTDIR → The path is not a directory
+
+📄 readdir()
+Purpose: Reads the next entry in the directory stream (i.e., contents of the opened directory – files and subdirectories).
+
+	✅ Return:
+On success: Returns a pointer to a struct dirent (contains info like filename).
+
+When there are no more entries: Returns NULL.
+
+On error: Returns NULL and sets errno.
+
+	📦 struct dirent fields:
+d_name → Name of the file or directory (as a string)
+
+d_type → Type (file, directory, symlink...) – ⚠️ Not always reliable on all systems
+
+d_ino → Inode number
+
+📊 stat(), lstat(), fstat() — Overview
+These functions fill a struct stat with file information (size, type, permissions, timestamps, etc.).
+
+	❌ Failure Reasons:
+stat() / lstat():
+
+File doesn’t exist
+
+No permissions
+
+Broken symbolic link
+
+fstat():
+
+Invalid or bad file descripto
+
+    	dev_t     st_dev;     // ID of device containing file
+    	ino_t     st_ino;     // Inode number
+    	mode_t    st_mode;    // File type and permissions
+    	nlink_t   st_nlink;   // Number of hard links
+    	uid_t     st_uid;     // User ID of owner
+    	gid_t     st_gid;     // Group ID of owner
+    	off_t     st_size;    // File size in bytes
+    	time_t    st_mtime;   // Last modified time
+	S_ISREG(st.st_mode)   // Regular file
+	S_ISDIR(st.st_mode)   // Directory
+	S_ISLNK(st.st_mode)   // Symbolic link
+	S_ISCHR(st.st_mode)   // Character device
+	S_ISBLK(st.st_mode)   // Block device
+Cd : 
+Problem	Cause		Fix
+Path doesn't exist	Typo or wrong path		Check with access()
+Permission denied	No read/execute permission	Use chmod, check ownership
+Not a directory		Path points to a file			Validate with stat()
+Doesn’t affect shell	chdir() done in child process	Run cd in parent process
+
+wait(): take int status of child return -1 if they failed and return  child process id on success 
+Fialure reasons: no child processes exist. if  interrupt by signal EINTR  
+
+Waitpid(): take pid of child , -1 wait for any 0 wait for any child in the same process group 
+ And she take status options 0 block until the child terminates WHOHANG return immediately if no child has exited WNOHANG = return immediately if no child has exited.
+
+WUNTRACED = also return if child is stopped.
+
+WCONTINUED = return if a stopped child was resumed.
+
+RETURN VALUE: 
+Childe pid on success, 0 if on child was used and child hasn't changed state -1 on failure errors set ;
+
+pid_t wait3(int *status, int options, struct rusage *rusage);
+WAIT3(_-): first tow argument is like of waitpid but the last one  struct to get resource usage (CPU time, memory used, etc.) of the child.
+THE RETURN VALUE IS THE SAME LIKE WAIPID
+
+
+pid_t wait4(pid_t pid, int *status, int options, struct rusage *rusage);
+
+SIGNAL 
+void (*signal(int signum, void (*handler)(int)))(int);
+Arguments: signum is sgnal number SIGINT = CTRL+C  SIGKILL SIGTERM SIGSEGV 
+
+RETUR VALUE: Returns the previous handler on success.
+
+Returns SIG_ERR on failure.
+
+WHY FAILURE ; invalid signumber 
+Or signal cannot be caught  :
+
+int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
+
+Act pointer to new action new handler and flags 
+Oldest pointer to store the old action can be NULL
+
+
+int isatty(int fd);
+
+Take file descriptor 
+Return value ; 1 -> it's terminal 0 -> is not a terminal errno -> is set on failure 
+Why it might fail: fd is Invalid 
+The file descriptor refers to non-terminal like file or socket 
+
+
+char *ttyname(int fd);
+Take file descriptor
+RETURN VALUE 
+Pointer to a string with terminal device path on success 
+NULL on failure errno is set 
+
+WHY IT MIGHT FIAL 
+
+Fd is not associated with terminal 
+Invalid fd
+On prermission 
+
+	int ttyslot(void);
+/mnt/homes/zel-yama/Desktop/philos
+

@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_echo.c                                          :+:      :+:    :+:   */
+/*   putchar.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 14:37:25 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/17 17:57:04 by zel-yama         ###   ########.fr       */
+/*   Created: 2024/12/03 09:41:42 by zel-yama          #+#    #+#             */
+/*   Updated: 2024/12/06 20:43:34 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "ft_printf.h"
 
-void    my_echo(char *op, char *string)
+void	ft_putchar(char c, int *count)
 {
-    printf("%s", string);
-    if (op && *op)
-        printf("\n");
-        
+	write(1, &c, 1);
+	*count += 1;
 }

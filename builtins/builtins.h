@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_echo.c                                          :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 14:37:25 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/17 17:57:04 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/04/11 16:23:46 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/04/11 16:59:14 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-void    my_echo(char *op, char *string)
-{
-    printf("%s", string);
-    if (op && *op)
-        printf("\n");
-        
-}
+#ifndef BUILTINS_H
+#define BUILTINS_H
+#include "../minishell.h"
+#endif
