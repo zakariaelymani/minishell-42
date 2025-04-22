@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:50:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/16 11:37:38 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/04/21 11:38:25 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ int		ft_isdigit(int c);
 int 	ft_atoi(const char *str);
 char	*ft_itoa(int n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
+char    *extract_key(char *value);
+long	norm_atoi(const char *str);
+void    change_value_var(t_env **env, char *var_name, char *new_val);
 
 #endif
 

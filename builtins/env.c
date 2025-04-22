@@ -1,25 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 17:48:05 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/11 17:55:04 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/04/13 10:38:16 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/04/19 11:54:28 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "minishell.h"
 
-void get_pwd()
+
+void print_strcut(t_env *env)
 {
-    char *pwd;
+	t_env *tmp;
 
-    pwd = getcwd(NULL, 0);
-    if (pwd == NULL)
-        perror("pwd");
-    else
-        printf("%s\n", pwd);
-    free(pwd);
+	tmp = env;
+	while (tmp)
+	{
+		printf("%s%s\n", tmp->key, tmp->value);
+		tmp = tmp->next;
+	}
+}
+
+void env_cmd(t_env *env)
+{
+	t_env *tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		if (tmp->status != -1)
+		{
+			if (tmp->value && *tmp->value)
+				printf("%s%s\n",tmp->key, tmp->value);
+			else 
+				printf ("%s\n", tmp->key);
+		}
+		tmp = tmp->next;
+	}
 }

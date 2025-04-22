@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   my_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 16:53:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/16 10:53:36 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/04/15 14:37:25 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/04/21 12:20:12 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtins.h"
 
-void ft_exit(int status)
+void    my_echo(char *op, char *string, t_env **env)
 {
-    write(1, "exit\n", 6);
-    exit(status);
+    ft_printf(string);
+    if (op && *op)
+        ft_printf("\n");
+    change_value_var(env, "_", "=echo");    
 }

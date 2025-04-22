@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 20:19:30 by zel-yama          #+#    #+#             */
-/*   Updated: 2024/12/08 13:30:23 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/04/21 10:56:51 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdarg.h>
+
 
 void	ft_putchar(char c, int *count);
 void	ft_putnbr(int nb, int *count);

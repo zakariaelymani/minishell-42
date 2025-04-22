@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:14:37 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/16 12:16:09 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/04/21 11:40:19 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,6 @@ t_env *creat_env(char **env)
 		i++;
 	}
 	minishell_cmd(&tmp);
+	change_value_var(&env, "SHELL", "=minishell");
 	return (tmp);
 }

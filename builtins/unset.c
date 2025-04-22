@@ -6,11 +6,11 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:27:03 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/15 18:36:21 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/04/21 12:20:18 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtins.h"
 
 
 
@@ -57,5 +57,6 @@ void unset(t_env **env, char *vars)
 	   i++;
     }
 	free_while(splited);
+    change_value_var(env, "_", "=unset");
    // ft_exit(0);
 }

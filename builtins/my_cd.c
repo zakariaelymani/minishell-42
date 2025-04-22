@@ -6,11 +6,11 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:53:32 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/15 16:55:31 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/04/21 12:19:48 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtins.h"
 
 //change oldpwd var in evn var  
 void change_old(t_env **env, char *tmp_path)

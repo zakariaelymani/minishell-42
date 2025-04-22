@@ -60,6 +60,10 @@ void    my_echo(char *op, char *string)
 {
     printf("%s", string);
     if (op && *op)
-        printf("\n");
+        printf("\n");`
 }
-i don't know here cat do this 
+i don't know here cat do this  
+
+Redirections (<, >) happen first on each side of the |.
+
+Pipes (|) happen second — after redirections are already set.
