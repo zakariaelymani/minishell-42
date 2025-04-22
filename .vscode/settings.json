@@ -4,5 +4,6 @@
         "tools.h": "c",
         "history.h": "c",
         "struct.h": "c"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
