@@ -51,7 +51,6 @@ int main(int argc, char *argv[], char *env[])
     (void)argv;
 	if (!env || !*env)
 		return (1);
-<<<<<<< HEAD
 	// if (argc > 2)
 	// 	return (0);
 	// env_new = creat_env(env);
@@ -72,24 +71,6 @@ int main(int argc, char *argv[], char *env[])
 	//   check_line(line, env_new);
 	  
     // }
-=======
-	if (argc > 2)
-		return (0);
-	
-
-	env_cmd(env_new);
-    while (1)
-    {
-      line = readline("minishell->");
-	  if (!line && !*line)
-	  {
-		write (2, "exit\n", 6);
-		break;
-	  }
-	  add_history(line);
-	  check_line(line, env_new);
-    }
->>>>>>> refs/remotes/origin/main
     
 }
 
