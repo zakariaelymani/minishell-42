@@ -51,13 +51,14 @@ int main(int argc, char *argv[], char *env[])
     (void)argv;
 	if (!env || !*env)
 		return (1);
-	if (argc > 2)
-		return (0);
-	env_new = creat_env(env);
-	export(&env_new, argv[1]);
-	print_strcut(env_new);
-	export(&env_new, NULL);
-	// env_cmd(env_new);
+	// if (argc > 2)
+	// 	return (0);
+	// env_new = creat_env(env);
+	// export(&env_new, argv[1]);
+	// print_strcut(env_new);
+	// export(&env_new, NULL);
+	// clone()
+	// // env_cmd(env_new);
     // while (1)
     // {
     //   line = readline("minishell->");
@@ -71,6 +72,5 @@ int main(int argc, char *argv[], char *env[])
 	  
     // }
     
-	
-
 }
+
