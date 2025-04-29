@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   putuHEX.c                                          :+:      :+:    :+:   */
+/*   free_and_joined.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 11:24:41 by zel-yama          #+#    #+#             */
-/*   Updated: 2024/12/06 20:41:54 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/04/22 18:20:30 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/04/28 16:17:55 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "tools.h"
 
-void	ft_put_upercase(unsigned int nb, int *count)
+char	*free_and_join(char *store, char *s)
 {
-	if (nb >= 16)
-	{
-		ft_put_upercase(nb / 16, count);
-		ft_putchar("0123456789ABCDEF"[nb % 16], count);
-	}
-	else
-	{
-		ft_putchar("0123456789ABCDEF"[nb % 16], count);
-	}
+	char	*str;
+
+	str = ft_strjoin(store, s);
+	if (store && *store)
+		free(store);
+	store = NULL;
+	return (str);
 }

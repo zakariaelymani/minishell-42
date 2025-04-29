@@ -6,13 +6,11 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:27:03 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/21 12:20:18 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/04/26 19:02:37 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-
-
 
 void removenode(t_env **env, char *var)
 {

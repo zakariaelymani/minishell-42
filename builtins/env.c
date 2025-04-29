@@ -6,11 +6,11 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:38:16 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/19 11:54:28 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/04/26 19:02:02 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtins.h"
 
 
 void print_strcut(t_env *env)

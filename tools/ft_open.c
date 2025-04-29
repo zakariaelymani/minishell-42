@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_open.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 14:44:39 by zel-yama          #+#    #+#             */
-/*   Updated: 2024/11/12 12:37:51 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/04/25 17:43:52 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/04/28 12:20:50 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "tools.h"
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_open(char *file_name, t_redir type)
 {
-	int	i;
+	int fd;
 
-	i = 0;
-	if (!s || fd < 0)
-		return ;
-	while (s[i])
+	if (type == INPUT)
+		fd = open(file_name, O_RDONLY);
+	else if (type == OUTPUT)
+		fd = open (file_name,  O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	else if (type == APPEND)
+		fd = open (file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
+	if (fd == -1)
 	{
-		write(fd, &s[i], 1);
-		i++;
+		perror("minishell");
+		exit(1);
 	}
+	return (fd);
 }

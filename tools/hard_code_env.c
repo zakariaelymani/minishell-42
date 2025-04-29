@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   puthex.c                                           :+:      :+:    :+:   */
+/*   hard_code_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 11:22:26 by zel-yama          #+#    #+#             */
-/*   Updated: 2024/12/06 20:39:19 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/04/24 14:54:45 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/04/25 17:59:56 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "tools.h"
 
-void	ft_puthex(unsigned int nb, int *count)
+t_env	*hard_code_env()
 {
-	if (nb >= 16)
-	{
-		ft_puthex(nb / 16, count);
-		ft_putchar("0123456789abcdef"[nb % 16], count);
-	}
-	else
-	{
-		ft_putchar("0123456789abcdef"[nb % 16], count);
-	}
+	t_env	*env;
+	char	*pwd;
+	char	*tmp;
+
+	tmp = getcwd(NULL, 0);
+	pwd = ft_strjoin("=", tmp);
+	free(tmp);
+	tmp = NULL;
+	env = node(ft_strjoin("PWD", pwd));
+	env->next = node("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
+	env->next->next = node("SHLVL=1");
+	env->next->next->next = node("_=/usr/bin/env");
+	
+	return (env);
 }

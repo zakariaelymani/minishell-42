@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 12:24:45 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/15 16:35:34 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/04/28 10:33:34 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ static char	**freplaces(unsigned long seats, char **s)
 	while (seats > 0)
 	{
 		free(s[seats - 1]);
+		S[seats - 1] = NULL;
 		seats--;
 	}
 	free(s);
+	s = NULL;
 	return (0);
 }
 

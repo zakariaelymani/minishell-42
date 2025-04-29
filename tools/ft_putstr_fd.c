@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   putadres.c                                         :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/05 14:31:09 by zel-yama          #+#    #+#             */
-/*   Updated: 2024/12/06 20:43:18 by zel-yama         ###   ########.fr       */
+/*   Created: 2024/10/29 14:44:39 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/04/22 18:45:26 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "tools.h"
 
-void	put_adress(size_t nb, int *count)
+void	ft_putstr_fd(char *s, int fd)
 {
-	char	*s;
+	int	i;
 
-	s = "0123456789abcdef";
-	if (nb >= 16)
+	i = 0;
+	if (!s || fd < 0)
+		return ;
+	while (s[i])
 	{
-		put_adress(nb / 16, count);
-		ft_putchar(s[nb % 16], count);
-	}
-	else
-	{
-		ft_putchar(s[nb % 16], count);
+		write(fd, &s[i], 1);
+		i++;
 	}
 }

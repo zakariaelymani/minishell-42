@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 09:58:50 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/15 16:35:15 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/04/22 21:12:34 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,16 @@ static char	*copin(char *str, const char *s1, const char *s2)
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-
 	char	*str;
 	size_t	len;
 	size_t	len2;
 
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (NULL);
+	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (ft_strdup(s1));
 	len = ft_strlen(s1);
 	len2 = ft_strlen(s2);
 	str = (char *)malloc(sizeof(char) * (len + len2 + 1));

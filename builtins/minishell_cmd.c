@@ -6,11 +6,11 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:14:37 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/21 11:40:19 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/04/26 19:19:45 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtins.h"
 
 char *join_equel(char *value)
 {
@@ -20,9 +20,6 @@ char *join_equel(char *value)
 	free(value);
 	return (joined);
 }
-
-
-
 //return value that be in shellvl if olthougth the problem if shell level is not valid we should turn to shlvl=1 or shelvl=0 if he is negative;  above this number or  is  include string 856124203 
 //check si SHLVL VALUE IS VALID		
 int	check_value_of_shlvl(char *val)
@@ -89,6 +86,6 @@ t_env *creat_env(char **env)
 		i++;
 	}
 	minishell_cmd(&tmp);
-	change_value_var(&env, "SHELL", "=minishell");
+	change_value_var(&tmp, "SHELL", "=minishell");
 	return (tmp);
 }

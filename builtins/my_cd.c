@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:53:32 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/21 12:19:48 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/04/26 19:04:41 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,33 @@ void change_old(t_env **env, char *tmp_path)
     }  
 }
 
-void change_dir(char *new_path, t_env **env)
+void change_dir(char **new_path, t_env **env)
 {
-    t_env   *tmp;
-    char    *tmp_path;
-    char    *path;
+	t_env   *tmp;
+	char    *tmp_path;
+	char    *path;
 
-    tmp = (*env);
-    if (!new_path || !*new_path || chdir(new_path) != 0)
-    {
-        perror("cd");
-       // exit(1);
-       return ;
-    }
-    while (tmp)
-    {
-        if (ft_strncmp(tmp->key, "PWD", 3) == 0 && ft_strlen(tmp->key) == 3)
-        {
-            tmp_path = ft_strdup(tmp->value);
-            free(tmp->value);
-            path = ft_strjoin("=", new_path);//THIS WELL ROMAVE IF FOUND TI USE LESS 
-            tmp->value = ft_strdup(path);
-            (free(path), change_old(env, tmp_path));
-            break;
-        }
-        tmp = tmp->next;
-    }
-    //exit(0);
+	tmp = (*env);
+	if (chdir(new_path[1]) != 0)
+	{
+		perror("cd");
+		exit(1);
+		return ;
+	}
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->key, "PWD", 3) == 0 && ft_strlen(tmp->key) == 3)
+		{
+			tmp_path = getcwd(NULL, 0);
+			free(tmp->value);
+			tmp->value = NULL;
+			path = ft_strjoin("=", tmp_path);//THIS WELL ROMAVE IF FOUND TI USE LESS 
+			tmp->value = ft_strdup(path);
+			(free(path), change_old(env, tmp_path));
+			path = NULL;
+			break;
+		}
+		tmp = tmp->next;
+	}
+	exit(0);
 }

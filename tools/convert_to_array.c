@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   putnber.c                                          :+:      :+:    :+:   */
+/*   convert_to_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 09:44:20 by zel-yama          #+#    #+#             */
-/*   Updated: 2024/12/08 13:27:20 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/04/23 20:09:02 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/04/25 17:59:01 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "tools.h"
 
-void	ft_putnbr(int nb, int *count)
+char	**convert_strcut_array(t_env *env)
 {
-	if (nb == -2147483648)
+    char	**env_map;
+    int		len;
+	int		i;
+
+	len = ft_lstsize(env);
+	env_map = (char **)malloc(sizeof(char *) * (len + 1));
+	i = 0;
+	while (env)
 	{
-		write(1, "-2147483648", 11);
-		*count += 11;
+		if (env ->status != -1)
+		{
+				env_map[i] = ft_strjoin(env->key, env->value);
+				i++;
+		}
+		env = env->next;
 	}
-	else if (nb < 0)
-	{
-		ft_putchar('-', count);
-		nb = -nb;
-		ft_putnbr (nb, count);
-	}
-	else if (nb > 9)
-	{
-		ft_putnbr (nb / 10, count);
-		ft_putchar ((nb % 10 + '0'), count);
-	}
-	else
-	{
-		ft_putchar ((nb + '0'), count);
-	}
+	env_map[i] = NULL;
+	return (env_map);
 }

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:44:46 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/16 20:32:47 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/04/28 14:22:24 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_env *node(char *value)
 	if (!node)
 		return (NULL);
 	node->status = 1;
+	node->exit_sta = 0;
 	node->value = ft_strdup(val);
 	if (!val || !*val)
 		node->status = -1;

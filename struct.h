@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:46:34 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/21 12:57:35 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/04/28 14:20:10 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,29 @@
 
 typedef struct s_env
 {
-    int status;
-    char *key;
-    char *value;
-    struct s_env *next;
-    
+	int status;
+	int exit_sta;
+	char *key;
+	char *value;
+	struct s_env *next;
+	
 }   t_env;
 
 //this redirction  type 
 typedef enum  s_redir
 {
-    INPUT,
-    OUTPUT,
-    APPEND,
-    HER_DOC,
-    
+	INPUT,
+	OUTPUT,
+	APPEND,
+	HER_DOC,
+	
 }   t_redir;
 // this  cammands type output input
 typedef enum s_cmd 
 {
-    PIPE,
-    REDIR,
-    NOT,
+	PIPE,
+	REDIR,
+	NOT,
 	HERE_DOC,
 	MIXED,
 }	t_cmd;
@@ -54,10 +55,11 @@ typedef struct s_redir_strcut
 
 typedef struct s_cmds
 {
-    char 		**cmps ;//command with arguments;
+	t_env		*enva;
+	char 		**cmds ;//command with arguments;
 	int			input;
 	int 		output;//this for me 
-    pid_t      pid;
+	pid_t      pid;
 	t_cmd		enum_cmd;//this form what is in front of the command
 	t_redir_s 	*redirction;//this put strcut to  s
 	struct		s_cmds *next;

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:50:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/21 11:38:25 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/04/28 12:21:57 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,14 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 char    *extract_key(char *value);
 long	norm_atoi(const char *str);
 void    change_value_var(t_env **env, char *var_name, char *new_val);
+char	*free_and_join(char *store, char *s);
+void	ft_putstr_fd(char *s, int fd);
+int     here_document(char *limiter, int flag, t_env *env);
+int	    ft_open(char *file_name, t_redir type);
+char    **convert_strcut_array(t_env *env);
+t_env	*hard_code_env();
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif
 
