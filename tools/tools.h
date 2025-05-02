@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:50:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/28 12:21:57 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/01 16:17:09 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char    **convert_strcut_array(t_env *env);
 t_env	*hard_code_env();
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+int     t_cmdsize(t_cmds *lst);
+char	*find_path_to_cmd(t_env **env, char *cmd);
 
 #endif
 

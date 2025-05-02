@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 15:14:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/21 12:20:26 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:34:18 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int determing_status(char *input)
 	while (input[i])
 	{
 		if (input[i] == '+' && input[i + 1] == '=')
-			return (1); //status is  appened value 
+			return (1); 
 		else if (input[i] == '=' && input[i - 1] != '+')
-			return (0);//set value
+			return (0);
 		i++;
 	}
 	return (-1);
@@ -86,7 +86,7 @@ int modify_var(char *input, t_env **env)
 			status  = determing_status(input);
 			if (status == -1)
 				return (1);
-			else if (status == 1)//appened mode 
+			else if (status == 1)
 				tmp->value = append_mode_to_env_var(input, tmp->value);
 			else if (status == 0)
 				tmp->value = set_val_to_env_var(tmp->value, input);
@@ -99,19 +99,17 @@ int modify_var(char *input, t_env **env)
 //should create function that take val and var name and this func will change that val 
 //
 
-void	export(t_env **env, char *input)
+int	export(t_env **env, char **splited)
 {
-	char	**splited;
 	int		i;
 	int		status;
 	
-    if (!input || !*input)
+    if (!splited[1])
     { 
 		export_without(*env);
-		return ;
+		return (0)
     }
-	splited = ft_split(input, ' ');
-	i = 0;
+	i = 1;
 	status = 0;
 	while (splited[i])
 	{
@@ -120,8 +118,9 @@ void	export(t_env **env, char *input)
 			status = check_name(splited[i]); ///parse name of var key 
 			if (status == 0)
 				ft_lstadd_back(env, node(splited[i]));
+			else
+				return (1);
 		}
 		i++;
 	}
-	//exit(status);
 }

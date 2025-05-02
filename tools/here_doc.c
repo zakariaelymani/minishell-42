@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:07:40 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/29 12:09:01 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/02 12:10:00 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	is_thathere(char *s, char c)
 }
 void check_is_there()
 {
-    if (access("/tmp/here_doc.txt", F_OK) == 0)
-        unlink("/tmp/here_doc.txt");
+    if (access("/tmp/here_doc", F_OK) == 0)
+        unlink("/tmp/here_doc");
 }
 
 char *exapnd_var_form_env(char *line, t_env *env, int *i)
@@ -87,7 +87,6 @@ char *expantion(char *line, t_env *env)
 		if (!line[x])
 			break ;
 	}
-	printf(" this is the ouput that is expected = |%s|\n", new_line);
 	return (new_line);
 }
 
@@ -100,17 +99,7 @@ int read_conten(char *limiter, int fd, t_env *env, int flag)
 	(1) && (line = NULL, i = 0);
 	while (1)
     {
-		ft_putstr_fd(">", 1);
-		while (is_thathere(line, '\n') == 0)
-		{
-			i = read(STDIN_FILENO, buffer, 1);
-			if (i == -1)
-				return (perror("minishell"), -1);			
-			if (i == 0)
-				return (fd);
-			buffer[i] = '\0';
-			line = free_and_join(line, buffer);
-		}
+		line = readline(">");
 		if (flag == -2)
 			line = expantion(line, env);
       	if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
@@ -131,7 +120,7 @@ int     here_document(char *limiter, int flag, t_env *env)
     i = 0;
     check_is_there();
     limiter = free_and_join(limiter, "\n");
-    fd = ft_open("/tmp/here_doc.txt",  OUTPUT);
+    fd = ft_open("/tmp/here_doc",  OUTPUT);
 	line = NULL;
 	fd = read_conten(limiter, fd, env, flag);
 	if (fd == -1)
@@ -139,16 +128,7 @@ int     here_document(char *limiter, int flag, t_env *env)
 	close(fd);
 	free(limiter);
 	limiter = NULL;
-	fd = ft_open("/tmp/here_doc.txt", INPUT);
-	unlink("/tmp/here_doc.txt");
+	fd = ft_open("/tmp/here_doc", INPUT);
+	unlink("/tmp/here_doc");
 	return (fd);
-}
-
-int main(int argc, char *argv[], char *env[])
-{
-	t_env *senv;
-	senv = creat_env(env);
-	
-	here_document(ft_strdup("lim"), -2, senv);
-	
 }

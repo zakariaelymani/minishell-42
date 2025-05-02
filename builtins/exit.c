@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:53:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/22 18:07:01 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/01 18:34:54 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int sheck_char(char *arg)
 }
 
 
-int ft_exit(char *arguments[])
+int ft_exit(char **arguments)
 {
 	int status;
 	int i;
