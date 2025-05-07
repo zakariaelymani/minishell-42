@@ -4,7 +4,9 @@
         "tools.h": "c",
         "history.h": "c",
         "struct.h": "c",
-        "sstream": "c"
+        "sstream": "c",
+        "__node_handle": "c",
+        "locale": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

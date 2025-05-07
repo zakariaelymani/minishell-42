@@ -6,22 +6,22 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:32:01 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/02 12:45:56 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/07 19:16:20 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void find_output_input(t_cmds **cmd, int input, int output)
+void find_output_input(t_cmds *cmd, int input, int output)
 {
 	t_redir_s *redirs;
 
-	redirs = (*cmd)->redirction;
+	redirs = cmd->redirction;
 	if (!redirs)
 		return ;
 	while (redirs)
 	{
-		if (redirs->type == OUTPUT || redirs == APPEND)
+		if (redirs->type == OUTPUT || redirs->type == APPEND)
 			output = redirs->fd;
 		if (redirs->type == INPUT || redirs->type == HER_DOC)
 			input = redirs->fd;
@@ -50,12 +50,12 @@ void dup_input_output(t_cmds **cmd)
 
 	input = -1;
 	output = -1;
-	find_output_input(cmd, input, output);
+	find_output_input(*cmd, input, output);
 	if ((*cmd)->input > -1)
-		dup2((*cmd)->input, STDIN_FILENO);
+		input = dup2((*cmd)->input, STDIN_FILENO);
 	if ((*cmd)->output > -1)
-		dup2((*cmd)->output, STDOUT_FILENO);
-	(close((*cmd)->input), close(cmd->output));
+		output =  dup2((*cmd)->output, STDOUT_FILENO);
+	(close((*cmd)->input), close((*cmd)->output));
 	redir = (*cmd)->redirction;
 	if (!redir)
 		return ;
@@ -65,4 +65,4 @@ void dup_input_output(t_cmds **cmd)
 			close(redir->fd);
 		redir = redir->next;
 	}
-}
+ }

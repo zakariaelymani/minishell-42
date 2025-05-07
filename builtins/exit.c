@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:53:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/01 18:34:54 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/07 21:31:10 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ int ft_exit(char **arguments)
 	}
 	if (status > 255)
 	   status = status % 256; 
-	write(1, "exit\n", 6);
+	write(1, "exit\n", 6);;
 	exit(status);
 }

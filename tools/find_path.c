@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:51:07 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/01 18:13:31 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/07 20:23:23 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ char *while_find_path(t_env **env)
 	// is a diretory return 126 exit code
 char *check_is_exsist_or_excuteble(char *cmd, t_env **env)
 {
-	if (access(cmd, F_OK) != 0)
+	if (access(cmd, F_OK | X_OK) != 0)
 	{
 		(*env)->exit_sta = 127;
+		perror("minishell");
 		return (free(cmd), cmd = NULL, NULL);
 	}
 	else if (access(cmd, X_OK) != 0)
@@ -46,6 +47,7 @@ char *check_is_exsist_or_excuteble(char *cmd, t_env **env)
 		(*env)->exit_sta = 126;
 		return (free(cmd), cmd = NULL, NULL);
 	}
+	
 	return (cmd);
 }
 

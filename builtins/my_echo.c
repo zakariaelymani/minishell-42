@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:37:25 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/01 18:53:18 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:40:17 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,11 @@ int   my_echo(char **string, t_env **env)
 	i = status;
 	while (string[i])
 	{
-		if (ft_putstr(string[i], 1) == 1)
+		if (compare("$?", string[i]) == 0)
+			printf("%d\n",(*env)->exit_sta);
+		else if (ft_putstr(string[i], 1) == 1)
 			return (1);
+		
 		i++;
 	}
 	if (status > 1) 

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:53:32 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/29 12:38:47 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:32:33 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void change_old(t_env **env, char *tmp_path)
     }  
 }
 
-int change_dir(char **new_path, t_env **env)
+int	change_dir(char **new_path, t_env **env)
 {
 	t_env   *tmp;
 	char    *tmp_path;
@@ -57,5 +57,5 @@ int change_dir(char **new_path, t_env **env)
 		}
 		tmp = tmp->next;
 	}
-	return (0)
+	return (0);
 }
