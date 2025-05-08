@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:51:07 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/07 20:23:23 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/08 18:30:19 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ char *while_find_path(t_env **env)
 	// is a diretory return 126 exit code
 char *check_is_exsist_or_excuteble(char *cmd, t_env **env)
 {
-	if (access(cmd, F_OK | X_OK) != 0)
+	
+	if (access(cmd, F_OK ) != 0)
 	{
 		(*env)->exit_sta = 127;
-		perror("minishell");
+		perror("minishell ");
 		return (free(cmd), cmd = NULL, NULL);
 	}
 	else if (access(cmd, X_OK) != 0)
@@ -47,7 +48,12 @@ char *check_is_exsist_or_excuteble(char *cmd, t_env **env)
 		(*env)->exit_sta = 126;
 		return (free(cmd), cmd = NULL, NULL);
 	}
-	
+	else if (open(cmd, O_DIRECTORY) != -1)
+	{
+		(*env)->exit_sta =126;
+		write(2, "input is directory\n", 20);
+		return (free(cmd), cmd = NULL, NULL);
+	}
 	return (cmd);
 }
 
@@ -57,7 +63,9 @@ char	*find_path_to_cmd(t_env **env, char *cmd)
 	char	**splited;
 	int		i;
 	char 	*joined;
+	char 	*cmd2;
 	
+	cmd2 = cmd;
 	if (!cmd || !*cmd)
 		return (NULL);
 	path = while_find_path(env);
@@ -67,7 +75,6 @@ char	*find_path_to_cmd(t_env **env, char *cmd)
 	(1) && (free(path), path = NULL);
 	i = 0;
 	joined = ft_strjoin("/", cmd);
-	(1) && (free(cmd), cmd = NULL);
 	while (splited[i])
 	{
 		cmd = ft_strjoin(splited[i], joined);
@@ -77,5 +84,5 @@ char	*find_path_to_cmd(t_env **env, char *cmd)
 		cmd = NULL;
 		i++;
 	}
-	return (free_while(splited), check_is_exsist_or_excuteble(joined, env));
+	return (free_while(splited), check_is_exsist_or_excuteble(cmd2, env));
 }

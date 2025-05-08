@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:30:23 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/07 21:33:08 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/07 21:49:50 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int main(int argc, char *argv[], char *env[])
         env_new = creat_env(env);
     while (1)
     {
-        line = readline("minishell$");
+        line = readline("minishell$ ");
         add_history(line);
         cmd = parsing_line(line);
        excute_command_line(&cmd, &env_new);

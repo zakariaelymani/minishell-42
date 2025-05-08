@@ -6,15 +6,11 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:25:17 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/07 21:30:07 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/08 18:17:47 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
-
-
 
 //we will do this in child not in parent so 
 void excute_command(t_cmds *cmd, t_env **env)
@@ -26,7 +22,6 @@ void excute_command(t_cmds *cmd, t_env **env)
 	path = find_path_to_cmd(env, cmd->cmds[0]);
 	if (!path)//clear and return here and exit in what in env exit status in first node and you should close fd; you should just exit; !! maybe here will be no command like this | > file.txt | no comand
 		exit((*env)->exit_sta);
-	
 	env_to_excute = convert_strcut_array(*env);
 	dub_for_cmds(&cmd, env);
 	execve(path,cmd->cmds, env_to_excute);
@@ -36,8 +31,7 @@ void excute_command(t_cmds *cmd, t_env **env)
 	
 }
 
-//check is builtins if that call and exit this in child 
-
+//check is builtins if that call and exit this in child
 
 void wait_child(t_cmds *tmp, t_env **env)
 {
