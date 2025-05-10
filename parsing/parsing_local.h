@@ -6,7 +6,7 @@
 /*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 16:42:23 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/05/10 16:43:48 by abenkaro         ###   ########.fr       */
+/*   Updated: 2025/05/10 16:51:49 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 typedef struct s_token{
 	t_type	 type;
-	char	*name;
+	char	*content;
 	s_token	next;
 }
 
