@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:51:07 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/08 18:30:19 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/09 20:25:08 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ char *check_is_exsist_or_excuteble(char *cmd, t_env **env)
 	if (access(cmd, F_OK ) != 0)
 	{
 		(*env)->exit_sta = 127;
-		perror("minishell ");
+		write(2, "command not found;\n ", 21);
 		return (free(cmd), cmd = NULL, NULL);
 	}
 	else if (access(cmd, X_OK) != 0)
 	{
-		perror("minishell");
+		write(2, "command is not excutble;\n", 26);
 		(*env)->exit_sta = 126;
 		return (free(cmd), cmd = NULL, NULL);
 	}
@@ -77,6 +77,7 @@ char	*find_path_to_cmd(t_env **env, char *cmd)
 	joined = ft_strjoin("/", cmd);
 	while (splited[i])
 	{
+		
 		cmd = ft_strjoin(splited[i], joined);
 		if (access(cmd, F_OK) == 0)
 			return (free_while(splited), free(joined), joined = NULL, check_is_exsist_or_excuteble(cmd, env));

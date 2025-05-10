@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:30:24 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/01 18:37:41 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/10 16:51:59 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int my_pwd(t_env **env)
 {
     char	*pwd;
 
+    (void)*env;
     pwd = getcwd(NULL, 0);
     if (!pwd || !*pwd)
     {

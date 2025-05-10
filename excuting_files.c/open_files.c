@@ -6,11 +6,11 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:21:54 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/07 19:12:12 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/10 17:05:41 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	open_redir(t_redir_s **tmp)
 {
@@ -28,18 +28,12 @@ int	open_redir(t_redir_s **tmp)
 	return (-1);
 }
 //cat > c | ls | rev | grep a 
-void	pipe_cammand(t_cmds **cmd, int size)
+void	pipe_cammand(t_cmds *tmp)
 {
-	t_cmds	*tmp;
 	int		return_val;
 	int		pid[2];
-	int		i;
 
-	tmp = (*cmd);
-	if (size == 1)
-		return ;
-	i = 1;
-	while (i < size)
+	if (tmp->next)
 	{
 		return_val = pipe(pid);
 		if (return_val == -1)
@@ -47,14 +41,10 @@ void	pipe_cammand(t_cmds **cmd, int size)
 			perror("pipe");
 			exit(1);
 		}
-		if (tmp->next)
-		{
-			tmp->output = pid[1];
-			tmp->next->input = pid[0];
-		}	
-		tmp = tmp->next;
-		i++;
-	}
+	
+		tmp->output = pid[1];
+		tmp->next->input = pid[0];
+	}	
 }
 void read_heredoc(t_cmds **cmd, t_env **env)
 {

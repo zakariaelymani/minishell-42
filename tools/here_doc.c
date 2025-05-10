@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:07:40 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/08 09:45:51 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/10 16:53:15 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ char *expantion(char *line, t_env *env)
 
 int read_conten(char *limiter, int fd, t_env *env, int flag)
 {
-	char	buffer[2];
 	char	*line;
 	int		i;
 

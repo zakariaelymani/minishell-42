@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:27:03 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/29 12:33:41 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/10 12:12:25 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void removenode(t_env **env, char *var)
 		{
 			if (prev == NULL)
 				*env = tmp->next;
+			else if (!tmp->next)
+				return ;
 			else
 				prev->next = tmp->next;
 			free(tmp);
@@ -54,5 +56,6 @@ int	unset(t_env **env, char **splited)
 	   i++;
 	}
 	free_while(splited);
+	change_value_var(env, "_", "=unset");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 15:14:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/02 15:45:22 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/09 09:46:43 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ int determing_status(char *input)
 	}
 	return (-1);
 }
-char *append_mode_to_env_var(char *new_val, char *old_val)
+char *append_mode_to_env_var(char *new_val, char *old_val, int *status)
 {
 	char *tmp_val;
 	char *joined_val;
 	
 	tmp_val = ft_strchr(new_val, '=');
+	*status = 1;
 	if (*(tmp_val + 1) == '\0')
 	{
 		free(new_val);
@@ -49,12 +50,13 @@ char *append_mode_to_env_var(char *new_val, char *old_val)
 	free(old_val);
 	return (joined_val);
 }
-char *set_val_to_env_var(char *old_val, char *new_val)
+char *set_val_to_env_var(char *old_val, char *new_val, int *status)
 {
 	char *tmp_val;
 	char *return_val;
 	
 	tmp_val = ft_strchr(new_val, '=');
+	*status = 1;
 	if (*(tmp_val + 1) == '\0')
 	{
 		free(old_val);
@@ -87,9 +89,9 @@ int modify_var(char *input, t_env **env)
 			if (status == -1)
 				return (1);
 			else if (status == 1)
-				tmp->value = append_mode_to_env_var(input, tmp->value);
+				tmp->value = append_mode_to_env_var(input, tmp->value , &tmp->status);
 			else if (status == 0)
-				tmp->value = set_val_to_env_var(tmp->value, input);
+				tmp->value = set_val_to_env_var(tmp->value, input, &tmp->status);
 			return (1);
 		}
 		tmp = tmp->next;

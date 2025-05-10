@@ -1,2 +1,0 @@
-we should fork for avery command ls  cat but if we have builtins echo and pwd in this case we should not fork but if you find cat i | ls | export ije | rev in this case we should fork to export 
-so i should know case when that we have export echo we without any pipe in this case call function and return fork minishell so 

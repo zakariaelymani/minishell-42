@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:33:51 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/07 18:25:19 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/10 18:14:29 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #include "builtins/builtins.h"
 #include <sched.h>
 #include <string.h>
+#include <termios.h>
 
 #define OPEN_FATAL 1
 #define OPEN_OK 0
@@ -32,7 +33,7 @@
 
 void    dup_input_output(t_cmds **cmd);//dup you dup in child and or parent acording to stats 
 int		check_is_builtins(t_cmds *cmd);
-void	pipe_cammand(t_cmds **cmd, int size);
+void	pipe_cammand(t_cmds *tmp);
 int		open_files(t_cmds **cmds, t_env **env);
 void    excute_builtins(t_cmds **cmd, t_env **env, int stat);
 void    read_heredoc(t_cmds **cmd, t_env **env);
