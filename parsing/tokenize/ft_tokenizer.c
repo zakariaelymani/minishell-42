@@ -12,7 +12,42 @@
 
 #include "parsing_local.h"
 
-t_token *tokenize(char *line)
+static t_type	get_tok_type(char *pos)
+{
+	if (*pos == '<')
+	{
+		if (*(pos + 1) && *(pos + 1) == *pos)
+			type = HEREDOC;
+		else
+			type = INPUT;
+	}
+	else if (*pos == '>')
+		if (*(pos + 1) && *(pos + 1) == *pos)
+			type = APPEND;
+		else
+			type = OUTPUT;
+	else
+		type = PIPE;
+	return (type);
+}
+
+int	add_operation_token(t_token *tokenlist, char *pos)
+{
+	t_tok	token;
+	char	*content;
+	t_type	type;
+
+	type = get_tok_type(pos);
+	if (type == APPEND || type == HEREDOC)
+		content = ft_substr(pos, 0, 2);
+	else
+		content = ft_substr(pos, 0, 1);
+	token = ft_newtoken(type, content);
+	ft_lstadd_back(tokenlist, token);
+	return (0);
+}
+
+t_token *ft_tokenizer(char *line)
 {
 	t_token	*tokenlist;
 	int			i;
@@ -24,17 +59,17 @@ t_token *tokenize(char *line)
 		if (ft_isalpha(line[i]))
 		{
 			cont = get_word(&line[i]);
-			ft_lstadd_back(tokenlist, ft_newtok(WORD, cont));
+			ft_lstadd_back(tokenlist, ft_newtoken(WORD, cont));
 		}
 		else if (ft_strchr("<>|", line[i]))
 			add_operation_token(tokenlist, &line[i]);
 		else if (ft_strchr("\'\"", line[i]))
 		{
 			cont = extract(&line[i]);
-			ft_lstadd_back(tokenlist, ft_newtok(WORD, cont));
+			ft_lstadd_back(tokenlist, ft_newtoken(WORD, cont));
 		}
-		else if (line[i] == ' ')
-			i++;
+		else
+			continue ;
 	}
 	return (tokenlist);
 }
