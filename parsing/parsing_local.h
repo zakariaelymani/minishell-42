@@ -42,7 +42,7 @@ void ms_lstiter(t_token *lst, void (*f)(void *));
 t_token *ms_lstlast(t_token *lst);
 t_token *ms_lstmap(t_token *lst, void *(*f)(void *), void (*del)(void *));
 int ms_lstsize(t_token *lst);
-t_token *ms_newtoken(char *name, t_type type);
 t_token *ms_tokenizer(char *line);
+t_token *ms_newtoken(char *name, t_type type);
 
 #endif
