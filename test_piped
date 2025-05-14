@@ -1,0 +1,21 @@
+bash-3.2$ cat | ls | sleep 3
+^M^M^M^M^M^M^M^M^M^M^C
+bash-3.2$  //hang here 
+----------------------------------
+bash-3.2$ cat | ls | sleep 3 | ewasd
+bash: ewasd: command not found
+^M^M^M^M^M^M //hang and  there out put over bash
+----------------------------------
+bash-3.2$ ls | ienv | sleep 3
+bash: ienv: command not found
+bash-3.2$ //without that 
+----------------------------------
+bash-3.2$ cat file | grep "mak" | wc -l
+       1
+///smothing 
+bash-3.2$ rev | ls
+Makefile                builtins                file                    main.o                  minishell.h             parsing.o               struct.h                tools
+README.md               excuting_files.c        main.c                  minishell               parsing.c               script.sh               test_piped
+iam
+iam
+///hang in excute 

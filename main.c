@@ -6,12 +6,12 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:30:23 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/10 18:16:50 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/14 11:06:59 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+#include <libc.h>
 void print_parsed_cmds(t_cmds *cmds) {
     int n = 1;
     while (cmds) {
@@ -24,6 +24,20 @@ void print_parsed_cmds(t_cmds *cmds) {
         }
         cmds = cmds->next;
     }
+}
+void handler_c(int i)
+{
+    (void)i;
+    rl_on_new_line();
+  rl_replace_line("", 0);
+    ft_putstr_fd("\n",1);
+    rl_redisplay();
+}
+void sig_quit(int t)
+{
+    (void)t;
+    rl_on_new_line();
+    rl_redisplay();
 }
 
 int main(int argc, char *argv[], char *env[])
@@ -41,10 +55,11 @@ int main(int argc, char *argv[], char *env[])
 		env_new = hard_code_env();
     else
         env_new = creat_env(env);
-    //save attributes in term struct;
     tcgetattr(STDIN_FILENO, &term);
     while (1)
     {
+       // signal(SIGINT,handler_c);
+      //  signal(SIGQUIT, sig_quit);
         line = readline("minishell$ ");
          if (!line)
             (write(2, "exit", 5), exit(0));

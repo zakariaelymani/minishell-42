@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:33:51 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/10 18:14:29 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/13 18:38:30 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #include <sched.h>
 #include <string.h>
 #include <termios.h>
+#include <signal.h>
 
 #define OPEN_FATAL 1
 #define OPEN_OK 0

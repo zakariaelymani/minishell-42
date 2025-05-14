@@ -6,27 +6,12 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:07:40 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/10 16:53:15 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/13 12:37:58 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 
-int	is_thathere(char *s, char c)
-{
-	int i;
-
-	i = 0;
-	if(!s)
-		return (0);
-	while(s[i])
-	{
-		if (s[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
 void check_is_there()
 {
     if (access("/tmp/here_doc", F_OK) == 0)
@@ -111,14 +96,28 @@ int read_conten(char *limiter, int fd, t_env *env, int flag)
 	return (fd);
 }
 
+char *randomize_name(int fd)
+{
+	char	 *name;
+	char	*return_val;
+	int 	name_int;
+	
+	name_int = (int)&fd;
+	printf("\n %d\n", name_int);
+	name = ft_itoa(name_int);
+	return_val = ft_strjoin("/tmp/", name);
+	return 	(free(name), name = NULL, return_val);
+}
 int     here_document(char *limiter, int flag, t_env **env)
 {
     char    *line;
     int     i;
     int     fd;
+	char	*name;
 
+	name = randomize_name(0);
     i = 0;
-    fd = ft_open("/tmp/here_doc",  OUTPUT);
+    fd = ft_open(name,  OUTPUT);
 	line = NULL;
 	limiter = free_and_join(limiter, "\n");
 	fd = read_conten(limiter, fd, *env, flag);
@@ -127,7 +126,9 @@ int     here_document(char *limiter, int flag, t_env **env)
 	close(fd);
 	free(limiter);
 	limiter = NULL;
-	fd = ft_open("/tmp/here_doc", INPUT);
-	unlink("/tmp/here_doc");
+	fd = ft_open(name, INPUT);
+	unlink(name);
+	free(name);
+	name = NULL;
 	return (fd);
 }

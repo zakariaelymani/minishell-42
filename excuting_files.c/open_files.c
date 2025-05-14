@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:21:54 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/10 17:05:41 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/13 12:42:49 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void	pipe_cammand(t_cmds *tmp)
 			perror("pipe");
 			exit(1);
 		}
-	
+		
 		tmp->output = pid[1];
 		tmp->next->input = pid[0];
-	}	
+	}
 }
 void read_heredoc(t_cmds **cmd, t_env **env)
 {

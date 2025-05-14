@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:28:55 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/10 17:05:19 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/12 18:19:33 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int  check_is_builtins(t_cmds *cmd)
 }
 
 void excute_builtins(t_cmds **cmd, t_env **env, int stat)
-{
+{	
 	if (stat == 1)
 		(*env)->exit_sta = my_echo((*cmd)->cmds, env);
 	else if (stat == 2)
@@ -71,33 +71,4 @@ void excute_builtins_inchild(t_cmds **cmd, t_env **env, int stat)
 		exit (change_dir((*cmd)->cmds, env));
 	
 }
-//this else in parent if we in bultins of in child if we in exute so what 
-int		excute_builtins_inparent(t_cmds **cmd, t_env **env, int stat)
-{
-	int input;
-	int	output;
-	int ret_val;
-	
-	ret_val = open_files(cmd, env);
-	if (ret_val == 1 || ret_val == -1)
-	{
-		if (ret_val == -1)
-			excute_builtins(cmd, env, stat);
-		return (1);
-	}
-	else if (ret_val == 0)
-	{
-		input = dup(STDIN_FILENO);
-		output = dup(STDOUT_FILENO);
-		dup_input_output(cmd);
-	}
-	excute_builtins(cmd, env, stat);
-	if (ret_val == 0)
-	{
-		dup2(input, STDIN_FILENO);
-		dup2(output, STDOUT_FILENO);
-		close(input);
-		close(output);
-	}
-	return (0);
-}
+
