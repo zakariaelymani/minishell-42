@@ -92,7 +92,7 @@ t_token *ms_tokenizer(char *line)
 	tokenlist = NULL;
 	while (line[++i])
 	{
-		if (ft_isalpha(line[i]))
+		if (!ft_strchr("|<>\'\" ", (line[i])))
 		{
 			cont = get_word(&line[i]);
 			ms_lstadd_back(&tokenlist, ms_newtoken(cont, WORD));
