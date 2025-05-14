@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:07:40 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/13 12:37:58 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/14 13:26:27 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ char *exapnd_var_form_env(char *line, t_env *env, int *i)
 {
 	int		var_len;
 	char	*var_name;
-	int 	copy;
 	t_env	*tmp;
 
 	if (!line || !env || !line[*i])
 		return (NULL);
-	(1) && (copy = 0, var_len = 0);
 	var_len = *i;
 	while (line[var_len] && (ft_isalnum(line[var_len]) == 1 || line[var_len] == '_' || line[var_len] ==  '?'))
 		var_len++;
@@ -49,13 +47,12 @@ char *exapnd_var_form_env(char *line, t_env *env, int *i)
 char *expantion(char *line, t_env *env)
 {
 	char 	*new_line;
-	char 	*var_name;
 	char 	*string;
 	int		i;
 	int		x;
 	int		len_sub;
 	
-	(1) && (x = 0, var_name = NULL, new_line = NULL);
+	(1) && (x = 0, new_line = NULL);
 	while (1)
 	{
 		i = x;
@@ -102,23 +99,18 @@ char *randomize_name(int fd)
 	char	*return_val;
 	int 	name_int;
 	
-	name_int = (int)&fd;
-	printf("\n %d\n", name_int);
+	name_int = (long)&fd;
 	name = ft_itoa(name_int);
 	return_val = ft_strjoin("/tmp/", name);
 	return 	(free(name), name = NULL, return_val);
 }
 int     here_document(char *limiter, int flag, t_env **env)
 {
-    char    *line;
-    int     i;
     int     fd;
 	char	*name;
 
 	name = randomize_name(0);
-    i = 0;
     fd = ft_open(name,  OUTPUT);
-	line = NULL;
 	limiter = free_and_join(limiter, "\n");
 	fd = read_conten(limiter, fd, *env, flag);
 	if (fd == -1)

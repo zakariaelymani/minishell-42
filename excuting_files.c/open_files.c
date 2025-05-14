@@ -6,11 +6,11 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:21:54 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/13 12:42:49 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/14 12:54:47 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "excute_header.h"
 
 int	open_redir(t_redir_s **tmp)
 {
@@ -27,21 +27,15 @@ int	open_redir(t_redir_s **tmp)
 	}
 	return (-1);
 }
-//cat > c | ls | rev | grep a 
+
 void	pipe_cammand(t_cmds *tmp)
 {
-	int		return_val;
 	int		pid[2];
 
 	if (tmp->next)
 	{
-		return_val = pipe(pid);
-		if (return_val == -1)
-		{
+		if(pipe(pid) == -1)
 			perror("pipe");
-			exit(1);
-		}
-		
 		tmp->output = pid[1];
 		tmp->next->input = pid[0];
 	}

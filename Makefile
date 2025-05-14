@@ -12,9 +12,7 @@ HEADER1 = builtins/builtins.h
 HEADER2 = struct.h 
 HEADER3 = tools/tools.h
 HEADER4 = minishell.h
-READLINE_LIB = -L/mnt/homes/zel-yama/.brew/opt/readline/lib
-READLINE_INC = -I/mnt/homes/zel-yama/.brew/opt/readline/include
-FLAGS += $(READLINE_INC)
+
 
 all: $(NAME)
 
@@ -23,7 +21,7 @@ all: $(NAME)
 
 
 $(NAME): $(OBJ)
-	$(cc) $(FLAGS) $(OBJ) $(READLINE_LIB) -lreadline  -o   $(NAME) 
+	$(cc) $(FLAGS) $(OBJ)  -lreadline  -o   $(NAME) 
 
 
 

@@ -6,11 +6,11 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:32:01 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/12 10:14:51 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/14 12:34:34 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "excute_header.h"
 
 void find_output_input(t_cmds *cmd, int input, int output)
 {
@@ -40,8 +40,7 @@ void find_output_input(t_cmds *cmd, int input, int output)
 		cmd->output = output;
 	}
 }
-//take comand and fill input and out to dup out put and input all this all about chose which cmand fd will take output and which will take input ;
-//take command and chose which fd will take out and if not will return ;
+
 void dup_input_output(t_cmds **cmd)
 {
 	int input;
@@ -55,7 +54,7 @@ void dup_input_output(t_cmds **cmd)
 		input = dup2((*cmd)->input, STDIN_FILENO);
 	if ((*cmd)->output > -1)
 		output =  dup2((*cmd)->output, STDOUT_FILENO);
-		if (input == -1 || output == -1)
+	if (input == -1 || output == -1)
 			perror("minishell4");
 	(close((*cmd)->input), close((*cmd)->output));
 	redir = (*cmd)->redirction;

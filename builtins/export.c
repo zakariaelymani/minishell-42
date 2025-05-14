@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 15:14:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/09 09:46:43 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/14 12:51:34 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,12 @@ int modify_var(char *input, t_env **env)
 	}
 	return (0);
 }
-//should create function that take val and var name and this func will change that val 
-//
 
 int	export(t_env **env, char **splited)
 {
 	int		i;
 	int		status;
+	int 	stu;
 	
     if (!splited[1])
     { 
@@ -113,17 +112,18 @@ int	export(t_env **env, char **splited)
     }
 	i = 1;
 	status = 0;
+	stu = 0;
 	while (splited[i])
 	{
 		if (modify_var(splited[i], env) == 0)
 		{
-			status = check_name(splited[i]); ///parse name of var key 
+			status = check_name(splited[i]);
 			if (status == 0)
 				ft_lstadd_back(env, node(splited[i]));
-			else
-				return (1);
+			else 
+				stu = status;
 		}
 		i++;
 	}
-	return (0);
+	return (stu);
 }

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:46:34 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/07 19:49:52 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/14 13:27:48 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,8 @@ typedef struct s_cmds
 	int			input;
 	int 		output;//this for me 
 	pid_t 		pid;
-	t_cmd		enum_cmd;//this form what is in front of the command
 	t_redir_s 	*redirction;//this put strcut to  s
 	struct		s_cmds *next;
 }	t_cmds;
 
-#endif
+#endi

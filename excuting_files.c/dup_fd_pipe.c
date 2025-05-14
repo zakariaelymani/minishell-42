@@ -6,11 +6,11 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:30:23 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/12 18:56:21 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/14 12:10:11 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "excute_header.h"
 
 /// input i will put by default pipe if there but i chose by the function
 // output and input will chose fd from this function 

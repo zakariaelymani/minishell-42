@@ -6,13 +6,12 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:25:17 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/14 11:08:45 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/14 13:11:19 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "excute_header.h"
 
-//we will do this in child not in parent so 
 void excute_command(t_cmds *cmd, t_env **env)
 {
 	char *path;
@@ -24,7 +23,7 @@ void excute_command(t_cmds *cmd, t_env **env)
 	env_to_excute = convert_strcut_array(*env);
 	dub_for_cmds(&cmd, env);
 	execve(path,cmd->cmds, env_to_excute);
-	perror("minishell");
+	perror("minishell5");
 	exit(127);
 }
 
@@ -34,7 +33,6 @@ void wait_child(t_cmds *tmp, t_env **env)
 	t_cmds 		*cmd;
 	t_redir_s 	*redir;
 	int 		status;
-	t_cmds 		*t;
 
 	cmd = tmp;
 	while (cmd->next)
@@ -50,29 +48,32 @@ void wait_child(t_cmds *tmp, t_env **env)
 			close(cmd->input);
 		if (cmd->output > -1)
 			close (cmd->output);
-		t = cmd;
-		waitpid(cmd->pid, &status, 0);
+	
 		cmd = cmd->next;
 	}
+	waitpid(-1, &status, 0);
 	(*env)->exit_sta = WEXITSTATUS(status);
 	return ;
 }
 
 void turn_dif(int exit_s)
 {
-	exit(exit_s);
+	write(2,"eee", 4);
+	(void)exit_s;
+	exit(2);
 	rl_on_new_line();
-	ft_putstr_fd("\n", 1);
-	rl_redisplay();
+    rl_replace_line("", 0);
+    ft_putstr_fd("\n",1);
+    rl_redisplay();
 }
 
 void turn_sig_quit(int i)
 {
+	write(2, "Quit:\n", 7);
+	ft_putstr_fd("\n", 1);
 	(void)i;
 	exit(131);
-	write(1, "Quit:\n", 7);
 	rl_on_new_line();
-	ft_putstr_fd("\n", 1);
 	rl_redisplay();
 }
 
@@ -86,11 +87,11 @@ void fork_and_excute(t_cmds **cmd, t_env **env)
 	while (tmp)
 	{
 		pipe_cammand(tmp);
-		//signal(SIGINT, turn_dif);
-		//signal(SIGQUIT, turn_sig_quit);
 		tmp->pid = fork();
 		if (tmp->pid == 0)
 		{
+			signal(SIGINT, turn_dif);
+			signal(SIGQUIT, turn_sig_quit);
 			i = check_is_builtins(tmp);
 			if (i != -1 && i  != -2)
 				excute_builtins_inchild(&tmp, env, i);
@@ -99,6 +100,8 @@ void fork_and_excute(t_cmds **cmd, t_env **env)
 			else
 				excute_command(tmp, env);
 		}
+		if (tmp->pid == -1)
+			perror("minishell");
 		tmp = tmp->next;
 	}
 	wait_child(*cmd, env);

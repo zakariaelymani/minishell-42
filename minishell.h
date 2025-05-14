@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:33:51 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/13 18:38:30 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/14 12:13:09 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,11 @@
 #include <string.h>
 #include <termios.h>
 #include <signal.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include "excuting_files.c/excute_header.h"
 
-#define OPEN_FATAL 1
-#define OPEN_OK 0
-#define OPEN_SKIP -1
 
-void    dup_input_output(t_cmds **cmd);//dup you dup in child and or parent acording to stats 
-int		check_is_builtins(t_cmds *cmd);
-void	pipe_cammand(t_cmds *tmp);
-int		open_files(t_cmds **cmds, t_env **env);
-void    excute_builtins(t_cmds **cmd, t_env **env, int stat);
-void    read_heredoc(t_cmds **cmd, t_env **env);
 t_cmds  *parsing_line(char *line);
 void	excute_command_line(t_cmds **cmd, t_env **env);
-void    excute_builtins_inchild(t_cmds **cmd, t_env **env, int stat);
-int		excute_builtins_inparent(t_cmds **cmd, t_env **env, int stat);
-void    dub_for_cmds(t_cmds **cmd, t_env **env);
-void    print_parsed_cmds(t_cmds *cmds);
-
 #endif
