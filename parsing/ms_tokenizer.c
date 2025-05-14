@@ -106,6 +106,8 @@ t_token *ms_tokenizer(char *line)
 		}
 		while (line[i] && line[i] != ' ')
 			i++;
+		if (!line[i])
+			break ;
 	}
 	return (tokenlist);
 }

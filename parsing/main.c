@@ -1,5 +1,25 @@
 #include "parsing_local.h"
 
+char	*type_determiner(t_token *toklist)
+{
+	switch (toklist->type) {
+		case WORD:
+			return ("word");
+		case OUTPUT:
+			return ("output");
+		case INPUT:
+			return ("input");
+		case HEREDOC:
+			return ("heredoc");
+		case APPEND:
+			return ("append");
+		case NONE:
+			return ("none");
+		case PIPE:
+			return ("pipe");
+	}
+}
+
 int	main(void)
 {
 	t_token *toklist;
@@ -10,7 +30,7 @@ int	main(void)
 	head = toklist;
 	while (toklist)
 	{
-		ft_putendl_fd(toklist->content, 1);
+		printf("type: %s value: %s\n", type_determiner(toklist), toklist->content);
 		toklist = toklist->next;
 	}
 	ms_lstclear(&head, free);
