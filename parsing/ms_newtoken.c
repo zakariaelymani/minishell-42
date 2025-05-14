@@ -20,7 +20,7 @@ t_token	*ms_newtoken(char *name, t_type type)
 	if (!result)
 		return (NULL);
 	result->type = type;
-	result->content = ft_strdup(name);
+	result->content = name;
 	result->next = NULL;
 	return (result);
 }
