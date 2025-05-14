@@ -6,14 +6,34 @@
 /*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 16:02:39 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/05/14 13:56:39 by abenkaro         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:41:42 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing_local.h"
 
+
+static char	*extract_quoted(const char *pos)
+{
+	size_t	i;
+	char	*result;
+	char	qtype;
+
+	i = 0;
+	qtype = *pos;
+	while (pos[++i] && pos[i] != qtype)
+		i++;
+	result = malloc(i + 1);
+	if (!result)
+		return (NULL);
+	ft_strlcpy(result, pos, i + 1);
+	return (result);
+}
+
 static t_type	get_tok_type(char *pos)
 {
+	t_type	type;
+
 	if (*pos == '<')
 	{
 		if (*(pos + 1) && *(pos + 1) == *pos)
@@ -31,10 +51,10 @@ static t_type	get_tok_type(char *pos)
 	return (type);
 }
 
-char	*get_word(const char *pos)
+static char	*get_word(const char *pos)
 {
 	char	*result;
-	int		i;
+	size_t	i;
 
 	i = 0;
 	while (pos[i] && pos[i] != ' ')
@@ -42,13 +62,13 @@ char	*get_word(const char *pos)
 	result = malloc(i + 1);
 	if (!result)
 		return (NULL);
-	ft_strncpy(result, pos, i);
+	ft_strlcpy(result, pos, i + 1);
 	return (result);
 }
 
-int	add_op_token(t_token *tokenlist, char *pos)
+static int	add_op_token(t_token **tokenlist, char *pos)
 {
-	t_tok	token;
+	t_token	*token;
 	char	*content;
 	t_type	type;
 
@@ -57,8 +77,8 @@ int	add_op_token(t_token *tokenlist, char *pos)
 		content = ft_substr(pos, 0, 2);
 	else
 		content = ft_substr(pos, 0, 1);
-	token = ft_newtoken(type, content);
-	ft_lstadd_back(tokenlist, token);
+	token = ms_newtoken(content, type);
+	ms_lstadd_back(tokenlist, token);
 	return (0);
 }
 
@@ -69,22 +89,23 @@ t_token *ms_tokenizer(char *line)
 	char	*cont;
 
 	i = -1;
+	tokenlist = NULL;
 	while (line[++i])
 	{
 		if (ft_isalpha(line[i]))
 		{
 			cont = get_word(&line[i]);
-			ms_lstadd_back(tokenlist, ms_newtoken(WORD, cont));
+			ms_lstadd_back(&tokenlist, ms_newtoken(cont, WORD));
 		}
 		else if (ft_strchr("<>|", line[i]))
-			add_operation_token(tokenlist, &line[i]);
+			add_op_token(&tokenlist, &line[i]);
 		else if (ft_strchr("\'\"", line[i]))
 		{
-			cont = extract(&line[i]);
-			ms_lstadd_back(tokenlist, ms_newtoken(WORD, cont));
+			cont = extract_quoted(&line[i]);
+			ms_lstadd_back(&tokenlist, ms_newtoken(cont, WORD));
 		}
-		else
-			continue ;
+		while (line[i] && line[i] != ' ')
+			i++;
 	}
 	return (tokenlist);
 }
