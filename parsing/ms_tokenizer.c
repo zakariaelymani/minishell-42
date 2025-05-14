@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tokenizer.c                                     :+:      :+:    :+:   */
+/*   ms_tokenizer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 16:02:39 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/05/10 17:26:29 by abenkaro         ###   ########.fr       */
+/*   Updated: 2025/05/14 13:56:39 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,22 @@ static t_type	get_tok_type(char *pos)
 	return (type);
 }
 
-int	add_operation_token(t_token *tokenlist, char *pos)
+char	*get_word(const char *pos)
+{
+	char	*result;
+	int		i;
+
+	i = 0;
+	while (pos[i] && pos[i] != ' ')
+		i++;
+	result = malloc(i + 1);
+	if (!result)
+		return (NULL);
+	ft_strncpy(result, pos, i);
+	return (result);
+}
+
+int	add_op_token(t_token *tokenlist, char *pos)
 {
 	t_tok	token;
 	char	*content;
@@ -47,11 +62,11 @@ int	add_operation_token(t_token *tokenlist, char *pos)
 	return (0);
 }
 
-t_token *ft_tokenizer(char *line)
+t_token *ms_tokenizer(char *line)
 {
 	t_token	*tokenlist;
-	int			i;
-	char		*cont;
+	int		i;
+	char	*cont;
 
 	i = -1;
 	while (line[++i])
@@ -59,14 +74,14 @@ t_token *ft_tokenizer(char *line)
 		if (ft_isalpha(line[i]))
 		{
 			cont = get_word(&line[i]);
-			ft_lstadd_back(tokenlist, ft_newtoken(WORD, cont));
+			ms_lstadd_back(tokenlist, ms_newtoken(WORD, cont));
 		}
 		else if (ft_strchr("<>|", line[i]))
 			add_operation_token(tokenlist, &line[i]);
 		else if (ft_strchr("\'\"", line[i]))
 		{
 			cont = extract(&line[i]);
-			ft_lstadd_back(tokenlist, ft_newtoken(WORD, cont));
+			ms_lstadd_back(tokenlist, ms_newtoken(WORD, cont));
 		}
 		else
 			continue ;

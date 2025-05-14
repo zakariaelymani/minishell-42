@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:46:34 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/10 16:38:34 by abenkaro         ###   ########.fr       */
+/*   Updated: 2025/05/14 13:38:40 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,6 @@ typedef enum s_cmd
 	HERE_DOC,
 	MIXED,
 }	t_cmd;
-
-typedef enum e_token_type
-{
-	INPUT,
-	OUTPUT,
-	APPEND,
-	HEREDOC,
-	PIPE,
-	NONE,
-} t_type
 
 typedef struct s_redir_struct
 {

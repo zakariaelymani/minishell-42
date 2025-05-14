@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ms_newtoken.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenkaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 02:06:25 by abenkaro          #+#    #+#             */
-/*   Updated: 2024/10/29 19:33:28 by abenkaro         ###   ########.fr       */
+/*   Created: 2024/10/28 23:22:11 by abenkaro          #+#    #+#             */
+/*   Updated: 2025/05/14 13:55:50 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_lstadd_back(t_token **lst, t_token *new)
+t_token	*ms_newtok(void *name, t_type type)
 {
-	if (!lst || !new)
-		return ;
-	if (!*lst)
-		*lst = new;
-	else
-		ft_lstlast(*lst)->next = new;
+	t_token	*result;
+
+	result = (t_token *)malloc(sizeof(t_token));
+	if (!result)
+		return (NULL);
+	result->type = type;
+	result->content = content;
+	result->next = NULL;
+	return (result);
 }

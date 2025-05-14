@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ms_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenkaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 00:22:21 by abenkaro          #+#    #+#             */
-/*   Updated: 2024/10/29 16:36:03 by abenkaro         ###   ########.fr       */
+/*   Created: 2024/10/29 15:35:34 by abenkaro          #+#    #+#             */
+/*   Updated: 2025/05/14 13:53:51 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstsize(t_token *lst)
+void	ms_lstclear(t_token **lst, void (*del)(void *))
 {
-	int	result;
+	t_token	*next;
 
-	if (!lst)
-		return (0);
-	result = 1;
-	while (lst->next != NULL)
+	if (!lst || !del)
+		return ;
+	while (*lst)
 	{
-		result++;
-		lst = lst->next;
+		next = (*lst)->next;
+		ms_lstdelone(*lst, del);
+		*lst = next;
 	}
-	return (result);
+	*lst = NULL;
 }

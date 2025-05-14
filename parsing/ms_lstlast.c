@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ms_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenkaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 15:13:50 by abenkaro          #+#    #+#             */
-/*   Updated: 2024/10/29 19:42:54 by abenkaro         ###   ########.fr       */
+/*   Created: 2024/10/29 01:57:54 by abenkaro          #+#    #+#             */
+/*   Updated: 2025/05/14 13:54:13 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_token *lst, void (*del)(void *))
+t_token	*ms_lstlast(t_token *lst)
 {
-	if (!lst || !del)
-		return ;
-	if (lst->content)
-		del(lst->content);
-	free(lst);
-	lst = NULL;
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }

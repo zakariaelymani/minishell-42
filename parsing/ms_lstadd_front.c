@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ms_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenkaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 15:35:34 by abenkaro          #+#    #+#             */
-/*   Updated: 2024/10/29 19:42:35 by abenkaro         ###   ########.fr       */
+/*   Created: 2024/10/29 00:01:07 by abenkaro          #+#    #+#             */
+/*   Updated: 2025/05/14 13:53:34 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_token **lst, void (*del)(void *))
+void	ms_lstadd_front(t_token **lst, t_token *new)
 {
-	t_token	*next;
-
-	if (!lst || !del)
+	if (!lst || !new)
 		return ;
-	while (*lst)
-	{
-		next = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		*lst = next;
-	}
-	*lst = NULL;
+	new->next = *lst;
+	*lst = new;
 }

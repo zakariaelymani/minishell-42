@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ms_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenkaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 16:55:05 by abenkaro          #+#    #+#             */
-/*   Updated: 2024/10/29 17:00:15 by abenkaro         ###   ########.fr       */
+/*   Created: 2024/10/29 02:06:25 by abenkaro          #+#    #+#             */
+/*   Updated: 2025/05/14 13:52:42 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "parsing_local.h"
 
-void	ft_lstiter(t_token *lst, void (*f)(void *))
+void	ms_lstadd_back(t_token **lst, t_token *new)
 {
-	if (!lst || !f)
+	if (!lst || !new)
 		return ;
-	while (lst)
-	{
-		f(lst->content);
-		lst = lst->next;
-	}
+	if (!*lst)
+		*lst = new;
+	else
+		ms_lstlast(*lst)->next = new;
 }

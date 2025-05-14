@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_newtoken.c                                      :+:      :+:    :+:   */
+/*   ms_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenkaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 23:22:11 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/05/10 16:46:08 by abenkaro         ###   ########.fr       */
+/*   Created: 2024/10/29 15:13:50 by abenkaro          #+#    #+#             */
+/*   Updated: 2025/05/14 13:54:00 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-t_token	*ft_newtok(void *name, t_type type)
-{
-	t_token	*result;
+#include "libft.h"
 
-	result = (t_token *)malloc(sizeof(t_token));
-	if (!result)
-		return (NULL);
-	result->type = type;
-	result->content = content;
-	result->next = NULL;
-	return (result);
+void	ms_lstdelone(t_token *lst, void (*del)(void *))
+{
+	if (!lst || !del)
+		return ;
+	if (lst->content)
+		del(lst->content);
+	free(lst);
+	lst = NULL;
 }
