@@ -24,7 +24,7 @@ t_redir	*new_redir(t_type type)
 	return (result);
 }
 
-int	add_cmd(t_cmds **chain, char **cmdstr, t_redir *redir)
+int	add_cmd(t_cmds **chain, char **cmdstr, t_redir **redir)
 {
 	t_cmds	*cmd;
 
@@ -34,10 +34,11 @@ int	add_cmd(t_cmds **chain, char **cmdstr, t_redir *redir)
 	cmd->cmds = ft_split(*cmdstr, ' ');
 	if (!cmd->cmds)
 		return (1);
-	cmd->redirection = redir;
+	cmd->redirection = *redir;
 	free(*cmdstr);
 	*cmdstr = NULL;
 	ms_appendcmd(chain, cmd);
+	*redir = NULL;
 	return (0);
 }
 
@@ -46,7 +47,6 @@ t_cmds	*cmd_parser(t_token *tokens)
 	t_cmds	*cmd_chain;
 	t_redir	*redir;
 	char	*cmdstr;
-	t_cmds	cmd;
 
 	cmd_chain = NULL;
 	cmdstr = "";
@@ -62,7 +62,7 @@ t_cmds	*cmd_parser(t_token *tokens)
 		}
 		tokens = tokens->next;
 		if (!tokens || tokens->type == PIPE)
-			add_cmd(&cmd_chain, &cmdstr, redir);
+			add_cmd(&cmd_chain, &cmdstr, &redir);
 	}
 	return (cmd_chain);
 }

@@ -23,7 +23,7 @@ char	*type_determiner(t_token *toklist)
 int	main(void)
 {
 	t_token *toklist;
-	char	*str = "cat >> file1 | ls << file2 | wc -l";
+	char	*str = "tr -d >> file1 | ls << file2 | wc -l";
 	t_cmds	*chain;
 
 	toklist = ms_tokenizer(str);
@@ -32,7 +32,8 @@ int	main(void)
 	{
 		while (*(chain->cmds))
 			printf("\"%s\" ", *(chain->cmds++));
-		printf("redir fname : %s\n", chain->redirection->file_name);
+		if (chain->redirection)
+			printf("redir fname : %s\n", chain->redirection->file_name);
 		chain = chain->next;
 	}
 }
