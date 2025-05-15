@@ -30,7 +30,7 @@ int	main(void)
 	head = toklist;
 	while (toklist)
 	{
-		printf("type: %s value: %s\n", type_determiner(toklist), toklist->content);
+		printf("value:%s|\n", toklist->content);
 		toklist = toklist->next;
 	}
 	ms_lstclear(&head, free);

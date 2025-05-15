@@ -59,7 +59,7 @@ static char	*get_word(const char *pos)
 	i = 0;
 	while (pos[i] && pos[i] != ' ')
 		i++;
-	result = malloc(i + 1);
+	result = malloc(++i + 1);
 	if (!result)
 		return (NULL);
 	ft_strlcpy(result, pos, i + 1);

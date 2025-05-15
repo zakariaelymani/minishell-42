@@ -17,25 +17,28 @@
 t_cmds	*cmd_parser(t_token *tokens)
 {
 	t_cmds	*cmd_chain;
-	t_cmds	*cmd;
-	s_redir	*redir;
-	char	**cmdstr;
+	s_redir	redir;
+	char	*cmdstr;
+	t_cmds	cmd;
 
 	cmd_chain = NULL;
-	redir = NULL;
 	while (token)
 	{
-		if (token->type == WORD)
-			cmdstr = get_cmd(&tokens);
-		if (token->type && (OUTPUT | INPUT | APPEND | HEREDOC))
+		cmd = ms_newcmd();
+		while (token && token->type != PIPE)
 		{
-			redir->type == token->type;
+			if (token->type == WORD)
+				cmdstr = ft_strjoin(token->content);
+			if (token->type && (OUTPUT | INPUT | APPEND | HEREDOC))
+			{
+				redir->type == token->type;
+				token = token->next;
+				redir->file_name == ft_substr(token->content, 0, ft_strlen(token->content) - 1);
+				cmd->redir = redir;
+			}
 			token = token->next;
-			redir->file_name == ft_strdup(token->content);
 		}
-		if (token->type == PIPE)
-			add_cmd(&cmd_chain, cmd);
-		token = token->next;
+		add_cmd(&cmd_chain, cmdstr, redir);
 	}
 	return (cmd_chain);
 }

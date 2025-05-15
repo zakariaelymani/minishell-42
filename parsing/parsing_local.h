@@ -44,5 +44,5 @@ t_token *ms_lstmap(t_token *lst, void *(*f)(void *), void (*del)(void *));
 int ms_lstsize(t_token *lst);
 t_token *ms_tokenizer(char *line);
 t_token *ms_newtoken(char *name, t_type type);
-
+t_cmds	*ms_newcmd(void);
 #endif
