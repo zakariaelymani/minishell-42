@@ -19,9 +19,9 @@ static char	*extract_quoted(const char *pos)
 	char	*result;
 	char	qtype;
 
-	i = 0;
 	qtype = *pos++;
-	while (pos[++i] && pos[i] != qtype)
+	i = 0;
+	while (pos[i] && pos[i] != qtype)
 		i++;
 	result = malloc(i + 1);
 	if (!result)
@@ -92,7 +92,7 @@ t_token *ms_tokenizer(char *line)
 	tokenlist = NULL;
 	while (line[++i])
 	{
-		if (!ft_strchr("|<>\'\" ", (line[i])))
+		if (!ft_strchr("|<>\'\" ", line[i]))
 		{
 			cont = get_word(&line[i]);
 			ms_lstadd_back(&tokenlist, ms_newtoken(cont, WORD));
@@ -103,6 +103,8 @@ t_token *ms_tokenizer(char *line)
 		{
 			cont = extract_quoted(&line[i]);
 			ms_lstadd_back(&tokenlist, ms_newtoken(cont, WORD));
+			while (line[i] && !ft_strchr("\'\"", line[i]))
+				i++;
 		}
 		while (line[i] && line[i] != ' ')
 			i++;
