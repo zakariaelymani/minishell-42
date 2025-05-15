@@ -24,14 +24,15 @@ int	main(void)
 {
 	t_token *toklist;
 	char	*str = "cat >> file1 | ls << file2 | wc -l";
-	t_token	*head;
+	t_cmds	*chain;
 
 	toklist = ms_tokenizer(str);
-	head = toklist;
-	while (toklist)
+	chain = cmd_parser(toklist);
+	while (chain)
 	{
-		printf("value:%s|\n", toklist->content);
-		toklist = toklist->next;
+		while (*(chain->cmds))
+			printf("\"%s\" ", *(chain->cmds++));
+		printf("redir fname : %s\n", chain->redirection->file_name);
+		chain = chain->next;
 	}
-	ms_lstclear(&head, free);
 }

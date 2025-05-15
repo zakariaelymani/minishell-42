@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing_local.h"
 
 void print_parsed_cmds(t_cmds *cmds) {
     int n = 1;

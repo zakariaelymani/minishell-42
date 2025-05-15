@@ -17,16 +17,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "libft.h"
-
-typedef enum e_type{
-	WORD = 1 << 0,
-	APPEND = 1 << 1,
-	HEREDOC = 1 << 2,
-	INPUT = 1 << 3,
-	OUTPUT = 1 << 4,
-	PIPE = 1 << 5,
-	NONE = 1 << 6,
-} t_type;
+#include "../minishell.h"
 
 typedef struct s_token{
 	t_type	 		type;
@@ -45,6 +36,10 @@ int ms_lstsize(t_token *lst);
 t_token *ms_tokenizer(char *line);
 t_token *ms_newtoken(char *name, t_type type);
 t_cmds	*ms_newcmd(void);
-void    ms_appendcmd(t_cmds **lst, t_cmd *new);
+void    ms_appendcmd(t_cmds **lst, t_cmds *new);
+t_redir	*new_redir(t_type type);
+t_cmds	*cmd_parser(t_token *tokens);
+void    ms_appendcmd(t_cmds **lst, t_cmds *new);
+t_cmds	*ms_cmdlast(t_cmds *lst);
 
 #endif

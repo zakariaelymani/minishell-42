@@ -11,14 +11,13 @@
 /* ************************************************************************** */
 
 #include "parsing_local.h"
-#include "minishell.h"
 
-void    ms_appendcmd(t_cmds **lst, t_cmd *new)
+void    ms_appendcmd(t_cmds **lst, t_cmds *new)
 {
         if (!lst || !new)
                 return ;
         if (!*lst)
-                *lst = new;
+			*lst = new;
         else
-                ms_lstlast(*lst)->next = new;
+			ms_cmdlast(*lst)->next = new;
 }

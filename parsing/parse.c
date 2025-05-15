@@ -10,21 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing_local_h"
-#include "parsing.h"
-#include "minishell.h"
+#include "parsing_local.h"
 
-int	add_cmd(t_cmds **chain, char *cmdstr, t_redir_s *redir)
+t_redir	*new_redir(t_type type)
+{
+	t_redir	*result;
+	result = (t_redir *)malloc(sizeof(t_redir));
+	if (!result)
+		return (NULL);
+	result->file_name = NULL;
+	result->type = type;
+	result->fd = -1;
+	return (result);
+}
+
+int	add_cmd(t_cmds **chain, char **cmdstr, t_redir *redir)
 {
 	t_cmds	*cmd;
 
 	cmd = ms_newcmd();
 	if (!cmd)
 		return (1);
-	cmd->cmds = ft_split(cmdstr, ' ');
+	cmd->cmds = ft_split(*cmdstr, ' ');
 	if (!cmd->cmds)
 		return (1);
-	cmd->redirction = redir;
+	cmd->redirection = redir;
+	free(*cmdstr);
+	*cmdstr = NULL;
 	ms_appendcmd(chain, cmd);
 	return (0);
 }
@@ -32,28 +44,25 @@ int	add_cmd(t_cmds **chain, char *cmdstr, t_redir_s *redir)
 t_cmds	*cmd_parser(t_token *tokens)
 {
 	t_cmds	*cmd_chain;
-	s_redir	*redir;
+	t_redir	*redir;
 	char	*cmdstr;
 	t_cmds	cmd;
 
 	cmd_chain = NULL;
-	while (token)
+	cmdstr = "";
+	while (tokens)
 	{
-		if (token->type == WORD)
-			cmdstr = ft_strjoin(token->content);
-		if (token->type && (OUTPUT | INPUT | APPEND | HEREDOC))
+		if (tokens->type == WORD)
+			cmdstr = ft_strjoin(cmdstr, tokens->content);
+		if (tokens->type & (OUTPUT | INPUT | APPEND | HEREDOC))
 		{
-			redir = ms_newredir();
-			redir->type == token->type;
-			token = token->next;
-			redir->file_name == ft_substr(token->content, 0, ft_strlen(token->content) - 1);
+			redir = new_redir(tokens->type);
+			tokens = tokens->next;
+			redir->file_name = ft_substr(tokens->content, 0, ft_strlen(tokens->content) - 1);
 		}
-		token = token->next;
-		if (token->type == pipe)
-		{
-			add_cmd(&cmd_chain, cmdstr, &redir);
-			token = token->next;
-		}
+		tokens = tokens->next;
+		if (!tokens || tokens->type == PIPE)
+			add_cmd(&cmd_chain, &cmdstr, redir);
 	}
 	return (cmd_chain);
 }

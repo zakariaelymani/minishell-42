@@ -17,12 +17,12 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
-#include "tools/tools.h"
+/*#include "tools/tools.h"*/
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "struct.h"
-#include "builtins/builtins.h"
+/*#include "builtins/builtins.h"*/
 #include <sched.h>
 #include <string.h>
 

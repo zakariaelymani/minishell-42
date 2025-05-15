@@ -27,32 +27,22 @@ typedef struct s_env
 	
 }   t_env;
 
-//this redirction  type 
-typedef enum  s_redir
-{
-	INPUT,
-	OUTPUT,
-	APPEND,
-	HER_DOC,
-	
-}   t_redir;
-// this  cammands type output input
-typedef enum s_cmd 
-{
-	PIPE,
-	REDIR,
-	NOT,
-	HERE_DOC,
-	MIXED,
-}	t_cmd;
+typedef enum e_type{
+        WORD = 1 << 0,
+        APPEND = 1 << 1,
+        HEREDOC = 1 << 2,
+        INPUT = 1 << 3,
+        OUTPUT = 1 << 4,
+        PIPE = 1 << 5,
+        NONE = 1 << 6,
+} t_type;
 
-typedef struct s_redir_struct
+typedef struct s_redir
 {
 	char *file_name; // if here_doc   this well be limiter 
-	t_redir type; //<< >> < > 
+	t_type	type; //<< >> < > 
 	int 	fd;/// this form my work don't touch this 
-	struct  s_redir_struct *next;
-}	t_redir_s;
+}	t_redir;
 
 typedef struct s_cmds
 {
@@ -60,8 +50,7 @@ typedef struct s_cmds
 	int			input;
 	int 		output;//this for me 
 	pid_t 		pid;
-	t_cmd		enum_cmd;//this form what is in front of the command
-	t_redir_s 	*redirction;//this put strcut to  s
+	t_redir 	*redirection;//this put strcut to  s
 	struct		s_cmds *next;
 }	t_cmds;
 
