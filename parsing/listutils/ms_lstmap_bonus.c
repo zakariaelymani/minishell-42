@@ -32,7 +32,7 @@ t_token	*ms_lstmap(t_token *lst, void *(*f)(void *), void (*del)(void *))
 		content = f(lst->content);
 		if (!content)
 			return (abort_map(new_list, del));
-		new_node = ms_newtoken(content);
+		new_node = ms_newtoken(content, NONE);
 		if (!new_node)
 		{
 			del(content);

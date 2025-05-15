@@ -6,7 +6,7 @@
 /*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 16:02:39 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/05/14 16:41:42 by abenkaro         ###   ########.fr       */
+/*   Updated: 2025/05/16 00:50:53 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ t_token *ms_tokenizer(char *line)
 		{
 			cont = extract_quoted(&line[i]);
 			ms_lstadd_back(&tokenlist, ms_newtoken(cont, WORD));
-			while (line[i] && !ft_strchr("\'\"", line[i]))
-				i++;
 		}
 		while (line[i] && line[i] != ' ')
 			i++;
