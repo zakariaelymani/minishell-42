@@ -19,13 +19,13 @@
 #include "libft.h"
 
 typedef enum e_type{
-	WORD,
-	APPEND,
-	HEREDOC,
-	INPUT,
-	OUTPUT,
-	PIPE,
-	NONE,
+	WORD = 1 << 0,
+	APPEND = 1 << 1,
+	HEREDOC = 1 << 2,
+	INPUT = 1 << 3,
+	OUTPUT = 1 << 4,
+	PIPE = 1 << 5,
+	NONE = 1 << 6,
 } t_type;
 
 typedef struct s_token{
@@ -45,4 +45,6 @@ int ms_lstsize(t_token *lst);
 t_token *ms_tokenizer(char *line);
 t_token *ms_newtoken(char *name, t_type type);
 t_cmds	*ms_newcmd(void);
+void    ms_appendcmd(t_cmds **lst, t_cmd *new);
+
 #endif
