@@ -20,7 +20,7 @@ static char	*extract_quoted(const char *pos)
 	char	qtype;
 
 	i = 0;
-	qtype = *pos;
+	qtype = *pos++;
 	while (pos[++i] && pos[i] != qtype)
 		i++;
 	result = malloc(i + 1);
