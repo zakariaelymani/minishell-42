@@ -27,7 +27,7 @@ static char	*extract_quoted(const char *pos)
 	if (!result)
 		return (NULL);
 	ft_strlcpy(result, pos, i + 1);
-  result[i++] = ' ';
+  result[i++] = '\x1F';
   result[i] = '\0';
 	return (result);
 }

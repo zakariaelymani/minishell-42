@@ -23,7 +23,7 @@ char	*type_determiner(t_token *toklist)
 int	main(void)
 {
 	t_token *toklist;
-	char	*str = "tr -d \'  \' >> \'file1\' | ls << file2 >> file1";
+	char	*str = "tr -d \"  bb  \" >> file1 | ls << file2 >> file1";
 	t_cmds	*chain;
 
 	toklist = ms_tokenizer(str);
