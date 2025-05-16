@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ms_tokclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenkaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 15:13:50 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/05/14 14:07:33 by abenkaro         ###   ########.fr       */
+/*   Created: 2024/10/29 15:35:34 by abenkaro          #+#    #+#             */
+/*   Updated: 2025/05/16 17:36:16 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing_local.h"
 
-void	ms_lstdelone(t_token *lst, void (*del)(void *))
+void	ms_tokclear(t_token **lst, void (*del)(void *))
 {
+	t_token	*next;
+
 	if (!lst || !del)
 		return ;
-	if (lst->content)
-		del(lst->content);
-	free(lst);
-	lst = NULL;
+	while (*lst)
+	{
+		next = (*lst)->next;
+		ms_tokdelone(*lst, del);
+		*lst = next;
+	}
+	*lst = NULL;
 }

@@ -80,8 +80,8 @@ static int	add_op_token(t_token **tokenlist, char *pos)
 		content = ft_substr(pos, 0, 2);
 	else
 		content = ft_substr(pos, 0, 1);
-	token = ms_newtoken(content, type);
-	ms_lstadd_back(tokenlist, token);
+	token = ms_toknew(content, type);
+	ms_tokappend(tokenlist, token);
 	return (0);
 }
 
@@ -98,14 +98,14 @@ t_token *ms_tokenizer(char *line)
 		if (!ft_strchr("|<>\'\" ", line[i]))
 		{
 			cont = get_word(&line[i]);
-			ms_lstadd_back(&tokenlist, ms_newtoken(cont, WORD));
+			ms_tokappend(&tokenlist, ms_toknew(cont, WORD));
 		}
 		else if (ft_strchr("<>|", line[i]))
 			add_op_token(&tokenlist, &line[i]);
 		else if (ft_strchr("\'\"", line[i]))
 		{
 			cont = extract_quoted(&line[i++]);
-			ms_lstadd_back(&tokenlist, ms_newtoken(cont, WORD));
+			ms_tokappend(&tokenlist, ms_toknew(cont, WORD));
       while (line[i] && !ft_strchr("\'\"", line[i]))
         i++;
 		}

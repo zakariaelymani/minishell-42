@@ -29,7 +29,7 @@ int	add_cmd(t_cmds **chain, char **cmdstr, t_redir **redir)
 {
 	t_cmds	*cmd;
 
-	cmd = ms_newcmd();
+	cmd = ms_cmdnew();
 	if (!cmd)
 		return (1);
 	cmd->cmds = ft_split(*cmdstr, '\x1F');
@@ -38,7 +38,7 @@ int	add_cmd(t_cmds **chain, char **cmdstr, t_redir **redir)
 	cmd->redirection = *redir;
 	free(*cmdstr);
 	*cmdstr = NULL;
-	ms_appendcmd(chain, cmd);
+	ms_cmdappend(chain, cmd);
 	*redir = NULL;
 	return (0);
 }

@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_lstiter.c                                       :+:      :+:    :+:   */
+/*   ms_cmdnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenkaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 16:55:05 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/05/14 14:07:41 by abenkaro         ###   ########.fr       */
+/*   Created: 2024/10/28 23:22:11 by abenkaro          #+#    #+#             */
+/*   Updated: 2025/05/16 17:39:38 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing_local.h"
 
-void	ms_lstiter(t_token *lst, void (*f)(void *))
+t_cmds	*ms_cmdnew(void)
 {
-	if (!lst || !f)
-		return ;
-	while (lst)
-	{
-		f(lst->content);
-		lst = lst->next;
-	}
+	t_cmds	*result;
+
+	result = (t_cmds *)malloc(sizeof(t_cmds));
+	if (!result)
+		return (NULL);
+	result->cmds = NULL;
+	result->input = -1;
+	result->output = -1;
+	result->pid = -1;
+	result->redirection = NULL;
+	result->next = NULL;
+	return (result);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_appendcmd.c                                     :+:      :+:    :+:   */
+/*   ms_cmdappend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 14:43:36 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/05/15 14:45:48 by abenkaro         ###   ########.fr       */
+/*   Updated: 2025/05/16 17:38:29 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing_local.h"
 
-void    ms_appendcmd(t_cmds **lst, t_cmds *new)
+void    ms_cmdappend(t_cmds **lst, t_cmds *new)
 {
         if (!lst || !new)
                 return ;

@@ -25,21 +25,20 @@ typedef struct s_token{
 	struct s_token	*next;
 }	t_token;
 
-void ms_lstadd_back(t_token **lst, t_token *new);
-void ms_lstadd_front(t_token **lst, t_token *new);
-void ms_lstclear(t_token **lst, void (*del)(void *));
-void ms_lstdelone(t_token *lst, void (*del)(void *));
+void ms_tokappend(t_token **lst, t_token *new);
+void ms_tokclear(t_token **lst, void (*del)(void *));
+void ms_tokdelone(t_token *lst, void (*del)(void *));
 void ms_lstiter(t_token *lst, void (*f)(void *));
-t_token *ms_lstlast(t_token *lst);
+t_token *ms_toklast(t_token *lst);
 t_token *ms_lstmap(t_token *lst, void *(*f)(void *), void (*del)(void *));
-int ms_lstsize(t_token *lst);
+int ms_toksize(t_token *lst);
 t_token *ms_tokenizer(char *line);
-t_token *ms_newtoken(char *name, t_type type);
-t_cmds	*ms_newcmd(void);
-void    ms_appendcmd(t_cmds **lst, t_cmds *new);
+t_token *ms_toknew(char *name, t_type type);
+t_cmds	*ms_cmdnew(void);
+void    ms_cmdappend(t_cmds **lst, t_cmds *new);
 t_redir	*new_redir(t_type type);
 t_cmds	*cmd_parser(t_token *tokens);
-void    ms_appendcmd(t_cmds **lst, t_cmds *new);
 t_cmds	*ms_cmdlast(t_cmds *lst);
+t_token	*ms_toklast(t_token *lst);
 
 #endif

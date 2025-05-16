@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ms_tokdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenkaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 00:01:07 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/05/14 14:07:16 by abenkaro         ###   ########.fr       */
+/*   Created: 2024/10/29 15:13:50 by abenkaro          #+#    #+#             */
+/*   Updated: 2025/05/16 17:37:07 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing_local.h"
 
-void	ms_lstadd_front(t_token **lst, t_token *new)
+void	ms_tokdelone(t_token *lst, void (*del)(void *))
 {
-	if (!lst || !new)
+	if (!lst || !del)
 		return ;
-	new->next = *lst;
-	*lst = new;
+	if (lst->content)
+		del(lst->content);
+	free(lst);
+	lst = NULL;
 }

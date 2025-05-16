@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_newtoken.c                                      :+:      :+:    :+:   */
+/*   ms_tokappend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenkaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 23:22:11 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/05/14 14:16:12 by abenkaro         ###   ########.fr       */
+/*   Created: 2024/10/29 02:06:25 by abenkaro          #+#    #+#             */
+/*   Updated: 2025/05/16 17:39:10 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing_local.h"
 
-t_token	*ms_newtoken(char *name, t_type type)
+void	ms_tokappend(t_token **lst, t_token *new)
 {
-	t_token	*result;
-
-	result = (t_token *)malloc(sizeof(t_token));
-	if (!result)
-		return (NULL);
-	result->type = type;
-	result->content = name;
-	result->next = NULL;
-	return (result);
+	if (!lst || !new)
+		return ;
+	if (!*lst)
+		*lst = new;
+	else
+		ms_toklast(*lst)->next = new;
 }
