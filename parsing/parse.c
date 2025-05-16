@@ -21,6 +21,7 @@ t_redir	*new_redir(t_type type)
 	result->file_name = NULL;
 	result->type = type;
 	result->fd = -1;
+	result->next = NULL;
 	return (result);
 }
 
@@ -40,6 +41,15 @@ int	add_cmd(t_cmds **chain, char **cmdstr, t_redir **redir)
 	ms_appendcmd(chain, cmd);
 	*redir = NULL;
 	return (0);
+}
+
+void	link_redirs(t_cmds *chain)
+{
+	while (chain->next)
+	{
+		chain->redirection->next = chain->next->redirection;
+		chain = chain->next;
+	}
 }
 
 t_cmds	*cmd_parser(t_token *tokens)
@@ -64,5 +74,6 @@ t_cmds	*cmd_parser(t_token *tokens)
 		if (!tokens || tokens->type == PIPE)
 			add_cmd(&cmd_chain, &cmdstr, &redir);
 	}
+	link_redirs(cmd_chain);
 	return (cmd_chain);
 }
