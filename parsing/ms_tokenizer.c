@@ -23,10 +23,12 @@ static char	*extract_quoted(const char *pos)
 	i = 0;
 	while (pos[i] && pos[i] != qtype)
 		i++;
-	result = malloc(i + 1);
+	result = malloc(i + 2);
 	if (!result)
 		return (NULL);
 	ft_strlcpy(result, pos, i + 1);
+  result[i++] = ' ';
+  result[i] = '\0';
 	return (result);
 }
 
@@ -101,8 +103,10 @@ t_token *ms_tokenizer(char *line)
 			add_op_token(&tokenlist, &line[i]);
 		else if (ft_strchr("\'\"", line[i]))
 		{
-			cont = extract_quoted(&line[i]);
+			cont = extract_quoted(&line[i++]);
 			ms_lstadd_back(&tokenlist, ms_newtoken(cont, WORD));
+      while (line[i] && !ft_strchr("\'\"", line[i]))
+        i++;
 		}
 		while (line[i] && line[i] != ' ')
 			i++;
