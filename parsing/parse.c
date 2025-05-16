@@ -32,7 +32,7 @@ int	add_cmd(t_cmds **chain, char **cmdstr, t_redir **redir)
 	cmd = ms_newcmd();
 	if (!cmd)
 		return (1);
-	cmd->cmds = ft_split(*cmdstr, ' ');
+	cmd->cmds = ft_split(*cmdstr, '\x1F');
 	if (!cmd->cmds)
 		return (1);
 	cmd->redirection = *redir;
@@ -45,9 +45,10 @@ int	add_cmd(t_cmds **chain, char **cmdstr, t_redir **redir)
 
 void	link_redirs(t_cmds *chain)
 {
-	while (chain->next)
+	while (chain)
 	{
-		chain->redirection->next = chain->next->redirection;
+		if (chain->next && chain->next->redirection)
+			chain->redirection->next = chain->next->redirection;
 		chain = chain->next;
 	}
 }

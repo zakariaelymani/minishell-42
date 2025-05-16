@@ -65,6 +65,7 @@ static char	*get_word(const char *pos)
 	if (!result)
 		return (NULL);
 	ft_strlcpy(result, pos, i + 1);
+	result[i - 1] = '\x1F';
 	return (result);
 }
 
