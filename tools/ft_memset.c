@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hard_code_env.c                                    :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 14:54:45 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/15 16:45:21 by zel-yama         ###   ########.fr       */
+/*   Created: 2024/10/22 17:09:35 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/05/15 12:27:29 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 
-t_env	*hard_code_env()
+void	*ft_memset(void *b, int c, size_t len)
 {
-	t_env	*env;
-	char	*pwd;
-	char	*tmp;
+	size_t	i;
+	char	*str;
 
-	tmp = getcwd(NULL, 0);
-	pwd = ft_strjoin("=", tmp);
-	free(tmp);
-	tmp = NULL;
-	env = node(ft_strjoin("PWD", pwd));
-	env->next = node("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
-	env->next->next = node("SHLVL=1");
-	env->next->next->next = node("_=/usr/bin/env");
-	
-	return (env);
+	str = b;
+	i = 0;
+	while (i < len)
+	{
+		str[i] = (unsigned char)c;
+		i++;
+	}
+	return (b);
 }

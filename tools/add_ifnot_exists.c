@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hard_code_env.c                                    :+:      :+:    :+:   */
+/*   add_ifnot_exists.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 14:54:45 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/15 16:45:21 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/05/15 16:49:21 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/05/15 18:20:48 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 
-t_env	*hard_code_env()
+void add_var_just_not_exists(t_env **env, char *var_name, char *value)
 {
-	t_env	*env;
-	char	*pwd;
-	char	*tmp;
+    t_env *tmp;
 
-	tmp = getcwd(NULL, 0);
-	pwd = ft_strjoin("=", tmp);
-	free(tmp);
-	tmp = NULL;
-	env = node(ft_strjoin("PWD", pwd));
-	env->next = node("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
-	env->next->next = node("SHLVL=1");
-	env->next->next->next = node("_=/usr/bin/env");
-	
-	return (env);
+    if (!env)
+        return ;
+
+    tmp = (*env);
+    while (tmp)
+    {
+        if (compare(var_name, tmp->key) == 0)
+            return ;
+        tmp = tmp->next;
+    }
+    ft_lstadd_back(env, node(ft_strjoin(var_name, value)));
 }

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:46:34 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/14 13:27:48 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/15 14:58:38 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+
 
 typedef struct s_env
 {
@@ -36,15 +38,7 @@ typedef enum  s_redir
 	HER_DOC,
 	
 }   t_redir;
-// this  cammands type output input
-typedef enum s_cmd 
-{
-	PIPE,
-	REDIR,
-	NOT,
-	HERE_DOC,
-	MIXED,
-}	t_cmd;
+
 typedef struct s_redir_struct
 {
 	char *file_name; // if here_doc   this well be limiter 
@@ -63,4 +57,4 @@ typedef struct s_cmds
 	struct		s_cmds *next;
 }	t_cmds;
 
-#endi
+#endif

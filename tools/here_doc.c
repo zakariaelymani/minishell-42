@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:07:40 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/14 13:26:27 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:15:37 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ char *expantion(char *line, t_env *env)
 		string = ft_substr(line, i, len_sub);
 		if (line[x] == '$' && line[x + 1])
 			x++;
-		new_line = free_and_join(new_line, string);
-		new_line = free_and_join(new_line, exapnd_var_form_env(line, env, &x));
+		new_line = free_and_join(new_line, string, 3);
+		new_line = free_and_join(new_line, exapnd_var_form_env(line, env, &x), 3);
 		if (!line[x])
 			break ;
 	}
@@ -81,7 +81,7 @@ int read_conten(char *limiter, int fd, t_env *env, int flag)
 	while (1)
     {
 		line = readline(">");
-		line = free_and_join(line, "\n");
+		line = free_and_join(line, "\n", 1);
 		if (flag == -2)
 			line = expantion(line, env);
       	if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
@@ -111,7 +111,7 @@ int     here_document(char *limiter, int flag, t_env **env)
 
 	name = randomize_name(0);
     fd = ft_open(name,  OUTPUT);
-	limiter = free_and_join(limiter, "\n");
+	limiter = free_and_join(limiter, "\n", 1);
 	fd = read_conten(limiter, fd, *env, flag);
 	if (fd == -1)
 		exit(1);

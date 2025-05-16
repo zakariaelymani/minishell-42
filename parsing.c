@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:16:25 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/07 20:19:27 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/15 12:13:56 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ t_cmds *parse_command_line(char *line) {
         cmd->input = -1;
         cmd->output = -1;
         cmd->pid = -1;
-        cmd->enum_cmd = PIPE;
         cmd->redirction = NULL;
         cmd->next = NULL;
 

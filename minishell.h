@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:33:51 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/14 12:13:09 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/16 19:45:00 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@
 #include <sys/wait.h>
 #include "excuting_files.c/excute_header.h"
 
+//he will check if ziro that will  we in parent  but in child it is somthing ot other  
 
 t_cmds  *parsing_line(char *line);
 void	excute_command_line(t_cmds **cmd, t_env **env);
+void signales(int flag);
 #endif

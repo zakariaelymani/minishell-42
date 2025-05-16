@@ -6,11 +6,13 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:30:23 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/14 13:12:21 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:18:52 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int globle_var = 0; 
 
 void print_parsed_cmds(t_cmds *cmds) {
 	int n = 1;
@@ -25,31 +27,53 @@ void print_parsed_cmds(t_cmds *cmds) {
 		cmds = cmds->next;
 	}
 }
-void handler_c(int i)
+void handler(int i)
 {
-	(void)i;
-	write(2,"hh", 3);
-	rl_on_new_line();
-	ft_putstr_fd("\n",1);
-	rl_replace_line("", 0);
-	rl_redisplay();
+	if (i == SIGINT && !globle_var)
+	{
+		rl_on_new_line();
+		ft_putstr_fd("\n",1);
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
-void sig_quit(int t)
+void handler_child(int sig)
 {
-	(void)t;
-	rl_on_new_line();
-	ft_putstr_fd("\n",1);
-	rl_redisplay();
+	if (SIGINT == sig)
+	{
+		write(1, "\n", 1);
+		exit(130);
+	}
+	else if (SIGQUIT == sig)
+	{
+		write(1, "Quit (core dumped)\n",20);
+		exit(131);
+	}
 }
+
+void signales(int flag)
+{
+	if (flag == 1)//parent handing 
+	{
+		signal(SIGINT, handler);
+		signal(SIGQUIT, handler);
+	}
+	else if (flag == 2)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+	}
+}
+
+
 
 int main(int argc, char *argv[], char *env[])
 {
 	t_env	*env_new;
 	t_cmds   *cmd;
 	struct termios term;
-	
-   char	*line;
-  
+   	char	*line;
+   
 	(void)argv;
 	(void)argc;
 	
@@ -60,11 +84,10 @@ int main(int argc, char *argv[], char *env[])
 	tcgetattr(STDIN_FILENO, &term);
 	while (1)
 	{
-	   signal(SIGINT,handler_c);
-	   signal(SIGQUIT, sig_quit);
+	   signales(1);
 		line = readline("minishell$ ");
 		 if (!line)
-			(write(2, "exit", 5), exit(env_new->exit_sta));
+			(write(2, "exit\n", 6), exit(env_new->exit_sta));
 		if (!*line)
 			continue;
 		add_history(line);

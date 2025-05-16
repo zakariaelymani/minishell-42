@@ -6,17 +6,11 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:53:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/07 21:31:10 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/15 16:46:48 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-
-// void dup_that(int redir, int pipe_out)
-// {
-// 	dup2(redir, 1);
-// 	dup2(1, pipe_out);
-// }
 
 
 int sheck_char(char *arg)
