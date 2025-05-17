@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hard_code_env.c                                    :+:      :+:    :+:   */
+/*   carbdgecollcter.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 14:54:45 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/15 16:45:21 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/02/18 22:11:17 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/04/16 19:51:56 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools.h"
+#include "minishell.h"
 
-t_env	*hard_code_env()
+void ft_free(void *ptr, int flag)
 {
-	t_env	*env;
-	char	*pwd;
-	char	*tmp;
-
-	tmp = getcwd(NULL, 0);
-	pwd = ft_strjoin("=", tmp);
-	free(tmp);
-	tmp = NULL;
-	env = node(ft_strjoin("PWD", pwd));
-	env->next = node("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
-	env->next->next = node("SHLVL=1");
-	env->next->next->next = node("_=/usr/bin/env");
+	static void	*collecter[INT_MAX];
+	static int	i;
+	int			j;
 	
-	return (env);
+	if (flag)
+	{
+		j = 0;
+		while(collecter[j])
+			free(collecter[j++]);
+	}
+	else
+		collecter[i++] = ptr;
+}
+
+void *ft_malloc(size_t size)
+{
+	void *ptr;
+	
+	ptr = malloc(size);
+	if (!ptr)
+		exit(2);
+	ft_free(ptr, 0);
+	return (ptr);
 }

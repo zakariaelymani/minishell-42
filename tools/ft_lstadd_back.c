@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 16:05:46 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/19 12:30:32 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/10 12:06:21 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstadd_back(t_env **lst, t_env *new)
 {
-	if (!new || !*lst)
+	if (!new)
 		return ;
 	if (*lst)
 		ft_lstlast(*lst)->next = new;

@@ -6,27 +6,12 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:07:40 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/07 20:19:36 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:15:37 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 
-int	is_thathere(char *s, char c)
-{
-	int i;
-
-	i = 0;
-	if(!s)
-		return (0);
-	while(s[i])
-	{
-		if (s[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
 void check_is_there()
 {
     if (access("/tmp/here_doc", F_OK) == 0)
@@ -37,12 +22,10 @@ char *exapnd_var_form_env(char *line, t_env *env, int *i)
 {
 	int		var_len;
 	char	*var_name;
-	int 	copy;
 	t_env	*tmp;
 
 	if (!line || !env || !line[*i])
 		return (NULL);
-	(1) && (copy = 0, var_len = 0);
 	var_len = *i;
 	while (line[var_len] && (ft_isalnum(line[var_len]) == 1 || line[var_len] == '_' || line[var_len] ==  '?'))
 		var_len++;
@@ -64,13 +47,12 @@ char *exapnd_var_form_env(char *line, t_env *env, int *i)
 char *expantion(char *line, t_env *env)
 {
 	char 	*new_line;
-	char 	*var_name;
 	char 	*string;
 	int		i;
 	int		x;
 	int		len_sub;
 	
-	(1) && (x = 0, var_name = NULL, new_line = NULL);
+	(1) && (x = 0, new_line = NULL);
 	while (1)
 	{
 		i = x;
@@ -82,8 +64,8 @@ char *expantion(char *line, t_env *env)
 		string = ft_substr(line, i, len_sub);
 		if (line[x] == '$' && line[x + 1])
 			x++;
-		new_line = free_and_join(new_line, string);
-		new_line = free_and_join(new_line, exapnd_var_form_env(line, env, &x));
+		new_line = free_and_join(new_line, string, 3);
+		new_line = free_and_join(new_line, exapnd_var_form_env(line, env, &x), 3);
 		if (!line[x])
 			break ;
 	}
@@ -92,7 +74,6 @@ char *expantion(char *line, t_env *env)
 
 int read_conten(char *limiter, int fd, t_env *env, int flag)
 {
-	char	buffer[2];
 	char	*line;
 	int		i;
 
@@ -100,6 +81,7 @@ int read_conten(char *limiter, int fd, t_env *env, int flag)
 	while (1)
     {
 		line = readline(">");
+		line = free_and_join(line, "\n", 1);
 		if (flag == -2)
 			line = expantion(line, env);
       	if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
@@ -111,23 +93,34 @@ int read_conten(char *limiter, int fd, t_env *env, int flag)
 	return (fd);
 }
 
+char *randomize_name(int fd)
+{
+	char	 *name;
+	char	*return_val;
+	int 	name_int;
+	
+	name_int = (long)&fd;
+	name = ft_itoa(name_int);
+	return_val = ft_strjoin("/tmp/", name);
+	return 	(free(name), name = NULL, return_val);
+}
 int     here_document(char *limiter, int flag, t_env **env)
 {
-    char    *line;
-    int     i;
     int     fd;
+	char	*name;
 
-    i = 0;
-    check_is_there();
-    fd = ft_open("/tmp/here_doc",  OUTPUT);
-	line = NULL;
+	name = randomize_name(0);
+    fd = ft_open(name,  OUTPUT);
+	limiter = free_and_join(limiter, "\n", 1);
 	fd = read_conten(limiter, fd, *env, flag);
 	if (fd == -1)
 		exit(1);
 	close(fd);
 	free(limiter);
 	limiter = NULL;
-	fd = ft_open("/tmp/here_doc", INPUT);
-	unlink("/tmp/here_doc");
+	fd = ft_open(name, INPUT);
+	unlink(name);
+	free(name);
+	name = NULL;
 	return (fd);
 }

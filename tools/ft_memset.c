@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenkaro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 00:22:21 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/05/14 14:08:05 by abenkaro         ###   ########.fr       */
+/*   Created: 2024/10/22 17:09:35 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/05/15 12:27:29 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "tools.h"
 
-int	ms_toksize(t_token *lst)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	int	result;
+	size_t	i;
+	char	*str;
 
-	if (!lst)
-		return (0);
-	result = 1;
-	while (lst->next != NULL)
+	str = b;
+	i = 0;
+	while (i < len)
 	{
-		result++;
-		lst = lst->next;
+		str[i] = (unsigned char)c;
+		i++;
 	}
-	return (result);
+	return (b);
 }

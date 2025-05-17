@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:14:37 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/01 18:52:51 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/15 16:58:51 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ t_env *creat_env(char **env)
 		new_env = new_env->next;
 		i++;
 	}
-	minishell_cmd(&tmp);// this will change shlvl and modifie and 
+	minishell_cmd(&tmp);
+	add_var_just_not_exists(&tmp, "PATH", "=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
 	change_value_var(&tmp, "SHELL", "=minishell");
 	return (tmp);
 }

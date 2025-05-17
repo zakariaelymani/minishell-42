@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing_local.h"
+#include "parsing.h"
 
 t_redir	*new_redir(t_type type)
 {
@@ -25,32 +25,34 @@ t_redir	*new_redir(t_type type)
 	return (result);
 }
 
-int	add_cmd(t_cmds **chain, char **cmdstr, t_redir **redir)
+t_redir *ms_redlast(t_redir *lst)
 {
-	t_cmds	*cmd;
+        if (!lst)
+                return (NULL);
+        while (lst->next)
+                lst = lst->next;
+        return (lst);
+}
 
-	cmd = ms_cmdnew();
-	if (!cmd)
-		return (1);
+void    ms_redappend(t_redir **lst, t_redir *new)
+{
+        if (!lst || !new)
+                return ;
+        if (!*lst)
+                *lst = new;
+        else
+                ms_redlast(*lst)->next = new;
+}
+
+int	add_cmd(t_cmds **chain, char **cmdstr, t_cmds *cmd)
+{
 	cmd->cmds = ft_split(*cmdstr, '\x1F');
 	if (!cmd->cmds)
 		return (1);
-	cmd->redirection = *redir;
 	free(*cmdstr);
 	*cmdstr = NULL;
 	ms_cmdappend(chain, cmd);
-	*redir = NULL;
 	return (0);
-}
-
-void	link_redirs(t_cmds *chain)
-{
-	while (chain)
-	{
-		if (chain->next && chain->next->redirection)
-			chain->redirection->next = chain->next->redirection;
-		chain = chain->next;
-	}
 }
 
 t_cmds	*cmd_parser(t_token *tokens)
@@ -58,23 +60,35 @@ t_cmds	*cmd_parser(t_token *tokens)
 	t_cmds	*cmd_chain;
 	t_redir	*redir;
 	char	*cmdstr;
+	char	*temp;
+	t_cmds	*cmd;
 
 	cmd_chain = NULL;
-	cmdstr = "";
+	cmdstr = ft_strdup("\x1F");
+	redir = NULL;
 	while (tokens)
 	{
-		if (tokens->type == WORD)
-			cmdstr = ft_strjoin(cmdstr, tokens->content);
-		if (tokens->type & (OUTPUT | INPUT | APPEND | HEREDOC))
+		cmd = ms_cmdnew();
+		while (tokens && tokens->type != PIPE)
 		{
-			redir = new_redir(tokens->type);
+			if (tokens && tokens->type == WORD)
+			{
+				temp = ft_strjoin(cmdstr, tokens->content);
+				free(cmdstr);
+				cmdstr = temp;
+			}
+			else if (tokens && (tokens->type & (OUTPUT | INPUT | APPEND | HEREDOC)))
+			{
+				redir = new_redir(tokens->type);
+				tokens = tokens->next;
+				redir->file_name = ft_substr(tokens->content, 0, ft_strlen(tokens->content));
+				ms_redappend(&cmd->redirection, redir);
+			}
 			tokens = tokens->next;
-			redir->file_name = ft_substr(tokens->content, 0, ft_strlen(tokens->content) - 1);
 		}
-		tokens = tokens->next;
-		if (!tokens || tokens->type == PIPE)
-			add_cmd(&cmd_chain, &cmdstr, &redir);
+		add_cmd(&cmd_chain, &cmdstr, cmd);
+		if (tokens && tokens->type == PIPE)
+			tokens = tokens->next;
 	}
-	link_redirs(cmd_chain);
 	return (cmd_chain);
 }

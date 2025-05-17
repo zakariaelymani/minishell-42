@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing_local.h"
+#include "parsing.h"
 
 
 static char	*extract_quoted(const char *pos)
