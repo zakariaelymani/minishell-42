@@ -61,11 +61,12 @@ static char	*get_word(const char *pos)
 	i = 0;
 	while (pos[i] && pos[i] != ' ')
 		i++;
-	result = malloc(++i + 1);
+	result = malloc(i + 2);
 	if (!result)
 		return (NULL);
 	ft_strlcpy(result, pos, i + 1);
-	result[i - 1] = '\x1F';
+	result[i] = '\x1F';
+	result[i + 1] = '\0';
 	return (result);
 }
 
