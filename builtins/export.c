@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 15:14:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/14 12:51:34 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/17 12:54:18 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,12 @@ char *set_val_to_env_var(char *old_val, char *new_val, int *status)
 		return (ft_strdup("="));
 	}
 	return_val = ft_strdup(tmp_val);
+	free(tmp_val);//new
 	free(old_val);
 	free(new_val);
 	return (return_val);
-	
 }
 
-
-//check is var is the change value of that var 
 int modify_var(char *input, t_env **env)
 {
 	t_env	*tmp;
@@ -119,7 +117,7 @@ int	export(t_env **env, char **splited)
 		{
 			status = check_name(splited[i]);
 			if (status == 0)
-				ft_lstadd_back(env, node(splited[i]));
+				ft_lstadd_back(env, node(splited[i], 0));
 			else 
 				stu = status;
 		}

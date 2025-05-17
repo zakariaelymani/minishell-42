@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:21:54 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/14 12:54:47 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/17 10:22:49 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,29 @@ int	open_redir(t_redir_s **tmp)
 	return (-1);
 }
 
+void close_fds(t_cmds *tmp)
+{
+	t_cmds *cmd;
+	t_redir_s *redirs;
+
+	cmd = tmp;
+	while (cmd)	
+	{
+		redirs = cmd->redirction;
+		while(redirs)
+		{
+			if (redirs->fd > -1)
+				close(redirs->fd);
+			redirs = redirs->next;
+		}
+		if (cmd->input > -1)
+			close (cmd->input);
+		if (cmd->output > -1)
+			close (cmd->output);
+		cmd = cmd->next;
+	}
+}
+
 void	pipe_cammand(t_cmds *tmp)
 {
 	int		pid[2];
@@ -36,6 +59,7 @@ void	pipe_cammand(t_cmds *tmp)
 	{
 		if(pipe(pid) == -1)
 			perror("pipe");
+	
 		tmp->output = pid[1];
 		tmp->next->input = pid[0];
 	}

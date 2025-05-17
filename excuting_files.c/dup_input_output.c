@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:32:01 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/14 12:34:34 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/17 10:56:27 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,10 @@ void find_output_input(t_cmds *cmd, int input, int output)
 	}
 }
 
-void dup_input_output(t_cmds **cmd)
+void dup_input_output(t_cmds **cmd, t_cmds *tmp)
 {
 	int input;
 	int output;
-	t_redir_s *redir;
 
 	input = -2;
 	output = -2;
@@ -53,17 +52,10 @@ void dup_input_output(t_cmds **cmd)
 	if ((*cmd)->input > -1)
 		input = dup2((*cmd)->input, STDIN_FILENO);
 	if ((*cmd)->output > -1)
+	{
 		output =  dup2((*cmd)->output, STDOUT_FILENO);
+	}
 	if (input == -1 || output == -1)
 			perror("minishell4");
-	(close((*cmd)->input), close((*cmd)->output));
-	redir = (*cmd)->redirction;
-	if (!redir)
-		return ;
-	while (redir)
-	{
-		if (redir->fd > -1)
-			close(redir->fd);
-		redir = redir->next;
-	}
+	close_fds(tmp);
  }

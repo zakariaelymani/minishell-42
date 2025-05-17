@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:30:23 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/15 18:18:52 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:35:41 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,10 @@ void signales(int flag)
 	}
 	else if (flag == 2)
 	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
+		signal(SIGINT, handler_child);
+		signal(SIGQUIT, handler_child);
 	}
 }
-
-
 
 int main(int argc, char *argv[], char *env[])
 {
@@ -87,13 +85,13 @@ int main(int argc, char *argv[], char *env[])
 	   signales(1);
 		line = readline("minishell$ ");
 		 if (!line)
-			(write(2, "exit\n", 6), exit(env_new->exit_sta));
+			(write(2, "exit\n", 6),  clear_env(&env_new), exit(env_new->exit_sta));
 		if (!*line)
 			continue;
 		add_history(line);
 		cmd = parsing_line(line);
 	   excute_command_line(&cmd, &env_new);
-	   free(line);
+	 	clear_commands(&cmd);
 	   tcsetattr( STDIN_FILENO, TCSANOW, &term);
 	}
 }

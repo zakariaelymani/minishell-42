@@ -6,13 +6,13 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:44:46 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/28 14:22:24 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/17 16:11:12 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 
-char *extract_key(char *value)
+char	*extract_key(char *value)
 {
 	int		i;
 	char	*new_key;
@@ -31,14 +31,14 @@ char *extract_key(char *value)
 		x++;
 	}
 	new_key[x] = '\0';
-	return(new_key);
+	return (new_key);
 }
 
-t_env *node(char *value)
+t_env	*node(char *value, int flag)
 {
-	t_env *node;
-	char *val;
-	
+	t_env	*node;
+	char	*val;
+
 	if (!value)
 		return (NULL);
 	val = ft_strchr(value, '=');
@@ -51,6 +51,8 @@ t_env *node(char *value)
 	if (!val || !*val)
 		node->status = -1;
 	node->key = extract_key(value);
+	if (flag == 1) //new
+		free(value);
 	node->next = NULL;
-	return(node);
+	return (node);
 }

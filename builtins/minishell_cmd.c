@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 10:14:37 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/15 16:58:51 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/17 12:54:59 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void minishell_cmd(t_env **env)
 		}
 		tmp = tmp->next;
 	}
-	ft_lstadd_back(env, node("SHLVL=1"));
+	ft_lstadd_back(env, node("SHLVL=1", 0));
 }
 
 t_env *creat_env(char **env)
@@ -77,11 +77,11 @@ t_env *creat_env(char **env)
 	i = 1;
 	
 	lenv = find_env(env);
-	new_env = node(env[0]);
+	new_env = node(env[0], 0);
 	tmp = new_env;
 	while (i < lenv)
 	{
-		new_env->next = node(env[i]);
+		new_env->next = node(env[i],  0);
 		new_env = new_env->next;
 		i++;
 	}

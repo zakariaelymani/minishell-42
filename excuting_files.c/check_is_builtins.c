@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:28:55 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/14 12:10:24 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/17 10:20:27 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void excute_builtins(t_cmds **cmd, t_env **env, int stat)
 	
 }
 
-void excute_builtins_inchild(t_cmds **cmd, t_env **env, int stat)
+void excute_builtins_inchild(t_cmds **cmd, t_env **env, int stat, t_cmds *tmp)
 {
-	dub_for_cmds(cmd, env);
+	dub_for_cmds(cmd, env, tmp);
 	if (stat == 1)
 		exit(my_echo((*cmd)->cmds, env));
 	else if (stat == 2)

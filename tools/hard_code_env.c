@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 14:54:45 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/15 16:45:21 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/17 12:52:16 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ t_env	*hard_code_env()
 	pwd = ft_strjoin("=", tmp);
 	free(tmp);
 	tmp = NULL;
-	env = node(ft_strjoin("PWD", pwd));
-	env->next = node("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
-	env->next->next = node("SHLVL=1");
-	env->next->next->next = node("_=/usr/bin/env");
+	env = node(ft_strjoin("PWD", pwd), 1);
+	env->next = node("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin", 0);
+	env->next->next = node("SHLVL=1", 0);
+	env->next->next->next = node("_=/usr/bin/env", 0);
 	
 	return (env);
 }

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:50:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/15 18:15:49 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/17 12:52:27 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int     ft_isalpha(int c);
 void	free_while(char **array);
 void	swap_string(char **str, char **str1);
 t_env	*dup_list(t_env *env);
-t_env	*node(char *value);
+t_env	*node(char *value, int flag);
 int		compare(const char *str, const char *str1);
 int		find_env(char **env);
 int		ft_isdigit(int c);
@@ -56,7 +56,9 @@ int     t_cmdsize(t_cmds *lst);
 char	*find_path_to_cmd(t_env **env, char *cmd);
 t_cmds	*lstlast(t_cmds *lst);
 void	*ft_memset(void *b, int c, size_t len);
-void add_var_just_not_exists(t_env **env, char *var_name, char *value);
+void    add_var_just_not_exists(t_env **env, char *var_name, char *value);
+void    clear_commands(t_cmds **cmds);
+void    clear_env(t_env **env);
 #endif
 
  

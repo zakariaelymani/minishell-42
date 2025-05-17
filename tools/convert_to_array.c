@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:09:02 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/15 15:42:13 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/17 16:07:25 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	**convert_strcut_array(t_env *env)
 {
-    char	**env_map;
-    int		len;
+	char	**env_map;
+	int		len;
 	int		i;
 
 	len = ft_lstsize(env);

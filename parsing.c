@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 10:16:25 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/15 12:13:56 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/17 12:49:14 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,7 @@ t_cmds *parsing_line(char *line)
         tmp = tmp->next;
         i++;
     }
+    free(line);
+    line = NULL;
     return (cmd);
 }

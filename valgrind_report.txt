@@ -1,0 +1,192 @@
+==12897== Memcheck, a memory error detector
+==12897== Copyright (C) 2002-2024, and GNU GPL'd, by Julian Seward et al.
+==12897== Using Valgrind-3.24.0 and LibVEX; rerun with -h for copyright info
+==12897== Command: ./minishell
+==12897== Parent PID: 12717
+==12897== 
+==12902== 
+==12902== HEAP SUMMARY:
+==12902==     in use at exit: 10,554 bytes in 266 blocks
+==12902==   total heap usage: 283 allocs, 17 frees, 10,685 bytes allocated
+==12902== 
+==12902== 3 bytes in 1 blocks are still reachable in loss record 1 of 15
+==12902==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12902==    by 0x10BFDE: ft_strjoin (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x109CB4: join_equel (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x109DE3: minishell_cmd (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x109ECF: creat_env (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10A8A1: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902== 
+==12902== 6 bytes in 1 blocks are still reachable in loss record 2 of 15
+==12902==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12902==    by 0x10AAA4: extract_key (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10AB8D: node (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x109E71: creat_env (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10A8A1: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902== 
+==12902== 11 bytes in 1 blocks are still reachable in loss record 3 of 15
+==12902==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12902==    by 0x10BE4C: ft_strdup (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10C0EB: change_value_var (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x109F09: creat_env (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10A8A1: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902== 
+==12902== 12 bytes in 1 blocks are still reachable in loss record 4 of 15
+==12902==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12902==    by 0x48B782C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==12902==    by 0x48B050F: add_history (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==12902==    by 0x10A91A: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902== 
+==12902== 14 bytes in 1 blocks are still reachable in loss record 5 of 15
+==12902==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12902==    by 0x48B782C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==12902==    by 0x48B02B9: alloc_history_entry (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==12902==    by 0x48B0535: add_history (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==12902==    by 0x10A91A: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902== 
+==12902== 14 bytes in 1 blocks are possibly lost in loss record 6 of 15
+==12902==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12902==    by 0x10BCD1: allcoteplecs (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10BDEB: ft_split (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10C668: parsing_line (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10A926: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902== 
+==12902== 16 bytes in 1 blocks are still reachable in loss record 7 of 15
+==12902==    at 0x484CBE3: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12902==    by 0x10C55C: parse_command_line (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10C68B: parsing_line (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10A926: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902== 
+==12902== 16 bytes in 1 blocks are definitely lost in loss record 8 of 15
+==12902==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12902==    by 0x10BDC1: ft_split (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10C668: parsing_line (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10A926: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902== 
+==12902== 24 bytes in 1 blocks are still reachable in loss record 9 of 15
+==12902==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12902==    by 0x48B782C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==12902==    by 0x48B02A0: alloc_history_entry (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==12902==    by 0x48B0535: add_history (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==12902==    by 0x10A91A: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902== 
+==12902== 32 bytes in 1 blocks are still reachable in loss record 10 of 15
+==12902==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12902==    by 0x10AB2A: node (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x109E71: creat_env (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10A8A1: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902== 
+==12902== 40 bytes in 1 blocks are still reachable in loss record 11 of 15
+==12902==    at 0x484CBE3: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12902==    by 0x10C2FE: parse_command_line (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10C68B: parsing_line (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10A926: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902== 
+==12902== 1,347 bytes in 85 blocks are still reachable in loss record 12 of 15
+==12902==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12902==    by 0x10AAA4: extract_key (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10AB8D: node (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x109EA3: creat_env (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10A8A1: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902== 
+==12902== 2,283 bytes in 84 blocks are still reachable in loss record 13 of 15
+==12902==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12902==    by 0x10BE4C: ft_strdup (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10AB5D: node (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x109EA3: creat_env (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10A8A1: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902== 
+==12902== 2,720 bytes in 85 blocks are still reachable in loss record 14 of 15
+==12902==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12902==    by 0x10AB2A: node (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x109EA3: creat_env (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902==    by 0x10A8A1: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902== 
+==12902== 4,016 bytes in 1 blocks are still reachable in loss record 15 of 15
+==12902==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12902==    by 0x48B782C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==12902==    by 0x48B05A1: add_history (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==12902==    by 0x10A91A: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12902== 
+==12902== LEAK SUMMARY:
+==12902==    definitely lost: 16 bytes in 1 blocks
+==12902==    indirectly lost: 0 bytes in 0 blocks
+==12902==      possibly lost: 14 bytes in 1 blocks
+==12902==    still reachable: 10,524 bytes in 264 blocks
+==12902==         suppressed: 0 bytes in 0 blocks
+==12902== 
+==12902== For lists of detected and suppressed errors, rerun with: -s
+==12902== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==12897== 
+==12897== HEAP SUMMARY:
+==12897==     in use at exit: 4,483 bytes in 9 blocks
+==12897==   total heap usage: 304 allocs, 295 frees, 11,177 bytes allocated
+==12897== 
+==12897== 11 bytes in 1 blocks are still reachable in loss record 1 of 8
+==12897==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12897==    by 0x10AAA4: extract_key (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x10AB8D: node (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x109EA3: creat_env (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x10A8A1: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897== 
+==12897== 13 bytes in 1 blocks are possibly lost in loss record 2 of 8
+==12897==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12897==    by 0x10BCD1: allcoteplecs (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x10BDEB: ft_split (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x10C668: parsing_line (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x10A926: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897== 
+==12897== 14 bytes in 1 blocks are indirectly lost in loss record 3 of 8
+==12897==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12897==    by 0x10BCD1: allcoteplecs (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x10BDEB: ft_split (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x10C668: parsing_line (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x10A926: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897== 
+==12897== 32 bytes in 1 blocks are still reachable in loss record 4 of 8
+==12897==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12897==    by 0x10AB2A: node (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x109EA3: creat_env (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x10A8A1: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897== 
+==12897== 46 (32 direct, 14 indirect) bytes in 2 blocks are definitely lost in loss record 5 of 8
+==12897==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12897==    by 0x10BDC1: ft_split (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x10C668: parsing_line (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x10A926: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897== 
+==12897== 109 bytes in 1 blocks are still reachable in loss record 6 of 8
+==12897==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12897==    by 0x10BE4C: ft_strdup (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x10AB5D: node (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x109EA3: creat_env (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x10A8A1: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897== 
+==12897== 256 bytes in 1 blocks are still reachable in loss record 7 of 8
+==12897==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12897==    by 0x48B7867: xrealloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==12897==    by 0x48A6E61: rl_extend_line_buffer (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==12897==    by 0x48AC4E4: rl_replace_line (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==12897==    by 0x10A777: handler (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x490C13F: ??? (in /usr/lib/x86_64-linux-gnu/libc.so.6)
+==12897==    by 0x49D02B4: wait4 (in /usr/lib/x86_64-linux-gnu/libc.so.6)
+==12897==    by 0x10D831: wait_child (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x10D9A2: fork_and_excute (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x10DA67: excute_command_line (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897==    by 0x10A93D: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897== 
+==12897== 4,016 bytes in 1 blocks are still reachable in loss record 8 of 8
+==12897==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==12897==    by 0x48B782C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==12897==    by 0x48B05A1: add_history (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.2)
+==12897==    by 0x10A91A: main (in /home/zel-yama/Desktop/minishell-42/minishell)
+==12897== 
+==12897== LEAK SUMMARY:
+==12897==    definitely lost: 32 bytes in 2 blocks
+==12897==    indirectly lost: 14 bytes in 1 blocks
+==12897==      possibly lost: 13 bytes in 1 blocks
+==12897==    still reachable: 4,424 bytes in 5 blocks
+==12897==         suppressed: 0 bytes in 0 blocks
+==12897== 
+==12897== For lists of detected and suppressed errors, rerun with: -s
+==12897== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
