@@ -104,19 +104,22 @@ t_token *ms_tokenizer(char *line)
 			ms_tokappend(&tokenlist, ms_toknew(cont, WORD));
 			while (line[i] && !ft_strchr("<>|\'\" ", line[i]))
 				i++;
+			i--;
 		}
 		else if (ft_strchr("<>|", line[i]))
 		{
 			add_op_token(&tokenlist, &line[i]);
 			while (line[i] && ft_strchr("<>|", line[i]))
 				i++;
+			i--;
 		}
 		else if (ft_strchr("\'\"", line[i]))
 		{
 			cont = extract_quoted(&line[i++]);
 			ms_tokappend(&tokenlist, ms_toknew(cont, WORD));
-			while (line[i] && !ft_strchr("\'\"", line[i]))
+			while (line[i] && !ft_strchr("\'\" ", line[i]))
 				i++;
+			i--;
 		}
 		if (!line[i])
 			break ;
