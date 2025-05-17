@@ -69,6 +69,7 @@ static char	*get_word(const char *pos)
 	return (result);
 }
 
+
 static int	add_op_token(t_token **tokenlist, char *pos)
 {
 	t_token	*token;

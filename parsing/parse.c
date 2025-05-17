@@ -64,7 +64,7 @@ t_cmds	*cmd_parser(t_token *tokens)
 	t_cmds	*cmd;
 
 	cmd_chain = NULL;
-	cmdstr = ft_strdup("\x1F");
+	cmdstr = NULL;
 	redir = NULL;
 	while (tokens)
 	{
@@ -81,7 +81,7 @@ t_cmds	*cmd_parser(t_token *tokens)
 			{
 				redir = new_redir(tokens->type);
 				tokens = tokens->next;
-				redir->file_name = ft_substr(tokens->content, 0, ft_strlen(tokens->content));
+				redir->file_name = ft_substr(tokens->content, 0, ft_strlen(tokens->content) - 1);
 				ms_redappend(&cmd->redirection, redir);
 			}
 			tokens = tokens->next;
