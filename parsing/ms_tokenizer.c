@@ -17,18 +17,19 @@ static char	*extract_quoted(const char *pos)
 {
 	size_t	i;
 	char	*result;
-	char	qtype;
 
-	qtype = *pos++;
+	pos += 1;
 	i = 0;
-	while (pos[i] && pos[i] != qtype)
+	while (pos[i] && pos[i] != ' ')
 		i++;
-	result = malloc(i + 2);
+	if (pos[i] && pos[i] == ' ' && pos[i - 1] != *pos)
+		return (NULL);
+	result = malloc(i);
 	if (!result)
 		return (NULL);
-	ft_strlcpy(result, pos, i + 1);
-  result[i++] = '\x1F';
-  result[i] = '\0';
+	ft_strlcpy(result, pos, i);
+	result[i++] = '\x1F';
+	result[i] = '\0';
 	return (result);
 }
 
@@ -59,7 +60,7 @@ static char	*get_word(const char *pos)
 	size_t	i;
 
 	i = 0;
-	while (pos[i] && pos[i] != ' ')
+	while (pos[i] && !ft_strchr("<>| ", pos[i]))
 		i++;
 	result = malloc(i + 2);
 	if (!result)
@@ -103,15 +104,19 @@ t_token *ms_tokenizer(char *line)
 			ms_tokappend(&tokenlist, ms_toknew(cont, WORD));
 		}
 		else if (ft_strchr("<>|", line[i]))
+		{
 			add_op_token(&tokenlist, &line[i]);
+			while (line[i] && !ft_strchr("<>| ", line[i]))
+				i++;
+		}
 		else if (ft_strchr("\'\"", line[i]))
 		{
 			cont = extract_quoted(&line[i++]);
 			ms_tokappend(&tokenlist, ms_toknew(cont, WORD));
-      while (line[i] && !ft_strchr("\'\"", line[i]))
-        i++;
+			while (line[i] && !ft_strchr("\'\"", line[i]))
+				i++;
 		}
-		while (line[i] && line[i] != ' ')
+		while (line[i] && !ft_strchr("<>|\'\" ", line[i]))
 			i++;
 		if (!line[i])
 			break ;
