@@ -5,19 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-<<<<<<< HEAD
 <<<<<<<< HEAD:tools/add_ifnot_exists.c
 /*   Created: 2025/05/15 16:49:21 by zel-yama          #+#    #+#             */
 /*   Updated: 2025/05/17 15:42:56 by zel-yama         ###   ########.fr       */
-=======
-/*   Created: 2025/05/15 16:49:21 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/15 18:20:48 by zel-yama         ###   ########.fr       */
->>>>>>> merged
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
-<<<<<<< HEAD
 ========
 /*   Created: 2025/04/13 10:30:23 by zel-yama          #+#    #+#             */
 /*   Updated: 2025/05/14 12:10:11 by zel-yama         ###   ########.fr       */
@@ -82,22 +76,3 @@ int		excute_builtins_inparent(t_cmds **cmd, t_env **env, int stat)
 	return (0);
 >>>>>>>> merged:excuting_files/dup_fd_pipe.c
 }
-=======
-
-void add_var_just_not_exists(t_env **env, char *var_name, char *value)
-{
-    t_env *tmp;
-
-    if (!env)
-        return ;
-
-    tmp = (*env);
-    while (tmp)
-    {
-        if (compare(var_name, tmp->key) == 0)
-            return ;
-        tmp = tmp->next;
-    }
-    ft_lstadd_back(env, node(ft_strjoin(var_name, value)));
-}
->>>>>>> merged

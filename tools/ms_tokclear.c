@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_and_joined.c                                  :+:      :+:    :+:   */
+/*   ms_tokclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abenkaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/22 18:20:30 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/17 16:46:23 by zel-yama         ###   ########.fr       */
+/*   Created: 2024/10/29 15:35:34 by abenkaro          #+#    #+#             */
+/*   Updated: 2025/05/16 17:36:16 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools.h"
+#include "parsing.h"
 
-char	*free_and_join(char *store, char *s, int i)
+void	ms_tokclear(t_token **lst, void (*del)(void *))
 {
-	char	*str;
+	t_token	*next;
 
-	str = ft_strjoin(store, s);
-	if (i ==  1)
-		free(store);
-	else if (i  == 2)
-		free(s);
-	else if (i == 3)
+	if (!lst || !del)
+		return ;
+	while (*lst)
 	{
-		free(s);
-		free(store);
+		next = (*lst)->next;
+		ms_tokdelone(*lst, del);
+		*lst = next;
 	}
-	return (str);
+	*lst = NULL;
 }

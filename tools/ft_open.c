@@ -12,7 +12,7 @@
 
 #include "tools.h"
 
-int	ft_open(char *file_name, t_redir type)
+int	ft_open(char *file_name, t_type type)
 {
 	int fd;
 

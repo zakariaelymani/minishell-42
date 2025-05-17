@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_and_joined.c                                  :+:      :+:    :+:   */
+/*   ms_toklast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abenkaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/22 18:20:30 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/17 16:46:23 by zel-yama         ###   ########.fr       */
+/*   Created: 2024/10/29 01:57:54 by abenkaro          #+#    #+#             */
+/*   Updated: 2025/05/16 17:47:38 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools.h"
+#include "parsing.h"
 
-char	*free_and_join(char *store, char *s, int i)
+t_token	*ms_toklast(t_token *lst)
 {
-	char	*str;
-
-	str = ft_strjoin(store, s);
-	if (i ==  1)
-		free(store);
-	else if (i  == 2)
-		free(s);
-	else if (i == 3)
-	{
-		free(s);
-		free(store);
-	}
-	return (str);
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }

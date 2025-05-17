@@ -1,6 +1,10 @@
 #!/bin/bash
 
+<<<<<<< HEAD
 PID=$(pgrep -f ./minishell)
+=======
+PID=$(pgrep -f bash)
+>>>>>>> merged
 
 if [ -z "$PID" ]; then
     echo "minishell is not running."
@@ -9,7 +13,11 @@ fi
 
 echo "Monitoring minishell (PID=$PID)..."
 
+<<<<<<< HEAD
 while ps "$PID" > /dev/null; do
+=======
+while ps -p "$PID" > /dev/null; do
+>>>>>>> merged
     echo "=============================="
     echo "Time: $(date)"
     echo "PID: $PID"
@@ -25,7 +33,11 @@ while ps "$PID" > /dev/null; do
 
     sleep 9
     echo -n "FD Count: "
+<<<<<<< HEAD
     lsof -p $(pgrep -f ./minishell) 
+=======
+    lsof -p $(pgrep -f bash) 
+>>>>>>> merged
     sleep 1
 done
 

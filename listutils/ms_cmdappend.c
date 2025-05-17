@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_and_joined.c                                  :+:      :+:    :+:   */
+/*   ms_cmdappend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/22 18:20:30 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/17 16:46:23 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/05/15 14:43:36 by abenkaro          #+#    #+#             */
+/*   Updated: 2025/05/16 17:38:29 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools.h"
+#include "parsing.h"
 
-char	*free_and_join(char *store, char *s, int i)
+void    ms_cmdappend(t_cmds **lst, t_cmds *new)
 {
-	char	*str;
-
-	str = ft_strjoin(store, s);
-	if (i ==  1)
-		free(store);
-	else if (i  == 2)
-		free(s);
-	else if (i == 3)
-	{
-		free(s);
-		free(store);
-	}
-	return (str);
+        if (!lst || !new)
+                return ;
+        if (!*lst)
+			*lst = new;
+        else
+			ms_cmdlast(*lst)->next = new;
 }
