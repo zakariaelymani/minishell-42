@@ -22,7 +22,7 @@ void excute_command(t_cmds *cmd, t_env **env)
 		exit((*env)->exit_sta);
 	env_to_excute = convert_strcut_array(*env);
 	dub_for_cmds(&cmd, env);
-	execve(path,cmd->cmds, env_to_excute);
+	execve(path, cmd->cmds, env_to_excute);
 	perror("minishell5");
 	exit(127);
 }
@@ -38,9 +38,7 @@ void wait_child(t_cmds *tmp, t_env **env)
 	
 	cmd = tmp; 
 	while (cmd->next)
-	{
 		cmd = cmd->next;
-	}
 	last_pid = cmd->pid;
 	cmd = tmp;
 	while (cmd)

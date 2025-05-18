@@ -102,4 +102,3 @@ int main(int argc, char *argv[], char *env[])
 	   tcsetattr( STDIN_FILENO, TCSANOW, &term);
 	}
 }
-

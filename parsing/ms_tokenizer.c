@@ -119,7 +119,6 @@ t_token *ms_tokenizer(char *line)
 			ms_tokappend(&tokenlist, ms_toknew(cont, WORD));
 			while (line[i] && !ft_strchr("\'\" ", line[i]))
 				i++;
-			i--;
 		}
 		if (!line[i])
 			break ;

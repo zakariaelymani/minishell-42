@@ -25,6 +25,7 @@ void dub_for_cmds(t_cmds **cmd, t_env **env)
 		(perror("mininshll"), exit(1));
 	dup_input_output(cmd);
 }
+
 int		excute_builtins_inparent(t_cmds **cmd, t_env **env, int stat)
 {
 	int input;

@@ -1,0 +1,15 @@
+Makefile
+README.md
+builtins
+excuting_files
+file
+file3
+main.c
+main.o
+minishell
+minishell.h
+parsing
+script.sh
+struct.h
+test_piped
+tools
