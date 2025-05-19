@@ -64,7 +64,7 @@ t_cmds	*cmd_parser(t_token *tokens)
 	t_cmds	*cmd;
 
 	cmd_chain = NULL;
-	cmdstr = NULL;
+	cmdstr = ft_strdup("\x1F");
 	redir = NULL;
 	while (tokens)
 	{

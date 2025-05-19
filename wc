@@ -1,0 +1,16 @@
+total 152
+drwxr-xr-x 2 abenkaro 2024_khouribga  4096 May 19 18:58 builtins
+drwxr-xr-x 2 abenkaro 2024_khouribga  4096 May 19 18:58 excuting_files
+-rw-r--r-- 1 abenkaro 2024_khouribga   126 May 19 19:36 ls
+-rw-r--r-- 1 abenkaro 2024_khouribga  2505 May 19 18:14 main.c
+-rw-r--r-- 1 abenkaro 2024_khouribga  9448 May 19 18:58 main.o
+-rw-r--r-- 1 abenkaro 2024_khouribga  3029 May 18 15:59 Makefile
+-rwxr-xr-x 1 abenkaro 2024_khouribga 98144 May 19 19:34 minishell
+-rw-r--r-- 1 abenkaro 2024_khouribga  1572 May 16 20:32 minishell.h
+drwxr-xr-x 2 abenkaro 2024_khouribga   183 May 19 19:34 parsing
+-rw-r--r-- 1 abenkaro 2024_khouribga    15 May 16 19:50 README.md
+-rwxr-xr-x 1 abenkaro 2024_khouribga   587 May 16 19:50 script.sh
+-rw-r--r-- 1 abenkaro 2024_khouribga  1790 May 17 21:41 struct.h
+-rw-r--r-- 1 abenkaro 2024_khouribga   820 May 16 19:50 test_piped
+drwxr-xr-x 2 abenkaro 2024_khouribga  4096 May 19 18:58 tools
+-rw-r--r-- 1 abenkaro 2024_khouribga     0 May 19 19:36 wc

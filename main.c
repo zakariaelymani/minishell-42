@@ -97,7 +97,8 @@ int main(int argc, char *argv[], char *env[])
 		tokens = ms_tokenizer(line);
 		cmd = cmd_parser(tokens);
 		// print_parsed_cmds(cmd);
-	   excute_command_line(&cmd, &env_new);
+	   if (cmd)
+			excute_command_line(&cmd, &env_new);
 	   free(line);
 	   tcsetattr( STDIN_FILENO, TCSANOW, &term);
 	}
