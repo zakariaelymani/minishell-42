@@ -12,9 +12,9 @@
 
 #include "tools.h"
 
-void	clear_redir(t_redir_s **redir)
+void	clear_redir(t_redir **redir)
 {
-	t_redir_s	*tmp;
+	t_redir	*tmp;
 
 	if (!redir || !*redir)
 		return ;
@@ -39,7 +39,7 @@ void	clear_commands(t_cmds **cmds)
 	{
 		tmp = (*cmds)->next;
 		free_while((*cmds)->cmds);
-		clear_redir(&(*cmds)->redirction);
+		clear_redir(&(*cmds)->redirection);
 		free((*cmds));
 		(*cmds) = NULL;
 		(*cmds) = tmp;

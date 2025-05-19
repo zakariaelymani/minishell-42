@@ -12,8 +12,8 @@
 
 #include "minishell.h"
 
-t_redir_s *create_redir(char *op, char *file) {
-    t_redir_s *r = malloc(sizeof(t_redir_s));
+t_redir *create_redir(char *op, char *file) {
+    t_redir *r = malloc(sizeof(t_redir));
     if (!r)
         return NULL;
 
@@ -28,7 +28,7 @@ t_redir_s *create_redir(char *op, char *file) {
     } else if (strcmp(op, "<") == 0) {
         r->type = INPUT;
     } else if (strcmp(op, "<<") == 0) {
-        r->type = HER_DOC;
+        r->type = HEREDOC;
         r->fd = -2;
     }
 
@@ -48,7 +48,7 @@ t_cmds *parse_command_line(char *line) {
         cmd->input = -1;
         cmd->output = -1;
         cmd->pid = -1;
-        cmd->redirction = NULL;
+        cmd->redirection = NULL;
         cmd->next = NULL;
 
         char *tokens[100] = {NULL};
@@ -64,12 +64,12 @@ t_cmds *parse_command_line(char *line) {
 
                 if (!word) break; // avoid crash
 
-                t_redir_s *new_r = create_redir(op, word);
+                t_redir *new_r = create_redir(op, word);
 
-                if (!cmd->redirction)
-                    cmd->redirction = new_r;
+                if (!cmd->redirection)
+                    cmd->redirection = new_r;
                 else {
-                    t_redir_s *tmp = cmd->redirction;
+                    t_redir *tmp = cmd->redirection;
                     while (tmp->next) tmp = tmp->next;
                     tmp->next = new_r;
                 }

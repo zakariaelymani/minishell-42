@@ -6,21 +6,13 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:25:17 by zel-yama          #+#    #+#             */
-<<<<<<<< HEAD:excuting_files.c/excute.c
 /*   Updated: 2025/05/17 11:44:23 by zel-yama         ###   ########.fr       */
-========
-/*   Updated: 2025/05/16 19:25:15 by zel-yama         ###   ########.fr       */
->>>>>>>> merged:excuting_files/excute.c
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "excute_header.h"
 
-<<<<<<<< HEAD:excuting_files.c/excute.c
 void excute_command(t_cmds *cmd, t_env **env, t_cmds *tmp)
-========
-void excute_command(t_cmds *cmd, t_env **env)
->>>>>>>> merged:excuting_files/excute.c
 {
 	char *path;
 	char **env_to_excute;
@@ -39,10 +31,6 @@ void wait_child(t_cmds *tmp, t_env **env)
 {
 	
 	t_cmds 		*cmd;
-<<<<<<<< HEAD:excuting_files.c/excute.c
-========
-	t_redir 	*redir;
->>>>>>>> merged:excuting_files/excute.c
 	int 		status;
 	pid_t		last_pid;
 
@@ -53,28 +41,10 @@ void wait_child(t_cmds *tmp, t_env **env)
 		cmd = cmd->next;
 	}
 	last_pid = cmd->pid;
-<<<<<<<< HEAD:excuting_files.c/excute.c
 	close_fds(tmp);
 	cmd = tmp;
 	while (cmd)
 	{
-========
-	cmd = tmp;
-	while (cmd)
-	{
-		redir = cmd->redirection;
-		while (redir)
-		{
-			if (redir->fd > -1)
-				close(redir->fd);
-			redir = redir->next;
-		}
-		if (cmd->next)
-			if (cmd->next->input > -1)
-				close(cmd->next->input);
-		if (cmd->output > -1)
-			close (cmd->output);
->>>>>>>> merged:excuting_files/excute.c
 		if (cmd->pid == last_pid)
 			waitpid(cmd->pid, &status, 0);
 		else
@@ -97,18 +67,11 @@ void fork_and_excute(t_cmds **cmd, t_env **env)
 		tmp->pid = fork();
 		if (tmp->pid == 0)
 		{
-<<<<<<<< HEAD:excuting_files.c/excute.c
 		
 			 signales(2);
 			i = check_is_builtins(tmp);
 			if (i != -1 && i  != -2)
 				excute_builtins_inchild(&tmp, env, i, *cmd);
-========
-			 signales(2);
-			i = check_is_builtins(tmp);
-			if (i != -1 && i  != -2)
-				excute_builtins_inchild(&tmp, env, i);
->>>>>>>> merged:excuting_files/excute.c
 			else if (i == -2)
 				exit(open_files(&tmp, env));
 			else

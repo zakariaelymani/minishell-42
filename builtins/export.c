@@ -6,11 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 15:14:11 by zel-yama          #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2025/05/17 12:54:18 by zel-yama         ###   ########.fr       */
-=======
-/*   Updated: 2025/05/14 12:51:34 by zel-yama         ###   ########.fr       */
->>>>>>> merged
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,11 +117,7 @@ int	export(t_env **env, char **splited)
 		{
 			status = check_name(splited[i]);
 			if (status == 0)
-<<<<<<< HEAD
 				ft_lstadd_back(env, node(splited[i], 0));
-=======
-				ft_lstadd_back(env, node(splited[i]));
->>>>>>> merged
 			else 
 				stu = status;
 		}

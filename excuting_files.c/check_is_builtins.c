@@ -6,11 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:28:55 by zel-yama          #+#    #+#             */
-<<<<<<<< HEAD:excuting_files.c/check_is_builtins.c
 /*   Updated: 2025/05/17 10:20:27 by zel-yama         ###   ########.fr       */
-========
-/*   Updated: 2025/05/14 12:10:24 by zel-yama         ###   ########.fr       */
->>>>>>>> merged:excuting_files/check_is_builtins.c
 /*                                                                            */
 /* ************************************************************************** */
 

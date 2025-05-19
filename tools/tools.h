@@ -6,11 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:50:11 by zel-yama          #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2025/05/17 12:52:27 by zel-yama         ###   ########.fr       */
-=======
-/*   Updated: 2025/05/15 18:15:49 by zel-yama         ###   ########.fr       */
->>>>>>> merged
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +56,9 @@ int     t_cmdsize(t_cmds *lst);
 char	*find_path_to_cmd(t_env **env, char *cmd);
 t_cmds	*lstlast(t_cmds *lst);
 void	*ft_memset(void *b, int c, size_t len);
-<<<<<<< HEAD
 void    add_var_just_not_exists(t_env **env, char *var_name, char *value);
 void    clear_commands(t_cmds **cmds);
 void    clear_env(t_env **env);
-=======
-void add_var_just_not_exists(t_env **env, char *var_name, char *value);
->>>>>>> merged
 #endif
 
  

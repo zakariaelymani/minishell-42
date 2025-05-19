@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:30:23 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/17 16:45:02 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:35:41 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 int globle_var = 0; 
 
-void print_parsed_cmds(t_cmds *cmds) {
-	int n = 1;
-	while (cmds) {
-		printf("Command %d:\n", n++);
-		for (int i = 0; cmds->cmds && cmds->cmds[i]; i++) {
-			printf("  Arg[%d]: %s\n", i, cmds->cmds[i]);
-		}
-		for (t_redir_s *r = cmds->redirction; r; r = r->next) {
-			printf("  Redir: type=%d, file=%s\n", r->type, r->file_name);
-		}
-		cmds = cmds->next;
-	}
-}
+// void print_parsed_cmds(t_cmds *cmds) {
+// 	int n = 1;
+// 	while (cmds) {
+// 		printf("Command %d:\n", n++);
+// 		for (int i = 0; cmds->cmds && cmds->cmds[i]; i++) {
+// 			printf("  Arg[%d]: %s\n", i, cmds->cmds[i]);
+// 		}
+// 		for (t_redir *r = cmds->redirction; r; r = r->next) {
+// 			printf("  Redir: type=%d, file=%s\n", r->type, r->file_name);
+// 		}
+// 		cmds = cmds->next;
+// 	}
+// }
 void handler(int i)
 {
 	if (i == SIGINT && !globle_var)
@@ -65,54 +65,10 @@ void signales(int flag)
 	}
 }
 
-void handler(int i)
-{
-	if (i == SIGINT && !globle_var)
-	{
-		rl_on_new_line();
-		ft_putstr_fd("\n",1);
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-}
-void handler_child(int sig)
-{
-	if (SIGINT == sig)
-	{
-		write(1, "\n", 1);
-		exit(130);
-	}
-	else if (SIGQUIT == sig)
-	{
-		write(1, "Quit (core dumped)\n",20);
-		exit(131);
-	}
-}
-
-void signales(int flag)
-{
-	if (flag == 1)//parent handing 
-	{
-		signal(SIGINT, handler);
-		signal(SIGQUIT, handler);
-	}
-	else if (flag == 2)
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-	}
-}
-
-
-
 int main(int argc, char *argv[], char *env[])
 {
 	t_env	*env_new;
 	t_cmds   *cmd;
-<<<<<<< HEAD
-=======
-	t_token	*tokens;
->>>>>>> merged
 	struct termios term;
    	char	*line;
    
@@ -129,7 +85,6 @@ int main(int argc, char *argv[], char *env[])
 	   signales(1);
 		line = readline("minishell$ ");
 		 if (!line)
-<<<<<<< HEAD
 			(write(2, "exit\n", 6),  clear_env(&env_new), exit(env_new->exit_sta));
 		if (!*line)
 			continue;
@@ -137,17 +92,6 @@ int main(int argc, char *argv[], char *env[])
 		cmd = parsing_line(line);
 	   excute_command_line(&cmd, &env_new);
 	 	clear_commands(&cmd);
-=======
-			(write(2, "exit\n", 6), exit(env_new->exit_sta));
-		if (!*line)
-			continue;
-		add_history(line);
-		tokens = ms_tokenizer(line);
-		cmd = cmd_parser(tokens);
-		// print_parsed_cmds(cmd);
-	   excute_command_line(&cmd, &env_new);
-	   free(line);
->>>>>>> merged
 	   tcsetattr( STDIN_FILENO, TCSANOW, &term);
 	}
 }

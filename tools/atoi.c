@@ -46,7 +46,9 @@ long	norm_atoi(const char *str)
 	long	res;
 	int		sing;
 
-	(1) && (i = 0, res = 0, sing = 1)
+	i = 0;
+	 res = 0;
+	  sing = 1;
 	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '+' || str[i] == '-')

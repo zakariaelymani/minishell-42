@@ -6,11 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:21:54 by zel-yama          #+#    #+#             */
-<<<<<<<< HEAD:excuting_files.c/open_files.c
 /*   Updated: 2025/05/17 10:22:49 by zel-yama         ###   ########.fr       */
-========
-/*   Updated: 2025/05/14 12:54:47 by zel-yama         ###   ########.fr       */
->>>>>>>> merged:excuting_files/open_files.c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +28,15 @@ int	open_redir(t_redir **tmp)
 	return (-1);
 }
 
-<<<<<<<< HEAD:excuting_files.c/open_files.c
 void close_fds(t_cmds *tmp)
 {
 	t_cmds *cmd;
-	t_redir_s *redirs;
+	t_redir *redirs;
 
 	cmd = tmp;
 	while (cmd)	
 	{
-		redirs = cmd->redirction;
+		redirs = cmd->redirection;
 		while(redirs)
 		{
 			if (redirs->fd > -1)
@@ -65,16 +60,6 @@ void	pipe_cammand(t_cmds *tmp)
 		if(pipe(pid) == -1)
 			perror("pipe");
 	
-========
-void	pipe_cammand(t_cmds *tmp)
-{
-	int		pid[2];
-
-	if (tmp->next)
-	{
-		if(pipe(pid) == -1)
-			perror("pipe");
->>>>>>>> merged:excuting_files/open_files.c
 		tmp->output = pid[1];
 		tmp->next->input = pid[0];
 	}
@@ -103,7 +88,7 @@ void read_heredoc(t_cmds **cmd, t_env **env)
 
 int open_files(t_cmds **cmds, t_env **env)
 {
-    t_redir		*redir;
+    t_redir	*redir;
     t_cmds		*tmp;
 	int			return_val;
     
