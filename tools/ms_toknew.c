@@ -22,5 +22,6 @@ t_token	*ms_toknew(char *name, t_type type)
 	result->type = type;
 	result->content = name;
 	result->next = NULL;
+	result->prev = NULL;
 	return (result);
 }

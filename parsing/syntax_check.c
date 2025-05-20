@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
 int	syntax_checker(t_token *token)
 {
@@ -19,18 +19,15 @@ int	syntax_checker(t_token *token)
 	i = 0;
 	while (token)
 	{
-		if (token->type & (HEREDOC | APPEND | INPUT | OUTPUT))
-			if (token->next->type != WORD)
-				return (0);
-		if (token->type == WORD && token->next->type == PIPE)
+		if (token->type == PIPE)
 		{
-			i = 2;
-			while (token && --i)
-				token = token->next;
-			if (!(token->type & (WORD | HEREDOC | APPEND | INPUT | OUTPUT))
-				return (0);
+			if (!token->prev || !token->next)
+				return (printf("INVALID SYNTAX NEAR : %s\n", token->content), 0);
 		}
-		if (token)
-			token = token->next;
+		else if (token-> type & (INPUT | OUTPUT | HEREDOC | APPEND))
+			if (!token->next || token->next->type != WORD || !(*token->next->content))
+				return (printf("INVALID SYNTAX NEAR : %s\n", token->content), 0);
+		token = token->next;
 	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: abenkaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 02:06:25 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/05/16 17:39:10 by abenkaro         ###   ########.fr       */
+/*   Updated: 2025/05/20 13:37:31 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 void	ms_tokappend(t_token **lst, t_token *new)
 {
+	t_token	*last;
+
 	if (!lst || !new)
 		return ;
 	if (!*lst)
 		*lst = new;
 	else
-		ms_toklast(*lst)->next = new;
+	{
+		last = ms_toklast(*lst);
+		last->next = new;
+		new->prev = last;
+	}
 }

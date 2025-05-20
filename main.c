@@ -95,6 +95,8 @@ int main(int argc, char *argv[], char *env[])
 			continue;
 		add_history(line);
 		tokens = ms_tokenizer(line);
+		if (!syntax_checker(tokens))
+			continue;
 		cmd = cmd_parser(tokens);
 		// print_parsed_cmds(cmd);
 	   if (cmd)

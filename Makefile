@@ -60,6 +60,7 @@ FILES = builtins/env.c \
 	tools/ms_toklast.c \
 	tools/ms_toknew.c \
 	tools/ms_toksize.c \
+	parsing/syntax_check.c \
 	parsing/ms_tokenizer.c \
 	parsing/parse.c \
 
