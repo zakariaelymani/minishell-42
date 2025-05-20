@@ -98,7 +98,7 @@ t_token *ms_tokenizer(char *line)
 	tokenlist = NULL;
 	while (line[++i])
 	{
-		if (!ft_strchr("|<>\'\" ", line[i]))
+		if (line[i] && !ft_strchr("|<>\'\" ", line[i]))
 		{
 			cont = get_word(&line[i]);
 			ms_tokappend(&tokenlist, ms_toknew(cont, WORD));
@@ -106,13 +106,13 @@ t_token *ms_tokenizer(char *line)
 				i++;
 			i--;
 		}
-		if (ft_strchr("<>|", line[i]))
+		if (line[i] && ft_strchr("<>|", line[i]))
 		{
 			add_op_token(&tokenlist, &line[i]);
 			while (line[i] && ft_strchr("<>", line[i]))
 				i++;
 		}
-		if (ft_strchr("\'\"", line[i]))
+		if (line[i] && ft_strchr("\'\"", line[i]))
 		{
 			cont = extract_quoted(&line[i++]);
 			ms_tokappend(&tokenlist, ms_toknew(cont, WORD));
