@@ -25,7 +25,7 @@ int	syntax_checker(t_token *token)
 				return (printf("INVALID SYNTAX NEAR : %s\n", token->content), 0);
 		}
 		else if (token-> type & (INPUT | OUTPUT | HEREDOC | APPEND))
-			if (!token->next || token->next->type != WORD || !(*token->next->content))
+			if (!token->next || token->next->type != WORD || !token->next || *(token->next->content) == '\x1F')
 				return (printf("INVALID SYNTAX NEAR : %s\n", token->content), 0);
 		token = token->next;
 	}
