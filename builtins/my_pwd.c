@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:30:24 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/10 16:51:59 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:17:54 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,26 @@
 
 int my_pwd(t_env **env)
 {
-    char	*pwd;
+	char	*pwd;
+	int		fd;
+	char	*line;
 
-    (void)*env;
-    pwd = getcwd(NULL, 0);
-    if (!pwd || !*pwd)
-    {
-        perror ("pwd");
-        return (1);
-    } 
-    printf("%s\n", pwd);
-    free(pwd);
-    pwd = NULL;
-    return (0);
+	line = return_value(*env, "PWD");
+	fd = open(".", O_WRONLY,  __O_DIRECTORY, 0644);
+	close(fd);
+	pwd = getcwd(NULL, 0);
+	if (!pwd  && fd != -1)
+		return (perror ("minishll: pwd"), 1);
+	else if (!pwd || !*pwd)
+	{
+		if (line)
+			printf("%s\n", return_value(*env, "PWD"));
+	}
+	else
+	{
+		printf("%s\n", pwd);
+		free(pwd);
+		pwd = NULL;
+	}
+	return (0);
 }

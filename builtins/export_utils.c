@@ -6,14 +6,17 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:43:10 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/17 12:44:19 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/21 12:00:39 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void print_export(t_env *tmp)
+void print_export(t_env *env)
 {
+	t_env *tmp;
+
+	tmp = env; 
 	while (tmp)
 	{
 		if (!tmp->value || !*tmp->value)

@@ -6,11 +6,11 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 10:55:42 by zel-yama          #+#    #+#             */
-/*   Updated: 2024/11/12 12:47:42 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:31:05 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "tools.h"
 
 char	*ft_strrchr(const char *s, int c)
 {

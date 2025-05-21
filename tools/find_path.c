@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:51:07 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/15 17:48:16 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:15:42 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*find_path_to_cmd(t_env **env, char *cmd)
 	splited = ft_split(path, ':');
 	(1) && (free(path), path = NULL);
 	i = 0;
-	joined = ft_strjoin("/", cmd);
+	joined = ft_strjoin("/", cmd);///leaks
 	while (splited[i])
 	{
 		cmd = ft_strjoin(splited[i], joined);

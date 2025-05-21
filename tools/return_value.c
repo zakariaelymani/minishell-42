@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_dup.c                                          :+:      :+:    :+:   */
+/*   return_value.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 16:42:20 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/21 12:13:10 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/05/20 11:38:48 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/05/20 11:41:40 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 
-t_env *dup_list(t_env *env)///new
+char *return_value(t_env *env, char *var_name)
 {
-	t_env	*tmp_head;
-	t_env	*tmp;
-	t_env	*hold_env;	
-
-	hold_env = env;
-	tmp = node(ft_strjoin(hold_env->key, hold_env->value), 0);
-	tmp_head = tmp;
-	hold_env = hold_env->next;
-	while (hold_env)
-	{
-		tmp->next = node(ft_strjoin(hold_env->key, hold_env->value), 0);
-		tmp = tmp->next;
-		hold_env = hold_env->next;
-	}
-	return (tmp_head);
+    t_env *tmp;
+    
+    tmp = env;
+    while (tmp)
+    {
+        if (compare(var_name, tmp->key) == 0)
+            return (tmp->value+1);
+        tmp = tmp->next;
+    }
+    return (NULL);
 }

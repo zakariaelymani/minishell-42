@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:30:23 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/17 10:24:08 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:56:37 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		excute_builtins_inparent(t_cmds **cmd, t_env **env, int stat)
 	int input;
 	int	output;
 	int ret_val;
+	
 	
 	ret_val = open_files(cmd, env);
 	if (ret_val == 1 || ret_val == -1)

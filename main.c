@@ -6,13 +6,13 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:30:23 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/17 15:35:41 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/21 12:01:47 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int globle_var = 0; 
+int globle_var; 
 
 // void print_parsed_cmds(t_cmds *cmds) {
 // 	int n = 1;
@@ -27,9 +27,10 @@ int globle_var = 0;
 // 		cmds = cmds->next;
 // 	}
 // }
+
 void handler(int i)
 {
-	if (i == SIGINT && !globle_var)
+	if (i == SIGINT && globle_var == 1)
 	{
 		rl_on_new_line();
 		ft_putstr_fd("\n",1);
@@ -53,7 +54,7 @@ void handler_child(int sig)
 
 void signales(int flag)
 {
-	if (flag == 1)//parent handing 
+	if (flag == 1)
 	{
 		signal(SIGINT, handler);
 		signal(SIGQUIT, handler);
@@ -82,10 +83,12 @@ int main(int argc, char *argv[], char *env[])
 	tcgetattr(STDIN_FILENO, &term);
 	while (1)
 	{
+		globle_var = 1;
 	   signales(1);
-		line = readline("minishell$ ");
+	   globle_var = 0;
+		line = readline("minishel$ ");
 		 if (!line)
-			(write(2, "exit\n", 6),  clear_env(&env_new), exit(env_new->exit_sta));
+			(write(2, "exit\n", 6), rl_clear_history(), clear_env(&env_new), exit(env_new->exit_sta));
 		if (!*line)
 			continue;
 		add_history(line);

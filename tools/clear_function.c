@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 11:12:27 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/17 15:49:37 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/21 12:01:30 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	clear_env(t_env **env)
 
 	if (!env || !*env)
 		return ;
-	rl_clear_history();
 	while (*env)
 	{
 		if ((*env)->next)
