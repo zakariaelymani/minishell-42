@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:32:01 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/22 14:50:14 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:56:24 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void dup_input_output(t_cmds **cmd, t_cmds *tmp)
 	input = -2;
 	output = -2;
 	find_output_input(*cmd, input, output);
-	printf("this is input %d and this output%d\n", (*cmd)->input, (*cmd)->output);
+	//printf("this is input %d and this output%d\n", (*cmd)->input, (*cmd)->output);
 	if ((*cmd)->input > -1)
 		input = dup2((*cmd)->input, STDIN_FILENO);
 	if ((*cmd)->output > -1)

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:30:23 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/22 16:23:22 by abenkaro         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:54:36 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int main(int argc, char *argv[], char *env[])
 			continue;
 		add_history(line);
 		tokens = ms_tokenizer(line);
+		if(!syntax_checker(tokens))
+			continue ;
 		cmd = cmd_parser(tokens);
 		excute_command_line(&cmd, &env_new);
 		clear_commands(&cmd);

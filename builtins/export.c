@@ -65,8 +65,8 @@ char *set_val_to_env_var(char *old_val, char *new_val, int *status)
 	}
 	return_val = ft_strdup(tmp_val);
 	free(tmp_val);//new
-	free(old_val);
-	free(new_val);
+	//free(old_val);
+	//free(new_val);
 	return (return_val);
 }
 

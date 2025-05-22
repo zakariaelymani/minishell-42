@@ -63,6 +63,10 @@ FILES = builtins/env.c \
 	parsing/syntax_check.c \
 	parsing/ms_tokenizer.c \
 	parsing/parse.c \
+	tools/return_value.c \
+	tools/clear_function.c \
+	tools/get_env.c \
+	tools/ft_lstadd_front_bonus.c \
 
 NAME = minishell
 cc = cc 
