@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:30:23 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/22 14:42:29 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:23:22 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int main(int argc, char *argv[], char *env[])
 	t_cmds   *cmd;
 	struct termios term;
    	char	*line;
+	t_token *tokens;
    
 	env_new = get_env(argc, argv, env);
 	tcgetattr(STDIN_FILENO, &term);
@@ -86,7 +87,8 @@ int main(int argc, char *argv[], char *env[])
 		if (!*line)
 			continue;
 		add_history(line);
-		cmd = parsing_line(line);
+		tokens = ms_tokenizer(line);
+		cmd = cmd_parser(tokens);
 		excute_command_line(&cmd, &env_new);
 		clear_commands(&cmd);
 		signales(2);

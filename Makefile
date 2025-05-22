@@ -66,7 +66,7 @@ FILES = builtins/env.c \
 
 NAME = minishell
 cc = cc 
-FLAGS = -g -Wall -Wextra -Werror # -fsanitize=address
+FLAGS = -I. -I./parsing -g -Wall -Wextra -Werror # -fsanitize=address
 OBJ = $(FILES:.c=.o)
 HEADER1 = builtins/builtins.h
 HEADER2 = struct.h 

@@ -30,6 +30,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include "excuting_files/excute_header.h"
+#include "parsing.h"
 
 //he will check if ziro that will  we in parent  but in child it is somthing ot other  
 
