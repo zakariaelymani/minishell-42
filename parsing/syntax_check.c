@@ -6,7 +6,7 @@
 /*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:10:27 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/05/17 17:21:16 by abenkaro         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:07:24 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 int	syntax_checker(t_token *token)
 {
-	size_t	i;
-
-	i = 0;
 	while (token)
 	{
 		if (token->type == PIPE)
