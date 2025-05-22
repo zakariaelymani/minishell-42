@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 15:14:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/20 11:25:16 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 13:24:39 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int modify_var(char *input, t_env **env)
 	int 	status;
 
 	new_key = extract_key(input);
-	tmp = (*env);
+	tmp = (*env)->next;
 	while (tmp)
 	{
 		

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:30:23 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/21 12:01:47 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:42:29 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,29 +73,24 @@ int main(int argc, char *argv[], char *env[])
 	struct termios term;
    	char	*line;
    
-	(void)argv;
-	(void)argc;
-	
-	if (!env || !*env)
-		env_new = hard_code_env();
-	else
-		env_new = creat_env(env);
+	env_new = get_env(argc, argv, env);
 	tcgetattr(STDIN_FILENO, &term);
 	while (1)
 	{
+	   	signales(1);
 		globle_var = 1;
-	   signales(1);
-	   globle_var = 0;
 		line = readline("minishel$ ");
+		globle_var = 0;
 		 if (!line)
 			(write(2, "exit\n", 6), rl_clear_history(), clear_env(&env_new), exit(env_new->exit_sta));
 		if (!*line)
 			continue;
 		add_history(line);
 		cmd = parsing_line(line);
-	   excute_command_line(&cmd, &env_new);
-	 	clear_commands(&cmd);
-	   tcsetattr( STDIN_FILENO, TCSANOW, &term);
+		excute_command_line(&cmd, &env_new);
+		clear_commands(&cmd);
+		signales(2);
+		tcsetattr( STDIN_FILENO, TCSANOW, &term);
 	}
 }
 

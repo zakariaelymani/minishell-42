@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:27:03 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/20 14:58:19 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 13:23:01 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void removenode(t_env **env, char *var)
 	t_env   *prev;
 	size_t	lenvar;
 
-	tmp = (*env);
+	tmp = (*env)->next;
 	lenvar = ft_strlen(var);
 	prev = NULL;
 	while (tmp)

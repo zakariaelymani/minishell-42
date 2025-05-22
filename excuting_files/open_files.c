@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:21:54 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/17 10:22:49 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:56:32 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,40 @@ void	pipe_cammand(t_cmds *tmp)
 	{
 		if(pipe(pid) == -1)
 			perror("pipe");
-	
 		tmp->output = pid[1];
 		tmp->next->input = pid[0];
 	}
 }
+
+int fork_and_readheredoc(t_env **env, t_redir *redir)
+{
+	pid_t	pid;
+	int		status;
+
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("minishell: fork");
+		return (1);
+	}
+	if (pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_IGN);
+		redir->fd = here_document(redir->file_name, redir->fd, env);
+		exit(0);
+	}
+	else
+	{
+		waitpid(pid, &status, 0);
+		(*env)->exit_sta = WEXITSTATUS(status);
+		if (WIFEXITED(status) && (*env)->exit_sta != 0)
+			return (1);
+	}
+	return (0);
+}
+
+
 void read_heredoc(t_cmds **cmd, t_env **env)
 {
 	t_redir *rids;
@@ -73,17 +102,15 @@ void read_heredoc(t_cmds **cmd, t_env **env)
 	while (tmp)
 	{
 		rids = tmp->redirection;
-		while (1)
+		while (rids)
 		{
-			if (!rids)
-				break ;
 			if (rids->type == HEREDOC)
-				rids->fd = here_document(rids->file_name, rids->fd, env);
+				if (fork_and_readheredoc(env, rids) == 1)
+					return ;
 			rids = rids->next;
 		}
 		tmp = tmp->next;
 	}
-	
 }
 
 int open_files(t_cmds **cmds, t_env **env)

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:53:32 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/21 11:57:09 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 13:19:39 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,28 @@ int	check_ishe_return(char *path, int *s)
 	return (how);
 }
 
+void change_pwd(t_env **env, char *input)
+{	
+	char *tmp_path;
+	char *path;
+
+	tmp_path = getcwd(NULL, 0);
+	if (!tmp_path)
+		perror("d: error retrieving current directory: getcwd: cannot access parent directories:");
+	change_value_var(env, "OLDPWD", return_value(*env, "PWD", 0));
+	if (tmp_path)
+		path = ft_strjoin("=", tmp_path);//leaks 
+	else
+	{
+		path = free_and_join("/", input, 0);
+		path = free_and_join(return_value(*env, "PWD", 0), path, 2);
+	}
+	free((*env)->value);	
+	(*env)->value = ft_strdup(path);
+	change_value_var(env, "PWD", path);
+	(free(path), free(tmp_path));
+}
+
 
 char *change_path(char *new_path, char *pwd, char *path, char *line)
 {
@@ -45,9 +67,9 @@ char *change_path(char *new_path, char *pwd, char *path, char *line)
 	int	i;
 	int s;
 	
-	(1) && (s = 0 , path = NULL);
+	s = 0;
 	how = check_ishe_return(new_path, &s);
-	if (how == 0 || !pwd)
+	if (how == 0 || !pwd || !path)
 		return (new_path);
 	i = ft_strlen(pwd);
 	if (pwd[i - 1] == '/')
@@ -58,6 +80,8 @@ char *change_path(char *new_path, char *pwd, char *path, char *line)
 				how--;
 		i--;
 	}
+	free(path);
+	path = NULL;
 	if (new_path[s])
 	{
 		path = ft_substr(new_path, s, ft_strlen(new_path));
@@ -70,23 +94,13 @@ char *change_path(char *new_path, char *pwd, char *path, char *line)
 
 int	change_dir(char **new_path, t_env **env)
 {
-	char    *tmp_path;
 	char    *path;
-	char	*path_to_change;
 	char	*line;
 	
 	line = NULL;
-	path_to_change = NULL;
-	path = change_path(new_path[1], return_value(*env, "PWD"), path_to_change, line);
+	path = change_path(new_path[1], return_value(*env, "PWD", 1), getcwd(NULL, 0), line);
 	if (chdir(path) != 0)
-			return(perror("minishell: cd"),  1);//duble free here if you free path leaks
-	tmp_path = getcwd(NULL, 0);
-	if (!tmp_path)
-		perror("d: error retrieving current directory: getcwd: cannot access parent directories:");
-	change_value_var(env, "OLDPWD", return_value(*env, "PWD"));
-	free(path);
-	path = ft_strjoin("=", tmp_path);//leaks 
-	change_value_var(env, "PWD", path);
-	(free(path), free(tmp_path));
+		return(perror("minishell: cd"),  1);//duble free here if you free path leaks
+	change_pwd(env, new_path[1]);
 	return (0);
 }

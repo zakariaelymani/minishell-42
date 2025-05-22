@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:05:27 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/17 10:22:15 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 10:49:15 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	excute_command_line(t_cmds **cmd, t_env **env);
 void    excute_builtins_inchild(t_cmds **cmd, t_env **env, int stat, t_cmds *tmp);
 int		excute_builtins_inparent(t_cmds **cmd, t_env **env, int stat);
 void    dub_for_cmds(t_cmds **cmd, t_env **env, t_cmds *tmp);
-void    print_parsed_cmds(t_cmds *cmds);
 void    close_fds(t_cmds *tmp);
+int     fork_and_readheredoc(t_env **env, t_redir *redir);
 
 #endif

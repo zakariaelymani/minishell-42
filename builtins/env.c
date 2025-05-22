@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:38:16 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/21 12:11:35 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 13:24:55 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char *join_env(t_env *env)
 	char *prev;
 
 	prev = NULL;
-	tmp = env;
+	tmp = env->next;
 	while (tmp)
 	{
 		if (tmp->status != -1)

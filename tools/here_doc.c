@@ -6,11 +6,12 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:07:40 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/20 10:28:58 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:56:01 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
+
 
 void check_is_there()
 {
@@ -44,6 +45,7 @@ char *exapnd_var_form_env(char *line, t_env *env, int *i)
 	return (free(var_name), var_name = NULL, NULL);
 }
 
+
 char *expantion(char *line, t_env *env)
 {
 	char 	*new_line;
@@ -73,15 +75,6 @@ char *expantion(char *line, t_env *env)
 	return (new_line);
 }
 
-void take_of_controlc(int i)
-{
-	if (i == SIGINT)
-	{
-		close(STDIN_FILENO);
-	}
-		return ;
-}
-
 int read_conten(char *limiter, int fd, t_env *env, int flag)
 {
 	char	*line;
@@ -90,8 +83,6 @@ int read_conten(char *limiter, int fd, t_env *env, int flag)
 	(1) && (line = NULL, i = 0);
 	while (1)
     {
-		//signal(SIGINT, take_of_controlc);
-		signal(SIGQUIT, SIG_IGN);
 		line = readline(">");
 		if (!line)
 			return (write(2, "where limiter\n", 15), fd);

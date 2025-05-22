@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:50:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/20 15:31:21 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 13:15:55 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ void	*ft_memset(void *b, int c, size_t len);
 void    add_var_just_not_exists(t_env **env, char *var_name, char *value);
 void    clear_commands(t_cmds **cmds);
 void    clear_env(t_env **env);
-char    *return_value(t_env *env, char *var_name);
+char    *return_value(t_env *env, char *var_name, int flag);
 char	*ft_strrchr(const char *s, int c);
-
+void	ft_lstadd_front(t_env **lst, t_env *new);
+t_env   *get_env(int argc, char *argv[], char *env[]);
 #endif
 
  
