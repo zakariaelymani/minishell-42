@@ -6,16 +6,16 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 11:38:48 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/22 13:14:29 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:32:29 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 
-char *return_value(t_env *env, char *var_name, int flag)
+char	*return_value(t_env *env, char *var_name, int flag)
 {
-	t_env *tmp;
-	
+	t_env	*tmp;
+
 	tmp = env;
 	while (tmp)
 	{
@@ -26,7 +26,6 @@ char *return_value(t_env *env, char *var_name, int flag)
 			else
 				return (tmp->value);
 		}
-		   
 		tmp = tmp->next;
 	}
 	return (NULL);

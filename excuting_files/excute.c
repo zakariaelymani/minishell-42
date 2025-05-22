@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:25:17 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/17 11:44:23 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 15:53:51 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void excute_command(t_cmds *cmd, t_env **env, t_cmds *tmp)
 	char *path;
 	char **env_to_excute;
 	
-	path = find_path_to_cmd(env, cmd->cmds[0]);
+	path = find_path_to_cmd(env, cmd->cmds[0], 0);
 	if (!path)
 		exit((*env)->exit_sta);
 	env_to_excute = convert_strcut_array(*env);

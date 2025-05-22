@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:53:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/15 16:46:48 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 15:49:15 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int ft_exit(char **arguments)
 			{
 			if (sheck_char(arguments[i]) == 1)
 				exit(2);
-			status = norm_atoi(arguments[i]);    
+			status = norm_atoi(arguments[i], 0);    
 			i++;
 			if (arguments[i])
 			{

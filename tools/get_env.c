@@ -6,13 +6,13 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:04:51 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/22 11:23:46 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:33:39 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 
-t_env *get_env(int argc, char *argv[], char *env[])
+t_env	*get_env(int argc, char *argv[], char *env[])
 {
 	t_env	*env_new;
 	char	*pwd;

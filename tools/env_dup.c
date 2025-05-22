@@ -6,13 +6,13 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:42:20 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/22 13:23:47 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 15:51:55 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 
-t_env *dup_list(t_env *env)///new
+t_env	*dup_list(t_env *env)///new
 {
 	t_env	*tmp_head;
 	t_env	*tmp;

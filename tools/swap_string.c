@@ -6,13 +6,13 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:40:12 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/20 10:29:44 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:33:53 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 
-void swap_string(char **str, char **str1)
+void	swap_string(char **str, char **str1)
 {
 	char	*tmp;
 
