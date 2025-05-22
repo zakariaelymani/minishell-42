@@ -6,27 +6,14 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:51:07 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/15 17:48:16 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:55:46 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "tools.h"
 
-char *while_find_path(t_env **env)
-{
-	t_env *tmp;
 
-	tmp = (*env);
-
-	while (tmp)
-	{
-		if (compare(tmp->key, "PATH") == 0)
-			return (ft_strdup(tmp->value + 1));
-		tmp = tmp->next;	
-	}
-	return (NULL);
-}
 int check_char_is_there(char *cmd, char c)
 {
 	int i;
@@ -81,13 +68,12 @@ char	*find_path_to_cmd(t_env **env, char *cmd)
 		return (NULL);
 	if (check_char_is_there(cmd, '/') == 1)
 		 return (check_is_exsist_or_excuteble(cmd, env));	
-	path = while_find_path(env);
+	path = return_value(*env, "PATH", 1);
 	if (!path || !*path)
 		return (check_is_exsist_or_excuteble(cmd, env));
 	splited = ft_split(path, ':');
-	(1) && (free(path), path = NULL);
 	i = 0;
-	joined = ft_strjoin("/", cmd);
+	joined = ft_strjoin("/", cmd);///leaks
 	while (splited[i])
 	{
 		cmd = ft_strjoin(splited[i], joined);

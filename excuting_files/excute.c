@@ -6,13 +6,13 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:25:17 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/16 19:25:15 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/17 11:44:23 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "excute_header.h"
 
-void excute_command(t_cmds *cmd, t_env **env)
+void excute_command(t_cmds *cmd, t_env **env, t_cmds *tmp)
 {
 	char *path;
 	char **env_to_excute;
@@ -21,8 +21,8 @@ void excute_command(t_cmds *cmd, t_env **env)
 	if (!path)
 		exit((*env)->exit_sta);
 	env_to_excute = convert_strcut_array(*env);
-	dub_for_cmds(&cmd, env);
-	execve(path, cmd->cmds, env_to_excute);
+	dub_for_cmds(&cmd, env, tmp);
+	execve(path,cmd->cmds, env_to_excute);
 	perror("minishell5");
 	exit(127);
 }
@@ -31,7 +31,6 @@ void wait_child(t_cmds *tmp, t_env **env)
 {
 	
 	t_cmds 		*cmd;
-	t_redir 	*redir;
 	int 		status;
 	pid_t		last_pid;
 
@@ -40,21 +39,10 @@ void wait_child(t_cmds *tmp, t_env **env)
 	while (cmd->next)
 		cmd = cmd->next;
 	last_pid = cmd->pid;
+	close_fds(tmp);
 	cmd = tmp;
 	while (cmd)
 	{
-		redir = cmd->redirection;
-		while (redir)
-		{
-			if (redir->fd > -1)
-				close(redir->fd);
-			redir = redir->next;
-		}
-		if (cmd->next)
-			if (cmd->next->input > -1)
-				close(cmd->next->input);
-		if (cmd->output > -1)
-			close (cmd->output);
 		if (cmd->pid == last_pid)
 			waitpid(cmd->pid, &status, 0);
 		else
@@ -77,14 +65,15 @@ void fork_and_excute(t_cmds **cmd, t_env **env)
 		tmp->pid = fork();
 		if (tmp->pid == 0)
 		{
+		
 			 signales(2);
 			i = check_is_builtins(tmp);
 			if (i != -1 && i  != -2)
-				excute_builtins_inchild(&tmp, env, i);
+				excute_builtins_inchild(&tmp, env, i, *cmd);
 			else if (i == -2)
 				exit(open_files(&tmp, env));
 			else
-				excute_command(tmp, env);
+				excute_command(tmp, env, *cmd);
 		}
 		if (tmp->pid == -1)
 			perror("minishell");

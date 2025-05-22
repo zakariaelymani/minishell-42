@@ -6,11 +6,12 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:07:40 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/15 18:15:37 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:56:01 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
+
 
 void check_is_there()
 {
@@ -44,6 +45,7 @@ char *exapnd_var_form_env(char *line, t_env *env, int *i)
 	return (free(var_name), var_name = NULL, NULL);
 }
 
+
 char *expantion(char *line, t_env *env)
 {
 	char 	*new_line;
@@ -55,6 +57,7 @@ char *expantion(char *line, t_env *env)
 	(1) && (x = 0, new_line = NULL);
 	while (1)
 	{
+		
 		i = x;
 		while (line[x] && line[x] != '$')
 			x++;
@@ -81,6 +84,8 @@ int read_conten(char *limiter, int fd, t_env *env, int flag)
 	while (1)
     {
 		line = readline(">");
+		if (!line)
+			return (write(2, "where limiter\n", 15), fd);
 		line = free_and_join(line, "\n", 1);
 		if (flag == -2)
 			line = expantion(line, env);
@@ -111,7 +116,7 @@ int     here_document(char *limiter, int flag, t_env **env)
 
 	name = randomize_name(0);
     fd = ft_open(name,  OUTPUT);
-	limiter = free_and_join(limiter, "\n", 1);
+	limiter = free_and_join(limiter, "\n", 0);
 	fd = read_conten(limiter, fd, *env, flag);
 	if (fd == -1)
 		exit(1);

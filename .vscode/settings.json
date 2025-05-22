@@ -6,7 +6,9 @@
         "struct.h": "c",
         "sstream": "c",
         "__node_handle": "c",
-        "locale": "c"
+        "locale": "c",
+        "ostream": "c",
+        "cstdlib": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

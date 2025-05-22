@@ -6,13 +6,14 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 16:23:46 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/07 10:58:35 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/20 11:33:11 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 #define BUILTINS_H
 
+#include <sys/types.h>
 #include "../struct.h"
 #include "../tools/tools.h"
 

@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_toklast.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenkaro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 01:57:54 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/05/16 17:47:38 by abenkaro         ###   ########.fr       */
+/*   Created: 2024/10/31 15:26:39 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/05/22 10:01:52 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "tools.h"
 
-t_token	*ms_toklast(t_token *lst)
+void	ft_lstadd_front(t_env **lst, t_env *new)
 {
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+	if (new == NULL)
+		return ;
+	new->next = *lst;
+	*lst = new;
 }

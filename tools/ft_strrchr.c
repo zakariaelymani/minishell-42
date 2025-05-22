@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenkaro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 00:22:21 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/05/14 14:08:05 by abenkaro         ###   ########.fr       */
+/*   Created: 2024/10/24 10:55:42 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/05/20 15:31:05 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "tools.h"
 
-int	ms_toksize(t_token *lst)
+char	*ft_strrchr(const char *s, int c)
 {
-	int	result;
+	int	i;
 
-	if (!lst)
-		return (0);
-	result = 1;
-	while (lst->next != NULL)
+	i = 0;
+	while (s[i])
+		i++;
+	while (i >= 0)
 	{
-		result++;
-		lst = lst->next;
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
+		i--;
 	}
-	return (result);
+	return (0);
 }

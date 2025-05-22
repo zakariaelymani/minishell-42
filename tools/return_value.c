@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   return_value.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 15:26:39 by zel-yama          #+#    #+#             */
-/*   Updated: 2024/11/07 11:32:05 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/05/20 11:38:48 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/05/22 13:14:29 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "tools.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+char *return_value(t_env *env, char *var_name, int flag)
 {
-	if (new == NULL)
-		return ;
-	new->next = *lst;
-	*lst = new;
+	t_env *tmp;
+	
+	tmp = env;
+	while (tmp)
+	{
+		if (compare(var_name, tmp->key) == 0)
+		{
+			if (flag == 1)
+				return (tmp->value + 1);
+			else
+				return (tmp->value);
+		}
+		   
+		tmp = tmp->next;
+	}
+	return (NULL);
 }

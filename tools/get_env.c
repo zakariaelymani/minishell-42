@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 10:55:42 by zel-yama          #+#    #+#             */
-/*   Updated: 2024/11/12 12:47:42 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/05/22 10:04:51 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/05/22 11:23:46 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "tools.h"
 
-char	*ft_strrchr(const char *s, int c)
+t_env *get_env(int argc, char *argv[], char *env[])
 {
-	int	i;
+	t_env	*env_new;
+	char	*pwd;
 
-	i = 0;
-	while (s[i])
-		i++;
-	while (i >= 0)
-	{
-		if (s[i] == (char)c)
-			return ((char *)(s + i));
-		i--;
-	}
-	return (0);
+	(void)argc;
+	(void)argv;
+	if (!env || !*env)
+		env_new = hard_code_env();
+	else
+		env_new = creat_env(env);
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
+		perror("minishell: getwcd");
+	pwd = free_and_join("=", pwd, 2);
+	ft_lstadd_front(&env_new, node(ft_strjoin("DATA", pwd), 1));
+	return (env_new);
 }

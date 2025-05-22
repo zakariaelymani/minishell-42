@@ -72,16 +72,18 @@ HEADER1 = builtins/builtins.h
 HEADER2 = struct.h 
 HEADER3 = tools/tools.h
 HEADER4 = minishell.h
-HEADER5 = parsing/parsing.h
 
 
 all: $(NAME)
 
-%.o: %.c $(HEADER1) $(HEADER2) $(HEADER3) $(HEADER4) $(HEADER5)
-	$(CC) -I./parsing -I. -I./tools $(FLAGS)   -c $< -o $@ 
+%.o: %.c $(HEADER1) $(HEADER2) $(HEADER3) $(HEADER4)
+	$(CC) $(FLAGS)   -c $< -o $@ 
+
 
 $(NAME): $(OBJ)
-	$(cc) -I./parsing -I. -I./tools $(FLAGS) $(OBJ)  -lreadline  -o   $(NAME) 
+	$(cc) $(FLAGS) $(OBJ)  -lreadline  -o   $(NAME) 
+
+
 
 clean:
 	$(RM) $(OBJ)

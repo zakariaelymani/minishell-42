@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:37:25 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/16 16:15:25 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/20 11:21:54 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,37 +54,47 @@ int	check_echo_flag(char **str)
 	}
 	return (i);
 }
-int join_and_print(int i, char **string)
+char *join_strings(int i, char **string, int flag)
 {
+	char	*line;
+	char	*prev;
 
+	prev = NULL;
 	if (!string[i])
-		return (0);
+		return (NULL);
 	while (string[i])
 	{
-		if  (write(STDOUT_FILENO, string[i], ft_strlen(string[i])) == -1)
-			return (1);
-		if (string[i + 1])
-			if (write(STDOUT_FILENO, " ", 1) == -1)
-				return (1);
+		if (!string[i + 1])
+		{
+			prev = free_and_join(prev, string[i], 1);
+			break;
+		}
+		line = free_and_join(string[i], " ", 0);
+		prev = free_and_join(prev, line, 2);
 		i++;
 	}
-	return (0);
+	if (flag == 1)
+		prev = free_and_join(prev, "\n", 1);
+	return (prev);
 }
 
-int   my_echo(char **string, t_env **env)
+int   my_echo(char **strings, t_env **env)
 {
-	int status;
-	int	i;
+	int 	status;
+	int		i;
+	char 	*line;
 
 	(void)env;
-	status = check_echo_flag(string);
+	status = check_echo_flag(strings);
 	i = status;
-	if (join_and_print(i, string) == 1)
-		return (1);
-	if (status > 1) 
-		return (0);
-	else if (write(1, "\n", 1) == -1)
-			return (1);
+
+	line = join_strings(i, strings, status);
+	if (line)
+	{
+		if (write(1, line, ft_strlen(line)) == -1)
+			return (free(line), 1);
+		free(line);
+	}
 	return (0);
 }
 

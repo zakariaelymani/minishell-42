@@ -6,21 +6,20 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 17:03:37 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/04/15 17:03:52 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/17 16:14:12 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 
-int find_env(char **env)
+int	find_env(char **env)
 {
-    int i;
-    
-    i = 0;
-    while (env[i])
-    {
-        i++;
-    }
-    return (i);
-    
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		i++;
+	}
+	return (i);
 }
