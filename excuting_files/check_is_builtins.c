@@ -16,25 +16,25 @@ int  check_is_builtins(t_cmds *cmd)
 {
 	if (!*cmd->cmds || !cmd->cmds)
 		return (-2);
-  	else if (compare(cmd->cmds[0], "echo") == 0)
+  	if (compare(cmd->cmds[0], "echo") == 0)
 		return (1);
-	else if (compare(cmd->cmds[0], "export") == 0)
+	if (compare(cmd->cmds[0], "export") == 0)
 		return (2);
-	else if (compare(cmd->cmds[0], "unset") == 0)
+	if (compare(cmd->cmds[0], "unset") == 0)
 		return (3);
-	else if (compare(cmd->cmds[0], "env") == 0)
+	if (compare(cmd->cmds[0], "env") == 0)
 		return (4);
-	else if (compare(cmd->cmds[0], "pwd") == 0)
+	if (compare(cmd->cmds[0], "pwd") == 0)
 		return (5);
-	else if (compare(cmd->cmds[0], "exit") == 0)
+	if (compare(cmd->cmds[0], "exit") == 0)
 		return (6);
-	else if (compare(cmd->cmds[0], "cd") == 0)
+	if (compare(cmd->cmds[0], "cd") == 0)
 		return (7);
 	return (-1);
 }
 
 void excute_builtins(t_cmds **cmd, t_env **env, int stat)
-{	
+{
 	if (stat == 1)
 		(*env)->exit_sta = my_echo((*cmd)->cmds, env);
 	else if (stat == 2)
@@ -69,6 +69,5 @@ void excute_builtins_inchild(t_cmds **cmd, t_env **env, int stat, t_cmds *tmp)
 		exit (ft_exit((*cmd)->cmds));
 	else if (stat == 7)
 		exit (change_dir((*cmd)->cmds, env));
-	
 }
 
