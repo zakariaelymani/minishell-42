@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_while.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 16:37:04 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:12:38 by zel-yama         ###   ########.fr       */
+/*   Created: 2024/10/25 20:05:31 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/05/24 16:05:35 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools.h"
+#include "../tools.h"
 
-void	free_while(char **array)
+char	*ft_strdup(const char *s1)
 {
-	int	i;
+	char	*newstr;
+	int		i;
 
 	i = 0;
-	while (array[i])
+	if (!s1 || !*s1)
+		return (NULL);
+	while (s1[i])
 	{
-		free(array[i]);
-		array[i] = NULL;
 		i++;
 	}
-	free(array);
-	array = NULL;
+	newstr = (char *)malloc(sizeof(char) * (i + 1));
+	if (!newstr)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		newstr[i] = s1[i];
+		i++;
+	}
+	newstr[i] = '\0';
+	return (newstr);
 }

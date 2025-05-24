@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_while.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 16:37:04 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:12:38 by zel-yama         ###   ########.fr       */
+/*   Created: 2024/10/24 10:55:42 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/05/24 16:06:04 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools.h"
+#include "../tools.h"
 
-void	free_while(char **array)
+char	*ft_strrchr(const char *s, int c)
 {
 	int	i;
 
 	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		array[i] = NULL;
+	while (s[i])
 		i++;
+	while (i >= 0)
+	{
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
+		i--;
 	}
-	free(array);
-	array = NULL;
+	return (0);
 }

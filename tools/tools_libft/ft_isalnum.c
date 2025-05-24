@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_while.c                                       :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 16:37:04 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:12:38 by zel-yama         ###   ########.fr       */
+/*   Created: 2024/10/22 11:00:30 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/05/24 16:04:26 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools.h"
+#include "../tools.h"
 
-void	free_while(char **array)
+int	ft_isalnum(int c)
 {
-	int	i;
-
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		array[i] = NULL;
-		i++;
-	}
-	free(array);
-	array = NULL;
+	if (c >= 48 && c <= 57)
+		return (1);
+	else if (c >= 65 && c <= 90)
+		return (1);
+	else if (c >= 97 && c <= 122)
+		return (1);
+	else
+		return (0);
 }

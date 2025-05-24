@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_while.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 16:37:04 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:12:38 by zel-yama         ###   ########.fr       */
+/*   Created: 2024/10/31 15:37:29 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/05/24 16:04:57 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools.h"
+#include "../tools.h"
 
-void	free_while(char **array)
+int	ft_lstsize(t_env *lst)
 {
 	int	i;
 
 	i = 0;
-	while (array[i])
+	if (lst == NULL)
+		return (0);
+	while (lst != NULL)
 	{
-		free(array[i]);
-		array[i] = NULL;
 		i++;
+		lst = lst->next;
 	}
-	free(array);
-	array = NULL;
+	return (i);
 }

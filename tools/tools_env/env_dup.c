@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_while.c                                       :+:      :+:    :+:   */
+/*   env_dup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 16:37:04 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:12:38 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/04/15 16:42:20 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/05/24 16:03:32 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools.h"
+#include "../tools.h"
 
-void	free_while(char **array)
+t_env	*dup_list(t_env *env)///new
 {
-	int	i;
+	t_env	*tmp_head;
+	t_env	*tmp;
+	t_env	*hold_env;	
 
-	i = 0;
-	while (array[i])
+	hold_env = env->next;
+	tmp = node(ft_strjoin(hold_env->key, hold_env->value), 0);
+	tmp_head = tmp;
+	hold_env = hold_env->next;
+	while (hold_env)
 	{
-		free(array[i]);
-		array[i] = NULL;
-		i++;
+		tmp->next = node(ft_strjoin(hold_env->key, hold_env->value), 0);
+		tmp = tmp->next;
+		hold_env = hold_env->next;
 	}
-	free(array);
-	array = NULL;
+	return (tmp_head);
 }

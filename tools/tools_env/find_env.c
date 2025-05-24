@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_while.c                                       :+:      :+:    :+:   */
+/*   find_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 16:37:04 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:12:38 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/04/15 17:03:37 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/05/24 16:03:34 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools.h"
+#include "../tools.h"
 
-void	free_while(char **array)
+int	find_env(char **env)
 {
 	int	i;
 
 	i = 0;
-	while (array[i])
+	while (env[i])
 	{
-		free(array[i]);
-		array[i] = NULL;
 		i++;
 	}
-	free(array);
-	array = NULL;
+	return (i);
 }

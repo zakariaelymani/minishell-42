@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_while.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 16:37:04 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:12:38 by zel-yama         ###   ########.fr       */
+/*   Created: 2024/10/23 17:11:05 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/05/24 16:05:45 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools.h"
+#include "../tools.h"
 
-void	free_while(char **array)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	int	i;
+	size_t	i;
+	size_t	len;
 
 	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		array[i] = NULL;
+	len = 0;
+	while (src[i])
 		i++;
+	if (dstsize != 0)
+	{
+		while (src[len] != '\0' && len < (dstsize - 1))
+		{
+			dst[len] = src[len];
+			len++;
+		}
+		dst[len] = '\0';
 	}
-	free(array);
-	array = NULL;
+	return (i);
 }

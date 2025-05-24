@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_while.c                                       :+:      :+:    :+:   */
+/*   add_ifnot_exists.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 16:37:04 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:12:38 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/05/15 16:49:21 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/05/24 16:03:12 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools.h"
+#include "../tools.h"
 
-void	free_while(char **array)
+void	add_var_just_not_exists(t_env **env, char *var_name, char *value)
 {
-	int	i;
+	t_env	*tmp;
 
-	i = 0;
-	while (array[i])
+	if (!env | !*env)
+		return ;
+	tmp = (*env);
+	while (tmp)
 	{
-		free(array[i]);
-		array[i] = NULL;
-		i++;
+		if (compare(var_name, tmp->key) == 0)
+			return ;
+		tmp = tmp->next;
 	}
-	free(array);
-	array = NULL;
+	ft_lstadd_back(env, node(ft_strjoin(var_name, value), 1));
 }

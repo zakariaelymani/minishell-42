@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_while.c                                       :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 16:37:04 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:12:38 by zel-yama         ###   ########.fr       */
+/*   Created: 2024/10/23 10:42:29 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/05/24 16:05:00 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools.h"
+#include "../tools.h"
 
-void	free_while(char **array)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	int	i;
+	size_t		i;
+	char		*str;
+	const char	*sc;
 
+	sc = src;
+	str = dst;
 	i = 0;
-	while (array[i])
+	if (!sc && !str)
+		return (NULL);
+	while (i < n)
 	{
-		free(array[i]);
-		array[i] = NULL;
+		str[i] = sc[i];
 		i++;
 	}
-	free(array);
-	array = NULL;
+	return ((void *)str);
 }

@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_while.c                                       :+:      :+:    :+:   */
+/*   return_value.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 16:37:04 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:12:38 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/05/20 11:38:48 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/05/24 16:03:44 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools.h"
+#include "../tools.h"
 
-void	free_while(char **array)
+char	*return_value(t_env *env, char *var_name, int flag)
 {
-	int	i;
+	t_env	*tmp;
 
-	i = 0;
-	while (array[i])
+	tmp = env;
+	while (tmp)
 	{
-		free(array[i]);
-		array[i] = NULL;
-		i++;
+		if (compare(var_name, tmp->key) == 0)
+		{
+			if (flag == 1)
+				return (tmp->value + 1);
+			else
+				return (tmp->value);
+		}
+		tmp = tmp->next;
 	}
-	free(array);
-	array = NULL;
+	return (NULL);
 }
