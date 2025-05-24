@@ -94,14 +94,10 @@ t_token *get_wtoken(char *line, int *i) {
   new = ms_toknew(content, WORD);
   if (!content || !new)
     exit(1);
-  while (line[*i] && !ft_strchr("<>|\'\" ", line[*i]))
+  // while (line[*i] && !ft_strchr("<>|\'\" ", line[*i]))
+  while (line[*i] && !ft_strchr("<>| ", line[*i]))
     (*i)++;
   return (new);
-}
-
-int	ft_isnotdelim(int c)
-{
-	return (ft_isalpha(c) || !ft_strchr("<>| \'\"", c));
 }
 
 t_token *ms_tokenizer(char *line) {
@@ -115,7 +111,7 @@ t_token *ms_tokenizer(char *line) {
       break;
     while (ft_isspace(line[i]))
       i++;
-    if (line[i] && ft_isnotdelim(line[i]))
+    if (line[i] && !ft_strchr("<>| ", line[i]))
       ms_tokappend(&tokenlist, get_wtoken(line, &i));
     if (line[i] && ft_strchr("<>", line[i]))
       ms_tokappend(&tokenlist, get_optoken(line, &i));
