@@ -17,15 +17,20 @@ void	*expand(void *tok)
 	t_token *token;
 	t_token	*expanded;
 	size_t	i;
+	int		mode;
 
 	i = 0;
+	mode = 0;
 	token = (t_token *)tok;
 	while (token->content[i])
 	{
-		if (token->content[i] == '$')
-			get_from_env;
+		if (line[i] == '\'')
+			mode = 1;
+		if (token->content[i] == '$' && mode == 1)
+			get_from_env(token->content, i);
+		i++;
 	}
-	
+
 }
 
 t_tokens *ms_expander(t_tokens *token)
