@@ -12,25 +12,46 @@
 
 #include "parsing.h"
 
+typedef enum e_qtype{
+	DOUBLE = 1,
+	SINGLE = 2,
+}
+
 void	*expand(void *tok)
 {
 	t_token *token;
 	t_token	*expanded;
 	size_t	i;
 	int		mode;
+	char	*pos;
 
 	i = 0;
-	mode = 0;
+	mode = DOUBLE;
+	pos = token->content;
 	token = (t_token *)tok;
-	while (token->content[i])
+	while (*pos)
 	{
-		if (line[i] == '\'')
-			mode = 1;
-		if (token->content[i] == '$' && mode == 1)
-			get_from_env(token->content, i);
+		if (*pos == '\'')
+			mode = (mode % 2) + 1;
+		if (*pos == '$' && mode == DOUBLE)
+			get_content_size(&i, env);
 		i++;
+		pos++;
 	}
-
+	expanded->content = malloc(i + 1);
+	if (!pos)
+		exit(1);
+	while (i)
+	{
+		if (*token->content == '$')
+		{
+			skip();
+			copy_from_env();
+		}
+		else
+			*expanded->content++ == *token->content++;
+		i--;
+	}
 }
 
 t_tokens *ms_expander(t_tokens *token)
