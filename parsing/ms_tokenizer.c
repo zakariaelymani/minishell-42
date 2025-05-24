@@ -123,13 +123,6 @@ t_token *ms_tokenizer(char *line)
 			ms_tokappend(&tokenlist, get_optoken(line, &i));
 		if (line[i] && line[i] == '|')
 			ms_tokappend(&tokenlist, get_optoken(line, &i));
-		// if (line[i] && ft_strchr("\'\"", line[i]))
-		// {
-		// 	cont = extract_quoted(&line[i++]);
-		// 	ms_tokappend(&tokenlist, ms_toknew(cont, WORD));
-		// 	while (line[i] && !ft_strchr("\'\" ", line[i]))
-		// 		i++;
-		// }
 		if (isspace(line[i]))
 			i++;
 	}
