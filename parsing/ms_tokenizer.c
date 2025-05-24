@@ -12,26 +12,6 @@
 
 #include "parsing.h"
 
-// static char	*extract_quoted(const char *pos)
-// {
-// 	size_t	i;
-// 	char	*result;
-//
-// 	pos += 1;
-// 	i = 0;
-// 	while (pos[i] && pos[i] != ' ')
-// 		i++;
-// 	if (pos[i] && pos[i] == ' ' && pos[i - 1] != *pos)
-// 		return (NULL);
-// 	result = malloc(i);
-// 	if (!result)
-// 		return (NULL);
-// 	ft_strlcpy(result, pos, i);
-// 	result[i++] = '\x1F';
-// 	result[i] = '\0';
-// 	return (result);
-// }
-
 static t_type get_tok_type(char *pos) {
   t_type type;
 
@@ -86,7 +66,7 @@ static t_token *get_optoken(char *line, int *i) {
   return (token);
 }
 
-t_token *get_wtoken(char *line, int *i) {
+static t_token *get_wtoken(char *line, int *i) {
   char *content;
   t_token *new;
 
@@ -94,7 +74,6 @@ t_token *get_wtoken(char *line, int *i) {
   new = ms_toknew(content, WORD);
   if (!content || !new)
     exit(1);
-  // while (line[*i] && !ft_strchr("<>|\'\" ", line[*i]))
   while (line[*i] && !ft_strchr("<>| ", line[*i]))
     (*i)++;
   return (new);

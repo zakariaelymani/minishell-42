@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_tokappend.c                                     :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenkaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 02:06:25 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/05/20 13:37:31 by abenkaro         ###   ########.fr       */
+/*   Created: 2024/10/29 16:55:05 by abenkaro          #+#    #+#             */
+/*   Updated: 2024/10/29 17:00:15 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 
-void	ms_tokappend(t_token **lst, t_token *new)
+void	ms_tokiter(t_token *lst, void (*f)(void *))
 {
-	t_token	*last;
-
-	if (!lst || !new)
+	if (!lst || !f)
 		return ;
-	if (!*lst)
-		*lst = new;
-	else
+	while (lst)
 	{
-		last = ms_toklast(*lst);
-		last->next = new;
-		new->prev = last;
+		f(lst->content);
+		lst = lst->next;
 	}
 }
