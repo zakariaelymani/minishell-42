@@ -38,6 +38,7 @@ t_env	*node(char *value, int flag);
 int		compare(const char *str, const char *str1);
 int		find_env(char **env);
 int		ft_isdigit(int c);
+int     ft_isspace(int c);
 int 	ft_atoi(const char *str);
 char	*ft_itoa(int n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);

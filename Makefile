@@ -33,7 +33,6 @@ FILES = builtins/env.c \
     tools/swap_string.c \
 	tools/ft_open.c \
     tools/ft_putstr_fd.c \
-	tools/ft_isalnum.c \
     tools/ft_isalpha.c \
     tools/ft_isdigit.c \
     tools/ft_itoa.c \
@@ -67,6 +66,8 @@ FILES = builtins/env.c \
 	tools/clear_function.c \
 	tools/get_env.c \
 	tools/ft_lstadd_front_bonus.c \
+	tools/ft_isalnum.c \
+	tools/ft_isspace.c
 
 NAME = minishell
 cc = cc 
