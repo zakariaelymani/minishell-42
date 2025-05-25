@@ -30,20 +30,31 @@ static t_type get_tok_type(char *pos) {
   return (type);
 }
 
-static t_token *get_wtoken(char *line, int *i) {
-  char *content;
-  t_token *new;
+static t_token *get_wtoken(char *line, int *i)
+{
+	char *content;
+	t_token *new;
+	char	qpair;
 
-  content = get_word(line + *i);
-  new = ms_toknew(content, WORD);
-  if (!content || !new)
-    exit(1);
-  while (line[*i] && !ft_strchr("<>| ", line[*i]))
-    (*i)++;
-  return (new);
+	content = get_word(line + *i);
+	new = ms_toknew(content, WORD);
+	if (!content || !new)
+		exit(1);
+	if (line[*i] == '\'' || line[*i] == '\"')
+	{
+		qpair = line[(*i)++];
+		while (line[*i] && line[*i] != qpair)
+			(*i)++;
+		(*i)++;
+	}
+	else
+		while (line[*i] && !ft_strchr("<>| ", line[*i]))
+			(*i)++;
+	return (new);
 }
 
-static t_token *get_optoken(char *line, int *i) {
+static t_token *get_optoken(char *line, int *i) 
+{
   t_token *token;
   char *content;
   t_type type;

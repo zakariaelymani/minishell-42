@@ -12,16 +12,19 @@
 
 #include "parsing.h"
 
-char *get_word(const char *pos) {
+char *get_word(const char *pos)
+{
 	char *result;
 	size_t i;
+	int		q;
 
 	i = 0;
+	q = 0;
 	if (*pos == '\'' || *pos == '\"')
 	{
-		while (pos[i++] && pos[i] != *pos)
+		q++;
+		while (pos[++i] && pos[i] != *pos)
 			;
-		i++;
 	}
 	else
 		while (pos[i] && !ft_strchr("<>| ", pos[i]))
@@ -29,7 +32,7 @@ char *get_word(const char *pos) {
 	result = malloc(i + 2);
 	if (!result)
 		return (NULL);
-	ft_strlcpy(result, pos, i + 1);
+	ft_strlcpy(result, pos + q, i + 1 - q);
 	result[i] = '\x1F';
 	result[i + 1] = '\0';
 	return (result);

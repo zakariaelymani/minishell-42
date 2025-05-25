@@ -20,6 +20,7 @@ t_token	*ms_toknew(char *name, t_type type)
 	if (!result)
 		return (NULL);
 	result->type = type;
+	result->expand = 1;
 	result->content = name;
 	result->next = NULL;
 	result->prev = NULL;
