@@ -1,0 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_word.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/25 19:34:38 by abenkaro          #+#    #+#             */
+/*   Updated: 2025/05/25 19:34:40 by abenkaro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "parsing.h"
+
+char *get_word(const char *pos) {
+	char *result;
+	size_t i;
+
+	i = 0;
+	if (*pos == '\'' || *pos == '\"')
+	{
+		while (pos[i++] && pos[i] != *pos)
+			;
+		i++;
+	}
+	else
+		while (pos[i] && !ft_strchr("<>| ", pos[i]))
+			i++;
+	result = malloc(i + 2);
+	if (!result)
+		return (NULL);
+	ft_strlcpy(result, pos, i + 1);
+	result[i] = '\x1F';
+	result[i + 1] = '\0';
+	return (result);
+}

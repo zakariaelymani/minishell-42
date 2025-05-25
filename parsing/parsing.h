@@ -41,5 +41,6 @@ t_redir	*new_redir(t_type type);
 t_cmds	*cmd_parser(t_token *tokens);
 t_cmds	*ms_cmdlast(t_cmds *lst);
 t_token	*ms_toklast(t_token *lst);
+char *get_word(const char *pos);
 
 #endif

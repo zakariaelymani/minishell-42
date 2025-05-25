@@ -30,24 +30,17 @@ static t_type get_tok_type(char *pos) {
   return (type);
 }
 
-static char *get_word(const char *pos) {
-	char *result;
-	size_t i;
+static t_token *get_wtoken(char *line, int *i) {
+  char *content;
+  t_token *new;
 
-	i = 0;
-	if (*pos == '\'' || *pos == '\"')
-		while (pos[++i] && pos[i] != *pos)
-			;
-	else
-		while (pos[i] && !ft_strchr("<>| ", pos[i]))
-			i++;
-	result = malloc(i + 2);
-	if (!result)
-		return (NULL);
-	ft_strlcpy(result, pos, i + 1);
-	result[i] = '\x1F';
-	result[i + 1] = '\0';
-	return (result);
+  content = get_word(line + *i);
+  new = ms_toknew(content, WORD);
+  if (!content || !new)
+    exit(1);
+  while (line[*i] && !ft_strchr("<>| ", line[*i]))
+    (*i)++;
+  return (new);
 }
 
 static t_token *get_optoken(char *line, int *i) {
@@ -68,19 +61,6 @@ static t_token *get_optoken(char *line, int *i) {
   else
     (*i)++;
   return (token);
-}
-
-static t_token *get_wtoken(char *line, int *i) {
-  char *content;
-  t_token *new;
-
-  content = get_word(line + *i);
-  new = ms_toknew(content, WORD);
-  if (!content || !new)
-    exit(1);
-  while (line[*i] && !ft_strchr("<>| ", line[*i]))
-    (*i)++;
-  return (new);
 }
 
 t_token *ms_tokenizer(char *line) {
