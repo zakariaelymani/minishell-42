@@ -31,19 +31,23 @@ static t_type get_tok_type(char *pos) {
 }
 
 static char *get_word(const char *pos) {
-  char *result;
-  size_t i;
+	char *result;
+	size_t i;
 
-  i = 0;
-  while (pos[i] && !ft_strchr("<>| ", pos[i]))
-    i++;
-  result = malloc(i + 2);
-  if (!result)
-    return (NULL);
-  ft_strlcpy(result, pos, i + 1);
-  result[i] = '\x1F';
-  result[i + 1] = '\0';
-  return (result);
+	i = 0;
+	if (*pos == '\'' || *pos == '\"')
+		while (pos[++i] && pos[i] != *pos)
+			;
+	else
+		while (pos[i] && !ft_strchr("<>| ", pos[i]))
+			i++;
+	result = malloc(i + 2);
+	if (!result)
+		return (NULL);
+	ft_strlcpy(result, pos, i + 1);
+	result[i] = '\x1F';
+	result[i + 1] = '\0';
+	return (result);
 }
 
 static t_token *get_optoken(char *line, int *i) {
