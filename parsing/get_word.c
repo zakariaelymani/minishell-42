@@ -14,25 +14,37 @@
 
 char *get_word(const char *pos)
 {
-	char *result;
-	size_t i;
-	int		q;
+	char	*result;
+	size_t	i;
+	char	mark;
 
 	i = 0;
-	q = 0;
-	if (*pos == '\'' || *pos == '\"')
+	while (pos[i] && !ft_strchr("<>| ", pos[i]))
 	{
-		q++;
-		while (pos[++i] && pos[i] != *pos)
-			;
+		if ((pos[i] == '\'' || pos[i] == '\"'))
+		{
+			mark = pos[i++];
+			while (pos[i] && pos[i] != mark)
+				i++;
+		}
+		i++;
 	}
-	else
-		while (pos[i] && !ft_strchr("<>| ", pos[i]))
-			i++;
 	result = malloc(i + 2);
 	if (!result)
 		return (NULL);
-	ft_strlcpy(result, pos + q, i + 1 - q);
+	// ft_strlcpy(result, pos + q, i + 1 - q);
+	i = 0;
+	while (*pos && !ft_strchr("<>| ", *pos))
+	{
+		if (*pos == '\'' || *pos == '\"')
+		{
+			mark = *pos;
+			result[i++] = *pos++;
+			while (*pos != mark)
+				result[i++] = *pos++;
+		}
+		result[i++] = *pos++;
+	}
 	result[i] = '\x1F';
 	result[i + 1] = '\0';
 	return (result);
