@@ -37,9 +37,11 @@ static t_token *get_wtoken(char *line, int *i)
 	char	qpair;
 
 	content = get_word(line + *i);
-	new = ms_toknew(content, WORD);
-	if (!content || !new)
+	if (!content)
 		return (NULL);
+	new = ms_toknew(content, WORD);
+	if (!new)
+		return (free(content), NULL);
 	while (line[*i] && !ft_strchr("<>| ", line[*i]))
 	{
 		if ((line[*i] == '\'' || line[*i] == '\"'))
@@ -88,13 +90,13 @@ t_token *ms_tokenizer(char *line)
       i++;
     if (line[i] && !ft_strchr("<>| ", line[i]))
 			if (!ms_tokappend(&tokenlist, get_wtoken(line, &i)))
-				return (NULL);
+				return (ms_tokclear(&tokenlist, free), NULL);
     if (line[i] && ft_strchr("<>", line[i]))
 			if (!ms_tokappend(&tokenlist, get_optoken(line, &i)))
-				return (NULL);
+				return (ms_tokclear(&tokenlist, free), NULL);
     if (line[i] && line[i] == '|')
 			if (!ms_tokappend(&tokenlist, get_optoken(line, &i)))
-				return (NULL);
+				return (ms_tokclear(&tokenlist, free), NULL);
   }
   return (tokenlist);
 }
