@@ -88,6 +88,8 @@ int main(int argc, char *argv[], char *env[])
 			continue;
 		add_history(line);
 		tokens = ms_tokenizer(line);
+		if (!tokens)
+			continue ;
 		if(!syntax_checker(tokens))
 			continue ;
 		cmd = cmd_parser(tokens);

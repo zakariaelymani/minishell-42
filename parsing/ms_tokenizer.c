@@ -39,17 +39,17 @@ static t_token *get_wtoken(char *line, int *i)
 	content = get_word(line + *i);
 	new = ms_toknew(content, WORD);
 	if (!content || !new)
-		exit(1);
-	if (line[*i] == '\'' || line[*i] == '\"')
+		return (NULL);
+	while (line[*i] && !ft_strchr("<>| ", line[*i]))
 	{
-		qpair = line[(*i)++];
-		while (line[*i] && line[*i] != qpair)
-			(*i)++;
+		if ((line[*i] == '\'' || line[*i] == '\"'))
+		{
+			qpair = line[(*i)++];
+			while (line[*i] && line[*i] != qpair)
+				(*i)++;
+		}
 		(*i)++;
 	}
-	else
-		while (line[*i] && !ft_strchr("<>| ", line[*i]))
-			(*i)++;
 	return (new);
 }
 
@@ -74,7 +74,8 @@ static t_token *get_optoken(char *line, int *i)
   return (token);
 }
 
-t_token *ms_tokenizer(char *line) {
+t_token *ms_tokenizer(char *line)
+{
   t_token *tokenlist;
   int i;
 
@@ -86,11 +87,14 @@ t_token *ms_tokenizer(char *line) {
     while (ft_isspace(line[i]))
       i++;
     if (line[i] && !ft_strchr("<>| ", line[i]))
-      ms_tokappend(&tokenlist, get_wtoken(line, &i));
+			if (!ms_tokappend(&tokenlist, get_wtoken(line, &i)))
+				return (NULL);
     if (line[i] && ft_strchr("<>", line[i]))
-      ms_tokappend(&tokenlist, get_optoken(line, &i));
+			if (!ms_tokappend(&tokenlist, get_optoken(line, &i)))
+				return (NULL);
     if (line[i] && line[i] == '|')
-      ms_tokappend(&tokenlist, get_optoken(line, &i));
+			if (!ms_tokappend(&tokenlist, get_optoken(line, &i)))
+				return (NULL);
   }
   return (tokenlist);
 }

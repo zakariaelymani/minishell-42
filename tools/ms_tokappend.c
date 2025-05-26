@@ -12,12 +12,12 @@
 
 #include "tools.h"
 
-void	ms_tokappend(t_token **lst, t_token *new)
+int	ms_tokappend(t_token **lst, t_token *new)
 {
 	t_token	*last;
 
 	if (!lst || !new)
-		return ;
+		return (0);
 	if (!*lst)
 		*lst = new;
 	else
@@ -26,4 +26,5 @@ void	ms_tokappend(t_token **lst, t_token *new)
 		last->next = new;
 		new->prev = last;
 	}
+	return (1);
 }

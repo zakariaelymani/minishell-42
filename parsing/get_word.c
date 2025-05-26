@@ -40,8 +40,10 @@ char *get_word(const char *pos)
 		{
 			mark = *pos;
 			result[i++] = *pos++;
-			while (*pos != mark)
+			while (*pos && *pos != mark)
 				result[i++] = *pos++;
+			if (!*pos)
+				return (NULL);
 		}
 		result[i++] = *pos++;
 	}
