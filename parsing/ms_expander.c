@@ -43,13 +43,13 @@ int	expand(char *str, char **env)
 
 	len = expanded_size(str);
 	i = 0;
-	expand = 1;
+	expand = 0;
 	result = malloc(len + 1);
 	if (!result)
 		return (-1);
 	while (str[i])
 	{
-		if (str[i] == '\'')
+		if (str[i] == '\'' && expand)
 			expand =! expand;
 		if (str[i] == '$' && expand)
 		{

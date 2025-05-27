@@ -92,6 +92,8 @@ int main(int argc, char *argv[], char *env[])
 			continue ;
 		if(!syntax_checker(tokens))
 			continue ;
+		// if (!ms_expander(tokens))
+		// 	continue ;
 		cmd = cmd_parser(tokens);
 		excute_command_line(&cmd, &env_new);
 		clear_commands(&cmd);
