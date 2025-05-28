@@ -12,7 +12,7 @@
 
 #include "parsing.h"
 
-char *get_word(const char *pos)
+char *get_word(char *pos)
 {
 	char	*result;
 	size_t	i;
