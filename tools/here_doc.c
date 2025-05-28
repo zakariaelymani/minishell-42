@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:07:40 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/22 16:31:00 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/28 11:00:44 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,11 @@ int	read_conten(char *limiter, int fd, t_env *env, int flag)
 	(1) && (line = NULL, i = 0);
 	while (1)
 	{
+		signal(SIGINT, heredoc_handle);
+		signal(SIGQUIT, SIG_IGN);
 		line = readline(">");
+		if (!line && g_global_status == 3)
+			return (-2);
 		if (!line)
 			return (write(2, "where limiter\n", 15), fd);
 		line = free_and_join(line, "\n", 1);
@@ -112,11 +116,15 @@ int	here_document(char *limiter, int flag, t_env **env)
 	fd = ft_open(name, OUTPUT);
 	limiter = free_and_join(limiter, "\n", 0);
 	fd = read_conten(limiter, fd, *env, flag);
-	if (fd == -1)
-		exit(1);
+	signales(1);
+
 	close(fd);
 	free(limiter);
 	limiter = NULL;
+	if (fd == -1)
+		return (-1);
+	if (fd == -2)
+		return (-2);
 	fd = ft_open(name, INPUT);
 	unlink(name);
 	free(name);

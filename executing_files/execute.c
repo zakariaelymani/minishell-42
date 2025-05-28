@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:25:17 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:16:41 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:07:09 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ void fork_and_excute(t_cmds **cmd, t_env **env)
 		tmp->pid = fork();
 		if (tmp->pid == 0)
 		{
-		
-			 signales(2);
+			signales(2);
 			i = check_is_builtins(tmp);
 			if (i != -1 && i  != -2)
 				excute_builtins_inchild(&tmp, env, i, *cmd);
@@ -90,7 +89,8 @@ void	excute_command_line(t_cmds **cmd, t_env **env)
 	int i;
 	int cmdsize;
 
-	read_heredoc(cmd, env);
+	if (read_heredoc(cmd, env) != 0)
+		return ;
 	cmdsize = t_cmdsize(*cmd);
 	if (cmdsize == 1)
 	{
@@ -107,5 +107,7 @@ void	excute_command_line(t_cmds **cmd, t_env **env)
 		}
 	}
 	fork_and_excute(cmd, env);
+	signal(SIGINT, handler);
+	signal(SIGQUIT, handler);
 	return ;
 }

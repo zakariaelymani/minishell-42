@@ -8,7 +8,8 @@
         "__node_handle": "c",
         "locale": "c",
         "ostream": "c",
-        "cstdlib": "c"
+        "cstdlib": "c",
+        "execute_header.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:28:55 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:16:21 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:37:33 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void excute_builtins(t_cmds **cmd, t_env **env, int stat)
 	else if (stat == 5)
 		(*env)->exit_sta = my_pwd(env);
 	else if (stat == 6)
-		(*env)->exit_sta = ft_exit((*cmd)->cmds);
+		(*env)->exit_sta = ft_exit((*cmd)->cmds, 0);
 	else if (stat == 7)
 		(*env)->exit_sta = change_dir((*cmd)->cmds, env);
 	
@@ -66,7 +66,7 @@ void excute_builtins_inchild(t_cmds **cmd, t_env **env, int stat, t_cmds *tmp)
 	else if (stat == 5)
 		exit(my_pwd(env));
 	else if (stat == 6)
-		exit (ft_exit((*cmd)->cmds));
+		exit (ft_exit((*cmd)->cmds, 0));
 	else if (stat == 7)
 		exit (change_dir((*cmd)->cmds, env));
 	

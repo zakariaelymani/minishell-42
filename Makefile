@@ -54,9 +54,18 @@ TOOLS_HELP = tools/tools_env/add_ifnot_exists.c \
 			 tools/tools_env/find_env.c \
 			 tools/compare_string.c \
 			 tools/tools_env/clear_function.c \
-
+			 tools/minishell_signals.c \
+			tools/safe_functions.c \
+		
 PARSING = parsing.c \
 		  readline_bonus.c
+
+FLAGS = -Wall -Wextra -Werror # -g -fsanitize=address 
+HEADER1 = builtins/builtins.h
+HEADER2 = struct.h
+HEADER3 = tools/tools.h
+HEADER4 = minishell.h
+HEADER5 = executing_files/excute_header.h
 
 NAME = minishell
 CC = cc
@@ -65,12 +74,7 @@ OBJ = $(BUILTINS:.c=.o) \
 	  $(PARSING:.c=.o) \
 	  $(EXECUTE:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address 
-HEADER1 = builtins/builtins.h
-HEADER2 = struct.h
-HEADER3 = tools/tools.h
-HEADER4 = minishell.h
-HEADER5 = executing_files/excute_header.h
+
 
 all: $(NAME)
 

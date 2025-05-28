@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:33:51 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:17:14 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/28 10:46:59 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 #include "executing_files/execute_header.h"
 
 //he will check if ziro that will  we in parent  but in child it is somthing ot other  
+extern int g_global_status;
 
 t_cmds  *parsing_line(char *line);
 void	excute_command_line(t_cmds **cmd, t_env **env);

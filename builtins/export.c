@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 15:14:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/22 13:24:39 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/28 11:01:49 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ char *append_mode_to_env_var(char *new_val, char *old_val, int *status)
 		return (old_val);	
 	}
 	else
-		joined_val = ft_strjoin(old_val, tmp_val + 1);
-
+		joined_val = free_and_join(old_val, tmp_val + 1, 1);
 	free(new_val);
-	free(old_val);
 	return (joined_val);
 }
 char *set_val_to_env_var(char *old_val, char *new_val, int *status)

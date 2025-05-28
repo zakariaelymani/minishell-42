@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:37:25 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/20 11:21:54 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/28 11:29:28 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,10 @@ int   my_echo(char **strings, t_env **env)
 	line = join_strings(i, strings, status);
 	if (line)
 	{
-		if (write(1, line, ft_strlen(line)) == -1)
-			return (free(line), 1);
+		if (compare(line, "$?\n") == 0)
+			printf("%d\n", (*env)->exit_sta);
+		else
+			safe_write(1, line, ft_strlen(line));
 		free(line);
 	}
 	return (0);

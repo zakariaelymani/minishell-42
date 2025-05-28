@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:21:54 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:17:28 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/28 10:44:35 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,23 +65,32 @@ void	pipe_cammand(t_cmds *tmp)
 }
 
 
-void read_heredoc(t_cmds **cmd, t_env **env)
+int read_heredoc(t_cmds **cmd, t_env **env)
 {
 	t_redir *rids;
 	t_cmds		*tmp;
-	
+	int		stdin_dup;
+
 	tmp = (*cmd);
+	stdin_dup = dup(STDIN_FILENO);
 	while (tmp)
 	{
 		rids = tmp->redirection;
 		while (rids)
 		{
 			if (rids->type == HEREDOC)
-				
+			{
+				rids->fd = here_document(rids->file_name, rids->fd, env);
+				if (rids->fd == -1)
+					return ((*env)->exit_sta = 1, 1);
+				if (rids->fd == -2)
+					return (dup2(stdin_dup, STDIN_FILENO), close(stdin_dup), (*env)->exit_sta = 130, 1);
+			}				
 			rids = rids->next;
 		}
 		tmp = tmp->next;
 	}
+	return ((*env)->exit_sta = 0, close(stdin_dup), 0);
 }
 
 int open_files(t_cmds **cmds, t_env **env)
