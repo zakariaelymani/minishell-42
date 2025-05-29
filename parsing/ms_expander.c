@@ -12,24 +12,48 @@
 
 #include "parsing.h"
 
-size_t	expanded_size(char *str)
+size_t	varsize(char *str, char **env)
+{
+	size_t	result;
+
+	while (*env)
+	{
+		if (!ft_strncmp(*env, str + 1, (ft_strchr(*env, '=') - *env)))
+		{
+			result = ft_strlen(ft_strchr(*env, '=') + 1);
+			return (result);
+		}
+	}
+	return (0);
+}
+
+size_t	expanded_size(char *str, char **env)
 {
 	size_t	len;
-	int		expand;
 
 	len = 0;
-	expand = 1;
 	while (*str)
 	{
 		if (*str == '\'')
-			expand =! expand;
-		if (*str == '$' && expand)
 		{
-			len += varsize(&str, env);
-			continue;
+			while (*str++ && *str != '\'')
+				len++;
+			len++;
 		}
-		len++;
-		str++;
+		else if (*str == '\"')
+		{
+			while (*str && *str != '\"')
+			{
+				if (*str == '$')
+					len += varsize(&str, env);
+				else
+					len++''
+			}
+		}
+		else if (*str == '$')
+			len += varsize(&str, &len, env);
+		else
+			len++;
 	}
 	return (len);
 }
@@ -37,21 +61,17 @@ size_t	expanded_size(char *str)
 int	expand(char *str, char **env)
 {
 	size_t	len;
-	int		expand;
 	char	*result;
 	int		i;
 
-	len = expanded_size(str);
+	len = expanded_size(str, env);
 	i = 0;
-	expand = 0;
 	result = malloc(len + 1);
 	if (!result)
 		return (-1);
 	while (str[i])
 	{
-		if (str[i] == '\'' && expand)
-			expand =! expand;
-		if (str[i] == '$' && expand)
+		if (str[i] == '$')
 		{
 			copy_from_env(result, &i, env);
 			continue ;
@@ -82,7 +102,4 @@ int	ms_expander(t_token *tokens, char **env)
 	}
 	return (1);
 }
-
-
-
 

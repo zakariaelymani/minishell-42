@@ -51,10 +51,10 @@ typedef enum e_type{
 
 typedef struct s_redir
 {
-	char *file_name; // if here_doc   this well be limiter 
-	t_type type; //<< >> < > 
-	int 	fd;/// this form my work don't touch this 
-	struct  s_redir *next;
+	char	*file_name; // if here_doc   this well be limiter 
+	t_type	type; //<< >> < > 
+	int		fd;/// this form my work don't touch this 
+	struct	s_redir *next;
 }	t_redir;
 
 typedef struct s_cmds
