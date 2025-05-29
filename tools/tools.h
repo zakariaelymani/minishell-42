@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:50:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/28 14:59:05 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:51:44 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,7 @@ char		*return_value(t_env *env, char *var_name, int flag);
 char		*ft_strrchr(const char *s, int c);
 void		ft_lstadd_front(t_env **lst, t_env *new);
 t_env		*get_env(int argc, char *argv[], char *env[]);
-void    	signales(int flag);
-void    	handler_child(int sig);
-void    	handler(int i);
+void    	signals(int flag);
 void    	heredoc_handle(int sig);
 void		safe_write(int fd, char *line, size_t len);
 void        my_perror(char *who, char *input, char *description);

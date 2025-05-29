@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:05:27 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/28 10:45:51 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:06:54 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 void    dup_input_output(t_cmds **cmd, t_cmds *tmp);//dup you dup in child and or parent acording to stats 
 int		check_is_builtins(t_cmds *cmd);
-void	pipe_cammand(t_cmds *tmp);
+void	pipe_cammand(t_cmds **tmp);
 int		open_files(t_cmds **cmds, t_env **env);
 void    excute_builtins(t_cmds **cmd, t_env **env, int stat);
 int     read_heredoc(t_cmds **cmd, t_env **env);

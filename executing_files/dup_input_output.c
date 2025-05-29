@@ -6,17 +6,17 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:32:01 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:16:28 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/28 20:05:35 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute_header.h"
 
-void find_output_input(t_cmds *cmd, int input, int output)
+void find_output_input(t_cmds **cmd, int input, int output)
 {
 	t_redir *redirs;
 
-	redirs = cmd->redirection;
+	redirs = (*cmd)->redirection;
 	if (!redirs)
 		return ;
 	while (redirs)
@@ -27,17 +27,17 @@ void find_output_input(t_cmds *cmd, int input, int output)
 			input = redirs->fd;
 		redirs = redirs->next;
 	}
-	if (input > -2)
+	if (input > -2 && isatty(input) == 0)
 	{
-		if (cmd->input > -1)
-			close(cmd->input);
-		cmd->input = input;
+		if ((*cmd)->input > -1)
+			close((*cmd)->input);
+		(*cmd)->input = input;
 	}
-	if(output > -2)
+	if(output > -2 && isatty(output) == 0)
 	{
-		if (cmd->output > -1)
-		 close(cmd->output);
-		cmd->output = output;
+		if ((*cmd)->output > -1)
+		 close((*cmd)->output);
+		(*cmd)->output = output;
 	}
 }
 
@@ -48,7 +48,7 @@ void dup_input_output(t_cmds **cmd, t_cmds *tmp)
 
 	input = -2;
 	output = -2;
-	find_output_input(*cmd, input, output);
+	find_output_input(cmd, input, output);
 	if ((*cmd)->input > -1)
 		input = dup2((*cmd)->input, STDIN_FILENO);
 	if ((*cmd)->output > -1)

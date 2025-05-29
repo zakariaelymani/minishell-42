@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:07:40 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/28 11:00:44 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:52:28 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,7 @@ int	here_document(char *limiter, int flag, t_env **env)
 	name = randomize_name(0);
 	fd = ft_open(name, OUTPUT);
 	limiter = free_and_join(limiter, "\n", 0);
-	fd = read_conten(limiter, fd, *env, flag);
-	signales(1);
-
+	fd = read_conten(limiter, fd, *env, flag);	
 	close(fd);
 	free(limiter);
 	limiter = NULL;

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:30:23 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/28 15:14:49 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:50:52 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ int main(int argc, char *argv[], char *env[])
 	tcgetattr(STDIN_FILENO, &term);
 	while (1)
 	{
-		signales(1);
+		signals(1);
 		g_global_status = 1;
 		line = readline("minishel$ ");
-		g_global_status = 0;
+		g_global_status = 2;
 		if (!line)
 			(write(2, "exit\n", 6), rl_clear_history(), clear_env(&env_new), exit(env_new->exit_sta));
 		if (!*line)
-			continue;
+			continue ;
 		add_history(line);
 		cmd = parsing_line(line);
 		excute_command_line(&cmd, &env_new);

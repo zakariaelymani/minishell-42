@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:21:54 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/28 10:44:35 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:26:40 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ void close_fds(t_cmds *tmp)
 	}
 }
 
-void	pipe_cammand(t_cmds *tmp)
+void	pipe_cammand(t_cmds **tmp)
 {
 	int		pid[2];
 
-	if (tmp->next)
+	if ((*tmp)->next)
 	{
 		if(pipe(pid) == -1)
 			perror("pipe");
-		tmp->output = pid[1];
-		tmp->next->input = pid[0];
+		(*tmp)->output = pid[1];
+		(*tmp)->next->input = pid[0];
 	}
 }
 
@@ -110,7 +110,7 @@ int open_files(t_cmds **cmds, t_env **env)
 		{
 			(*env)->exit_sta = 1;
 			return (1);
-		}	
+		}
 		redir = redir->next;
 	}
 	return (0);
