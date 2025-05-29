@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:05:31 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:05:35 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/29 12:57:57 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char	*ft_strdup(const char *s1)
 	i = 0;
 	if (!s1 || !*s1)
 		return (NULL);
+	newstr = NULL;
 	while (s1[i])
 	{
 		i++;

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:04:51 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/29 10:52:47 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/29 13:13:27 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_env	*get_env(int argc, char *argv[], char *env[])
 	t_env	*env_new;
 	char	*pwd;
 
+	pwd = NULL;
 	(void)argc;
 	(void)argv;
 	if (!env || !*env)

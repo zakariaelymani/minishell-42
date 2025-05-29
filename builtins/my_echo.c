@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:37:25 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/28 11:29:28 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/29 13:11:19 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ int	check_echo_flag(char **str)
 	}
 	return (i);
 }
+
+#include <stdio.h>
+
 char *join_strings(int i, char **string, int flag)
 {
 	char	*line;
@@ -62,6 +65,7 @@ char *join_strings(int i, char **string, int flag)
 	prev = NULL;
 	if (!string[i])
 		return (NULL);
+	int fd = open("leaks", O_CREAT | O_WRONLY | O_APPEND, 0644);
 	while (string[i])
 	{
 		if (!string[i + 1])
@@ -70,11 +74,13 @@ char *join_strings(int i, char **string, int flag)
 			break;
 		}
 		line = free_and_join(string[i], " ", 0);
-		prev = free_and_join(prev, line, 2);
+		prev = free_and_join(prev, line, 3);//maybe leaks
+		dprintf(fd, "line %p this prev %p\n", line, prev);
 		i++;
 	}
 	if (flag == 1)
 		prev = free_and_join(prev, "\n", 1);
+	free(line);//new 
 	return (prev);
 }
 

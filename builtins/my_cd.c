@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:53:32 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/28 11:23:18 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/29 11:59:00 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ int	change_dir(char **new_path, t_env **env)
 		return (safe_write(2, "minishell: cd:  too many arguments\n", 36) , 1);
 	path = change_path(new_path[1], return_value(*env, "PWD", 1), getcwd(NULL, 0), line);
 	if (chdir(path) != 0)
-		return(perror("minishell: cd"),  1);//duble free here if you free path leaks
+		return(perror("minishell: cd"), free(path), 1);//duble free here if you free path leaks
+	free(path);
 	change_pwd(env, new_path[1]);
 	return (0);
 }

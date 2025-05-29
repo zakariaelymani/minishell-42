@@ -19,3 +19,15 @@ README.md               excuting_files.c        main.c                  minishel
 iam
 iam
 ///hang in excute 
+
+
+==9179== 51 (32 direct, 19 indirect) bytes in 1 blocks are definitely lost in loss record 24 of 82
+==9179==    at 0x4845858: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==9179==    by 0x10E36E: node (in /home/zel-yama/Desktop/minishell-42/minishell)
+==9179==    by 0x10BEF1: dup_list (in /home/zel-yama/Desktop/minishell-42/minishell)
+==9179==    by 0x109B9D: export_without (in /home/zel-yama/Desktop/minishell-42/minishell)
+==9179==    by 0x109A08: export (in /home/zel-yama/Desktop/minishell-42/minishell)
+==9179==    by 0x10ACA4: excute_builtins (in /home/zel-yama/Desktop/minishell-42/minishell)
+==9179==    by 0x10AF44: excute_builtins_inparent (in /home/zel-yama/Desktop/minishell-42/minishell)
+==9179==    by 0x10B507: excute_command_line (in /home/zel-yama/Desktop/minishell-42/minishell)
+==9179==    by 0x10B9EF: main (in /home/zel-yama/Desktop/minishell-42/minishell)

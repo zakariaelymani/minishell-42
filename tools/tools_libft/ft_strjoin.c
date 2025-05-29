@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 09:58:50 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:05:40 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/29 12:57:34 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	len;
 	size_t	len2;
 
+	str = NULL;
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)

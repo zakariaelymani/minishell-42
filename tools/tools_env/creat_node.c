@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:44:46 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:03:29 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/29 12:31:40 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,15 @@ t_env	*node(char *value, int flag)
 	t_env	*node;
 	char	*val;
 
+	val = NULL;
+	node = NULL;
 	if (!value)
 		return (NULL);
 	val = ft_strchr(value, '=');
 	node = (t_env *)malloc(sizeof(t_env));
 	if (!node)
 		return (NULL);
+	ft_memset(node, 0,sizeof(node));
 	node->status = 1;
 	node->exit_sta = 0;
 	node->value = ft_strdup(val);
@@ -52,7 +55,9 @@ t_env	*node(char *value, int flag)
 		node->status = -1;
 	node->key = extract_key(value);
 	if (flag == 1) //new
+	{
 		free(value);
+	} 
 	node->next = NULL;
 	return (node);
 }

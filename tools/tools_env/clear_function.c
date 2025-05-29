@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 11:12:27 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:03:23 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/29 12:51:33 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,6 @@ void	clear_env(t_env **env)
 		*env = NULL;
 		(*env) = tmp;
 	}
+	free((*env)->next);
+	free(*env);
 }

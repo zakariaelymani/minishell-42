@@ -67,6 +67,7 @@ FILES = builtins/env.c \
     tools/tools_env/get_env.c \
     tools/tools_env/find_env.c \
     tools/tools_env/return_value.c \
+    tools/tools_libft/ft_memset.c\
 
 NAME = minishell
 cc = cc 
