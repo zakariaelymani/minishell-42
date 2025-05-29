@@ -19,10 +19,8 @@ size_t	varsize(char *str, char **env)
 	while (*env)
 	{
 		if (!ft_strncmp(*env, str + 1, (ft_strchr(*env, '=') - *env)))
-		{
-			result = ft_strlen(ft_strchr(*env, '=') + 1);
-			return (result);
-		}
+			return (ft_strlen(ft_strchr(*env, '=') + 1));
+		env++;
 	}
 	return (0);
 }

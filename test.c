@@ -5,17 +5,19 @@
 
 size_t  varsize(char **str, char **env)
 {
-	size_t  result;
+	size_t	namelen;
+	char	*s;
 
+	s = *str + 1;
 	while (*env)
 	{
-		if (!strncmp(*env, (*str)++, (strchr(*env, '=') - *env)))
+		namelen = strchr(*env, '=') - *env;
+		if (!strncmp(s, *env, namelen))
 		{
-			while (**str && !strchr("$ \'\"", **str))
-				(*str)++;
-			result = strlen(strchr(*env, '=') + 1);
-			return (result);
+			*str += namelen + 1;
+			return (strlen(strchr(*env, '=') + 1));
 		}
+		env++;
 	}
 	return (0);
 }
@@ -29,13 +31,14 @@ size_t	expanded_size(char *str, char **env)
 	{
 		if (*str == '\'')
 		{
-			while (*str++ && *str != '\'')
-				len++;
 			len++;
+			while (*++str && *str != '\'')
+				len++;
 		}
-		else if (*str == '\"')
+		else if (*str && *str == '\"')
 		{
-			while (*str && *str != '\"')
+			len++;
+			while (*++str && *str != '\"')
 			{
 				if (*str == '$')
 					len += varsize(&str, env);
@@ -43,7 +46,7 @@ size_t	expanded_size(char *str, char **env)
 					len++;
 			}
 		}
-		else if (*str == '$')
+		else if (*str && *str == '$')
 			len += varsize(&str, env);
 		else
 		{
@@ -56,8 +59,8 @@ size_t	expanded_size(char *str, char **env)
 
 int main()
 {
-	char	*input = "ls -la $PATH$PATH";
-	char	*env[] = {"PATH=/bin/ls", NULL};
+	char	*input = "$a";
+	char	*env[] = {"PATH=/bin/ls", "a=test", NULL};
 	size_t	i = expanded_size(input, env);
 	printf("size : %ld\n", i);
 
