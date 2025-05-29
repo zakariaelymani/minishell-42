@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:42:20 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:03:32 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/29 10:46:23 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ t_env	*dup_list(t_env *env)///new
 	t_env	*hold_env;	
 
 	hold_env = env->next;
-	tmp = node(ft_strjoin(hold_env->key, hold_env->value), 0);
+	tmp = node(ft_strjoin(hold_env->key, hold_env->value), 1); //new add 1 to remove leaks
 	tmp_head = tmp;
 	hold_env = hold_env->next;
 	while (hold_env)
 	{
-		tmp->next = node(ft_strjoin(hold_env->key, hold_env->value), 0);
+		tmp->next = node(ft_strjoin(hold_env->key, hold_env->value), 1);//new add 1 leaks
 		tmp = tmp->next;
 		hold_env = hold_env->next;
 	}

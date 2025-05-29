@@ -20,25 +20,24 @@ FILES = builtins/env.c \
     builtins/my_echo.c \
     builtins/my_pwd.c \
     builtins/unset.c \
-	excuting_files/check_is_builtins.c \
-    excuting_files/dup_fd_pipe.c \
-    excuting_files/dup_input_output.c \
-    excuting_files/excute.c \
-    excuting_files/open_files.c \
+	executing_files/check_is_builtins.c \
+    executing_files/dup_fd_pipe.c \
+    executing_files/dup_input_output.c \
+    executing_files/execute.c \
+    executing_files/open_files.c \
 	main.c \
 	tools/tools_libft/ft_lstadd_back.c \
     tools/tools_libft/ft_lstlast.c \
     tools/tools_libft/ft_lstsize.c \
 	tools/atoi.c \
     tools/compare_string.c \
-    tools/env_dup.c \
+    tools/tools_env/env_dup.c \
     tools/free_and_joined.c \
     tools/free_while.c \
-    tools/find_env.c \
-    tools/find_path.c \
-    tools/hard_code_env.c \
+    tools/tools_env/find_path.c \
+    tools/tools_env/hard_code_env.c \
     tools/swap_string.c \
-	tools/ft_open.c
+	tools/ft_open.c \
     tools/tools_libft/ft_lstadd_front_bonus.c\
     tools/tools_libft/ft_putstr_fd.c \
 	tools/tools_libft/ft_isalnum.c\
@@ -54,18 +53,20 @@ FILES = builtins/env.c \
     tools/tools_libft/ft_strdup.c \
     tools/tools_libft/ft_substr.c \
 	tools/tools_env/add_ifnot_exists.c \
-    tools/change_value_struct_env.c \
+    tools/tools_env/change_value_struct_env.c \
 	tools/here_doc.c \
 	tools/last_node_cmd.c \
     tools/cmd_size.c \
-	parsing/parse.c \
+	parsing.c \
     tools/safe_functions.c \
     tools/my_perror.c \
     tools/minishell_signals.c \
-    tools/last_node_cmd.c \
     tools/tools_env/clear_function.c \
     tools/tools_env/convert_to_array.c \
     tools/tools_env/creat_node.c \
+    tools/tools_env/get_env.c \
+    tools/tools_env/find_env.c \
+    tools/tools_env/return_value.c \
 
 NAME = minishell
 cc = cc 
@@ -83,7 +84,7 @@ all: $(NAME)
 	$(CC) $(FLAGS)   -c $< -o $@ 
 
 %.o: %.c $(HEADER1) $(HEADER2) $(HEADER3) $(HEADER4) $(HEADER5)
-	$(CC) -I./parsing -I. -I./tools $(FLAGS)   -c $< -o $@ 
+	$(CC)  $(FLAGS)   -c $< -o $@ 
 
 $(NAME): $(OBJ)
 	$(cc) $(FLAGS) $(OBJ)  -lreadline  -o   $(NAME) 

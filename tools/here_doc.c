@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:07:40 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/28 17:52:28 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/29 11:26:15 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*expantion(char *line, t_env *env, int i, int x)
 		if (!line[x])
 			break ;
 	}
-	return (new_line);
+	return (free(line), new_line);//new free line 
 }
 
 int	read_conten(char *limiter, int fd, t_env *env, int flag)
@@ -87,7 +87,7 @@ int	read_conten(char *limiter, int fd, t_env *env, int flag)
 		if (flag == -2)
 			line = expantion(line, env, 0, 0);
 		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
-			break ;
+			return (free(line), fd);
 		else
 			ft_putstr_fd(line, fd);
 		(1) && (free(line), line = NULL);

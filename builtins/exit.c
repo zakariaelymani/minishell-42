@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:53:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/28 14:33:02 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/29 10:22:07 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int ft_exit(char **arguments, long status)
 	int i;
 	int sing;
 
-	(1) && (sing = 0, i = 1);
+	sing = 0;
+	 i = 1;
 	if (arguments[i])
 	{
 		while (arguments[i])

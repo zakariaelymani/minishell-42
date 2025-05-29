@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:51:07 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:03:37 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/29 10:39:48 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,5 @@ char	*find_path_to_cmd(t_env **env, char *cmd, int i)
 	}
 	write(2, "command not found\n", 19);
 	(*env)->exit_sta = 127;
-	return (free_while(splited), NULL);// new free leaks 
+	return (free_while(splited), free(joined), NULL);// new free leaks 
 }

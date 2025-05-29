@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 15:14:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/28 11:01:49 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/29 11:42:42 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ char *set_val_to_env_var(char *old_val, char *new_val, int *status)
 		return (ft_strdup("="));
 	}
 	return_val = ft_strdup(tmp_val);
-	free(tmp_val);//new
 	free(old_val);
 	free(new_val);
 	return (return_val);
@@ -83,16 +82,16 @@ int modify_var(char *input, t_env **env)
 		{
 			status  = determing_status(input);
 			if (status == -1)
-				return (1);
+				return (free(new_key), 1);
 			else if (status == 1)
 				tmp->value = append_mode_to_env_var(input, tmp->value , &tmp->status);
 			else if (status == 0)
 				tmp->value = set_val_to_env_var(tmp->value, input, &tmp->status);
-			return (1);
+			return (free(new_key), 1);
 		}
 		tmp = tmp->next;
 	}
-	return (0);
+	return (free(new_key), 0);//new free new_key
 }
 
 int	export(t_env **env, char **splited)
