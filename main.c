@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:30:23 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/28 17:50:52 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:15:28 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int main(int argc, char *argv[], char *env[])
 			continue ;
 		add_history(line);
 		cmd = parsing_line(line);
-		excute_command_line(&cmd, &env_new);
+		execute_command_line(&cmd, &env_new);
 		clear_commands(&cmd);
 		tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	}

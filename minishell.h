@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:33:51 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/28 10:46:59 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:09:39 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,5 @@ extern int g_global_status;
 
 t_cmds  *parsing_line(char *line);
 void	excute_command_line(t_cmds **cmd, t_env **env);
-void signales(int flag);
 char	*mini_get_line(void);
 #endif

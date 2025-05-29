@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 11:46:34 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/17 16:31:31 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:09:31 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,6 @@ typedef struct s_env
 	struct s_env *next;
 	
 }   t_env;
-
-//this redirection  type 
-/*typedef enum  s_redir*/
-/*{*/
-/*	INPUT,*/
-/*	OUTPUT,*/
-/*	APPEND,*/
-/*	HER_DOC,*/
-/**/
-/*}   t_redir;*/
 
 typedef enum e_type{
 	WORD = 1 << 0,

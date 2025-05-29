@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:28:55 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/28 14:37:33 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:14:51 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int  check_is_builtins(t_cmds *cmd)
 	return (-1);
 }
 
-void excute_builtins(t_cmds **cmd, t_env **env, int stat)
+void execute_builtins(t_cmds **cmd, t_env **env, int stat)
 {	
 	if (stat == 1)
 		(*env)->exit_sta = my_echo((*cmd)->cmds, env);
@@ -52,7 +52,7 @@ void excute_builtins(t_cmds **cmd, t_env **env, int stat)
 	
 }
 
-void excute_builtins_inchild(t_cmds **cmd, t_env **env, int stat, t_cmds *tmp)
+void execute_builtins_inchild(t_cmds **cmd, t_env **env, int stat, t_cmds *tmp)
 {
 	dub_for_cmds(cmd, env, tmp);
 	if (stat == 1)

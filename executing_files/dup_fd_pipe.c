@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:30:23 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:16:23 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:13:19 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void dub_for_cmds(t_cmds **cmd, t_env **env, t_cmds *tmp)
 		(perror("mininshll"), exit(1));
 	dup_input_output(cmd, tmp);
 }
-int		excute_builtins_inparent(t_cmds **cmd, t_env **env, int stat)
+int		execute_builtins_inparent(t_cmds **cmd, t_env **env, int stat)
 {
 	int input;
 	int	output;
@@ -32,7 +32,7 @@ int		excute_builtins_inparent(t_cmds **cmd, t_env **env, int stat)
 	if (ret_val == 1 || ret_val == -1)
 	{
 		if (ret_val == -1)
-			excute_builtins(cmd, env, stat);
+			execute_builtins(cmd, env, stat);
 		return (1);
 	}
 	else if (ret_val == 0)
@@ -43,7 +43,7 @@ int		excute_builtins_inparent(t_cmds **cmd, t_env **env, int stat)
 			perror("minishell3");
 		dup_input_output(cmd, *cmd);
 	}
-	excute_builtins(cmd, env, stat);
+	execute_builtins(cmd, env, stat);
 	if (ret_val == 0)
 	{
 		if (dup2(input, STDIN_FILENO) == -1)

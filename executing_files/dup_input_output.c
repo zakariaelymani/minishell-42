@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:32:01 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/28 20:05:35 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:12:59 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void find_output_input(t_cmds **cmd, int input, int output)
 			input = redirs->fd;
 		redirs = redirs->next;
 	}
-	if (input > -2 && isatty(input) == 0)
+	if (input > -2)
 	{
 		if ((*cmd)->input > -1)
 			close((*cmd)->input);
 		(*cmd)->input = input;
 	}
-	if(output > -2 && isatty(output) == 0)
+	if(output > -2)
 	{
 		if ((*cmd)->output > -1)
 		 close((*cmd)->output);

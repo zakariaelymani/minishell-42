@@ -6,13 +6,13 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:25:17 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/28 18:06:38 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:13:44 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute_header.h"
 
-void excute_command(t_cmds *cmd, t_env **env, t_cmds *tmp)
+void execute_command(t_cmds *cmd, t_env **env, t_cmds *tmp)
 {
 	char *path;
 	char **env_to_excute;
@@ -55,7 +55,7 @@ void wait_child(t_cmds *tmp, t_env **env)
 	return ;
 }
 
-void fork_and_excute(t_cmds **cmd, t_env **env)
+void fork_and_execute(t_cmds **cmd, t_env **env)
 {
 	int i;
 	t_cmds *tmp;
@@ -70,11 +70,11 @@ void fork_and_excute(t_cmds **cmd, t_env **env)
 			signals(2);
 			i = check_is_builtins(tmp);
 			if (i != -1 && i  != -2)
-				excute_builtins_inchild(&tmp, env, i, *cmd);
+				execute_builtins_inchild(&tmp, env, i, *cmd);
 			else if (i == -2)
 				exit(open_files(&tmp, env));
 			else
-				excute_command(tmp, env, *cmd);
+				execute_command(tmp, env, *cmd);
 		}
 		if (tmp->pid == -1)
 			perror("minishell");
@@ -84,7 +84,7 @@ void fork_and_excute(t_cmds **cmd, t_env **env)
 	return ;
 }
 
-void	excute_command_line(t_cmds **cmd, t_env **env)
+void	execute_command_line(t_cmds **cmd, t_env **env)
 {
 	int i;
 	int cmdsize;
@@ -97,7 +97,7 @@ void	excute_command_line(t_cmds **cmd, t_env **env)
 		i = check_is_builtins(*cmd);
 		if (i != -1 && i != -2)
 		{
-			excute_builtins_inparent(cmd, env, i);
+			execute_builtins_inparent(cmd, env, i);
 			return ;
 		}
 		if (i == -2)
@@ -106,6 +106,6 @@ void	excute_command_line(t_cmds **cmd, t_env **env)
 			return ;
 		}
 	}
-	fork_and_excute(cmd, env);
+	fork_and_execute(cmd, env);
 	return ;
 }
