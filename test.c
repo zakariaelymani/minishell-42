@@ -67,5 +67,4 @@ int main()
 	char	*env[] = {"PATH=/bin/ls", "a=test", NULL};
 	size_t	i = expanded_size(input, env);
 	printf("size : %ld\n", i);
-
 }
