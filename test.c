@@ -38,12 +38,16 @@ size_t	expanded_size(char *str, char **env)
 		else if (*str && *str == '\"')
 		{
 			len++;
-			while (*++str && *str != '\"')
+			str++;
+			while (*str && *str != '\"')
 			{
 				if (*str == '$')
 					len += varsize(&str, env);
 				else
+				{
 					len++;
+					str++;
+				}
 			}
 		}
 		else if (*str && *str == '$')
@@ -59,7 +63,7 @@ size_t	expanded_size(char *str, char **env)
 
 int main()
 {
-	char	*input = "$a";
+	char	*input = "$PATH";
 	char	*env[] = {"PATH=/bin/ls", "a=test", NULL};
 	size_t	i = expanded_size(input, env);
 	printf("size : %ld\n", i);
