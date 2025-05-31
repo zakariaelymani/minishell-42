@@ -87,7 +87,7 @@ all: $(NAME)
 
 
 $(NAME): $(OBJ)
-	$(cc) $(FLAGS) $(OBJ)  -lreadline  -o   $(NAME) 
+	$(cc) $(FLAGS) $(OBJ)  -lreadline -lbsd  -o   $(NAME) 
 
 
 

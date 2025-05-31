@@ -82,7 +82,7 @@ int	env_cpy(char *dest, char **str, char **env)
 		if (!strncmp(s, *env, namelen))
 		{
 			*str += namelen + 1;
-			return (strlcpy(dest, strchr(*env, '=') + 1), namelen);
+			return (strlcpy(dest, strchr(*env, '=') + 1, strlen(*env, namelen));
 		}
 		env++;
 	}
@@ -110,13 +110,13 @@ int	fill(char *dest, char *str, char **env)
 			while (*str && *str != '\"')
 			{
 				if (*str == '$')
-					env_cpy(dest, &str, env);
+					dest += env_cpy(dest, &str, env);
 				else
 					*dest++ = *str++;
 			}
 		}
 		else if (*str && *str == '$')
-			envcpy(dest, &str, env);
+			dest += env_cpy(dest, &str, env);
 		else
 			*dest++ = *str++;
 	}

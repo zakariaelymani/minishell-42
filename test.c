@@ -2,6 +2,28 @@
 #include <stdio.h>
 #include <string.h>
 #include <strings.h>
+#include <stdlib.h>
+
+size_t  ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+        size_t  i;
+        size_t  len;
+
+        i = 0;
+        len = 0;
+        while (src[i])
+                i++;
+        if (dstsize != 0)
+        {
+                while (src[len] != '\0' && len < (dstsize - 1))
+                {
+                        dst[len] = src[len];
+                        len++;
+                }
+                dst[len] = '\0';
+        }
+        return (i);
+}
 
 size_t  varsize(char **str, char **env)
 {
@@ -61,10 +83,63 @@ size_t	expanded_size(char *str, char **env)
 	return (len);
 }
 
+int	env_cpy(char *dest, char **str, char **env)
+{
+	size_t	namelen;
+	char	*s;
+
+	s = *str + 1;
+	while (*env)
+	{
+		namelen = strchr(*env, '=') - *env;
+		if (!strncmp(s, *env, namelen))
+		{
+			*str += namelen + 1;
+			return (ft_strlcpy(dest, strchr(*env, '=') + 1, strlen(*env) - namelen));
+		}
+		env++;
+	}
+	return (0);
+}
+
+int	fill(char *dest, char *str, char **env)
+{
+	char	*head;
+
+	head = str;
+	while (*str)
+	{
+		if (*str == '\'')
+		{
+			*dest++ = *str++;
+			while (*++str && *str != '\'')
+				*dest++ = *str;
+		}
+		else if (*str && *str == '\"')
+		{
+			*dest++ = *str++;
+			while (*str && *str != '\"')
+			{
+				if (*str == '$')
+					dest += env_cpy(dest, &str, env);
+				else
+					*dest++ = *str++;
+			}
+		}
+		else if (*str && *str == '$')
+			dest += env_cpy(dest, &str, env);
+		else
+			*dest++ = *str++;
+	}
+	return (0);
+}
+
 int main()
 {
-	char	*input = "$PATH";
-	char	*env[] = {"PATH=/bin/ls", "a=test", NULL};
+	char	*input = "\"HEREITIS=$PATH\"";
+	char	*env[] = {"PATH=/bin/ls:slashmicron", "a=test", NULL};
 	size_t	i = expanded_size(input, env);
-	printf("size : %ld\n", i);
+	char	*result = malloc(i + 1);
+	fill (result, input, env);
+	printf("size : %ld\nresult: %s\n", i, result);
 }
