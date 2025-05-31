@@ -42,7 +42,7 @@ size_t  varsize(char **str, char **env)
 	while (*env)
 	{
 		namelen = ft_strchr(*env, '=') - *env;
-		if (!ft_strncmp(s, *env, namelen))
+		if (!ft_strncmp(*env, s, namelen))
 		{
 			*str += namelen + 1;
 			return (ft_strlen(ft_strchr(*env, '=') + 1));
@@ -102,7 +102,7 @@ int	env_cpy(char *dest, char **str, char **env)
 	while (*env)
 	{
 		namelen = ft_strchr(*env, '=') - *env;
-		if (!ft_strncmp(s, *env, namelen))
+		if (!ft_strncmp(*env, s, namelen))
 		{
 			*str += namelen + 1;
 			return (ft_strlcpy(dest, ft_strchr(*env, '=') + 1, strlen(*env) - namelen));
