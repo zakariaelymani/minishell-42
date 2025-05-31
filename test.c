@@ -127,7 +127,15 @@ int	fill(char *dest, char *str, char **env)
 			}
 		}
 		else if (*str && *str == '$')
-			dest += env_cpy(dest, &str, env);
+		{
+			env_cpy(dest, &str, env);
+			while (*dest)
+			{
+				if (*dest == ' ')
+					*dest = '\x1F';
+				dest++;
+			}
+		}
 		else
 			*dest++ = *str++;
 	}
@@ -136,8 +144,8 @@ int	fill(char *dest, char *str, char **env)
 
 int main()
 {
-	char	*input = "'HEREITIS=$PATH'";
-	char	*env[] = {"PATH=", "a=", NULL};
+	char	*input = "$PATH";
+	char	*env[] = {"PATH=ls -la", "a=", NULL};
 	size_t	i = expanded_size(input, env);
 	char	*result = malloc(i + 1);
 	fill (result, input, env);

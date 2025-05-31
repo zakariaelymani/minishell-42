@@ -139,7 +139,15 @@ int	fill(char *dest, char *str, char **env)
 			}
 		}
 		else if (*str && *str == '$')
-			dest += env_cpy(dest, &str, env);
+		{
+			env_cpy(dest, &str, env);
+			while (*dest)
+			{
+				if (*dest == ' ')
+					*dest = '\x1F';
+				dest++;
+			}
+		}
 		else
 			*dest++ = *str++;
 	}
