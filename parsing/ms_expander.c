@@ -12,14 +12,20 @@
 
 #include "parsing.h"
 
-size_t	varsize(char *str, char **env)
+size_t  varsize(char **str, char **env)
 {
-	size_t	result;
+	size_t	namelen;
+	char	*s;
 
+	s = *str + 1;
 	while (*env)
 	{
-		if (!ft_strncmp(*env, str + 1, (ft_strchr(*env, '=') - *env)))
-			return (ft_strlen(ft_strchr(*env, '=') + 1));
+		namelen = strchr(*env, '=') - *env;
+		if (!strncmp(s, *env, namelen))
+		{
+			*str += namelen + 1;
+			return (strlen(strchr(*env, '=') + 1));
+		}
 		env++;
 	}
 	return (0);
@@ -34,26 +40,87 @@ size_t	expanded_size(char *str, char **env)
 	{
 		if (*str == '\'')
 		{
-			while (*str++ && *str != '\'')
-				len++;
 			len++;
+			while (*++str && *str != '\'')
+				len++;
 		}
-		else if (*str == '\"')
+		else if (*str && *str == '\"')
 		{
+			len++;
+			str++;
 			while (*str && *str != '\"')
 			{
 				if (*str == '$')
 					len += varsize(&str, env);
 				else
-					len++''
+				{
+					len++;
+					str++;
+				}
 			}
 		}
-		else if (*str == '$')
-			len += varsize(&str, &len, env);
+		else if (*str && *str == '$')
+			len += varsize(&str, env);
 		else
+		{
 			len++;
+			str++;
+		}
 	}
 	return (len);
+}
+
+int	env_cpy(char *dest, char **str, char **env)
+{
+	size_t	namelen;
+	char	*s;
+
+	s = *str + 1;
+	while (*env)
+	{
+		namelen = strchr(*env, '=') - *env;
+		if (!strncmp(s, *env, namelen))
+		{
+			*str += namelen + 1;
+			return (strlcpy(dest, strchr(*env, '=') + 1), namelen);
+		}
+		env++;
+	}
+	return (0);
+}
+
+int	fill(char *dest, char *str, char **env)
+{
+	char	*head;
+
+	head = str;
+	while (*str)
+	{
+		if (*str == '\'')
+		{
+			*dest++ = *str++;
+			while (*++str && *str != '\'')
+				*dest++ = *str;
+		}
+		else if (*str && *str == '\"')
+		{
+			len++;
+			str++;
+			*dest++ = *str++;
+			while (*str && *str != '\"')
+			{
+				if (*str == '$')
+					env_cpy(dest, &str, env);
+				else
+					*dest++ = *str++;
+			}
+		}
+		else if (*str && *str == '$')
+			envcpy(dest, &str, env);
+		else
+			*dest++ = *str++;
+	}
+	return (0);
 }
 
 int	expand(char *str, char **env)
@@ -67,15 +134,6 @@ int	expand(char *str, char **env)
 	result = malloc(len + 1);
 	if (!result)
 		return (-1);
-	while (str[i])
-	{
-		if (str[i] == '$')
-		{
-			copy_from_env(result, &i, env);
-			continue ;
-		}
-		i++;
-	}
 	free(str);
 	str = result;
 	return (1);
