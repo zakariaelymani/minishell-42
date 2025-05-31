@@ -112,8 +112,8 @@ int	fill(char *dest, char *str, char **env)
 		if (*str == '\'')
 		{
 			*dest++ = *str++;
-			while (*++str && *str != '\'')
-				*dest++ = *str;
+			while (*str && *str != '\'')
+				*dest++ = *str++;
 		}
 		else if (*str && *str == '\"')
 		{
@@ -136,8 +136,8 @@ int	fill(char *dest, char *str, char **env)
 
 int main()
 {
-	char	*input = "\"HEREITIS=$PATH\"";
-	char	*env[] = {"PATH=/bin/ls:slashmicron", "a=test", NULL};
+	char	*input = "'HEREITIS=$PATH'";
+	char	*env[] = {"PATH=", "a=", NULL};
 	size_t	i = expanded_size(input, env);
 	char	*result = malloc(i + 1);
 	fill (result, input, env);

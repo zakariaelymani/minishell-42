@@ -62,6 +62,7 @@ FILES = builtins/env.c \
 	parsing/syntax_check.c \
 	parsing/ms_tokenizer.c \
 	parsing/get_word.c \
+	parsing/ms_expander.c \
 	parsing/parse.c \
 	tools/return_value.c \
 	tools/clear_function.c \

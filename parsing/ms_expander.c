@@ -12,6 +12,27 @@
 
 #include "parsing.h"
 
+// size_t  ft_strlcpy(char *dst, const char *src, size_t dstsize)
+// {
+//         size_t  i;
+//         size_t  len;
+//
+//         i = 0;
+//         len = 0;
+//         while (src[i])
+//                 i++;
+//         if (dstsize != 0)
+//         {
+//                 while (src[len] != '\0' && len < (dstsize - 1))
+//                 {
+//                         dst[len] = src[len];
+//                         len++;
+//                 }
+//                 dst[len] = '\0';
+//         }
+//         return (i);
+// }
+//
 size_t  varsize(char **str, char **env)
 {
 	size_t	namelen;
@@ -20,15 +41,17 @@ size_t  varsize(char **str, char **env)
 	s = *str + 1;
 	while (*env)
 	{
-		namelen = strchr(*env, '=') - *env;
-		if (!strncmp(s, *env, namelen))
+		namelen = ft_strchr(*env, '=') - *env;
+		if (!ft_strncmp(s, *env, namelen))
 		{
 			*str += namelen + 1;
-			return (strlen(strchr(*env, '=') + 1));
+			return (ft_strlen(ft_strchr(*env, '=') + 1));
 		}
 		env++;
 	}
-	return (0);
+	while (**str && !ft_strchr("\"'|>< ", **str))
+		*str += 1;
+	return (1);
 }
 
 size_t	expanded_size(char *str, char **env)
@@ -78,14 +101,16 @@ int	env_cpy(char *dest, char **str, char **env)
 	s = *str + 1;
 	while (*env)
 	{
-		namelen = strchr(*env, '=') - *env;
-		if (!strncmp(s, *env, namelen))
+		namelen = ft_strchr(*env, '=') - *env;
+		if (!ft_strncmp(s, *env, namelen))
 		{
 			*str += namelen + 1;
-			return (strlcpy(dest, strchr(*env, '=') + 1, strlen(*env, namelen));
+			return (ft_strlcpy(dest, ft_strchr(*env, '=') + 1, strlen(*env) - namelen));
 		}
 		env++;
 	}
+	while (**str && !ft_strchr("\"'|>< ", **str))
+		*str += 1;
 	return (0);
 }
 
@@ -99,13 +124,11 @@ int	fill(char *dest, char *str, char **env)
 		if (*str == '\'')
 		{
 			*dest++ = *str++;
-			while (*++str && *str != '\'')
-				*dest++ = *str;
+			while (*str && *str != '\'')
+				*dest++ = *str++;
 		}
 		else if (*str && *str == '\"')
 		{
-			len++;
-			str++;
 			*dest++ = *str++;
 			while (*str && *str != '\"')
 			{
@@ -123,19 +146,22 @@ int	fill(char *dest, char *str, char **env)
 	return (0);
 }
 
-int	expand(char *str, char **env)
+int	expand(char **str, char **env)
 {
 	size_t	len;
 	char	*result;
 	int		i;
 
-	len = expanded_size(str, env);
+	if (!ft_strchr(*str, '$'))
+		return (0);
+	len = expanded_size(*str, env);
 	i = 0;
 	result = malloc(len + 1);
 	if (!result)
 		return (-1);
-	free(str);
-	str = result;
+	fill(result, *str, env);
+	free(*str);
+	*str = result;
 	return (1);
 }
 
@@ -147,14 +173,14 @@ int	ms_expander(t_token *tokens, char **env)
 	head = tokens;
 	while (head)
 	{
-		head = head->next;
-		err = expand(head->content, env);
+		err = expand(&head->content, env);
 		if (err < 0)
 		{
 			ft_putstr_fd("Allocation Failure", 2);
-			ms_tokclear(tokens);
+			ms_tokclear(&tokens, free);
 			return (0);
 		}
+		head = head->next;
 	}
 	return (1);
 }
