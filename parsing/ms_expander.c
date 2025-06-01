@@ -161,7 +161,6 @@ int	fill(char *dest, char *str, t_env *env)
 		else
 			*dest++ = *str++;
 	}
-	*dest = '\0';
 	return (0);
 }
 
