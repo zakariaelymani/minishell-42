@@ -62,8 +62,10 @@ t_cmds	*cmd_parser(t_token *tokens)
 	char	*cmdstr;
 	char	*temp;
 	t_cmds	*cmd;
+	t_token	*head;
 
 	cmd_chain = NULL;
+	head = tokens;
 	cmdstr = ft_strdup("\x1F");
 	redir = NULL;
 	while (tokens)
@@ -90,5 +92,6 @@ t_cmds	*cmd_parser(t_token *tokens)
 		if (tokens && tokens->type == PIPE)
 			tokens = tokens->next;
 	}
+	ms_tokclear(&head, free);
 	return (cmd_chain);
 }
