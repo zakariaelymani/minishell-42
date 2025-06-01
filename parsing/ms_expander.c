@@ -69,6 +69,7 @@ size_t	expanded_size(char *str, t_env *env)
 				len++;
 				str++;
 			}
+			str++;
 		}
 		else if (*str && *str == '\"')
 		{
@@ -83,6 +84,7 @@ size_t	expanded_size(char *str, t_env *env)
 					str++;
 				}
 			}
+			str++;
 		}
 		else if (*str && *str == '$')
 			len += varsize(&str, env);
@@ -163,7 +165,7 @@ int	expand(char **str, t_env *env)
 	// if (!ft_strchr(*str, '$'))
 	// 	return (0);
 	len = expanded_size(*str, env);
-	result = calloc(len + 1, 1);
+	result = malloc(len + 1);
 	if (!result)
 		return (-1);
 	fill(result, *str, env);
