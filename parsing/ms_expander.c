@@ -49,7 +49,8 @@ size_t  varsize(char **str, t_env *env)
 		}
 		env = env->next;
 	}
-	while (**str && !ft_strchr("\"'|>< ", **str))
+	(*str)++;
+	while (**str && !ft_strchr("\"'|$>< ", **str))
 		*str += 1;
 	return (0);
 }
@@ -113,7 +114,8 @@ int	env_cpy(char *dest, char **str, t_env *env)
 		}
 		env = env->next;
 	}
-	while (**str && !ft_strchr("\"'|>< ", **str))
+	(*str)++;
+	while (**str && !ft_strchr("\"'|><$ ", **str))
 		*str += 1;
 	return (0);
 }
@@ -154,6 +156,7 @@ int	fill(char *dest, char *str, t_env *env)
 		else
 			*dest++ = *str++;
 	}
+	*dest = '\0';
 	return (0);
 }
 
@@ -165,7 +168,7 @@ int	expand(char **str, t_env *env)
 	// if (!ft_strchr(*str, '$'))
 	// 	return (0);
 	len = expanded_size(*str, env);
-	result = malloc(len + 1);
+	result = calloc(len + 1, 1);
 	if (!result)
 		return (-1);
 	fill(result, *str, env);
