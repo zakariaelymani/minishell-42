@@ -38,11 +38,14 @@ size_t  varsize(char **str, t_env *env)
 	size_t	namelen;
 	char	*s;
 
+	namelen = 0;
 	s = *str + 1;
+	while (s[namelen] && !ft_strchr("\"'|><$\x1F ", s[namelen]))
+		namelen++;
 	while (env)
 	{
 		namelen = ft_strlen(env->key);
-		if (!ft_strncmp(env->key, s, namelen))
+		if (!ft_strncmp(s, env->key, namelen))
 		{
 			*str += namelen + 1;
 			return (ft_strlen(env->value + 1));
@@ -104,10 +107,12 @@ int	env_cpy(char *dest, char **str, t_env *env)
 	char	*s;
 
 	s = *str + 1;
+	namelen = 0;
+	while (s[namelen] && !ft_strchr("\"'|><$\x1F ", s[namelen]))
+		namelen++;
 	while (env)
 	{
-		namelen = ft_strlen(env->key);
-		if (!ft_strncmp(env->key, s, namelen))
+		if (!ft_strncmp(s, env->key, namelen))
 		{
 			*str += namelen + 1;
 			return (ft_strlcpy(dest, env->value + 1, ft_strlen(env->value + 1) + 1));
