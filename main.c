@@ -92,7 +92,7 @@ int main(int argc, char *argv[], char *env[])
 			continue ;
 		if(!syntax_checker(tokens))
 			continue ;
-		if (!ms_expander(tokens, env))
+		if (!ms_expander(tokens, env_new))
 			continue ;
 		cmd = cmd_parser(tokens);
 		excute_command_line(&cmd, &env_new);
