@@ -105,7 +105,7 @@ int	env_cpy(char *dest, char **str, char **env)
 		if (!ft_strncmp(*env, s, namelen))
 		{
 			*str += namelen + 1;
-		return (ft_strlcpy(dest, ft_strchr(*env, '=') + 1, strlen(*env) - namelen - 1));
+		return (ft_strlcpy(dest, ft_strchr(*env, '=') + 1, strlen(*env) - namelen));
 		}
 		env++;
 	}
