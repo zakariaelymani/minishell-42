@@ -80,7 +80,7 @@ size_t	expanded_size(char *str, t_env *env)
 			str++;
 			while (*str && *str != '\"')
 			{
-				if (*str == '$' && !ft_strchr("\"'", *(str + 1)))
+				if (* str && *str == '$' && *(str + 1) != '\x1F' && !ft_strchr("\"'", *(str + 1)))
 					len += varsize(&str, env);
 				else
 				{
@@ -90,7 +90,7 @@ size_t	expanded_size(char *str, t_env *env)
 			}
 			str++;
 		}
-		else if (*str && *str == '$' && !ft_strchr("\"'", *(str + 1)))
+		else if (*str && *str == '$' && *(str + 1) != '\x1F' && !ft_strchr("\"'", *(str + 1)))
 			len += varsize(&str, env);
 		else
 		{
@@ -141,14 +141,14 @@ int	fill(char *dest, char *str, t_env *env)
 			str++;
 			while (*str && *str != '\"')
 			{
-				if (*str == '$' && !ft_strchr("\"'", *(str + 1)))
+				if (*str == '$' && *(str + 1) != '\x1F' && !ft_strchr("\"'", *(str + 1)))
 					dest += env_cpy(dest, &str, env);
 				else
 					*dest++ = *str++;
 			}
 			str++;
 		}
-		else if (*str && *str == '$' && !ft_strchr("\"'", *(str + 1)))
+		else if (*str && *str == '$' && *(str + 1) != '\x1F' && !ft_strchr("\"'", *(str + 1)))
 		{
 			env_cpy(dest, &str, env);
 			while (*dest)
