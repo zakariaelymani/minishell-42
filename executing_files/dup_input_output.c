@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:32:01 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/29 15:12:59 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:41:01 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void find_output_input(t_cmds **cmd, int input, int output)
 	if(output > -2)
 	{
 		if ((*cmd)->output > -1)
-		 close((*cmd)->output);
+			close((*cmd)->output);
 		(*cmd)->output = output;
 	}
 }

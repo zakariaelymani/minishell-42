@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:37:25 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/29 13:11:19 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/02 14:05:46 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,17 @@ int	check_echo_flag(char **str)
 	return (i);
 }
 
-#include <stdio.h>
 
 char *join_strings(int i, char **string, int flag)
 {
 	char	*line;
 	char	*prev;
+	char	*store;
 
 	prev = NULL;
+	store = NULL;
 	if (!string[i])
 		return (NULL);
-	int fd = open("leaks", O_CREAT | O_WRONLY | O_APPEND, 0644);
 	while (string[i])
 	{
 		if (!string[i + 1])
@@ -74,13 +74,13 @@ char *join_strings(int i, char **string, int flag)
 			break;
 		}
 		line = free_and_join(string[i], " ", 0);
-		prev = free_and_join(prev, line, 3);//maybe leaks
-		dprintf(fd, "line %p this prev %p\n", line, prev);
+		free_vars(store, NULL, NULL, NULL);
+		store = line;
+		prev = free_and_join(prev, line, 1);//maybe leaks
 		i++;
 	}
 	if (flag == 1)
 		prev = free_and_join(prev, "\n", 1);
-	free(line);//new 
 	return (prev);
 }
 
@@ -97,10 +97,7 @@ int   my_echo(char **strings, t_env **env)
 	line = join_strings(i, strings, status);
 	if (line)
 	{
-		if (compare(line, "$?\n") == 0)
-			printf("%d\n", (*env)->exit_sta);
-		else
-			safe_write(1, line, ft_strlen(line));
+		safe_write(1, line, ft_strlen(line));
 		free(line);
 	}
 	return (0);

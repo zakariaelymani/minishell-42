@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:43:10 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/29 12:35:00 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:46:02 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void export_without(t_env *env)
 		}
 	}
 	print_export(tmp);
-	clear_env(&tmp);//new
+	clear_env(&tmp, &size);//new
 	
 }
 

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:30:23 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/29 15:15:28 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:31:43 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int main(int argc, char *argv[], char *env[])
 	t_cmds	*cmd;
 	struct	termios term;
 	char	*line;
+	int		last_status;
 
 	env_new = get_env(argc, argv, env);
 	tcgetattr(STDIN_FILENO, &term);
@@ -46,7 +47,7 @@ int main(int argc, char *argv[], char *env[])
 		line = readline("minishel$ ");
 		g_global_status = 2;
 		if (!line)
-			(write(2, "exit\n", 6), rl_clear_history(), clear_env(&env_new), exit(env_new->exit_sta));
+			(write(2, "exit\n", 6), rl_clear_history(), clear_env(&env_new, &last_status), exit(last_status));
 		if (!*line)
 			continue ;
 		add_history(line);

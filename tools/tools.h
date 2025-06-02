@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:50:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/28 17:51:44 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:32:04 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_cmds		*lstlast(t_cmds *lst);
 void		*ft_memset(void *b, int c, size_t len);
 void		add_var_just_not_exists(t_env **env, char *var_name, char *value);
 void		clear_commands(t_cmds **cmds);
-void		clear_env(t_env **env);
+void		clear_env(t_env **env, int *last_status);
 char		*return_value(t_env *env, char *var_name, int flag);
 char		*ft_strrchr(const char *s, int c);
 void		ft_lstadd_front(t_env **lst, t_env *new);
@@ -67,7 +67,7 @@ void    	signals(int flag);
 void    	heredoc_handle(int sig);
 void		safe_write(int fd, char *line, size_t len);
 void        my_perror(char *who, char *input, char *description);
-
+void        free_vars(char *var1, char *var2, char *var3, char *var4);
 #endif
 
  
