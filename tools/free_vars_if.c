@@ -1,35 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_and_joined.c                                  :+:      :+:    :+:   */
+/*   free_vars_if.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/22 18:20:30 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/02 12:14:54 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/06/02 11:39:08 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/06/02 12:03:05 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 
-char	*free_and_join(char *store, char *s, int i)
+void free_vars(char *var1, char *var2, char *var3, char *var4)
 {
-	char	*str;
-
-	str = ft_strjoin(store, s);
-	if (i == 1 && store && *store)
+	if (var1)
 	{
-		free(store);
-		store = NULL;
+		free(var1);
+		var1  = NULL;
 	}
-	else if (i == 2 && s && *s)
+	if (var2)
 	{
-		free(s);
-		s = NULL;
+		free(var2);
+		var2 = NULL;
+	}
+	if (var3)
+	{
+		free(var3);
+		var3 = NULL;
+	}
+	if (var4)
+	{
+		free(var4);
+		var4 = NULL;
 	}	
-	else if (i == 3)
-	{
-		free_vars(store, s, NULL, NULL);
-	}
-	return (str);
+	if (var1)
+		printf("this var one %p\n", var1);
+	if (var2)
+		printf("this var tow %p\n", var2);
+	if (var3)
+		printf("this var three %p\n", var3);
+	if (var4)
+		printf("this var four %p\n", var4);
 }

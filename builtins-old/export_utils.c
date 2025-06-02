@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:43:10 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/02 12:46:02 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/21 12:00:39 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void export_without(t_env *env)
 	t_env	*tmp;
 	int 	size;
 
-	dup_env = NULL;
 	dup_env = dup_list(env);
 	size = ft_lstsize(env);
 	tmp = dup_env;
@@ -53,7 +52,7 @@ void export_without(t_env *env)
 		}
 	}
 	print_export(tmp);
-	clear_env(&tmp, &size);//new
+	clear_env(&tmp);//new
 	
 }
 

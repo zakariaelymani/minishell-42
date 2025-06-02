@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:53:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/29 10:22:07 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/15 16:46:48 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,7 @@ int sheck_char(char *arg)
 	{
 		if (ft_isdigit(arg[i]) == 0)
 		{
-			while (arg[i] == 32 || (arg[i] >= 9 && arg[i] <= 13))
-				i++;
-			if (!arg[i])
-				return (0);
-			write(2, "minishell :exit: numeric argument required \n", 45);
+			write(2, "exit\n numeric argument required\n", 33);
 			return (1);
 		}   
 		i++;
@@ -39,32 +35,30 @@ int sheck_char(char *arg)
 }
 
 
-int ft_exit(char **arguments, long status)
+int ft_exit(char **arguments)
 {
+	int status;
 	int i;
-	int sing;
-
-	sing = 0;
-	 i = 1;
+	
+	i = 1;
+	status = 0;
 	if (arguments[i])
 	{
 		while (arguments[i])
-		{
+			{
 			if (sheck_char(arguments[i]) == 1)
 				exit(2);
-			status = norm_atoi(arguments[i], 0, &sing);    
+			status = norm_atoi(arguments[i]);    
 			i++;
 			if (arguments[i])
 			{
-				safe_write(2, "exit\n minshell too many argumets\n", 34);
+				write(1, "exit\n minshell exit too many argumets\n",39);
 				return (1);
-			}	
+			}
 		}
 	}
 	if (status > 255)
-	   status = status % 256;
-	write(1, "exit\n", 6);
-	if (sing  == -1)
-		safe_write(2,"minishell: exit: numeric argument required\n", 43);
+	   status = status % 256; 
+	write(1, "exit\n", 6);;
 	exit(status);
 }

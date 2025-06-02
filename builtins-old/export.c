@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 15:14:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/29 12:16:38 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/05/22 13:24:39 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,14 @@ char *append_mode_to_env_var(char *new_val, char *old_val, int *status)
 	*status = 1;
 	if (*(tmp_val + 1) == '\0')
 	{
+		free(new_val);
 		return (old_val);	
 	}
 	else
-		joined_val = free_and_join(old_val, tmp_val + 1, 0);
+		joined_val = ft_strjoin(old_val, tmp_val + 1);
+
+	free(new_val);
+	free(old_val);
 	return (joined_val);
 }
 char *set_val_to_env_var(char *old_val, char *new_val, int *status)
@@ -52,15 +56,17 @@ char *set_val_to_env_var(char *old_val, char *new_val, int *status)
 	char *return_val;
 	
 	tmp_val = ft_strchr(new_val, '=');
-	return_val = NULL;
 	*status = 1;
 	if (*(tmp_val + 1) == '\0')
 	{
 		free(old_val);
+		free(new_val);
 		return (ft_strdup("="));
 	}
 	return_val = ft_strdup(tmp_val);
-	free(old_val);
+	free(tmp_val);//new
+	//free(old_val);
+	//free(new_val);
 	return (return_val);
 }
 
@@ -74,20 +80,21 @@ int modify_var(char *input, t_env **env)
 	tmp = (*env)->next;
 	while (tmp)
 	{
+		
 		if (compare(new_key, tmp->key) == 0)
 		{
 			status  = determing_status(input);
 			if (status == -1)
-				return (free(new_key), 1);
+				return (1);
 			else if (status == 1)
 				tmp->value = append_mode_to_env_var(input, tmp->value , &tmp->status);
 			else if (status == 0)
 				tmp->value = set_val_to_env_var(tmp->value, input, &tmp->status);
-			return (free(new_key), 1);
+			return (1);
 		}
 		tmp = tmp->next;
 	}
-	return (free(new_key), 0);//new free new_key
+	return (0);
 }
 
 int	export(t_env **env, char **splited)

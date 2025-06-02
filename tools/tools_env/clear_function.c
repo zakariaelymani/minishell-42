@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 11:12:27 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/29 12:51:33 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:45:48 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	clear_redir(t_redir **redir)
 		(*redir) = NULL;
 		*redir = tmp;
 	}
+	free(*redir);
 }
 
 void	clear_commands(t_cmds **cmds)
@@ -44,28 +45,28 @@ void	clear_commands(t_cmds **cmds)
 		(*cmds) = NULL;
 		(*cmds) = tmp;
 	}
+	free(*cmds);
 }
 
-void	clear_env(t_env **env)
+void	clear_env(t_env **env, int *last_status)
 {
 	t_env	*tmp;
 
+	
 	if (!env || !*env)
 		return ;
+
+	*last_status = (*env)->exit_sta;
+	
 	while (*env)
 	{
-		if ((*env)->next)
-			tmp = (*env)->next;
-		else
-			return ;
+		tmp = (*env)->next;
 		free((*env)->value);
 		(*env)->value = NULL;
 		free((*env)->key);
 		(*env)->key = NULL;
 		free(*env);
-		*env = NULL;
 		(*env) = tmp;
 	}
-	free((*env)->next);
-	free(*env);
+	*env = NULL;
 }
