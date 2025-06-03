@@ -76,6 +76,8 @@ FILES = builtins/env.c \
 	parsing/ms_tokenizer.c \
 	parsing/get_word.c \
 	parsing/ms_expander.c \
+	parsing/expander_utils/expand_size.c \
+	parsing/expander_utils/expand_copy.c \
 	parsing/parse.c \
 
 
