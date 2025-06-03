@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 11:12:27 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/02 12:45:48 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:53:52 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	clear_env(t_env **env, int *last_status)
 		return ;
 
 	*last_status = (*env)->exit_sta;
-	
 	while (*env)
 	{
 		tmp = (*env)->next;

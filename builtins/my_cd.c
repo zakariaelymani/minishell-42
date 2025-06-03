@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:53:32 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/29 11:59:00 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:31:39 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void change_pwd(t_env **env, char *input)
 
 
 	tmp_path = getcwd(NULL, 0);
-	if (!tmp_path)
-		perror("d: error retrieving current directory: getcwd: cannot access parent directories:");
+	if (!tmp_path || !*tmp_path)
+		perror("cd: error retrieving current directory: getcwd: cannot access parent directories:");
 	change_value_var(env, "OLDPWD", return_value(*env, "PWD", 0));
 	if (tmp_path)
 		path = free_and_join("=", tmp_path, 2);//leaks 
@@ -55,10 +55,10 @@ void change_pwd(t_env **env, char *input)
 		path = free_and_join("/", input, 0);
 		path = free_and_join(return_value(*env, "PWD", 0), path, 2);
 	}
-	free((*env)->value);	
+	free_vars((*env)->value, NULL, NULL, NULL);	
 	(*env)->value = ft_strdup(path);
 	change_value_var(env, "PWD", path);
-	(free(path), free(tmp_path));
+	free_vars(path ,NULL, NULL, NULL);
 }
 
 
@@ -71,7 +71,7 @@ char *change_path(char *new_path, char *pwd, char *path, char *line)
 	s = 0;
 	how = check_ishe_return(new_path, &s);
 	if (how == 0 || !pwd || !path)
-		return (new_path);
+		return (free_vars(path, NULL, NULL, NULL), new_path);
 	i = ft_strlen(pwd);
 	if (pwd[i - 1] == '/')
 		i--;
@@ -81,15 +81,15 @@ char *change_path(char *new_path, char *pwd, char *path, char *line)
 				how--;
 		i--;
 	}
-	free(path);
-	path = NULL;
 	if (new_path[s])
 	{
 		path = ft_substr(new_path, s, ft_strlen(new_path));
 		path = free_and_join("/", path, 2);
+		write(2, "here\n", 5);
 	}
 	line = ft_substr(pwd , 0, i);
-	line = free_and_join(line, path, 3);
+	line = free_and_join(line, path, 1);
+	printf("%s\n", line);
 	return (line);
 }
 
@@ -99,12 +99,13 @@ int	change_dir(char **new_path, t_env **env)
 	char	*line;
 	
 	line = NULL;
+	(void)line;
+	(void)path;
 	if (find_env(new_path) > 2)
 		return (safe_write(2, "minishell: cd:  too many arguments\n", 36) , 1);
-	path = change_path(new_path[1], return_value(*env, "PWD", 1), getcwd(NULL, 0), line);
-	if (chdir(path) != 0)
-		return(perror("minishell: cd"), free(path), 1);//duble free here if you free path leaks
-	free(path);
+	//path = change_path(new_path[1], return_value(*env, "PWD", 1), getcwd(NULL, 0), line);
+	if (chdir(new_path[1]) != 0)
+		return(perror("minishell: cd"), 1);//duble free here if you free path leaks
 	change_pwd(env, new_path[1]);
 	return (0);
 }

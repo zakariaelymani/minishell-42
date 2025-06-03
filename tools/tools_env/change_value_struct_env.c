@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:18:58 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:03:20 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:27:53 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	change_value_var(t_env **env, char *var_name, char *new_val)
 	{
 		if (compare(var_name, tmp_env->key) == 0)
 		{
-			free(tmp_env->value);
-			tmp_env->value = NULL;
+			free_vars(tmp_env->value, NULL, NULL, NULL);
 			tmp_env->value = ft_strdup(new_val);
 			return ;
 		}

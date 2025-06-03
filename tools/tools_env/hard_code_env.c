@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 14:54:45 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/24 16:03:42 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:06:19 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_env	*hard_code_env(void)
 
 	tmp = getcwd(NULL, 0);
 	pwd = ft_strjoin("=", tmp);
-	free(tmp);
+	if (tmp)
+		free(tmp);
 	tmp = NULL;
 	env = node(ft_strjoin("PWD", pwd), 1);
 	env->next = node("PATH=/usr/local/sbin:/usr/local/bin: \

@@ -12,6 +12,6 @@ MINISHELL=./minishell
 
 # Run Valgrind with leak check
 echo "Running Minishell under Valgrind..."
-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind_report.txt $MINISHELL
+valgrind --leak-check=full  --track-origins=yes --log-file=valgrind_report.txt $MINISHELL
 
-echo "Done. Check valgrind_report.txt for detailed leak info."
+echo "Done. Check valgrind_report.txt for detailed leak info."--leak-ckeck=full

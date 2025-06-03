@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:27:03 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/22 13:23:01 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:48:16 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void removenode(t_env **env, char *var)
 				return ;
 			else
 				prev->next = tmp->next;
-			free(tmp);
+			free(tmp->key);
+			(free(tmp->value), free(tmp));
 			tmp = NULL;
 			return ;
 		}

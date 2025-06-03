@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:51:07 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/29 10:39:48 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:38:20 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,19 @@ char	*check_is_exsist_or_excuteble(char *cmd, t_env **env)
 	{
 		(*env)->exit_sta = 127;
 		write(2, "No such file or directory\n", 27);
-		return (free(cmd), cmd = NULL, NULL);
+		return (NULL);
 	}
 	else if (access(cmd, X_OK) != 0)
 	{
 		write(2, "command is not excutble;\n", 26);
 		(*env)->exit_sta = 126;
-		return (free(cmd), cmd = NULL, NULL);
+		return (NULL);
 	}
-	else if (open(cmd, O_DIRECTORY) != -1)
+	else if (open(cmd, __O_DIRECTORY) != -1)
 	{
 		(*env)->exit_sta = 126;
 		write(2, "input is directory\n", 20);
-		return (free(cmd), cmd = NULL, NULL);
+		return (NULL);
 	}
 	return (cmd);
 }
@@ -71,7 +71,8 @@ char	*find_path_to_cmd(t_env **env, char *cmd, int i)
 		cmd = ft_strjoin(splited[i], joined);
 		if (access(cmd, F_OK | X_OK) == 0)
 			return (free_while(splited), free(joined), joined = NULL, cmd);
-		(1) && (free(cmd), i++);
+		free_vars(cmd, NULL, NULL, NULL);
+		i++;
 	}
 	write(2, "command not found\n", 19);
 	(*env)->exit_sta = 127;

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:30:24 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/22 14:28:19 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/03 11:44:29 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int my_pwd(t_env **env)
 
 	line = return_value(*env, "PWD", 1);
 	fd = open(".", O_WRONLY,  __O_DIRECTORY, 0644);
-	close(fd);
+	if (fd != -1)
+		close(fd);
 	pwd = getcwd(NULL, 0);
 	if (!pwd  && fd != -1)
 		return (perror ("minishll: pwd"), 1);
