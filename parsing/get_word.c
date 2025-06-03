@@ -28,7 +28,7 @@ char *get_word(char *pos)
 				i++;
 			if (pos[i] == '\0')
 			{
-				ft_putstr_fd("Syntax Error : Unmatched quote\n", 2);
+				ft_putstr_fd("Syntax Error: Unmatched quote\n", 2);
 				return (NULL);
 			}
 		}
