@@ -37,7 +37,7 @@ size_t  varsize(char **str, t_env *env)
 	return (0);
 }
 
-static int	sq_mode(char **str, ssize_t *len)
+static void	sq_mode(char **str, size_t *len)
 {
 	*str += 1;
 	while (**str && **str != '\'')
@@ -45,13 +45,10 @@ static int	sq_mode(char **str, ssize_t *len)
 		*len += 1;
 		*str += 1;
 	}
-	if (**str == '\0')
-		return (-1);
 	*str += 1;
-	return (0);
 }
 
-static int	dq_mode(char **str, ssize_t *len, t_env *env)
+static void	dq_mode(char **str, size_t *len, t_env *env)
 {
 	*str += 1;
 	while (**str && **str != '\"')
@@ -64,29 +61,20 @@ static int	dq_mode(char **str, ssize_t *len, t_env *env)
 			*str += 1;
 		}
 	}
-	if (**str == '\0')
-		return (-1);
 	*str += 1;
-	return (0);
 }
 
-ssize_t	expanded_size(char *str, t_env *env)
+size_t	expanded_size(char *str, t_env *env)
 {
-	ssize_t	len;
+	size_t	len;
 
 	len = 0;
 	while (*str)
 	{
 		if (*str == '\'')
-		{
-			if (sq_mode(&str, &len) < 0)
-				return (-1);
-		}
+			sq_mode(&str, &len);
 		else if (*str && *str == '\"')
-		{
-			if (dq_mode(&str, &len, env) < 0)
-				return (-1);
-		}
+			dq_mode(&str, &len, env);
 		else if (*str == '$' && ft_isalnum(*(str + 1)))
 			len += varsize(&str, env);
 		else

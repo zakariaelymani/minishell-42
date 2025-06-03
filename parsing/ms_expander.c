@@ -14,13 +14,15 @@
 
 int	expand(char **str, t_env *env)
 {
-	size_t	len;
+	ssize_t	len;
 	char	*result;
 
 	len = expanded_size(*str, env);
+	if (len < 0)
+		return (-1);
 	result = calloc(len + 1, 1);
 	if (!result)
-		return (-1);
+		return (-2);
 	fill(result, *str, env);
 	free(*str);
 	*str = result;
@@ -38,7 +40,10 @@ int	ms_expander(t_token *tokens, t_env *env)
 		err = expand(&head->content, env);
 		if (err < 0)
 		{
-			ft_putstr_fd("Allocation Failure", 2);
+			if (err == -2)
+				ft_putstr_fd("Allocation Failure", 2);
+			else
+				ft_putstr_fd("Unmatched quote", 2);
 			ms_tokclear(&tokens, free);
 			return (0);
 		}
