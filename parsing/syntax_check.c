@@ -19,11 +19,11 @@ int	syntax_checker(t_token *token)
 		if (token->type == PIPE)
 		{
 			if (!token->prev || !token->next)
-				return (printf("INVALID SYNTAX NEAR : %s\n", token->content), 0);
+				return (ft_putstr_fd("Syntax error: Invalid pipe |\n", 2), 0);
 		}
 		else if ((token->type & (INPUT | OUTPUT | HEREDOC | APPEND)))
 			if (!token->next || token->next->type != WORD)
-				return (printf("INVALID SYNTAX NEAR : %s\n", token->content), 0);
+				return (ft_putstr_fd("Syntax error: No redirect destination\n", 2), 0);
 		token = token->next;
 	}
 	return (1);
