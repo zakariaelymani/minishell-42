@@ -23,6 +23,8 @@ void execute_command(t_cmds *cmd, t_env **env, t_cmds *tmp)
 	env_to_excute = convert_strcut_array(*env);
 	dub_for_cmds(&cmd, env, tmp);
 	execve(path,cmd->cmds, env_to_excute);
+	free(path);
+	free_while(cmd->cmds);
 	perror("minishell5");
 	exit(127);
 }

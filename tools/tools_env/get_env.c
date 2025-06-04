@@ -29,5 +29,6 @@ t_env	*get_env(int argc, char *argv[], char *env[])
 		perror("minishell: getcwd");
 	pwd = free_and_join("=", pwd, 2);
 	ft_lstadd_front(&env_new, node(ft_strjoin("DATA", pwd), 1));
+	free(pwd);
 	return (env_new);
 }

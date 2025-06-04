@@ -17,9 +17,7 @@ char *join_env(t_env *env)
 {
 	t_env *tmp;
 	char *line;
-	char *prev;
 
-	prev = NULL;
 	tmp = env->next;
 	while (tmp)
 	{
@@ -27,11 +25,10 @@ char *join_env(t_env *env)
 		{
 			line = free_and_join(tmp->key, tmp->value, 0);
 			line = free_and_join(line, "\n", 1);
-			prev = free_and_join(prev, line, 3);
 		}
 		tmp = tmp->next;
 	}
-	return (prev);
+	return (line);
 }
 
 int env_cmd(t_env *env)

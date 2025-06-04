@@ -21,10 +21,7 @@ int	open_redir(t_redir **tmp)
 	else if ((*tmp)->type == APPEND)
 		(*tmp)->fd = ft_open((*tmp)->file_name, APPEND);
 	if ((*tmp)->fd == -1)
-	{
-		perror("minishell-->");
 		return (1);
-	}
 	return (-1);
 }
 
