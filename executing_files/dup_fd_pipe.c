@@ -18,7 +18,7 @@ void dub_for_cmds(t_cmds **cmd, t_env **env, t_cmds *tmp)
 
 	fd = open_files(cmd, env);
 	if (fd == 1)
-		(perror("mininshll"), exit(1));
+		exit(1);
 	dup_input_output(cmd, tmp);
 }
 int		execute_builtins_inparent(t_cmds **cmd, t_env **env, int stat)

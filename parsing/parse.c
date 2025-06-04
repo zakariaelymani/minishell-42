@@ -82,6 +82,8 @@ t_cmds	*cmd_parser(t_token *tokens)
 			else if (tokens && (tokens->type & (OUTPUT | INPUT | APPEND | HEREDOC)))
 			{
 				redir = new_redir(tokens->type);
+				if (tokens->type == HEREDOC)
+					redir->fd = -2;
 				tokens = tokens->next;
 				redir->file_name = ft_substr(tokens->content, 0, ft_strlen(tokens->content) - 1);
 				ms_redappend(&cmd->redirection, redir);

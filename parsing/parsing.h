@@ -21,7 +21,6 @@
 typedef struct s_token{
 	t_type	 		type;
 	char			*content;
-	int				expand;
 	struct s_token	*next;
 	struct s_token	*prev;
 }	t_token;
@@ -44,5 +43,7 @@ t_cmds	*ms_cmdlast(t_cmds *lst);
 t_token	*ms_toklast(t_token *lst);
 char *get_word(char *pos);
 int	ms_expander(t_token *tokens, t_env *env);
+size_t expanded_size(char *str, t_env *env);
+int     fill(char *dest, char *str, t_env *env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:53:32 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/03 12:31:39 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/04 20:05:18 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void change_pwd(t_env **env, char *input)
 	else
 	{
 		path = free_and_join("/", input, 0);
-		path = free_and_join(return_value(*env, "PWD", 0), path, 2);
+		path = free_and_join(return_value(*env, "PWD", 0), path, 0);
 	}
 	free_vars((*env)->value, NULL, NULL, NULL);	
 	(*env)->value = ft_strdup(path);

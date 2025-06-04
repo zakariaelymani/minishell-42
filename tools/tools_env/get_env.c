@@ -28,6 +28,11 @@ t_env	*get_env(int argc, char *argv[], char *env[])
 	if (!pwd || !*pwd)
 		perror("minishell: getcwd");
 	pwd = free_and_join("=", pwd, 2);
+<<<<<<< HEAD
 	ft_lstadd_front(&env_new, node(free_and_join("DATA", pwd, 2), 1));
+=======
+	ft_lstadd_front(&env_new, node(ft_strjoin("DATA", pwd), 1));
+	free(pwd);
+>>>>>>> refs/remotes/origin/merged
 	return (env_new);
 }

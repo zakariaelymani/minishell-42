@@ -51,7 +51,6 @@ FILES = builtins/env.c \
 	tools/here_doc.c \
 	tools/last_node_cmd.c \
     tools/cmd_size.c \
-	parsing.c \
     tools/safe_functions.c \
     tools/my_perror.c \
     tools/minishell_signals.c \
@@ -76,12 +75,14 @@ FILES = builtins/env.c \
 	parsing/ms_tokenizer.c \
 	parsing/get_word.c \
 	parsing/ms_expander.c \
+	parsing/expander_utils/expand_size.c \
+	parsing/expander_utils/expand_copy.c \
 	parsing/parse.c \
 
 
 NAME = minishell
 cc = cc 
-FLAGS = -I. -I./parsing -I./tools -Wall -Wextra -Werror # -fsanitize=address -g
+FLAGS = -I. -I./parsing -I./tools -Wall -Wextra -Werror -g # -fsanitize=address
 OBJ = $(FILES:.c=.o)
 HEADER1 = builtins/builtins.h
 HEADER2 = struct.h 

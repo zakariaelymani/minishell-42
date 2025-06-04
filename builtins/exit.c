@@ -45,7 +45,7 @@ int ft_exit(char **arguments, long status)
 	int sing;
 
 	sing = 0;
-	 i = 1;
+	i = 1;
 	if (arguments[i])
 	{
 		while (arguments[i])

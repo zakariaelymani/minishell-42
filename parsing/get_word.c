@@ -26,13 +26,17 @@ char *get_word(char *pos)
 			mark = pos[i++];
 			while (pos[i] && pos[i] != mark)
 				i++;
+			if (pos[i] == '\0')
+			{
+				ft_putstr_fd("Syntax Error: Unmatched quote\n", 2);
+				return (NULL);
+			}
 		}
 		i++;
 	}
 	result = malloc(i + 2);
 	if (!result)
 		return (NULL);
-	// ft_strlcpy(result, pos + q, i + 1 - q);
 	i = 0;
 	while (*pos && !ft_strchr("<>| ", *pos))
 	{
@@ -42,8 +46,6 @@ char *get_word(char *pos)
 			result[i++] = *pos++;
 			while (*pos && *pos != mark)
 				result[i++] = *pos++;
-			if (!*pos)
-				return (NULL);
 		}
 		result[i++] = *pos++;
 	}

@@ -12,13 +12,6 @@ MINISHELL=./minishell
 
 # Run Valgrind with leak check
 echo "Running Minishell under Valgrind..."
-<<<<<<< HEAD
 valgrind --leak-check=full  --track-origins=yes --log-file=valgrind_report.txt $MINISHELL
 
 echo "Done. Check valgrind_report.txt for detailed leak info."--leak-ckeck=full
-=======
-valgrind --leak-check=full --track-origins=yes --log-file=valgrind_report.txt $MINISHELL
-
-echo "Done. Check valgrind_report.txt for detailed leak info."
-
->>>>>>> refs/remotes/origin/merged
