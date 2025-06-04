@@ -39,8 +39,8 @@ void	clear_commands(t_cmds **cmds)
 	while (*cmds)
 	{
 		tmp = (*cmds)->next;
-		free_while((*cmds)->cmds);
 		clear_redir(&(*cmds)->redirection);
+		free_while((*cmds)->cmds);
 		free((*cmds));
 		(*cmds) = NULL;
 		(*cmds) = tmp;
@@ -51,13 +51,10 @@ void	clear_commands(t_cmds **cmds)
 void	clear_env(t_env **env, int *last_status)
 {
 	t_env	*tmp;
-
 	
 	if (!env || !*env)
 		return ;
-
 	*last_status = (*env)->exit_sta;
-	
 	while (*env)
 	{
 		tmp = (*env)->next;

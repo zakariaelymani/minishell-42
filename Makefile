@@ -51,7 +51,6 @@ FILES = builtins/env.c \
 	tools/here_doc.c \
 	tools/last_node_cmd.c \
     tools/cmd_size.c \
-	parsing.c \
     tools/safe_functions.c \
     tools/my_perror.c \
     tools/minishell_signals.c \

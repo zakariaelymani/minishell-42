@@ -21,7 +21,6 @@
 typedef struct s_token{
 	t_type	 		type;
 	char			*content;
-	int				expand;
 	struct s_token	*next;
 	struct s_token	*prev;
 }	t_token;

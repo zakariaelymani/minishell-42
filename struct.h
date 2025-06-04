@@ -29,16 +29,6 @@ typedef struct s_env
 	
 }   t_env;
 
-//this redirection  type 
-/*typedef enum  s_redir*/
-/*{*/
-/*	INPUT,*/
-/*	OUTPUT,*/
-/*	APPEND,*/
-/*	HER_DOC,*/
-/**/
-/*}   t_redir;*/
-
 typedef enum e_type{
 	WORD = 1 << 0,
 	APPEND = 1 << 1,
