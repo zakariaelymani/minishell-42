@@ -14,6 +14,11 @@
 
 int	open_redir(t_redir **tmp)
 {
+	if (ft_strchr((*tmp)->file_name, '\x1F'))
+	{
+		printf("Syntax Error: Ambiguous redirect\n");
+		return (1);
+	}
 	if ((*tmp)->type == OUTPUT)
 		(*tmp)->fd = ft_open((*tmp)->file_name, OUTPUT);
 	else if ((*tmp)->type == INPUT)
