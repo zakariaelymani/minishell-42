@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:26:45 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/29 10:49:14 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/04 20:02:01 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void heredoc_handle(int sig)
     {
 		write(1, "\n", 2);
         g_global_status = 3;
-		//ioctl
+		//ioctl(STDIN_FILENO, FIONBIO, &arg);
 		close (STDIN_FILENO);
         return ;
     }

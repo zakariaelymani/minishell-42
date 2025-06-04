@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 19:47:49 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/02 14:58:06 by abenkaro         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:45:34 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int check_longmax(const char  *str, int y)
 		return (0);
 	sum_long = 1000;
 	sum = 0;
+	while (str[y] == '0' && ft_isdigit(str[y]) == 1)
+		y++;
 	while (str[y] && ft_isdigit(str[y]) == 1)
 	{
 		sum += (int)str[y];

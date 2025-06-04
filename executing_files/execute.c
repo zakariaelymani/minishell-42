@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:25:17 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/29 15:13:44 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:37:07 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void fork_and_execute(t_cmds **cmd, t_env **env)
 				execute_command(tmp, env, *cmd);
 		}
 		if (tmp->pid == -1)
-			perror("minishell");
+			perror("minishell");//spialce handle 
 		tmp = tmp->next;
 	}
 	wait_child(*cmd, env);

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:33:51 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/21 16:46:21 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:23:08 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 #include <sys/wait.h>
 #include "executing_files/execute_header.h"
 #include "parsing.h"
+#include <sys/ioctl.h>
+
 
 //he will check if ziro that will  we in parent  but in child it is somthing ot other
 

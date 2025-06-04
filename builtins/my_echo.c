@@ -6,27 +6,11 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:37:25 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/02 14:05:46 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/03 21:17:34 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-
-int	ft_putstr(char *s, int fd)
-{
-	int	i;
-
-	i = 0;
-	if (!s || fd < 0)
-		return (1);
-	while (s[i])
-	{
-		if (write(fd, &s[i], 1) == -1)
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 int	check_echo_flag(char **str)
 {

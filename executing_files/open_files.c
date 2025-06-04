@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:21:54 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/28 18:26:40 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/04 20:01:37 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int read_heredoc(t_cmds **cmd, t_env **env)
 					return ((*env)->exit_sta = 1, 1);
 				if (rids->fd == -2)
 					return (dup2(stdin_dup, STDIN_FILENO), close(stdin_dup), (*env)->exit_sta = 130, 1);
-			}				
+			}
 			rids = rids->next;
 		}
 		tmp = tmp->next;
