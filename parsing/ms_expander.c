@@ -41,9 +41,7 @@ int	ms_expander(t_token *tokens, t_env *env)
 		if (err < 0)
 		{
 			if (err == -2)
-				ft_putstr_fd("Allocation Failure", 2);
-			else
-				ft_putstr_fd("Unmatched quote", 2);
+				ft_putstr_fd("Allocation Failure\n", 2);
 			ms_tokclear(&tokens, free);
 			return (0);
 		}
