@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:21:54 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/04 20:01:37 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:55:51 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int open_files(t_cmds **cmds, t_env **env)
 		if (return_val == 1)
 		{
 			(*env)->exit_sta = 1;
+			perror("minishell");
 			return (1);
 		}
 		redir = redir->next;
