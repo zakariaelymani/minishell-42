@@ -19,6 +19,12 @@ size_t  varsize(char **str, t_env *env)
 
 	namelen = 0;
 	s = *str + 1;
+	if (*s == '?')
+	{
+		*str += 2;
+		char *temp = ft_itoa(env->exit_sta);
+		return (ft_strlen(temp));
+	}
 	while (s[namelen] && ft_isalnum(s[namelen]))
 		namelen++;
 	while (env)
@@ -53,7 +59,7 @@ static void	dq_mode(char **str, size_t *len, t_env *env)
 	*str += 1;
 	while (**str && **str != '\"')
 	{
-		if (**str == '$' && ft_isalnum(*(*str + 1)))
+		if (**str == '$' && (ft_isalnum(*(*str + 1)) || *(*str + 1) == '?'))
 			*len += varsize(str, env);
 		else
 		{
@@ -75,7 +81,7 @@ size_t	expanded_size(char *str, t_env *env)
 			sq_mode(&str, &len);
 		else if (*str && *str == '\"')
 			dq_mode(&str, &len, env);
-		else if (*str == '$' && ft_isalnum(*(str + 1)))
+		else if (*str == '$' && (ft_isalnum(*(str + 1)) || *(str + 1) == '?'))
 			len += varsize(&str, env);
 		else
 		{
