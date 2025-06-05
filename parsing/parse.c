@@ -82,13 +82,14 @@ t_cmds	*cmd_parser(t_token *tokens)
 			else if (tokens && (tokens->type & (OUTPUT | INPUT | APPEND | HEREDOC)))
 			{
 				redir = new_redir(tokens->type);
-				if (tokens->type == HEREDOC)
-					redir->fd = -1;
+				if (tokens->type == HEREDOC && !ft_strchr(tokens->next->content, '"'))
+					redir->fd = -2;
 				tokens = tokens->next;
 				redir->file_name = ft_substr(tokens->content, 0, ft_strlen(tokens->content) - 1);
 				ms_redappend(&cmd->redirection, redir);
 			}
-			tokens = tokens->next;
+			if (tokens)
+				tokens = tokens->next;
 		}
 		add_cmd(&cmd_chain, &cmdstr, cmd);
 		if (tokens && tokens->type == PIPE)
