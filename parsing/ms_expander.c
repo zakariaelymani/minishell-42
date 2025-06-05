@@ -48,6 +48,11 @@ size_t	unquoted_size(char *str)
 				len++;
 			str += 1;
 		}
+		else
+		{
+			str += 1;
+			len++;
+		}
 	}
 	return (len);
 }
@@ -68,6 +73,8 @@ void	copy_unquoted(char *dest, char *str)
 				*dest++ = *str;
 			str += 1;
 		}
+		else
+			*dest++ = *str++;
 	}
 }
 
