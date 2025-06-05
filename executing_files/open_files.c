@@ -66,7 +66,6 @@ void	pipe_cammand(t_cmds **tmp)
 	}
 }
 
-
 int read_heredoc(t_cmds **cmd, t_env **env)
 {
 	t_redir *rids;
