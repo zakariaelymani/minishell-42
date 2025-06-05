@@ -29,6 +29,67 @@ int	expand(char **str, t_env *env)
 	return (1);
 }
 
+size_t	unquoted_size(char *str)
+{
+	size_t	len;
+
+	len = 0;
+	while (*str)
+	{
+		if (*str == '\"')
+		{
+			while (*++str != '\"')
+				len++;
+			str += 1;
+		}
+		else if (*str == '\'')
+		{
+			while (*++str != '\'')
+				len++;
+			str += 1;
+		}
+	}
+	return (len);
+}
+
+void	copy_unquoted(char *dest, char *str)
+{
+	while (*str)
+	{
+		if (*str == '\"')
+		{
+			while (*++str != '\"')
+				*dest++ = *str;
+			str += 1;
+		}
+		else if (*str == '\'')
+		{
+			while (*++str != '\'')
+				*dest++ = *str;
+			str += 1;
+		}
+	}
+}
+
+int	remove_quotes(char **str)
+{
+	size_t	len;
+	char	*unquoted;
+
+	len = 0;
+	if (ft_strchr(*str, '"') || ft_strchr(*str, '\"'))
+	{
+		len = unquoted_size(*str);
+		unquoted = malloc(len + 1);
+		if (!unquoted)
+			return (-1);
+		copy_unquoted(unquoted, *str);
+		free(*str);
+		*str = unquoted;
+	}
+	return (0);
+}
+
 int	ms_expander(t_token *tokens, t_env *env)
 {
 	int		err;
@@ -37,7 +98,13 @@ int	ms_expander(t_token *tokens, t_env *env)
 	head = tokens;
 	while (head)
 	{
-		err = expand(&head->content, env);
+		if (head->type == HEREDOC)
+		{
+			head = head->next;
+			err = remove_quotes(&head->content);
+		}
+		else
+			err = expand(&head->content, env);
 		if (err < 0)
 		{
 			if (err == -2)

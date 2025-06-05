@@ -85,7 +85,10 @@ int	read_conten(char *limiter, int fd, t_env *env, int flag)
 			return (write(2, "where limiter\n", 15), fd);
 		line = free_and_join(line, "\n", 1);
 		if (flag == -2)
-			line = expantion(line, env, 0, 0);
+		{
+			if (ft_strncmp(line, limiter, ft_strlen(limiter)))
+				line = expantion(line, env, 0, 0);
+		}
 		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 			return (free(line), fd);
 		else
