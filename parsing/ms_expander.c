@@ -20,7 +20,7 @@ int	expand(char **str, t_env *env)
 	len = expanded_size(*str, env);
 	if (len < 0)
 		return (-1);
-	result = calloc(len + 1, 1); // REPLACE WITH FT VERSION !!!!!!!!!!!!!!!!!!!!!
+	result = malloc(len + 1);
 	if (!result)
 		return (-2);
 	fill(result, *str, env);

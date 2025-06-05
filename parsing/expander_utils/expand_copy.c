@@ -95,5 +95,6 @@ int	fill(char *dest, char *str, t_env *env)
 		else
 			*dest++ = *str++;
 	}
+	*dest = *str;
 	return (0);
 }
