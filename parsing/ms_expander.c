@@ -76,6 +76,7 @@ void	copy_unquoted(char *dest, char *str)
 		else
 			*dest++ = *str++;
 	}
+	*dest = *str;
 }
 
 int	remove_quotes(char **str)
