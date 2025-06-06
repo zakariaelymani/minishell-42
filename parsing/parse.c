@@ -34,8 +34,6 @@ static int	add_redir(t_token **tokens, t_redir **cmdredir)
 		str = (*tokens)->next->content;
 		if (!ft_strrchr(str, '\x1E'))
 			redir->fd = -2;
-		else if (ft_strrchr(str, '\x1E'))
-			*ft_strrchr(str, '\x1E') = '\x1F';
 	}
 	*tokens = (*tokens)->next;
 	redir->file_name = ft_substr((*tokens)->content, 0,
