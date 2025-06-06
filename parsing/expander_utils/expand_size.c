@@ -12,6 +12,15 @@
 
 #include "parsing.h"
 
+static size_t	exit_status(char **str, int code)
+{
+	char	tmp[12];
+
+	*str += 2;
+	ft_cpynbr(tmp, code);
+	return (ft_strlen(tmp));
+}
+
 size_t  varsize(char **str, t_env *env)
 {
 	size_t	namelen;
@@ -20,11 +29,7 @@ size_t  varsize(char **str, t_env *env)
 	namelen = 0;
 	s = *str + 1;
 	if (*s == '?')
-	{
-		*str += 2;
-		char *temp = ft_itoa(env->exit_sta);
-		return (ft_strlen(temp));
-	}
+		return (exit_status(str, env->exit_sta));
 	while (s[namelen] && ft_isalnum(s[namelen]))
 		namelen++;
 	while (env)

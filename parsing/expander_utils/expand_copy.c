@@ -12,19 +12,23 @@
 
 #include "parsing.h"
 
-int	env_cpy(char *dest, char **str, t_env *env)
+static int	exit_status(char *dest, char **str, int code)
+{
+	char	tmp[12];
+
+	*str += 2;
+	ft_cpynbr(tmp, code);
+	return (ft_strlcpy(dest, tmp, ft_strlen(tmp) + 1));
+}
+
+static int	env_cpy(char *dest, char **str, t_env *env)
 {
 	size_t	namelen;
 	char	*s;
-	char	*tmp;
 
 	s = *str + 1;
 	if (*s == '?')
-	{
-		*str += 2;
-		tmp = ft_itoa(env->exit_sta);
-		return (ft_strlcpy(dest, tmp, ft_strlen(tmp) + 1));
-	}
+		return (exit_status(dest, str, env->exit_sta));
 	namelen = 0;
 	while (s[namelen] && ft_isalnum(s[namelen]))
 		namelen++;
