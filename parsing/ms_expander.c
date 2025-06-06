@@ -94,6 +94,7 @@ int	remove_quotes(char **str)
 		copy_unquoted(unquoted, *str);
 		free(*str);
 		*str = unquoted;
+		*strrchr(*str, '\x1F') = '\x1E';
 	}
 	return (0);
 }
