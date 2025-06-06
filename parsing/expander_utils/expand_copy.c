@@ -44,6 +44,7 @@ static int	env_cpy(char *dest, char **str, t_env *env)
 	(*str)++;
 	while (**str && ft_isalnum(**str))
 		*str += 1;
+	*dest = '\0';
 	return (0);
 }
 
