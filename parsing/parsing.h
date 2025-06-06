@@ -47,5 +47,6 @@ int		fill(char *dest, char *str, t_env *env);
 t_redir	*new_redir(t_type type);
 t_redir	*ms_redlast(t_redir *lst);
 void	ms_redappend(t_redir **lst, t_redir *new);
+void	varlen(size_t *len, char *str);
 
 #endif

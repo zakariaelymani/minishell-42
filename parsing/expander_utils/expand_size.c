@@ -31,8 +31,7 @@ size_t	varsize(char **str, t_env *env)
 	s = *str + 1;
 	if (*s == '?')
 		return (exit_status(str, env->exit_sta));
-	while (s[namelen] && (ft_isalnum(s[namelen]) || s[namelen] == '_'))
-		namelen++;
+	varlen(&namelen, s);
 	while (env)
 	{
 		tok = s[namelen];
