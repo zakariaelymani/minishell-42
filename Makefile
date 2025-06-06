@@ -42,6 +42,7 @@ FILES = builtins/env.c \
     tools/tools_libft/ft_substr.c \
     tools/tools_libft/ft_isspace.c \
 	tools/tools_libft/ft_memmove.c\
+	tools/tools_libft/ft_strrchr.c\
 	tools/tools_env/add_ifnot_exists.c \
     tools/tools_env/change_value_struct_env.c \
 	tools/here_doc.c \

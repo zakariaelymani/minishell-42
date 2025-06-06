@@ -32,10 +32,10 @@ static int	add_redir(t_token **tokens, t_redir **cmdredir)
 	if ((*tokens)->type == HEREDOC)
 	{
 		str = (*tokens)->next->content;
-		if (!strrchr(str, '\x1E'))
+		if (!ft_strrchr(str, '\x1E'))
 			redir->fd = -2;
-		else if (strrchr(str, '\x1E'))
-			*strrchr(str, '\x1E') = '\x1F';
+		else if (ft_strrchr(str, '\x1E'))
+			*ft_strrchr(str, '\x1E') = '\x1F';
 	}
 	*tokens = (*tokens)->next;
 	redir->file_name = ft_substr((*tokens)->content, 0, ft_strlen((*tokens)->content) - 1);
