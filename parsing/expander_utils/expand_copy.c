@@ -96,7 +96,7 @@ int	fill(char *dest, char *str, t_env *env)
 			env_cpy(dest, &str, env);
 			while (*dest)
 			{
-				if (*dest == ' ')
+				if (ft_isspace(*dest))
 					*dest = '\x1F';
 				dest++;
 			}

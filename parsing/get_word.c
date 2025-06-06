@@ -18,7 +18,7 @@ static ssize_t	calculate_size(char *str)
 	char	mark;
 
 	len = 0;
-	while (str[len] && !ft_strchr("<>| ", str[len]))
+	while (str[len] && !ft_strchr("<>|", str[len]) && !ft_isspace(str[len]))
 	{
 		if ((str[len] == '\'' || str[len] == '\"'))
 		{
@@ -50,7 +50,7 @@ char *get_word(char *pos)
 	if (!result)
 		return (NULL);
 	i = 0;
-	while (*pos && !ft_strchr("<>| ", *pos))
+	while (*pos && !ft_strchr("<>|", *pos) && !ft_isspace(*pos))
 	{
 		if (*pos == '\'' || *pos == '\"')
 		{

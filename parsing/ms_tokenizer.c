@@ -42,7 +42,7 @@ static t_token *get_wtoken(char *line, int *i)
 	new = ms_toknew(content, WORD);
 	if (!new)
 		return (free(content), NULL);
-	while (line[*i] && !ft_strchr("<>| ", line[*i]))
+	while (line[*i] && !ft_strchr("<>|", line[*i]) && !ft_isspace(line[*i]))
 	{
 		if ((line[*i] == '\'' || line[*i] == '\"'))
 		{
@@ -88,7 +88,7 @@ t_token *ms_tokenizer(char *line)
       break;
     while (ft_isspace(line[i]))
       i++;
-    if (line[i] && !ft_strchr("<>| ", line[i]))
+    if (line[i] && !ft_strchr("<>|", line[i]) && !ft_isspace(line[i]))
 			if (!ms_tokappend(&tokenlist, get_wtoken(line, &i)))
 				return (ms_tokclear(&tokenlist, free), NULL);
     if (line[i] && ft_strchr("<>", line[i]))
