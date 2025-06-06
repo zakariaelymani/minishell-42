@@ -67,6 +67,7 @@ FILES = builtins/env.c \
 	tools/tools_parsing/ms_toklast.c \
 	tools/tools_parsing/ms_toknew.c \
 	tools/tools_parsing/ms_toksize.c \
+	parsing/ms_redirutils.c \
 	parsing/syntax_check.c \
 	parsing/ms_tokenizer.c \
 	parsing/get_word.c \
