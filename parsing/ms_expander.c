@@ -85,7 +85,7 @@ int	remove_quotes(char **str)
 	char	*unquoted;
 
 	len = 0;
-	if (ft_strchr(*str, '"') || ft_strchr(*str, '\"'))
+	if (ft_strchr(*str, '"') || ft_strchr(*str, '\''))
 	{
 		len = unquoted_size(*str);
 		unquoted = malloc(len + 1);
@@ -106,11 +106,8 @@ int	ms_expander(t_token *tokens, t_env *env)
 	head = tokens;
 	while (head)
 	{
-		if (head->type == HEREDOC)
-		{
-			head = head->next;
+		if (head->prev && head->prev->type == HEREDOC)
 			err = remove_quotes(&head->content);
-		}
 		else
 			err = expand(&head->content, env);
 		if (err < 0)

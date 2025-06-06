@@ -31,7 +31,7 @@ static int	env_cpy(char *dest, char **str, t_env *env)
 	if (*s == '?')
 		return (exit_status(dest, str, env->exit_sta));
 	namelen = 0;
-	while (s[namelen] && ft_isalnum(s[namelen]))
+	while (s[namelen] && (ft_isalnum(s[namelen]) || s[namelen] == '_'))
 		namelen++;
 	while (env)
 	{
