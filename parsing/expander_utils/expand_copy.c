@@ -21,7 +21,7 @@ static int	exit_status(char *dest, char **str, int code)
 	return (ft_strlcpy(dest, tmp, ft_strlen(tmp) + 1));
 }
 
-static int	env_cpy(char *dest, char **str, t_env *env)
+static int	env_cpy(char *d, char **str, t_env *env)
 {
 	size_t	namelen;
 	char	*s;
@@ -29,7 +29,7 @@ static int	env_cpy(char *dest, char **str, t_env *env)
 
 	s = *str + 1;
 	if (*s == '?')
-		return (exit_status(dest, str, env->exit_sta));
+		return (exit_status(d, str, env->exit_sta));
 	varlen(&namelen, s);
 	while (env)
 	{
@@ -39,13 +39,14 @@ static int	env_cpy(char *dest, char **str, t_env *env)
 		{
 			*str += namelen + 1;
 			s[namelen] = tok;
-			return (ft_strlcpy(dest, env->value + 1, ft_strlen(env->value) + 1));
+			return (ft_strlcpy(d, env->value + 1, ft_strlen(env->value) + 1));
 		}
 		s[namelen] = tok;
 		env = env->next;
 	}
-	*str += namelen + 1;
-	*dest = '\0';
+	while (*++*str && ft_isalnum(**str))
+		;
+	*d = '\0';
 	return (0);
 }
 

@@ -45,7 +45,8 @@ size_t	varsize(char **str, t_env *env)
 		s[namelen] = tok;
 		env = env->next;
 	}
-	*str += namelen + 1;
+	while (*++*str && ft_isalnum(**str))
+		;
 	return (0);
 }
 
