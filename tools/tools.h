@@ -70,6 +70,7 @@ void		my_perror(char *who, char *input, char *description);
 void		free_vars(char *var1, char *var2, char *var3, char *var4);
 long long	norm_atoi(const char *str, long long res, int *flag);
 size_t		ft_cpynbr(char *dest, int n);
+void		*ft_memmove(void *dst, const void *src, size_t len);
 
 #endif
 

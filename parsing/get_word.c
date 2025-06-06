@@ -61,6 +61,6 @@ char *get_word(char *pos)
 		}
 		result[i++] = *pos++;
 	}
-	memmove(result + i, "\x1F\0", 2);
+	ft_memmove(result + i, "\x1F\0", 2);
 	return (result);
 }
