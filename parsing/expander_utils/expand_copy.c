@@ -25,6 +25,7 @@ static int	env_cpy(char *dest, char **str, t_env *env)
 {
 	size_t	namelen;
 	char	*s;
+	char	tok;
 
 	s = *str + 1;
 	if (*s == '?')
@@ -34,16 +35,19 @@ static int	env_cpy(char *dest, char **str, t_env *env)
 		namelen++;
 	while (env)
 	{
-		if (!ft_strncmp(s, env->key, namelen))
+		tok = s[namelen];
+		s[namelen] = '\0';
+		if (!ft_strncmp(s, env->key, namelen + 1))
 		{
 			*str += namelen + 1;
+			s[namelen] = tok;
 			return (ft_strlcpy(dest, env->value + 1, ft_strlen(env->value + 1) + 1));
 		}
+		s[namelen] = tok;
 		env = env->next;
 	}
-	(*str)++;
-	while (**str && ft_isalnum(**str))
-		*str += 1;
+	while (*++*str && ft_isalnum(**str))
+		;
 	*dest = '\0';
 	return (0);
 }

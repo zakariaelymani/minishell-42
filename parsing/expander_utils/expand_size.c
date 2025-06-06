@@ -25,6 +25,7 @@ size_t  varsize(char **str, t_env *env)
 {
 	size_t	namelen;
 	char	*s;
+	char	tok;
 
 	namelen = 0;
 	s = *str + 1;
@@ -34,17 +35,19 @@ size_t  varsize(char **str, t_env *env)
 		namelen++;
 	while (env)
 	{
-		namelen = ft_strlen(env->key);
-		if (!ft_strncmp(s, env->key, namelen))
+		tok = s[namelen];
+		s[namelen] = '\0';
+		if (!ft_strncmp(s, env->key, namelen + 1))
 		{
 			*str += namelen + 1;
+			s[namelen] = tok;
 			return (ft_strlen(env->value + 1));
 		}
+		s[namelen] = tok;
 		env = env->next;
 	}
-	(*str)++;
-	while (**str && ft_isalnum(**str))
-		*str += 1;
+	while (*++*str && ft_isalnum(**str))
+		;
 	return (0);
 }
 
