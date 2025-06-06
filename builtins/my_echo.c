@@ -84,6 +84,8 @@ int   my_echo(char **strings, t_env **env)
 		safe_write(1, line, ft_strlen(line));
 		free(line);
 	}
+	else if (!line || !*line)
+		safe_write(1, "\n", 1);
 	return (0);
 }
 
