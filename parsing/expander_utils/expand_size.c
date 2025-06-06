@@ -21,7 +21,7 @@ static size_t	exit_status(char **str, int code)
 	return (ft_strlen(tmp));
 }
 
-size_t  varsize(char **str, t_env *env)
+size_t	varsize(char **str, t_env *env)
 {
 	size_t	namelen;
 	char	*s;
@@ -46,8 +46,7 @@ size_t  varsize(char **str, t_env *env)
 		s[namelen] = tok;
 		env = env->next;
 	}
-	while (*++*str && ft_isalnum(**str))
-		;
+	*str += namelen + 1;
 	return (0);
 }
 
@@ -68,7 +67,7 @@ static void	dq_mode(char **str, size_t *len, t_env *env)
 	while (**str && **str != '\"')
 	{
 		if (**str == '$' && (ft_isalnum(*(*str + 1)) || *(*str + 1) == '?'
-			|| *(*str + 1) == '_' ))
+				|| *(*str + 1) == '_' ))
 			*len += varsize(str, env);
 		else
 		{

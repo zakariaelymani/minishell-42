@@ -36,7 +36,7 @@ static ssize_t	calculate_size(char *str)
 	return (len);
 }
 
-char *get_word(char *pos)
+char	*get_word(char *pos)
 {
 	char	*result;
 	ssize_t	len;

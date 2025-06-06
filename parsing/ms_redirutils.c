@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ms_redirutils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/06 17:21:08 by abenkaro          #+#    #+#             */
+/*   Updated: 2025/06/06 17:21:10 by abenkaro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
 t_redir	*new_redir(t_type type)
 {
 	t_redir	*result;
+
 	result = (t_redir *)malloc(sizeof(t_redir));
 	if (!result)
 		return (NULL);
@@ -13,7 +26,7 @@ t_redir	*new_redir(t_type type)
 	return (result);
 }
 
-t_redir *ms_redlast(t_redir *lst)
+t_redir	*ms_redlast(t_redir *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -22,7 +35,7 @@ t_redir *ms_redlast(t_redir *lst)
 	return (lst);
 }
 
-void    ms_redappend(t_redir **lst, t_redir *new)
+void	ms_redappend(t_redir **lst, t_redir *new)
 {
 	if (!lst || !new)
 		return ;

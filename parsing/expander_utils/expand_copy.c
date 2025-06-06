@@ -41,13 +41,12 @@ static int	env_cpy(char *dest, char **str, t_env *env)
 		{
 			*str += namelen + 1;
 			s[namelen] = tok;
-			return (ft_strlcpy(dest, env->value + 1, ft_strlen(env->value + 1) + 1));
+			return (ft_strlcpy(dest, env->value + 1, ft_strlen(env->value) + 1));
 		}
 		s[namelen] = tok;
 		env = env->next;
 	}
-	while (*++*str && ft_isalnum(**str))
-		;
+	*str += namelen + 1;
 	*dest = '\0';
 	return (0);
 }
@@ -70,7 +69,7 @@ static void	dq_mode(char **str, char **dest, t_env *env)
 	while (**str && **str != '\"')
 	{
 		if (**str == '$' && (ft_isalnum(*(*str + 1)) || *(*str + 1) == '?'
-			|| *(*str + 1) == '_'))
+				|| *(*str + 1) == '_'))
 			*dest += env_cpy(*dest, str, env);
 		else
 		{

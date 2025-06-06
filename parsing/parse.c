@@ -38,7 +38,8 @@ static int	add_redir(t_token **tokens, t_redir **cmdredir)
 			*ft_strrchr(str, '\x1E') = '\x1F';
 	}
 	*tokens = (*tokens)->next;
-	redir->file_name = ft_substr((*tokens)->content, 0, ft_strlen((*tokens)->content) - 1);
+	redir->file_name = ft_substr((*tokens)->content, 0,
+			ft_strlen((*tokens)->content) - 1);
 	ms_redappend(cmdredir, redir);
 	return (0);
 }

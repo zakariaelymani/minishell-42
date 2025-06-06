@@ -22,8 +22,13 @@ int	syntax_checker(t_token *token)
 				return (ft_putstr_fd("Syntax error: Invalid pipe |\n", 2), 0);
 		}
 		else if ((token->type & (INPUT | OUTPUT | HEREDOC | APPEND)))
+		{
 			if (!token->next || token->next->type != WORD)
-				return (ft_putstr_fd("Syntax error: No redirect destination\n", 2), 0);
+			{
+				ft_putstr_fd("Syntax error: No redirect destination\n", 2);
+				return (0);
+			}
+		}
 		token = token->next;
 	}
 	return (1);
