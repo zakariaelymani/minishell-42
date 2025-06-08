@@ -1,9 +1,3 @@
-# FILES = builtins/env.c builtins/exit.c builtins/export_utils.c builtins/export.c builtins/minishell_cmd.c builtins/my_cd.c builtins/my_echo.c tools/ft_lstlast.c builtins/my_pwd.c builtins/unset.c tools/ft_isalpha.c tools/ft_isalnum.c \
-#  main.c tools/compare_string.c tools/creat_node.c tools/env_dup.c tools/free_while.c  tools/find_env.c  tools/swap_string.c tools/atoi.c tools/ft_isdigit.c tools/ft_lstsize.c tools/ft_open.c tools/ft_putstr_fd.c \
-#  tools/here_doc.c  tools/hard_code_env.c tools/ft_strncmp.c tools/ft_lstadd_back.c tools/ft_itoa.c tools/ft_strlen.c tools/ft_split.c tools/ft_strdup.c tools/ft_strjoin.c tools/free_and_joined.c\
-#  tools/change_value_struct_env.c tools/ft_strchr.c   parsing.c tools/find_path.c tools/ft_strlcpy.c tools/ft_substr.c tools/last_node_cmd.c tools/cmd_size.c tools/convert_to_array.c excuting_files.c/check_is_builtins.c  \
-# excuting_files.c/open_files.c excuting_files.c/dup_input_output.c excuting_files.c/dup_fd_pipe.c excuting_files.c/excute.c tools/add_ifnot_exists.c
-
 FILES = builtins/env.c \
 	builtins/exit.c \
     builtins/export.c \
@@ -31,6 +25,7 @@ FILES = builtins/env.c \
     tools/tools_env/hard_code_env.c \
     tools/swap_string.c \
 	tools/ft_open.c \
+	tools/tools_libft/ft_cpynbr.c\
     tools/tools_libft/ft_lstadd_front_bonus.c\
     tools/tools_libft/ft_putstr_fd.c \
 	tools/tools_libft/ft_isalnum.c\
@@ -46,6 +41,8 @@ FILES = builtins/env.c \
     tools/tools_libft/ft_strdup.c \
     tools/tools_libft/ft_substr.c \
     tools/tools_libft/ft_isspace.c \
+	tools/tools_libft/ft_memmove.c\
+	tools/tools_libft/ft_strrchr.c\
 	tools/tools_env/add_ifnot_exists.c \
     tools/tools_env/change_value_struct_env.c \
 	tools/here_doc.c \
@@ -71,12 +68,14 @@ FILES = builtins/env.c \
 	tools/tools_parsing/ms_toklast.c \
 	tools/tools_parsing/ms_toknew.c \
 	tools/tools_parsing/ms_toksize.c \
+	parsing/ms_redirutils.c \
 	parsing/syntax_check.c \
 	parsing/ms_tokenizer.c \
 	parsing/get_word.c \
 	parsing/ms_expander.c \
 	parsing/expander_utils/expand_size.c \
 	parsing/expander_utils/expand_copy.c \
+	parsing/expander_utils/varlen.c \
 	parsing/parse.c \
 
 
@@ -94,7 +93,7 @@ HEADER6 = executing_files/execute_header.h
 all: $(NAME)
 
 %.o: %.c $(HEADER1) $(HEADER2) $(HEADER3) $(HEADER4) $(HEADER5) $(HEADER6)
-	$(CC) $(FLAGS)   -c $< -o $@ 
+	$(CC) $(FLAGS) -c $< -o $@ 
 
 $(NAME): $(OBJ)
 	$(cc) $(FLAGS) $(OBJ)  -lreadline -o   $(NAME) 

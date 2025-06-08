@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenkaro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 16:07:36 by abenkaro          #+#    #+#             */
-/*   Updated: 2024/10/30 20:38:48 by abenkaro         ###   ########.fr       */
+/*   Created: 2024/10/24 15:28:00 by abenkaro          #+#    #+#             */
+/*   Updated: 2024/10/29 01:48:26 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../tools.h"
 
-char	*ft_strrchr(const char *s, int c)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char	*last_char_ptr;
+	unsigned char		*d;
+	unsigned char		*s;
 
-	last_char_ptr = (char *)s + ft_strlen(s);
-	while (last_char_ptr >= (char *)s)
+	if (!dst && !src)
+		return (NULL);
+	d = (unsigned char *)dst;
+	s = (unsigned char *)src;
+	if (dst <= src)
 	{
-		if (*last_char_ptr == (char)c)
-			return (last_char_ptr);
-		last_char_ptr--;
+		while (len--)
+			*d++ = *s++;
 	}
-	return (NULL);
+	else
+	{
+		while (len--)
+			*(d + len) = *(s + len);
+	}
+	return (dst);
 }

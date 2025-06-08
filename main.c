@@ -14,14 +14,29 @@
 
 int g_global_status;
 
+static t_cmds	*process_input(char *line, t_env *env)
+{
+	t_token	*tokens;
+	t_cmds	*cmd;
+
+	tokens = ms_tokenizer(line);
+	if (!tokens)
+		return (NULL);
+	if (!syntax_checker(tokens))
+		return (NULL);
+	if (!ms_expander(tokens, env))
+		return (NULL);
+	cmd = cmd_parser(tokens);
+	return (cmd);
+}
+
 int main(int argc, char *argv[], char *env[])
 {
-	t_env *env_new;
+	t_env	*env_new;
 	t_cmds	*cmd;
 	struct	termios term;
 	char	*line;
 	int		last_status;
-	t_token	*tokens;
 
 	env_new = get_env(argc, argv, env);
 	tcgetattr(STDIN_FILENO, &term);
@@ -36,14 +51,9 @@ int main(int argc, char *argv[], char *env[])
 		if (!*line)
 			continue ;
 		add_history(line);
-		tokens = ms_tokenizer(line);
-		if (!tokens)
+		cmd = process_input(line, env_new);
+		if (!cmd)
 			continue ;
-		if(!syntax_checker(tokens))
-			continue ;
-		if (!ms_expander(tokens, env_new))
-			continue ;
-		cmd = cmd_parser(tokens);
 		execute_command_line(&cmd, &env_new);
 		clear_commands(&cmd);
 		tcsetattr(STDIN_FILENO, TCSANOW, &term);

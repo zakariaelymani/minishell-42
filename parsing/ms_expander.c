@@ -20,7 +20,7 @@ int	expand(char **str, t_env *env)
 	len = expanded_size(*str, env);
 	if (len < 0)
 		return (-1);
-	result = calloc(len + 1, 1); // REPLACE WITH FT VERSION !!!!!!!!!!!!!!!!!!!!!
+	result = malloc(len + 1);
 	if (!result)
 		return (-2);
 	fill(result, *str, env);
@@ -76,6 +76,7 @@ void	copy_unquoted(char *dest, char *str)
 		else
 			*dest++ = *str++;
 	}
+	*dest = *str;
 }
 
 int	remove_quotes(char **str)
@@ -84,7 +85,7 @@ int	remove_quotes(char **str)
 	char	*unquoted;
 
 	len = 0;
-	if (ft_strchr(*str, '"') || ft_strchr(*str, '\"'))
+	if (ft_strchr(*str, '"') || ft_strchr(*str, '\''))
 	{
 		len = unquoted_size(*str);
 		unquoted = malloc(len + 1);
@@ -93,6 +94,7 @@ int	remove_quotes(char **str)
 		copy_unquoted(unquoted, *str);
 		free(*str);
 		*str = unquoted;
+		*ft_strrchr(*str, '\x1F') = '\x1E';
 	}
 	return (0);
 }
@@ -105,11 +107,8 @@ int	ms_expander(t_token *tokens, t_env *env)
 	head = tokens;
 	while (head)
 	{
-		if (head->type == HEREDOC)
-		{
-			head = head->next;
+		if (head->prev && head->prev->type == HEREDOC)
 			err = remove_quotes(&head->content);
-		}
 		else
 			err = expand(&head->content, env);
 		if (err < 0)
@@ -123,4 +122,3 @@ int	ms_expander(t_token *tokens, t_env *env)
 	}
 	return (1);
 }
-

@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   skip.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/24 17:39:51 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/05/24 17:40:20 by abenkaro         ###   ########.fr       */
+/*   Created: 2025/06/06 18:32:55 by abenkaro          #+#    #+#             */
+/*   Updated: 2025/06/06 18:35:14 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools.h"
+#include "parsing.h"
 
-int     ft_isspace(int c)
+void	varlen(size_t *len, char *str)
 {
-    return (c == '\n' || c == '\t' || c == ' ');
+	*len = 0;
+	while (str[*len] && ft_isalnum(str[*len]))
+		*len += 1;
 }

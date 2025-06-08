@@ -12,34 +12,41 @@
 
 #include "parsing.h"
 
-int	env_cpy(char *dest, char **str, t_env *env)
+static int	exit_status(char *dest, char **str, int code)
+{
+	char	tmp[12];
+
+	*str += 2;
+	ft_cpynbr(tmp, code);
+	return (ft_strlcpy(dest, tmp, ft_strlen(tmp) + 1));
+}
+
+static int	env_cpy(char *d, char **str, t_env *env)
 {
 	size_t	namelen;
 	char	*s;
-	char	*tmp;
+	char	tok;
 
 	s = *str + 1;
 	if (*s == '?')
-	{
-		*str += 2;
-		tmp = ft_itoa(env->exit_sta);
-		return (ft_strlcpy(dest, tmp, ft_strlen(tmp) + 1));
-	}
-	namelen = 0;
-	while (s[namelen] && ft_isalnum(s[namelen]))
-		namelen++;
+		return (exit_status(d, str, env->exit_sta));
+	varlen(&namelen, s);
 	while (env)
 	{
-		if (!ft_strncmp(s, env->key, namelen))
+		tok = s[namelen];
+		s[namelen] = '\0';
+		if (!ft_strncmp(s, env->key, namelen + 1))
 		{
 			*str += namelen + 1;
-			return (ft_strlcpy(dest, env->value + 1, ft_strlen(env->value + 1) + 1));
+			s[namelen] = tok;
+			return (ft_strlcpy(d, env->value + 1, ft_strlen(env->value) + 1));
 		}
+		s[namelen] = tok;
 		env = env->next;
 	}
-	(*str)++;
-	while (**str && ft_isalnum(**str))
-		*str += 1;
+	while (*++*str && ft_isalnum(**str))
+		;
+	*d = '\0';
 	return (0);
 }
 
@@ -61,7 +68,7 @@ static void	dq_mode(char **str, char **dest, t_env *env)
 	while (**str && **str != '\"')
 	{
 		if (**str == '$' && (ft_isalnum(*(*str + 1)) || *(*str + 1) == '?'
-			|| *(*str + 1) == '_'))
+				|| *(*str + 1) == '_'))
 			*dest += env_cpy(*dest, str, env);
 		else
 		{
@@ -87,7 +94,7 @@ int	fill(char *dest, char *str, t_env *env)
 			env_cpy(dest, &str, env);
 			while (*dest)
 			{
-				if (*dest == ' ')
+				if (ft_isspace(*dest))
 					*dest = '\x1F';
 				dest++;
 			}
@@ -95,5 +102,6 @@ int	fill(char *dest, char *str, t_env *env)
 		else
 			*dest++ = *str++;
 	}
+	*dest = *str;
 	return (0);
 }

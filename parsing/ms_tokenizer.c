@@ -12,28 +12,33 @@
 
 #include "parsing.h"
 
-static t_type get_tok_type(char *pos) {
-  t_type type;
+static t_type	get_tok_type(char *pos)
+{
+	t_type	type;
 
-  if (*pos == '<') {
-    if (*(pos + 1) && *(pos + 1) == *pos)
-      type = HEREDOC;
-    else
-      type = INPUT;
-  } else if (*pos == '>')
-    if (*(pos + 1) && *(pos + 1) == *pos)
-      type = APPEND;
-    else
-      type = OUTPUT;
-  else
-    type = PIPE;
-  return (type);
+	if (*pos == '<')
+	{
+		if (*(pos + 1) && *(pos + 1) == *pos)
+			type = HEREDOC;
+		else
+			type = INPUT;
+	}
+	else if (*pos == '>')
+	{
+		if (*(pos + 1) && *(pos + 1) == *pos)
+			type = APPEND;
+		else
+			type = OUTPUT;
+	}
+	else
+		type = PIPE;
+	return (type);
 }
 
-static t_token *get_wtoken(char *line, int *i)
+static t_token	*get_wtoken(char *line, int *i)
 {
-	char *content;
-	t_token *new;
+	char	*content;
+	t_token	*new;
 	char	qpair;
 
 	content = get_word(line + *i);
@@ -42,7 +47,7 @@ static t_token *get_wtoken(char *line, int *i)
 	new = ms_toknew(content, WORD);
 	if (!new)
 		return (free(content), NULL);
-	while (line[*i] && !ft_strchr("<>| ", line[*i]))
+	while (line[*i] && !ft_strchr("<>|", line[*i]) && !ft_isspace(line[*i]))
 	{
 		if ((line[*i] == '\'' || line[*i] == '\"'))
 		{
@@ -55,48 +60,49 @@ static t_token *get_wtoken(char *line, int *i)
 	return (new);
 }
 
-static t_token *get_optoken(char *line, int *i) 
+static t_token	*get_optoken(char *line, int *i)
 {
-  t_token *token;
-  char *content;
-  t_type type;
+	t_token	*token;
+	char	*content;
+	t_type	type;
 
-  type = get_tok_type(line + *i);
-  if (type == APPEND || type == HEREDOC)
-    content = ft_substr(line + *i, 0, 2);
-  else
-    content = ft_substr(line + *i, 0, 1);
-  token = ms_toknew(content, type);
-  if (!content || !token)
-    exit(1);
-  if (type == APPEND || type == HEREDOC)
-    *i += 2;
-  else
-    (*i)++;
-  return (token);
+	type = get_tok_type(line + *i);
+	if (type == APPEND || type == HEREDOC)
+		content = ft_substr(line + *i, 0, 2);
+	else
+		content = ft_substr(line + *i, 0, 1);
+	token = ms_toknew(content, type);
+	if (!content || !token)
+		exit(1);
+	if (type == APPEND || type == HEREDOC)
+		*i += 2;
+	else
+		(*i)++;
+	return (token);
 }
 
-t_token *ms_tokenizer(char *line)
+t_token	*ms_tokenizer(char *line)
 {
-  t_token *tokenlist;
-  int i;
+	t_token	*tokenlist;
+	int		i;
 
-  tokenlist = NULL;
-  i = 0;
-  while (1) {
-    if (!line[i])
-      break;
-    while (ft_isspace(line[i]))
-      i++;
-    if (line[i] && !ft_strchr("<>| ", line[i]))
+	tokenlist = NULL;
+	i = 0;
+	while (1)
+	{
+		if (!line[i])
+			break ;
+		while (ft_isspace(line[i]))
+			i++;
+		if (line[i] && !ft_strchr("<>|", line[i]) && !ft_isspace(line[i]))
 			if (!ms_tokappend(&tokenlist, get_wtoken(line, &i)))
 				return (ms_tokclear(&tokenlist, free), NULL);
-    if (line[i] && ft_strchr("<>", line[i]))
+		if (line[i] && ft_strchr("<>", line[i]))
 			if (!ms_tokappend(&tokenlist, get_optoken(line, &i)))
 				return (ms_tokclear(&tokenlist, free), NULL);
-    if (line[i] && line[i] == '|')
+		if (line[i] && line[i] == '|')
 			if (!ms_tokappend(&tokenlist, get_optoken(line, &i)))
 				return (ms_tokclear(&tokenlist, free), NULL);
-  }
-  return (tokenlist);
+	}
+	return (tokenlist);
 }

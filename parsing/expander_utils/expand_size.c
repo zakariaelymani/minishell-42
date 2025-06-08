@@ -12,34 +12,41 @@
 
 #include "parsing.h"
 
-size_t  varsize(char **str, t_env *env)
+static size_t	exit_status(char **str, int code)
+{
+	char	tmp[12];
+
+	*str += 2;
+	ft_cpynbr(tmp, code);
+	return (ft_strlen(tmp));
+}
+
+size_t	varsize(char **str, t_env *env)
 {
 	size_t	namelen;
 	char	*s;
+	char	tok;
 
 	namelen = 0;
 	s = *str + 1;
 	if (*s == '?')
-	{
-		*str += 2;
-		char *temp = ft_itoa(env->exit_sta);
-		return (ft_strlen(temp));
-	}
-	while (s[namelen] && ft_isalnum(s[namelen]))
-		namelen++;
+		return (exit_status(str, env->exit_sta));
+	varlen(&namelen, s);
 	while (env)
 	{
-		namelen = ft_strlen(env->key);
-		if (!ft_strncmp(s, env->key, namelen))
+		tok = s[namelen];
+		s[namelen] = '\0';
+		if (!ft_strncmp(s, env->key, namelen + 1))
 		{
 			*str += namelen + 1;
+			s[namelen] = tok;
 			return (ft_strlen(env->value + 1));
 		}
+		s[namelen] = tok;
 		env = env->next;
 	}
-	(*str)++;
-	while (**str && ft_isalnum(**str))
-		*str += 1;
+	while (*++*str && ft_isalnum(**str))
+		;
 	return (0);
 }
 
@@ -60,7 +67,7 @@ static void	dq_mode(char **str, size_t *len, t_env *env)
 	while (**str && **str != '\"')
 	{
 		if (**str == '$' && (ft_isalnum(*(*str + 1)) || *(*str + 1) == '?'
-			|| *(*str + 1) == '_' ))
+				|| *(*str + 1) == '_' ))
 			*len += varsize(str, env);
 		else
 		{
