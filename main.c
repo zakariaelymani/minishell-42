@@ -6,13 +6,13 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:30:23 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/02 12:31:43 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/08 11:42:39 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int g_global_status;
+int	g_global_status;
 
 static t_cmds	*process_input(char *line, t_env *env)
 {
@@ -45,6 +45,8 @@ int main(int argc, char *argv[], char *env[])
 		signals(1);
 		g_global_status = 1;
 		line = readline("minishell$ ");
+		if (g_global_status == 130)
+			env_new->exit_sta = 130;
 		g_global_status = 2;
 		if (!line)
 			(write(2, "exit\n", 6), rl_clear_history(), clear_env(&env_new, &last_status), exit(last_status));

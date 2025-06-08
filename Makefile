@@ -78,7 +78,6 @@ FILES = builtins/env.c \
 	parsing/expander_utils/varlen.c \
 	parsing/parse.c \
 
-
 NAME = minishell
 cc = cc 
 FLAGS = -I. -I./parsing -I./tools -Wall -Wextra -Werror -g # -fsanitize=address

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:05:27 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/08 08:39:31 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/08 10:59:57 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # include "../struct.h"
 # include "../builtins/builtins.h"
 # include "../tools/tools.h"
+# include <sys/types.h>
+# include <signal.h>
 
 void	dup_input_output(t_cmds **cmd, t_cmds *tmp);
 int		check_is_builtins(t_cmds *cmd);

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:25:17 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/08 08:52:07 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/08 14:21:19 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,28 @@ void	wait_child(t_cmds *tmp, t_env **env)
 			waitpid(cmd->pid, NULL, 0);
 		cmd = cmd->next;
 	}
+	if (WIFSIGNALED(status) && handle_sigs_child(env, WTERMSIG(status)) == 1)
+		return ;
 	(*env)->exit_sta = WEXITSTATUS(status);
 	return ;
+}
+
+int remove_orphan(t_cmds *cmd, int return_val)
+{
+	t_cmds	*tmp;
+
+	if (return_val != -1)
+		return (0);
+	tmp = cmd;
+	perror("minishell: fork failed");
+	close_fds(cmd);
+	while (tmp->pid != -1)
+	{
+		kill(tmp->pid, SIGKILL);
+		waitpid(tmp->pid, NULL, 0);
+		tmp = tmp->next;
+	}
+	return (1);
 }
 
 void	fork_and_execute(t_cmds **cmd, t_env **env)
@@ -76,8 +96,8 @@ void	fork_and_execute(t_cmds **cmd, t_env **env)
 			else
 				execute_command(tmp, env, *cmd);
 		}
-		if (tmp->pid == -1)
-			perror("minishell");
+		if (remove_orphan(*cmd, tmp->pid) == 1)
+			return ;
 		tmp = tmp->next;
 	}
 	wait_child(*cmd, env);

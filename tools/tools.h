@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:50:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/08 09:52:45 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/08 14:21:27 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ long long	norm_atoi(const char *str, long long res, int *flag);
 size_t		ft_cpynbr(char *dest, int n);
 void		*ft_memmove(void *dst, const void *src, size_t len);
 char		*ft_strrchr(const char *s, int c);
-
+int         handle_sigs_child(t_env **env, int status);
 #endif

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/24 19:26:45 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/08 09:51:13 by zel-yama         ###   ########.fr       */
+/*   Created: 2025/06/08 14:14:11 by zel-yama          #+#    #+#             */
+/*   Updated: 2025/06/08 14:21:16 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 void	handle_parc(int i)
 {
 	(void)i;
-	if (g_global_status == 1)
+	if (g_global_status == 1  || g_global_status == 130)
 	{
+        g_global_status = 130;
 		rl_on_new_line();
 		ft_putstr_fd("\n", 1);
 		rl_replace_line("", 0);
@@ -24,19 +25,7 @@ void	handle_parc(int i)
 	}
 }
 
-void	handle_childq(int sig)
-{
-	(void)sig;
-	safe_write(1, "Quit (core dumped)\n", 18);
-	exit(131);
-}
 
-void	handle_childc(int sig)
-{
-	(void)sig;
-	write(2, "\n", 1);
-	exit(130);
-}
 
 void	signals(int flag)
 {
@@ -61,4 +50,19 @@ void	heredoc_handle(int sig)
 		close (STDIN_FILENO);
 		return ;
 	}
+}
+
+int handle_sigs_child(t_env **env, int status)
+{
+    if (status == 2)
+    {
+        safe_write(1, "\n", 1);
+        (*env)->exit_sta = 130;
+    }
+    else if (status == 3)
+    {
+        safe_write(1, "Quit (core dumped)\b\n", 21);
+        (*env)->exit_sta = 131;
+    }
+    return (1);
 }

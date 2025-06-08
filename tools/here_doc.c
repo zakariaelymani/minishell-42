@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 18:07:40 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/08 09:48:00 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/08 11:44:51 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	read_conten(char *limiter, int fd, t_env *env, int flag)
 		(signal(SIGINT, heredoc_handle), signal(SIGQUIT, SIG_IGN));
 		line = readline(">");
 		if (!line && g_global_status == 3)
-			return (-2);
+			return (g_global_status = 1, -2);
 		if (!line)
 			return (write(2, "where limiter\n", 15), fd);
 		line = free_and_join(line, "\n", 1);
