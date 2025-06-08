@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:51:07 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/03 12:38:20 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/08 09:59:03 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*find_path_to_cmd(t_env **env, char *cmd, int i)
 	if (!path || !*path)
 		return (check_is_exsist_or_excuteble(cmd, env));
 	splited = ft_split(path, ':');
-	joined = ft_strjoin("/", cmd);///leaks
+	joined = ft_strjoin("/", cmd);
 	while (splited[i])
 	{
 		cmd = ft_strjoin(splited[i], joined);
@@ -76,5 +76,5 @@ char	*find_path_to_cmd(t_env **env, char *cmd, int i)
 	}
 	write(2, "command not found\n", 19);
 	(*env)->exit_sta = 127;
-	return (free_while(splited), free(joined), NULL);// new free leaks 
+	return (free_while(splited), free(joined), NULL);
 }

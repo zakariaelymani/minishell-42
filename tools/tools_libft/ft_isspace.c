@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 17:39:51 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/05/24 17:40:20 by abenkaro         ###   ########.fr       */
+/*   Updated: 2025/06/08 10:14:47 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 
-int     ft_isspace(int c)
+int	ft_isspace(int c)
 {
-    return (c == '\n' || c == '\t' || c == ' ');
+	return (c == '\n' || c == '\t' || c == ' ');
 }

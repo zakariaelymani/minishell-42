@@ -6,16 +6,16 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 14:40:13 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/28 14:45:10 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/08 09:55:18 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tools.h"
 
-void my_perror(char *who, char *input, char *description)
+void	my_perror(char *who, char *input, char *description)
 {
-    safe_write(2, who, ft_strlen(who));
-    safe_write(2, input, ft_strlen(input));
-    safe_write(2, description, ft_strlen(description));
-    safe_write(2, "\n", 2);
+	safe_write(2, who, ft_strlen(who));
+	safe_write(2, input, ft_strlen(input));
+	safe_write(2, description, ft_strlen(description));
+	safe_write(2, "\n", 2);
 }

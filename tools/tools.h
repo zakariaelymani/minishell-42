@@ -6,18 +6,17 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:50:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/02 14:57:17 by abenkaro         ###   ########.fr       */
+/*   Updated: 2025/06/08 09:52:45 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOOLS_H
-#define TOOLS_H
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <limits.h>
-#include "../struct.h"
-#include "../minishell.h"
+# define TOOLS_H
+# include <stdio.h>
+# include <stdlib.h>
+# include <limits.h>
+# include "../struct.h"
+# include "../minishell.h"
 
 int			ft_isalpha(int c);
 char		*ft_strdup(const char *s1);
@@ -49,7 +48,7 @@ void		ft_putstr_fd(char *s, int fd);
 int			here_document(char *limiter, int flag, t_env **env);
 int			ft_open(char *file_name, t_type type);
 char		**convert_strcut_array(t_env *env);
-t_env		*hard_code_env();
+t_env		*hard_code_env(void);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 int			t_cmdsize(t_cmds *lst);
@@ -60,7 +59,6 @@ void		add_var_just_not_exists(t_env **env, char *var_name, char *value);
 void		clear_commands(t_cmds **cmds);
 void		clear_env(t_env **env, int *last_status);
 char		*return_value(t_env *env, char *var_name, int flag);
-// char		*ft_strrchr(const char *s, int c);
 void		ft_lstadd_front(t_env **lst, t_env *new);
 t_env		*get_env(int argc, char *argv[], char *env[]);
 void		signals(int flag);
@@ -74,5 +72,3 @@ void		*ft_memmove(void *dst, const void *src, size_t len);
 char		*ft_strrchr(const char *s, int c);
 
 #endif
-
- 

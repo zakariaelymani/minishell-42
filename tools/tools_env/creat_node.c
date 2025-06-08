@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:44:46 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/05 21:49:26 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/08 09:57:24 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_env	*node(char *value, int flag)
 	node = (t_env *)malloc(sizeof(t_env));
 	if (!node)
 		return (NULL);
-	ft_memset(node, 0,sizeof(node));
+	ft_memset(node, 0, sizeof(node));
 	node->status = 1;
 	node->exit_sta = 0;
 	node->value = ft_strdup(val);
@@ -57,7 +57,7 @@ t_env	*node(char *value, int flag)
 	if (flag == 1)
 	{
 		free(value);
-	} 
+	}
 	node->next = NULL;
 	return (node);
 }

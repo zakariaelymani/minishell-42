@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 11:12:27 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/02 17:53:52 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/08 09:58:34 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	clear_commands(t_cmds **cmds)
 void	clear_env(t_env **env, int *last_status)
 {
 	t_env	*tmp;
-	
+
 	if (!env || !*env)
 		return ;
 	*last_status = (*env)->exit_sta;

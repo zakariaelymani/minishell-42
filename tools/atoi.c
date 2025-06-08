@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 19:47:49 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/03 21:45:34 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/08 10:12:05 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_atoi(const char *str)
 	return (res * sing);
 }
 
-int check_longmax(const char  *str, int y)
+int	check_longmax(const char *str, int y)
 {
 	long	sum_long;
 	long	sum;
@@ -57,7 +57,7 @@ int check_longmax(const char  *str, int y)
 		y++;
 	}
 	if (sum > sum_long)
-		return (1);	
+		return (1);
 	return (0);
 }
 
@@ -77,7 +77,7 @@ long long	norm_atoi(const char *str, long long res, int *flag)
 		i++;
 	}
 	if (sing == 1 && check_longmax(str, i) == 1)
-		return (*flag = -1,  2);
+		return (*flag = -1, 2);
 	while (str[i])
 	{
 		if (res < LONG_MIN)
