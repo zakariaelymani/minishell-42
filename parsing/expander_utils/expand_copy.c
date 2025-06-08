@@ -95,7 +95,7 @@ int	fill(char *dest, char *str, t_env *env)
 			while (*dest)
 			{
 				if (ft_isspace(*dest))
-					*dest = '\x1F';
+					*dest = '\x1D';
 				dest++;
 			}
 		}
