@@ -6,34 +6,55 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:43:10 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/02 12:46:02 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/08 09:25:19 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void print_export(t_env *env)
+void	join_quote(t_env **tmp)
 {
-	t_env *tmp;
+	char	*tmp_line;
+	t_env	*env;
 
-	tmp = env; 
+	tmp_line = NULL;
+	env = (*tmp);
+	while (env)
+	{
+		tmp_line = env->value;
+		if (env->value)
+			env->value = free_and_join("\"", env->value + 1, 0);
+		else
+			env->value = free_and_join("\"", NULL, 0);
+		free_vars(tmp_line, NULL, NULL, NULL);
+		env->value = free_and_join(env->value, "\"", 1);
+		env->value = free_and_join("=", env->value, 2);
+		env = env->next;
+	}
+}
+
+void	print_export(t_env **env)
+{
+	t_env	*tmp;
+
+	join_quote(env);
+	tmp = *env;
 	while (tmp)
 	{
 		if (!tmp->value || !*tmp->value)
 			printf("declare -x %s\n", tmp->key);
 		else
 			printf("declare -x %s%s\n", tmp->key, tmp->value);
-		tmp = tmp->next;	
+		tmp = tmp->next;
 	}
 }
 
-//print env sorted no 
-void export_without(t_env *env)
+void	export_without(t_env *env)
 {
 	t_env	*dup_env;
 	t_env	*tmp_env;
 	t_env	*tmp;
-	int 	size;
+	int		size;
 
 	dup_env = NULL;
 	dup_env = dup_list(env);
@@ -52,29 +73,27 @@ void export_without(t_env *env)
 			tmp_env = tmp_env->next;
 		}
 	}
-	print_export(tmp);
-	clear_env(&tmp, &size);//new
-	
+	print_export(&tmp);
+	clear_env(&tmp, &size);
 }
 
-//check name of var that will add to the env
-//INT_MAX
-int check_name(char *splited)
+int	check_name(char *splited)
 {
 	int	i;
 
 	i = 0;
 	if (ft_isalpha(splited[i]) == 0 && splited[i] != '_')
 	{
-		write(2,"minishell tell this is invalid id \n", 36);
+		write(2, "minishell tell this is invalid id \n", 36);
 		return (1);
 	}
 	i++;
 	while (splited[i] != '=' && splited[i] != '\0')
 	{
-		if (ft_isalnum(splited[i]) == 0 && (splited[i] != '+' && splited[i + 1] != '='))
+		if (ft_isalnum(splited[i]) == 0
+			&& (splited[i] != '+' && splited[i + 1] != '='))
 		{
-			write(2,"minishell tell this is invalid id >\n", 37);
+			write(2, "minishell tell this is invalid id >\n", 37);
 			return (1);
 		}
 		i++;

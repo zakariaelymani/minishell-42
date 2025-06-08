@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:44:46 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/29 12:31:40 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/05 21:49:26 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_env	*node(char *value, int flag)
 	if (!val || !*val)
 		node->status = -1;
 	node->key = extract_key(value);
-	if (flag == 1) //new
+	if (flag == 1)
 	{
 		free(value);
 	} 

@@ -6,38 +6,36 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:25:17 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/03 21:37:07 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/08 08:52:07 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute_header.h"
 
-void execute_command(t_cmds *cmd, t_env **env, t_cmds *tmp)
+void	execute_command(t_cmds *cmd, t_env **env, t_cmds *tmp)
 {
-	char *path;
-	char **env_to_excute;
-	
+	char	*path;
+	char	**env_to_excute;
+
 	path = find_path_to_cmd(env, cmd->cmds[0], 0);
 	if (!path)
 		exit((*env)->exit_sta);
 	env_to_excute = convert_strcut_array(*env);
 	dub_for_cmds(&cmd, env, tmp);
-	execve(path,cmd->cmds, env_to_excute);
+	execve(path, cmd->cmds, env_to_excute);
 	free(path);
 	free_while(cmd->cmds);
 	perror("minishell5");
-	exit(127);
+	exit(1);
 }
 
-void wait_child(t_cmds *tmp, t_env **env)
+void	wait_child(t_cmds *tmp, t_env **env)
 {
-	
-	t_cmds 		*cmd;
-	int 		status;
+	t_cmds		*cmd;
+	int			status;
 	pid_t		last_pid;
 
-	
-	cmd = tmp; 
+	cmd = tmp;
 	while (cmd->next)
 	{
 		cmd = cmd->next;
@@ -57,11 +55,11 @@ void wait_child(t_cmds *tmp, t_env **env)
 	return ;
 }
 
-void fork_and_execute(t_cmds **cmd, t_env **env)
+void	fork_and_execute(t_cmds **cmd, t_env **env)
 {
-	int i;
-	t_cmds *tmp;
-	
+	int		i;
+	t_cmds	*tmp;
+
 	tmp = (*cmd);
 	while (tmp)
 	{
@@ -71,7 +69,7 @@ void fork_and_execute(t_cmds **cmd, t_env **env)
 		{
 			signals(2);
 			i = check_is_builtins(tmp);
-			if (i != -1 && i  != -2)
+			if (i != -1 && i != -2)
 				execute_builtins_inchild(&tmp, env, i, *cmd);
 			else if (i == -2)
 				exit(open_files(&tmp, env));
@@ -79,7 +77,7 @@ void fork_and_execute(t_cmds **cmd, t_env **env)
 				execute_command(tmp, env, *cmd);
 		}
 		if (tmp->pid == -1)
-			perror("minishell");//spialce handle 
+			perror("minishell");
 		tmp = tmp->next;
 	}
 	wait_child(*cmd, env);
@@ -88,8 +86,8 @@ void fork_and_execute(t_cmds **cmd, t_env **env)
 
 void	execute_command_line(t_cmds **cmd, t_env **env)
 {
-	int i;
-	int cmdsize;
+	int	i;
+	int	cmdsize;
 
 	if (read_heredoc(cmd, env) != 0)
 		return ;

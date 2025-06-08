@@ -6,28 +6,38 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:30:23 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/29 15:13:19 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/08 08:47:26 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute_header.h"
 
-void dub_for_cmds(t_cmds **cmd, t_env **env, t_cmds *tmp)
+void	dub_for_cmds(t_cmds **cmd, t_env **env, t_cmds *tmp)
 {
-	int fd;
+	int	fd;
 
 	fd = open_files(cmd, env);
 	if (fd == 1)
 		exit(1);
 	dup_input_output(cmd, tmp);
 }
-int		execute_builtins_inparent(t_cmds **cmd, t_env **env, int stat)
+
+void	help_executing(int input, int output)
 {
-	int input;
+	if (dup2(input, STDIN_FILENO) == -1)
+		perror("minishell1");
+	if (dup2(output, STDOUT_FILENO) == -1)
+		perror("minishell2");
+	close(input);
+	close(output);
+}
+
+int	execute_builtins_inparent(t_cmds **cmd, t_env **env, int stat)
+{
+	int	input;
 	int	output;
-	int ret_val;
-	
-	
+	int	ret_val;
+
 	ret_val = open_files(cmd, env);
 	if (ret_val == 1 || ret_val == -1)
 	{
@@ -46,12 +56,7 @@ int		execute_builtins_inparent(t_cmds **cmd, t_env **env, int stat)
 	execute_builtins(cmd, env, stat);
 	if (ret_val == 0)
 	{
-		if (dup2(input, STDIN_FILENO) == -1)
-			perror("minishell1");
-		if (dup2(output, STDOUT_FILENO) == -1)
-			perror("minishell2");
-		close(input);
-		close(output);
+		help_executing(input, output);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:46:09 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/17 16:06:43 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/05 16:01:10 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	compare(const char *str, const char *str1)
 {
 	int	i;
 
-	if ((!*str && !*str1) || (!str && !str1))
+	if (!str && !str1)
 		return (0);
 	i = 0;
 	while ((str[i] && str1[i]) && str[i] == str1[i])

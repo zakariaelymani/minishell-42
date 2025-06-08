@@ -6,17 +6,17 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:28:55 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/05/29 15:14:51 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/06 19:03:26 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute_header.h"
 
-int  check_is_builtins(t_cmds *cmd)
+int	check_is_builtins(t_cmds *cmd)
 {
 	if (!*cmd->cmds || !cmd->cmds)
 		return (-2);
-  	else if (compare(cmd->cmds[0], "echo") == 0)
+	else if (compare(cmd->cmds[0], "echo") == 0)
 		return (1);
 	else if (compare(cmd->cmds[0], "export") == 0)
 		return (2);
@@ -33,7 +33,7 @@ int  check_is_builtins(t_cmds *cmd)
 	return (-1);
 }
 
-void execute_builtins(t_cmds **cmd, t_env **env, int stat)
+void	execute_builtins(t_cmds **cmd, t_env **env, int stat)
 {	
 	if (stat == 1)
 		(*env)->exit_sta = my_echo((*cmd)->cmds, env);
@@ -49,16 +49,16 @@ void execute_builtins(t_cmds **cmd, t_env **env, int stat)
 		(*env)->exit_sta = ft_exit((*cmd)->cmds, 0);
 	else if (stat == 7)
 		(*env)->exit_sta = change_dir((*cmd)->cmds, env);
-	
 }
 
-void execute_builtins_inchild(t_cmds **cmd, t_env **env, int stat, t_cmds *tmp)
+void	execute_builtins_inchild(t_cmds **cmd, t_env **env,
+		int stat, t_cmds *tmp)
 {
 	dub_for_cmds(cmd, env, tmp);
 	if (stat == 1)
 		exit(my_echo((*cmd)->cmds, env));
 	else if (stat == 2)
-		exit(export(env, (*cmd)->cmds)); 
+		exit(export(env, (*cmd)->cmds));
 	else if (stat == 3)
 		exit (unset(env, (*cmd)->cmds));
 	else if (stat == 4)
@@ -69,6 +69,4 @@ void execute_builtins_inchild(t_cmds **cmd, t_env **env, int stat, t_cmds *tmp)
 		exit (ft_exit((*cmd)->cmds, 0));
 	else if (stat == 7)
 		exit (change_dir((*cmd)->cmds, env));
-	
 }
-

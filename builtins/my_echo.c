@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:37:25 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/03 21:17:34 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/08 09:14:08 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	check_echo_flag(char **str)
 {
 	int	i;
-	int x;
-	
+	int	x;
+
 	i = 1;
 	if (!str[1])
 		return (1);
@@ -34,33 +34,33 @@ int	check_echo_flag(char **str)
 			else
 				return (i);
 		}
-		i++;	
+		i++;
 	}
 	return (i);
 }
 
-
-char *join_strings(int i, char **string, int flag)
+char	*join_strings(int i, char **string, int flag)
 {
 	char	*line;
 	char	*prev;
 	char	*store;
 
-	prev = NULL;
-	store = NULL;
-	if (!string[i])
+	(1) && (prev = NULL, store = NULL);
+	if (!string[i] && i == 1)
+		return (write(1, "\n", 2), NULL);
+	else if (!string[i] && i != 1)
 		return (NULL);
 	while (string[i])
 	{
 		if (!string[i + 1])
 		{
 			prev = free_and_join(prev, string[i], 1);
-			break;
+			break ;
 		}
 		line = free_and_join(string[i], " ", 0);
 		free_vars(store, NULL, NULL, NULL);
 		store = line;
-		prev = free_and_join(prev, line, 1);//maybe leaks
+		prev = free_and_join(prev, line, 1);
 		i++;
 	}
 	if (flag == 1)
@@ -68,16 +68,15 @@ char *join_strings(int i, char **string, int flag)
 	return (prev);
 }
 
-int   my_echo(char **strings, t_env **env)
+int	my_echo(char **strings, t_env **env)
 {
-	int 	status;
+	int		status;
 	int		i;
-	char 	*line;
+	char	*line;
 
 	(void)env;
 	status = check_echo_flag(strings);
 	i = status;
-
 	line = join_strings(i, strings, status);
 	if (line)
 	{
@@ -86,4 +85,3 @@ int   my_echo(char **strings, t_env **env)
 	}
 	return (0);
 }
-

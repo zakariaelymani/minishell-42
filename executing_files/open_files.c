@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:21:54 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/05 14:55:51 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/08 08:56:35 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	open_redir(t_redir **tmp)
 	if (ft_strchr((*tmp)->file_name, '\x1F') || !*((*tmp)->file_name))
 	{
 		ft_putstr_fd("Syntax Error: Ambiguous redirect\n", 2);
-		return (1);
+		return (-2);
 	}
 	if ((*tmp)->type == OUTPUT)
 		(*tmp)->fd = ft_open((*tmp)->file_name, OUTPUT);
@@ -30,16 +30,16 @@ int	open_redir(t_redir **tmp)
 	return (-1);
 }
 
-void close_fds(t_cmds *tmp)
+void	close_fds(t_cmds *tmp)
 {
-	t_cmds *cmd;
-	t_redir *redirs;
+	t_cmds	*cmd;
+	t_redir	*redirs;
 
 	cmd = tmp;
-	while (cmd)	
+	while (cmd)
 	{
 		redirs = cmd->redirection;
-		while(redirs)
+		while (redirs)
 		{
 			if (redirs->fd > -1)
 				close(redirs->fd);
@@ -55,22 +55,22 @@ void close_fds(t_cmds *tmp)
 
 void	pipe_cammand(t_cmds **tmp)
 {
-	int		pid[2];
+	int	pid[2];
 
 	if ((*tmp)->next)
 	{
-		if(pipe(pid) == -1)
+		if (pipe(pid) == -1)
 			perror("pipe");
 		(*tmp)->output = pid[1];
 		(*tmp)->next->input = pid[0];
 	}
 }
 
-int read_heredoc(t_cmds **cmd, t_env **env)
+int	read_heredoc(t_cmds **cmd, t_env **env)
 {
-	t_redir *rids;
+	t_redir		*rids;
 	t_cmds		*tmp;
-	int		stdin_dup;
+	int			stdin_dup;
 
 	tmp = (*cmd);
 	stdin_dup = dup(STDIN_FILENO);
@@ -85,7 +85,8 @@ int read_heredoc(t_cmds **cmd, t_env **env)
 				if (rids->fd == -1)
 					return ((*env)->exit_sta = 1, 1);
 				if (rids->fd == -2)
-					return (dup2(stdin_dup, STDIN_FILENO), close(stdin_dup), (*env)->exit_sta = 130, 1);
+					return (dup2(stdin_dup, STDIN_FILENO),
+						close(stdin_dup), (*env)->exit_sta = 130, 1);
 			}
 			rids = rids->next;
 		}
@@ -94,23 +95,24 @@ int read_heredoc(t_cmds **cmd, t_env **env)
 	return ((*env)->exit_sta = 0, close(stdin_dup), 0);
 }
 
-int open_files(t_cmds **cmds, t_env **env)
+int	open_files(t_cmds **cmds, t_env **env)
 {
-    t_redir	*redir;
-    t_cmds		*tmp;
+	t_redir		*redir;
+	t_cmds		*tmp;
 	int			return_val;
-    
+
 	tmp = (*cmds);
 	redir = tmp->redirection;
 	if (!redir)
 		return (-1);
 	while (redir)
 	{
-	    return_val = open_redir(&redir);
-		if (return_val == 1)
+		return_val = open_redir(&redir);
+		if (return_val == 1 || return_val == -2)
 		{
 			(*env)->exit_sta = 1;
-			perror("minishell");
+			if (return_val == 1)
+				perror("minishell");
 			return (1);
 		}
 		redir = redir->next;
