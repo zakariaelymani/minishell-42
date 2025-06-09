@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   skip.c                                             :+:      :+:    :+:   */
+/*   varlen.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 18:32:55 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/06/06 18:35:14 by abenkaro         ###   ########.fr       */
+/*   Updated: 2025/06/09 15:17:33 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	varlen(size_t *len, char *str)
+void varlen(size_t *len, char *str)
 {
 	*len = 0;
 	while (str[*len] && ft_isalnum(str[*len]))

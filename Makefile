@@ -77,10 +77,11 @@ FILES = builtins/env.c \
 	parsing/expander_utils/expand_copy.c \
 	parsing/expander_utils/varlen.c \
 	parsing/parse.c \
+    tools/get_next_line.c \
 
 NAME = minishell
 cc = cc 
-FLAGS = -I. -I./parsing -I./tools -Wall -Wextra -Werror -g -fsanitize=address
+FLAGS = -I. -I./parsing -I./tools -Wall -Wextra -Werror     #-g -fsanitize=address
 OBJ = $(FILES:.c=.o)
 HEADER1 = builtins/builtins.h
 HEADER2 = struct.h 

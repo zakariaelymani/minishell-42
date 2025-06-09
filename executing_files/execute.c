@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:25:17 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/09 11:31:16 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/09 14:14:23 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	fork_and_execute(t_cmds **cmd, t_env **env)
 			else
 				execute_command(tmp, env, *cmd);
 		}
-		if (remove_orphan(*cmd, tmp->pid) == 1)
+		else if (remove_orphan(*cmd, tmp->pid) == 1)
 			return ;
 		tmp = tmp->next;
 	}

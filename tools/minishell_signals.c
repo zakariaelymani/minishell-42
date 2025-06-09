@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 14:14:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/09 10:27:07 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/09 14:49:24 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,15 @@
 void	handle_parc(int i)
 {
 	(void)i;
-	if (g_global_status == 1  || g_global_status == 130)
+	if (g_global_status == 1  || g_global_status == 4)
 	{
-        g_global_status = 130;
+        g_global_status = 4;
 		rl_on_new_line();
-		ft_putstr_fd("\n", 1);
+		safe_write(1, "\n", 1);
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }
-
-
 
 void	signals(int flag)
 {
@@ -45,9 +43,9 @@ void	heredoc_handle(int sig)
 {
 	if (sig == SIGINT)
 	{
-		write(1, "\n", 2);
+		safe_write(1, "\n", 1);
 		g_global_status = 3;
-		close (STDIN_FILENO);
+		close(STDIN_FILENO);
 		return ;
 	}
 }

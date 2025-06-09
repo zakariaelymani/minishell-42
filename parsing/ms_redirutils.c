@@ -12,9 +12,9 @@
 
 #include "parsing.h"
 
-t_redir	*new_redir(t_type type)
+t_redir *new_redir(t_type type)
 {
-	t_redir	*result;
+	t_redir *result;
 
 	result = (t_redir *)malloc(sizeof(t_redir));
 	if (!result)
@@ -26,7 +26,7 @@ t_redir	*new_redir(t_type type)
 	return (result);
 }
 
-t_redir	*ms_redlast(t_redir *lst)
+t_redir *ms_redlast(t_redir *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -35,10 +35,10 @@ t_redir	*ms_redlast(t_redir *lst)
 	return (lst);
 }
 
-void	ms_redappend(t_redir **lst, t_redir *new)
+void ms_redappend(t_redir **lst, t_redir *new)
 {
 	if (!lst || !new)
-		return ;
+		return;
 	if (!*lst)
 		*lst = new;
 	else

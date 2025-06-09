@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ms_expander.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:30:12 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/05/24 18:30:14 by abenkaro         ###   ########.fr       */
+/*   Updated: 2025/06/09 15:18:08 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	expand(char **str, t_env *env)
+int expand(char **str, t_env *env)
 {
-	ssize_t	len;
-	char	*result;
+	ssize_t len;
+	char *result;
 
 	len = expanded_size(*str, env);
 	if (len < 0)
@@ -29,9 +29,9 @@ int	expand(char **str, t_env *env)
 	return (1);
 }
 
-size_t	unquoted_size(char *str)
+size_t unquoted_size(char *str)
 {
-	size_t	len;
+	size_t len;
 
 	len = 0;
 	while (*str)
@@ -57,7 +57,7 @@ size_t	unquoted_size(char *str)
 	return (len);
 }
 
-void	copy_unquoted(char *dest, char *str)
+void copy_unquoted(char *dest, char *str)
 {
 	while (*str)
 	{
@@ -79,10 +79,10 @@ void	copy_unquoted(char *dest, char *str)
 	*dest = *str;
 }
 
-int	remove_quotes(char **str)
+int remove_quotes(char **str)
 {
-	size_t	len;
-	char	*unquoted;
+	size_t len;
+	char *unquoted;
 
 	len = 0;
 	if (ft_strchr(*str, '"') || ft_strchr(*str, '\''))
@@ -99,10 +99,10 @@ int	remove_quotes(char **str)
 	return (0);
 }
 
-int	ms_expander(t_token *tokens, t_env *env)
+int ms_expander(t_token *tokens, t_env *env)
 {
-	int		err;
-	t_token	*head;
+	int err;
+	t_token *head;
 
 	head = tokens;
 	while (head)

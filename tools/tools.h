@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:50:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/08 14:21:27 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/09 15:05:31 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <limits.h>
 # include "../struct.h"
 # include "../minishell.h"
+# define BUFFER_SIZE 214
 
 int			ft_isalpha(int c);
 char		*ft_strdup(const char *s1);
@@ -72,4 +73,5 @@ void		*ft_memmove(void *dst, const void *src, size_t len);
 char		*ft_strrchr(const char *s, int c);
 int         handle_sigs_child(t_env **env, int status);
 unsigned long	counterwords(const char *str, char c);
+char            *get_next_line(int fd);
 #endif

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:30:23 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/08 20:37:33 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/09 15:09:09 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int main(int argc, char *argv[], char *env[])
 		signals(1);
 		g_global_status = 1;
 		line = readline("minishell$ ");
-		if (g_global_status == 130)
+		if (g_global_status == 4)
 			env_new->exit_sta = 130;
 		g_global_status = 2;
 		if (!line)
@@ -59,7 +59,6 @@ int main(int argc, char *argv[], char *env[])
 		if (!cmd)
 			continue;
 		execute_command_line(&cmd, &env_new);
-		clear_commands(&cmd);
 		tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	}
 }
