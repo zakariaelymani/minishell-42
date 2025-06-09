@@ -25,7 +25,7 @@ typedef struct s_token{
 	struct s_token	*prev;
 }	t_token;
 
-int		syntax_checker(t_token *token);
+int		syntax_checker(t_token *token, t_env *env);
 int		ms_tokappend(t_token **lst, t_token *new);
 void	ms_tokclear(t_token **lst, void (*del)(void *));
 void	ms_tokdelone(t_token *lst, void (*del)(void *));
