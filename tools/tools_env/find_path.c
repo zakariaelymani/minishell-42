@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:51:07 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/08 09:59:03 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/09 11:58:25 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,19 @@ char	*check_is_exsist_or_excuteble(char *cmd, t_env **env)
 	if (access(cmd, F_OK) != 0)
 	{
 		(*env)->exit_sta = 127;
-		write(2, "No such file or directory\n", 27);
+		my_perror("minishell: ", cmd, ": No such file or directory\n");
 		return (NULL);
 	}
 	else if (access(cmd, X_OK) != 0)
 	{
-		write(2, "command is not excutble;\n", 26);
+		my_perror("minishell: ", cmd ,": command is not executble;\n");
 		(*env)->exit_sta = 126;
 		return (NULL);
 	}
 	else if (open(cmd, __O_DIRECTORY) != -1)
 	{
 		(*env)->exit_sta = 126;
-		write(2, "input is directory\n", 20);
+		my_perror("minishell: ",cmd, ": input is directory\n");
 		return (NULL);
 	}
 	return (cmd);
@@ -65,6 +65,7 @@ char	*find_path_to_cmd(t_env **env, char *cmd, int i)
 	if (!path || !*path)
 		return (check_is_exsist_or_excuteble(cmd, env));
 	splited = ft_split(path, ':');
+	path = cmd;
 	joined = ft_strjoin("/", cmd);
 	while (splited[i])
 	{
@@ -74,7 +75,7 @@ char	*find_path_to_cmd(t_env **env, char *cmd, int i)
 		free_vars(cmd, NULL, NULL, NULL);
 		i++;
 	}
-	write(2, "command not found\n", 19);
+	my_perror("minishell: ", path, ": command not found\n");
 	(*env)->exit_sta = 127;
 	return (free_while(splited), free(joined), NULL);
 }

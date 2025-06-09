@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:27:03 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/08 09:03:23 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/09 09:59:34 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ int	unset(t_env **env, char **splited)
 	i = 1;
 	while (splited[i])
 	{
-		if (check_name(splited[i]) == 1)
-			return (1);
-		else
-			removenode(env, splited[i]);
+		removenode(env, splited[i]);
 		i++;
 	}
 	change_value_var(env, "_", "=unset");

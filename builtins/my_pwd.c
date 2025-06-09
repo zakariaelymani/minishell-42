@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 18:30:24 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/08 09:34:22 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/09 11:50:53 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	my_pwd(t_env **env)
 	int		fd;
 	char	*line;
 
+	if (!*((*env)->value + 1))
+		return (perror("minishell you run minishell in unexisted dir"), 1);
 	line = return_value(*env, "PWD", 1);
 	fd = open(".", O_WRONLY, __O_DIRECTORY, 0644);
 	if (fd != -1)

@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 16:25:17 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/08 14:21:19 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/09 11:31:16 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	execute_command(t_cmds *cmd, t_env **env, t_cmds *tmp)
 	free(path);
 	free_while(cmd->cmds);
 	perror("minishell5");
-	exit(1);
+	exit(126);
 }
 
 void	wait_child(t_cmds *tmp, t_env **env)

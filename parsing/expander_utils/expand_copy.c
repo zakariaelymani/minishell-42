@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   expand_copy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:26:04 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/06/03 18:26:17 by abenkaro         ###   ########.fr       */
+/*   Updated: 2025/06/08 20:17:00 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static int	exit_status(char *dest, char **str, int code)
+static int exit_status(char *dest, char **str, int code)
 {
-	char	tmp[12];
+	char tmp[12];
 
 	*str += 2;
 	ft_cpynbr(tmp, code);
 	return (ft_strlcpy(dest, tmp, ft_strlen(tmp) + 1));
 }
 
-static int	env_cpy(char *d, char **str, t_env *env)
+static int env_cpy(char *d, char **str, t_env *env)
 {
-	size_t	namelen;
-	char	*s;
-	char	tok;
+	size_t namelen;
+	char *s;
+	char tok;
 
 	s = *str + 1;
 	if (*s == '?')
@@ -50,7 +50,7 @@ static int	env_cpy(char *d, char **str, t_env *env)
 	return (0);
 }
 
-static void	sq_mode(char **str, char **dest)
+static void sq_mode(char **str, char **dest)
 {
 	*str += 1;
 	while (**str && **str != '\'')
@@ -62,13 +62,12 @@ static void	sq_mode(char **str, char **dest)
 	*str += 1;
 }
 
-static void	dq_mode(char **str, char **dest, t_env *env)
+static void dq_mode(char **str, char **dest, t_env *env)
 {
 	*str += 1;
 	while (**str && **str != '\"')
 	{
-		if (**str == '$' && (ft_isalnum(*(*str + 1)) || *(*str + 1) == '?'
-				|| *(*str + 1) == '_'))
+		if (**str == '$' && (ft_isalnum(*(*str + 1)) || *(*str + 1) == '?' || *(*str + 1) == '_'))
 			*dest += env_cpy(*dest, str, env);
 		else
 		{
@@ -80,7 +79,7 @@ static void	dq_mode(char **str, char **dest, t_env *env)
 	*str += 1;
 }
 
-int	fill(char *dest, char *str, t_env *env)
+int fill(char *dest, char *str, t_env *env)
 {
 	while (*str)
 	{
@@ -88,8 +87,7 @@ int	fill(char *dest, char *str, t_env *env)
 			sq_mode(&str, &dest);
 		else if (*str && *str == '\"')
 			dq_mode(&str, &dest, env);
-		else if (*str == '$' && (ft_isalnum(*(str + 1)) || *(str + 1) == '?'
-				|| *(str + 1) == '_'))
+		else if (*str == '$' && (ft_isalnum(*(str + 1)) || *(str + 1) == '?' || *(str + 1) == '_'))
 		{
 			env_cpy(dest, &str, env);
 			while (*dest)

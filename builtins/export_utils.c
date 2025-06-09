@@ -6,7 +6,7 @@
 /*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 18:43:10 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/08 09:25:19 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/09 10:10:50 by zel-yama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,17 @@ void	join_quote(t_env **tmp)
 	env = (*tmp);
 	while (env)
 	{
-		tmp_line = env->value;
 		if (env->value)
-			env->value = free_and_join("\"", env->value + 1, 0);
-		else
-			env->value = free_and_join("\"", NULL, 0);
-		free_vars(tmp_line, NULL, NULL, NULL);
-		env->value = free_and_join(env->value, "\"", 1);
-		env->value = free_and_join("=", env->value, 2);
+		{
+			tmp_line = env->value;
+			if (env->value)
+				env->value = free_and_join("\"", env->value + 1, 0);
+			else
+				env->value = free_and_join("\"", NULL, 0);
+			free_vars(tmp_line, NULL, NULL, NULL);
+			env->value = free_and_join(env->value, "\"", 1);
+			env->value = free_and_join("=", env->value, 2);
+		}
 		env = env->next;
 	}
 }
