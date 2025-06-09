@@ -71,4 +71,5 @@ size_t		ft_cpynbr(char *dest, int n);
 void		*ft_memmove(void *dst, const void *src, size_t len);
 char		*ft_strrchr(const char *s, int c);
 int         handle_sigs_child(t_env **env, int status);
+unsigned long	counterwords(const char *str, char c);
 #endif

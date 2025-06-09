@@ -14,12 +14,24 @@
 
 int	open_redir(t_redir **tmp)
 {
+	char	*s;
+
+	s = (*tmp)->file_name;
 	if ((*tmp)->type == HEREDOC)
 		return (-1);
-	if (ft_strchr((*tmp)->file_name, '\x1F') || !*((*tmp)->file_name))
+	if (counterwords(s, '\x1D') != 1)
 	{
 		ft_putstr_fd("Syntax Error: Ambiguous redirect\n", 2);
 		return (-2);
+	}
+	else
+	{
+		while (*s)
+		{
+			if (*s == '\x1D')
+				*s = ' ';
+			s++;
+		}
 	}
 	if ((*tmp)->type == OUTPUT)
 		(*tmp)->fd = ft_open((*tmp)->file_name, OUTPUT);
