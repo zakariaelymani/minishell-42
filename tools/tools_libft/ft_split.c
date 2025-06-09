@@ -25,7 +25,7 @@ static char	**freplaces(unsigned long seats, char **s)
 	return (0);
 }
 
-static unsigned long	counterwords(const char *str, char c)
+unsigned long	counterwords(const char *str, char c)
 {
 	unsigned long	i;
 	unsigned long	counter;
