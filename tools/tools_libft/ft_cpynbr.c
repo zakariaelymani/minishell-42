@@ -12,7 +12,7 @@
 
 #include "../tools.h"
 
-static size_t num_len(int n)
+static size_t	num_len(int n)
 {
 	size_t	result;
 	long	num;

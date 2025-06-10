@@ -12,23 +12,19 @@
 
 #include "parsing.h"
 
-int	syntax_checker(t_token *token, t_env *env)
+int	syntax_checker(t_token *token)
 {
 	while (token)
 	{
 		if (token->type == PIPE)
 		{
 			if (!token->prev || !token->next)
-			{
-				env->exit_sta = 2;
 				return (ft_putstr_fd("Syntax error: Invalid pipe |\n", 2), 0);
-			}
 		}
 		else if ((token->type & (INPUT | OUTPUT | HEREDOC | APPEND)))
 		{
 			if (!token->next || token->next->type != WORD)
 			{
-				env->exit_sta = 2;
 				ft_putstr_fd("Syntax error: No redirect destination\n", 2);
 				return (0);
 			}

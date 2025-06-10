@@ -25,7 +25,7 @@ typedef struct s_token{
 	struct s_token	*prev;
 }	t_token;
 
-int		syntax_checker(t_token *token, t_env *env);
+int		syntax_checker(t_token *token);
 int		ms_tokappend(t_token **lst, t_token *new);
 void	ms_tokclear(t_token **lst, void (*del)(void *));
 void	ms_tokdelone(t_token *lst, void (*del)(void *));
@@ -42,7 +42,7 @@ t_cmds	*ms_cmdlast(t_cmds *lst);
 t_token	*ms_toklast(t_token *lst);
 char	*get_word(char *pos);
 int		ms_expander(t_token *tokens, t_env *env);
-size_t	expanded_size(char *str, t_env *env);
+ssize_t	expanded_size(char *str, t_env *env);
 int		fill(char *dest, char *str, t_env *env);
 t_redir	*new_redir(t_type type);
 t_redir	*ms_redlast(t_redir *lst);

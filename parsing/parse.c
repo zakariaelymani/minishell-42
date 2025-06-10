@@ -16,11 +16,9 @@ void	split_manager(char *s)
 {
 	char	*close;
 
-	if (!s[1])
-		return ;
 	close = ft_strchr(s + 1, '\x1F');
 	*close = '\0';
-	if (strstr(s, "export"))
+	if (strstr(s, "export")) //USE LIBFT VERSION
 	{
 		*close = '\x1F';
 		while (1)
@@ -36,18 +34,16 @@ void	split_manager(char *s)
 	else
 	{
 		*close = '\x1F';
-		while (*s)
-		{
+		while (*++s)
 			if (*s == '\x1D')
 				*s = '\x1F';
-			s++;
-		}
 	}
 }
 
 static int	add_cmd(t_cmds **chain, char **cmdstr, t_cmds *cmd)
 {
-	split_manager(*cmdstr);
+	if ((*cmdstr)[1])
+		split_manager(*cmdstr);
 	cmd->cmds = ft_split(*cmdstr, '\x1F');
 	if (!cmd->cmds)
 		return (1);

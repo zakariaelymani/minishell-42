@@ -25,10 +25,17 @@ static t_cmds *process_input(char *line, t_env *env)
 		env->exit_sta = 2;
 		return (NULL);
 	}
+<<<<<<< HEAD
 	if (!syntax_checker(tokens, env))
 		return (NULL);
 	if (!ms_expander(tokens, env))
+=======
+	if (!syntax_checker(tokens) || !ms_expander(tokens, env))
+	{
+		env->exit_sta = 2;
+>>>>>>> refs/remotes/origin/merged
 		return (NULL);
+	}
 	cmd = cmd_parser(tokens);
 	return (cmd);
 }
