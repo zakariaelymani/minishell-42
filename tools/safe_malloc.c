@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -13,15 +12,15 @@
 
 #include "tools.h"
 
-void    *ft_malloc(size_t size)
+void	*ft_malloc(size_t size)
 {
-    void *content;
+	void	*content;
 
-    content = malloc(size);
-    if (!content)
-    {
-        perror("malloc failed");
-        exit(1);
-    }
-    return (content);
+	content = malloc(size);
+	if (!content)
+	{
+		perror("malloc failed");
+		exit(1);
+	}
+	return (content);
 }

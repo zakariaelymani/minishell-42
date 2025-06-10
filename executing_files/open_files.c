@@ -74,7 +74,10 @@ void	pipe_cammand(t_cmds **tmp)
 	if ((*tmp)->next)
 	{
 		if (pipe(pid) == -1)
+		{
 			perror("pipe");
+			return ;
+		}
 		(*tmp)->output = pid[1];
 		(*tmp)->next->input = pid[0];
 	}
@@ -100,7 +103,7 @@ int	read_heredoc(t_cmds **cmd, t_env **env)
 					return ((*env)->exit_sta = 1, 1);
 				if (rids->fd == -2)
 					return (dup2(stdin_dup, STDIN_FILENO),
-						close(stdin_dup), (*env)->exit_sta = 130, 1);
+						close(stdin_dup), (*env)->exit_sta = 130, close_fds(*cmd), 1);
 			}
 			rids = rids->next;
 		}

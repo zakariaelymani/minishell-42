@@ -57,7 +57,7 @@ void	wait_child(t_cmds *tmp, t_env **env)
 	return ;
 }
 
-int remove_orphan(t_cmds *cmd, int return_val)
+int	remove_orphan(t_cmds *cmd, int return_val)
 {
 	t_cmds	*tmp;
 

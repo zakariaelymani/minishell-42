@@ -51,7 +51,7 @@ int	change_dir_to_home(t_env *env, int fd)
 
 int	change_dir(char **new_path, t_env **env)
 {
-	int fd;
+	int	fd;
 
 	if (!*((*env)->value + 1))
 		return (perror("minishell you run minishell in unexsited dir"), 1);

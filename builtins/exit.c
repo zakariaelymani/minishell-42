@@ -37,7 +37,7 @@ int	sheck_char(char *arg)
 	return (0);
 }
 
-void check_and_exit(long status, int sing, t_env **env, t_cmds **cmds)
+void	check_and_exit(long status, int sing, t_env **env, t_cmds **cmds)
 {
 	if (status > 255)
 		status = status % 256;
@@ -47,7 +47,7 @@ void check_and_exit(long status, int sing, t_env **env, t_cmds **cmds)
 	(clear_commands(cmds), clear_env(env, &sing));
 	close_fds(*cmds);
 	exit(status);
-} 
+}
 
 int	ft_exit(char **arguments, long status, t_env **env, t_cmds **cmds)
 {

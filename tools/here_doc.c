@@ -122,8 +122,6 @@ int	here_document(char *limiter, int flag, t_env **env)
 		close(fd);
 	free(limiter);
 	limiter = NULL;
-	if (fd == -1)
-		return (unlink(name), free(name), -1);
 	if (fd == -2)
 		return (unlink(name), free(name), -2);
 	fd = ft_open(name, INPUT);

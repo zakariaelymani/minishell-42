@@ -35,10 +35,7 @@ int	my_pwd(t_env **env)
 			printf("%s\n", (*env)->value + 1);
 	}
 	else
-	{
 		printf("%s\n", pwd);
-		free(pwd);
-		pwd = NULL;
-	}
+	free_vars(pwd, NULL, NULL, NULL);
 	return (0);
 }
