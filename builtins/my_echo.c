@@ -46,15 +46,14 @@ char	*join_strings(int i, char **string, int flag)
 	char	*store;
 
 	(1) && (prev = NULL, store = NULL);
-	if (!string[i] && i == 1)
-		return (write(1, "\n", 2), NULL);
-	else if (!string[i] && i != 1)
+	if (!string[i] && i != 1)
 		return (NULL);
 	while (string[i])
 	{
 		if (!string[i + 1])
 		{
 			prev = free_and_join(prev, string[i], 1);
+			free_vars(store, NULL, NULL, NULL);
 			break ;
 		}
 		line = free_and_join(string[i], " ", 0);

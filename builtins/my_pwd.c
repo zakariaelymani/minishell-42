@@ -16,11 +16,9 @@ int	my_pwd(t_env **env)
 {
 	char	*pwd;
 	int		fd;
-	char	*line;
 
 	if (!*((*env)->value + 1))
 		return (perror("minishell you run minishell in unexisted dir"), 1);
-	line = return_value(*env, "PWD", 1);
 	fd = open(".", O_WRONLY, __O_DIRECTORY, 0644);
 	if (fd != -1)
 		close(fd);
@@ -29,10 +27,7 @@ int	my_pwd(t_env **env)
 		return (perror ("minishll: pwd"), 1);
 	else if (!pwd || !*pwd)
 	{
-		if (line)
-			printf("%s\n", line);
-		else
-			printf("%s\n", (*env)->value + 1);
+		printf("%s\n", (*env)->value + 1);
 	}
 	else
 		printf("%s\n", pwd);

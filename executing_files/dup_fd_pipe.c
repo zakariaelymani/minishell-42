@@ -45,7 +45,7 @@ int	execute_builtins_inparent(t_cmds **cmd, t_env **env, int stat)
 			execute_builtins(cmd, env, stat);
 		return (1);
 	}
-	else if (ret_val == 0)
+	else if (ret_val == 0 && stat != 6)
 	{
 		input = dup(STDIN_FILENO);
 		output = dup(STDOUT_FILENO);
@@ -54,7 +54,7 @@ int	execute_builtins_inparent(t_cmds **cmd, t_env **env, int stat)
 		dup_input_output(cmd, *cmd);
 	}
 	execute_builtins(cmd, env, stat);
-	if (ret_val == 0)
+	if (ret_val == 0 && stat != 6)
 	{
 		help_executing(input, output);
 	}

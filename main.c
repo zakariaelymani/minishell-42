@@ -20,6 +20,7 @@ static t_cmds	*process_input(char *line, t_env *env)
 	t_cmds	*cmd;
 
 	tokens = ms_tokenizer(line);
+	free(line);
 	if (!tokens)
 	{
 		env->exit_sta = 2;

@@ -34,7 +34,7 @@ int	check_is_builtins(t_cmds *cmd)
 }
 
 void	execute_builtins(t_cmds **cmd, t_env **env, int stat)
-{	
+{
 	if (stat == 1)
 		(*env)->exit_sta = my_echo((*cmd)->cmds, env);
 	else if (stat == 2)
@@ -46,7 +46,10 @@ void	execute_builtins(t_cmds **cmd, t_env **env, int stat)
 	else if (stat == 5)
 		(*env)->exit_sta = my_pwd(env);
 	else if (stat == 6)
+	{
+		close_fds(*cmd);
 		(*env)->exit_sta = ft_exit((*cmd)->cmds, 0, env, cmd);
+	}	
 	else if (stat == 7)
 		(*env)->exit_sta = change_dir((*cmd)->cmds, env);
 }
