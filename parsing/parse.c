@@ -97,9 +97,9 @@ t_cmds	*cmd_parser(t_token *tokens)
 
 	cmd_chain = NULL;
 	head = tokens;
-	cmdstr = ft_strdup("\x1F");
 	while (tokens)
 	{
+		cmdstr = ft_strdup("\x1F");
 		cmd = ms_cmdnew();
 		while (tokens && tokens->type != PIPE)
 			build_cmd(&tokens, &cmdstr, &cmd->redirection);
