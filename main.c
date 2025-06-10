@@ -21,8 +21,11 @@ static t_cmds *process_input(char *line, t_env *env)
 
 	tokens = ms_tokenizer(line);
 	if (!tokens)
+	{
+		env->exit_sta = 2;
 		return (NULL);
-	if (!syntax_checker(tokens))
+	}
+	if (!syntax_checker(tokens, env))
 		return (NULL);
 	if (!ms_expander(tokens, env))
 		return (NULL);
@@ -53,7 +56,7 @@ int main(int argc, char *argv[], char *env[])
 		if (!isatty(STDIN_FILENO))
 			return 1;
 		if (!*line)
-			continue ;
+			continue;
 		add_history(line);
 		cmd = process_input(line, env_new);
 		if (!cmd)
