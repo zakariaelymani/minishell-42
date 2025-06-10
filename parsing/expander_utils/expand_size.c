@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_size.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:06:51 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/06/09 15:16:03 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:31:00 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ ssize_t	expanded_size(char *str, t_env *env)
 	len = 0;
 	while (*str)
 	{
-		if(len > 4000000)
+		if (len > 4000000)
 			return (-1);
 		if (*str == '\'')
 			sq_mode(&str, &len);

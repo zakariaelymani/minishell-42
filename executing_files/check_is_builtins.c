@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_is_builtins.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:28:55 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/06 19:03:26 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:46:44 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	execute_builtins(t_cmds **cmd, t_env **env, int stat)
 		(*env)->exit_sta = change_dir((*cmd)->cmds, env);
 }
 
-void close_and_exit(int status, t_cmds **cmd)
+void	close_and_exit(int status, t_cmds **cmd)
 {
 	close_fds(*cmd);
 	exit(status);

@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   get_word.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 19:34:38 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/06/09 15:16:39 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:31:06 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static ssize_t calculate_size(char *str)
+static ssize_t	calculate_size(char *str)
 {
-	ssize_t len;
-	char mark;
+	ssize_t	len;
+	char	mark;
 
 	len = 0;
 	while (str[len] && !ft_strchr("<>|", str[len]) && !ft_isspace(str[len]))
@@ -36,12 +36,12 @@ static ssize_t calculate_size(char *str)
 	return (len);
 }
 
-char *get_word(char *pos)
+char	*get_word(char *pos)
 {
-	char *result;
-	ssize_t len;
-	size_t i;
-	char mark;
+	char	*result;
+	ssize_t	len;
+	size_t	i;
+	char	mark;
 
 	len = calculate_size(pos);
 	if (len < 0)

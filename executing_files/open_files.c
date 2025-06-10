@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 20:21:54 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/08 08:56:35 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:46:09 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int	open_redir(t_redir **tmp)
 	if ((*tmp)->type == HEREDOC)
 		return (-1);
 	if (counterwords(s, '\x1D') != 1)
-	{
-		ft_putstr_fd("Syntax Error: Ambiguous redirect\n", 2);
-		return (-2);
-	}
+		return (ft_putstr_fd("Syntax Error: Ambiguous redirect\n", 2), -2);
 	else
 	{
 		while (*s)
@@ -87,10 +84,10 @@ int	read_heredoc(t_cmds **cmd, t_env **env)
 {
 	t_redir		*rids;
 	t_cmds		*tmp;
-	int			stdin_dup;
+	int			fd;
 
 	tmp = (*cmd);
-	stdin_dup = dup(STDIN_FILENO);
+	fd = dup(STDIN_FILENO);
 	while (tmp)
 	{
 		rids = tmp->redirection;
@@ -100,16 +97,16 @@ int	read_heredoc(t_cmds **cmd, t_env **env)
 			{
 				rids->fd = here_document(rids->file_name, rids->fd, env);
 				if (rids->fd == -1)
-					return ((*env)->exit_sta = 1, 1);
+					return ((*env)->exit_sta = 1, close(fd), 1);
 				if (rids->fd == -2)
-					return (dup2(stdin_dup, STDIN_FILENO),
-						close(stdin_dup), (*env)->exit_sta = 130, close_fds(*cmd), 1);
+					return (dup2(fd, STDIN_FILENO),
+						close(fd), (*env)->exit_sta = 130, close_fds(*cmd), 1);
 			}
 			rids = rids->next;
 		}
 		tmp = tmp->next;
 	}
-	return ((*env)->exit_sta = 0, close(stdin_dup), 0);
+	return ((*env)->exit_sta = 0, close(fd), 0);
 }
 
 int	open_files(t_cmds **cmds, t_env **env)

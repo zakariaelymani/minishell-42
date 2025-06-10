@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-yama <zel-yama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 10:50:11 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/09 15:05:31 by zel-yama         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:38:00 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,6 @@ int				handle_sigs_child(t_env **env, int status);
 unsigned long	counterwords(const char *str, char c);
 char			*get_next_line(int fd);
 void			*ft_malloc(size_t size);
+char			*ft_strnstr(const char *hay, const char *needle, size_t len);
+
 #endif
