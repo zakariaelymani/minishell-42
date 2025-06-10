@@ -21,7 +21,7 @@ static size_t	exit_status(char **str, int code)
 	return (ft_strlen(tmp));
 }
 
-size_t	varsize(char **str, t_env *env)
+ssize_t	varsize(char **str, t_env *env)
 {
 	size_t	namelen;
 	char	*s;
@@ -40,7 +40,7 @@ size_t	varsize(char **str, t_env *env)
 		{
 			*str += namelen + 1;
 			s[namelen] = tok;
-			return (ft_strlen(env->value + 1));
+			return ((ssize_t)ft_strlen(env->value + 1));
 		}
 		s[namelen] = tok;
 		env = env->next;
@@ -50,7 +50,7 @@ size_t	varsize(char **str, t_env *env)
 	return (0);
 }
 
-static void	sq_mode(char **str, size_t *len)
+static void	sq_mode(char **str, ssize_t *len)
 {
 	*str += 1;
 	while (**str && **str != '\'')
@@ -61,7 +61,7 @@ static void	sq_mode(char **str, size_t *len)
 	*str += 1;
 }
 
-static void	dq_mode(char **str, size_t *len, t_env *env)
+static void	dq_mode(char **str, ssize_t *len, t_env *env)
 {
 	*str += 1;
 	while (**str && **str != '\"')
@@ -78,13 +78,15 @@ static void	dq_mode(char **str, size_t *len, t_env *env)
 	*str += 1;
 }
 
-size_t	expanded_size(char *str, t_env *env)
+ssize_t	expanded_size(char *str, t_env *env)
 {
-	size_t	len;
+	ssize_t	len;
 
 	len = 0;
 	while (*str)
 	{
+		if(len > 4000000)
+			return (-1);
 		if (*str == '\'')
 			sq_mode(&str, &len);
 		else if (*str && *str == '\"')

@@ -115,6 +115,8 @@ int	ms_expander(t_token *tokens, t_env *env)
 		{
 			if (err == -2)
 				ft_putstr_fd("Allocation Failure\n", 2);
+			else
+				ft_putstr_fd("#############################################################\nInput is too big, please unset large environment variables.\n", 2);
 			ms_tokclear(&tokens, free);
 			return (0);
 		}
