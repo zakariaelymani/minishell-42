@@ -87,7 +87,8 @@ int	check_name(char *splited)
 	i = 0;
 	if (ft_isalpha(splited[i]) == 0 && splited[i] != '_')
 	{
-		write(2, "minishell tell this is invalid id \n", 36);
+		my_perror("minishell: export: ", splited,
+			" is not a valid identifier\n");
 		return (1);
 	}
 	i++;
@@ -96,7 +97,8 @@ int	check_name(char *splited)
 		if (ft_isalnum(splited[i]) == 0
 			&& (splited[i] != '+' && splited[i + 1] != '='))
 		{
-			write(2, "minishell tell this is invalid id >\n", 37);
+			my_perror("minishell: export: ", splited,
+				" is not a valid identifier\n");
 			return (1);
 		}
 		i++;
