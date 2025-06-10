@@ -28,7 +28,7 @@ char	*read_store(int fd, char *store)
 	char	*buffer;
 
 	i = 1;
-	buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	buffer = (char *)ft_malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
 	while (!ft_strchr(store, '\n') && i > 0)
@@ -59,7 +59,7 @@ char	*read_line(char *store)
 		i++;
 	if (store[i] == '\n')
 		i++;
-	str = (char *)malloc(sizeof(char) * i + 1);
+	str = (char *)ft_malloc(sizeof(char) * i + 1);
 	if (!str)
 		return (free_if(store));
 	i = 0;
@@ -86,7 +86,7 @@ char	*update_store(char *store)
 		i++;
 	if (store[i] == '\n')
 		i++;
-	temp = malloc(ft_strlen(store) - i + 1);
+	temp = ft_malloc(ft_strlen(store) - i + 1);
 	if (!temp)
 		return (free_if(store));
 	if (i >= ft_strlen(store))

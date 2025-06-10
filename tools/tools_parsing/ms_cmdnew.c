@@ -16,7 +16,7 @@ t_cmds	*ms_cmdnew(void)
 {
 	t_cmds	*result;
 
-	result = (t_cmds *)malloc(sizeof(t_cmds));
+	result = (t_cmds *)ft_malloc(sizeof(t_cmds));
 	if (!result)
 		return (NULL);
 	result->cmds = NULL;

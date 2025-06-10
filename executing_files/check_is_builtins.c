@@ -51,22 +51,28 @@ void	execute_builtins(t_cmds **cmd, t_env **env, int stat)
 		(*env)->exit_sta = change_dir((*cmd)->cmds, env);
 }
 
+void close_and_exit(int status, t_cmds **cmd)
+{
+	close_fds(*cmd);
+	exit(status);
+}
+
 void	execute_builtins_inchild(t_cmds **cmd, t_env **env,
 		int stat, t_cmds *tmp)
 {
 	dub_for_cmds(cmd, env, tmp);
 	if (stat == 1)
-		exit(my_echo((*cmd)->cmds, env));
+		close_and_exit(my_echo((*cmd)->cmds, env), cmd);
 	else if (stat == 2)
-		exit(export(env, (*cmd)->cmds));
+		close_and_exit(export(env, (*cmd)->cmds), cmd);
 	else if (stat == 3)
-		exit (unset(env, (*cmd)->cmds));
+		close_and_exit((unset(env, (*cmd)->cmds)), cmd);
 	else if (stat == 4)
-		exit(env_cmd(*env));
+		close_and_exit((env_cmd(*env)), cmd);
 	else if (stat == 5)
-		exit(my_pwd(env));
+		close_and_exit(my_pwd(env), cmd);
 	else if (stat == 6)
-		exit (ft_exit((*cmd)->cmds, 0, env, cmd));
+		ft_exit((*cmd)->cmds, 0, env, cmd);
 	else if (stat == 7)
-		exit (change_dir((*cmd)->cmds, env));
+		close_and_exit(change_dir((*cmd)->cmds, env), cmd);
 }

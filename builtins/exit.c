@@ -45,6 +45,7 @@ void check_and_exit(long status, int sing, t_env **env, t_cmds **cmds)
 	if (sing == -1)
 		safe_write(2, "minishell: exit: numeric argument required\n", 43);
 	(clear_commands(cmds), clear_env(env, &sing));
+	close_fds(*cmds);
 	exit(status);
 } 
 

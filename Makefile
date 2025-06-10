@@ -78,6 +78,7 @@ FILES = builtins/env.c \
 	parsing/expander_utils/varlen.c \
 	parsing/parse.c \
     tools/get_next_line.c \
+    tools/safe_malloc.c \
 
 NAME = minishell
 cc = cc 

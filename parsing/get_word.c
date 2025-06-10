@@ -46,7 +46,7 @@ char *get_word(char *pos)
 	len = calculate_size(pos);
 	if (len < 0)
 		return (NULL);
-	result = malloc(len + 2);
+	result = ft_malloc(len + 2);
 	if (!result)
 		return (NULL);
 	i = 0;

@@ -16,7 +16,7 @@ t_token	*ms_toknew(char *name, t_type type)
 {
 	t_token	*result;
 
-	result = (t_token *)malloc(sizeof(t_token));
+	result = (t_token *)ft_malloc(sizeof(t_token));
 	if (!result)
 		return (NULL);
 	result->type = type;

@@ -82,7 +82,7 @@ char **strs, unsigned long words)
 			len++;
 			co++;
 		}
-		strs[i] = (char *)malloc(sizeof (char) * (len + 1));
+		strs[i] = (char *)ft_malloc(sizeof (char) * (len + 1));
 		if (!strs[i])
 			return (freplaces(i, strs));
 		copyin(s, strs[i], co, len);
@@ -101,7 +101,7 @@ char	**ft_split(char const *s, char c)
 	if (!s || !*s)
 		return (0);
 	num = counterwords(s, c);
-	strs = (char **)malloc(sizeof (char *) * (num + 1));
+	strs = (char **)ft_malloc(sizeof (char *) * (num + 1));
 	if (!strs)
 		return (NULL);
 	strs = allcoteplecs(s, c, strs, num);

@@ -30,5 +30,6 @@ void	execute_builtins_inchild(t_cmds **cmd,
 int		execute_builtins_inparent(t_cmds **cmd, t_env **env, int stat);
 void	dub_for_cmds(t_cmds **cmd, t_env **env, t_cmds *tmp);
 void	close_fds(t_cmds *tmp);
+void	close_and_exit(int status, t_cmds **cmd);
 
 #endif

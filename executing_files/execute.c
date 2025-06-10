@@ -118,11 +118,13 @@ void	execute_command_line(t_cmds **cmd, t_env **env)
 		if (i != -1 && i != -2)
 		{
 			execute_builtins_inparent(cmd, env, i);
+			close_fds(*cmd);
 			return ;
 		}
 		if (i == -2)
 		{
 			(*env)->exit_sta = open_files(cmd, env);
+			close_fds(*cmd);
 			return ;
 		}
 	}

@@ -75,4 +75,5 @@ char			*ft_strrchr(const char *s, int c);
 int				handle_sigs_child(t_env **env, int status);
 unsigned long	counterwords(const char *str, char c);
 char			*get_next_line(int fd);
+void			*ft_malloc(size_t size);
 #endif

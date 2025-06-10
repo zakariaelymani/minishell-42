@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -10,26 +11,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../tools.h"
+#include "tools.h"
 
-char	**convert_strcut_array(t_env *env)
+void    *ft_malloc(size_t size)
 {
-	char	**env_map;
-	int		len;
-	int		i;
+    void *content;
 
-	len = ft_lstsize(env);
-	env_map = (char **)ft_malloc(sizeof(char *) * (len + 1));
-	i = 0;
-	while (env)
-	{
-		if (env ->status != -1)
-		{
-			env_map[i] = ft_strjoin(env->key, env->value);
-			i++;
-		}
-		env = env->next;
-	}
-	env_map[i] = NULL;
-	return (env_map);
+    content = malloc(size);
+    if (!content)
+    {
+        perror("malloc failed");
+        exit(1);
+    }
+    return (content);
 }

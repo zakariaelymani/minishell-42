@@ -49,7 +49,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (ft_strdup(s1));
 	len = ft_strlen(s1);
 	len2 = ft_strlen(s2);
-	str = (char *)malloc(sizeof(char) * (len + len2 + 1));
+	str = (char *)ft_malloc(sizeof(char) * (len + len2 + 1));
 	if (!str)
 		return (NULL);
 	str = copin(str, s1, s2);

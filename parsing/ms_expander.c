@@ -20,7 +20,7 @@ int expand(char **str, t_env *env)
 	len = expanded_size(*str, env);
 	if (len < 0)
 		return (-1);
-	result = malloc(len + 1);
+	result = ft_malloc(len + 1);
 	if (!result)
 		return (-2);
 	fill(result, *str, env);
@@ -88,7 +88,7 @@ int remove_quotes(char **str)
 	if (ft_strchr(*str, '"') || ft_strchr(*str, '\''))
 	{
 		len = unquoted_size(*str);
-		unquoted = malloc(len + 1);
+		unquoted = ft_malloc(len + 1);
 		if (!unquoted)
 			return (-1);
 		copy_unquoted(unquoted, *str);

@@ -24,7 +24,7 @@ char	*extract_key(char *value)
 		return (NULL);
 	while (value[i] && value[i] != '=' && value[i] != '+')
 		i++;
-	new_key = malloc(sizeof(char) * (i + 1));
+	new_key = ft_malloc(sizeof(char) * (i + 1));
 	while (x < i)
 	{
 		new_key[x] = value[x];
@@ -44,7 +44,7 @@ t_env	*node(char *value, int flag)
 	if (!value)
 		return (NULL);
 	val = ft_strchr(value, '=');
-	node = (t_env *)malloc(sizeof(t_env));
+	node = (t_env *)ft_malloc(sizeof(t_env));
 	if (!node)
 		return (NULL);
 	ft_memset(node, 0, sizeof(node));

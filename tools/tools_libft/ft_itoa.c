@@ -50,7 +50,7 @@ static char	*copyin(long n, char *s, long len)
 
 static char	*zirocase(char *s)
 {
-	s = (char *)malloc(2 * sizeof(char));
+	s = (char *)ft_malloc(2 * sizeof(char));
 	s[0] = '0';
 	s[1] = '\0';
 	return (s);
@@ -70,7 +70,7 @@ char	*ft_itoa(int n)
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
 	len = lencouter(n);
-	str = (char *)malloc(sizeof(char) * len + 1);
+	str = (char *)ft_malloc(sizeof(char) * len + 1);
 	if (!str)
 		return (NULL);
 	if (n < 0)

@@ -16,7 +16,7 @@ t_redir *new_redir(t_type type)
 {
 	t_redir *result;
 
-	result = (t_redir *)malloc(sizeof(t_redir));
+	result = (t_redir *)ft_malloc(sizeof(t_redir));
 	if (!result)
 		return (NULL);
 	result->file_name = NULL;
