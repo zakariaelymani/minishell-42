@@ -15,9 +15,9 @@
 void	handle_parc(int i)
 {
 	(void)i;
-	if (g_global_status == 1  || g_global_status == 4)
+	if (g_global_status == 1 || g_global_status == 4)
 	{
-        g_global_status = 4;
+		g_global_status = 4;
 		rl_on_new_line();
 		safe_write(1, "\n", 1);
 		rl_replace_line("", 0);
@@ -50,17 +50,17 @@ void	heredoc_handle(int sig)
 	}
 }
 
-int handle_sigs_child(t_env **env, int status)
+int	handle_sigs_child(t_env **env, int status)
 {
-    if (status == 2)
-    {
-        safe_write(1, "\n", 1);
-        (*env)->exit_sta = 130;
-    }
-    else if (status == 3)
-    {
-        safe_write(1, "Quit (core dumped)\b\n", 21);
-        (*env)->exit_sta = 131;
-    }
-    return (1);
+	if (status == 2)
+	{
+		safe_write(1, "\n", 1);
+		(*env)->exit_sta = 130;
+	}
+	else if (status == 3)
+	{
+		safe_write(1, "Quit (core dumped)\b\n", 21);
+		(*env)->exit_sta = 131;
+	}
+	return (1);
 }

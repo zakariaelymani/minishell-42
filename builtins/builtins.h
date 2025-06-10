@@ -18,7 +18,7 @@
 # include "../tools/tools.h"
 
 int		env_cmd(t_env *env);
-int		ft_exit(char **arguments, long status);
+int		ft_exit(char **arguments, long status, t_env **env, t_cmds **cmds);
 int		export(t_env **env, char **splited);
 t_env	*creat_env(char **env);
 int		change_dir(char **new_path, t_env **env);

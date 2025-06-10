@@ -12,16 +12,17 @@
 
 #include "tools.h"
 
-char *exapnd_var_form_env(char *line, t_env *env, int *i)
+char	*exapnd_var_form_env(char *line, t_env *env, int *i)
 {
-	int var_len;
-	char *var_name;
-	t_env *tmp;
+	int		var_len;
+	char	*var_name;
+	t_env	*tmp;
 
 	if (!line || !env || !line[*i])
 		return (NULL);
 	var_len = *i;
-	while (line[var_len] && (ft_isalnum(line[var_len]) == 1 || line[var_len] == '_' || line[var_len] == '?'))
+	while (line[var_len] && (ft_isalnum(line[var_len]) == 1
+			|| line[var_len] == '_' || line[var_len] == '?'))
 		var_len++;
 	var_len = var_len - *i;
 	var_name = ft_substr(line, *i, var_len);
@@ -38,11 +39,11 @@ char *exapnd_var_form_env(char *line, t_env *env, int *i)
 	return (free(var_name), var_name = NULL, NULL);
 }
 
-char *expantion(char *line, t_env *env, int i, int x)
+char	*expantion(char *line, t_env *env, int i, int x)
 {
-	char *new_line;
-	char *string;
-	int len_sub;
+	char	*new_line;
+	char	*string;
+	int		len_sub;
 
 	(1) && (x = 0, new_line = NULL);
 	while (1)
@@ -50,30 +51,33 @@ char *expantion(char *line, t_env *env, int i, int x)
 		i = x;
 		while (line[x] && line[x] != '$')
 			x++;
-		if (line[x] == '$' && line[x + 1] && (ft_isalnum(line[x + 1]) == 0 && line[x + 1] != '_' && line[x + 1] != '?'))
+		if (line[x] == '$' && line[x + 1] && (ft_isalnum(line[x + 1])
+				== 0 && line[x + 1] != '_' && line[x + 1] != '?'))
 			x += 2;
 		len_sub = x - i;
 		string = ft_substr(line, i, len_sub);
-		if (line[x] == '$' && line[x + 1] && (ft_isalnum(line[x + 1]) == 1 && line[x + 1] != '_' && line[x + 1] != '?'))
+		if (line[x] == '$' && line[x + 1] && (ft_isalnum(line[x + 1])
+				== 1 && line[x + 1] != '_' && line[x + 1] != '?'))
 			x++;
 		new_line = free_and_join(new_line, string, 3);
 		new_line = free_and_join(new_line,
-								 exapnd_var_form_env(line, env, &x), 3);
+				exapnd_var_form_env(line, env, &x), 3);
 		if (!line[x])
-			break;
+			break ;
 	}
 	return (free(line), new_line);
 }
 
-int read_conten(char *limiter, int fd, t_env *env, int flag)
+int	read_conten(char *limiter, int fd, t_env *env, int flag)
 {
-	char *line;
-	int i;
+	char	*line;
+	int		i;
 
 	(1) && (line = NULL, i = 0);
 	while (1)
 	{
 		(signal(SIGINT, heredoc_handle), signal(SIGQUIT, SIG_IGN));
+		safe_write(1, "> ", 3);
 		line = get_next_line(STDIN_FILENO);
 		if (!line && g_global_status == 3)
 			return (g_global_status = 1, -2);
@@ -93,11 +97,11 @@ int read_conten(char *limiter, int fd, t_env *env, int flag)
 	return (fd);
 }
 
-char *randomize_name(int fd)
+char	*randomize_name(int fd)
 {
-	char *name;
-	char *return_val;
-	int name_int;
+	char	*name;
+	char	*return_val;
+	int		name_int;
 
 	name_int = (long)&fd;
 	name = ft_itoa(name_int);
@@ -105,10 +109,10 @@ char *randomize_name(int fd)
 	return (free(name), name = NULL, return_val);
 }
 
-int here_document(char *limiter, int flag, t_env **env)
+int	here_document(char *limiter, int flag, t_env **env)
 {
-	int fd;
-	char *name;
+	int		fd;
+	char	*name;
 
 	name = randomize_name(0);
 	fd = ft_open(name, OUTPUT);

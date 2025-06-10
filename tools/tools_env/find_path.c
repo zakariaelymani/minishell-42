@@ -38,14 +38,14 @@ char	*check_is_exsist_or_excuteble(char *cmd, t_env **env)
 	}
 	else if (access(cmd, X_OK) != 0)
 	{
-		my_perror("minishell: ", cmd ,": command is not executble;\n");
+		my_perror("minishell: ", cmd, ": command is not executble;\n");
 		(*env)->exit_sta = 126;
 		return (NULL);
 	}
 	else if (open(cmd, __O_DIRECTORY) != -1)
 	{
 		(*env)->exit_sta = 126;
-		my_perror("minishell: ",cmd, ": input is directory\n");
+		my_perror("minishell: ", cmd, ": input is directory\n");
 		return (NULL);
 	}
 	return (cmd);

@@ -46,7 +46,7 @@ void	execute_builtins(t_cmds **cmd, t_env **env, int stat)
 	else if (stat == 5)
 		(*env)->exit_sta = my_pwd(env);
 	else if (stat == 6)
-		(*env)->exit_sta = ft_exit((*cmd)->cmds, 0);
+		(*env)->exit_sta = ft_exit((*cmd)->cmds, 0, env, cmd);
 	else if (stat == 7)
 		(*env)->exit_sta = change_dir((*cmd)->cmds, env);
 }
@@ -66,7 +66,7 @@ void	execute_builtins_inchild(t_cmds **cmd, t_env **env,
 	else if (stat == 5)
 		exit(my_pwd(env));
 	else if (stat == 6)
-		exit (ft_exit((*cmd)->cmds, 0));
+		exit (ft_exit((*cmd)->cmds, 0, env, cmd));
 	else if (stat == 7)
 		exit (change_dir((*cmd)->cmds, env));
 }
