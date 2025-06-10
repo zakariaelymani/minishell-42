@@ -6,7 +6,7 @@
 /*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 18:10:34 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/06/10 16:53:34 by abenkaro         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:02:54 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	split_manager(char *s)
 
 	close = ft_strchr(s + 1, '\x1F');
 	*close = '\0';
-	if (ft_strnstr(s, "export", ft_strlen("export")))
+	if (ft_strnstr(s, "export", ft_strlen(s)))
 	{
 		*close = '\x1F';
 		while (1)
