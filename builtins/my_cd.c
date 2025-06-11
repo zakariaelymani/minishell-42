@@ -54,7 +54,7 @@ int	change_dir(char **new_path, t_env **env)
 	int	fd;
 
 	if (!*((*env)->value + 1))
-		return (perror("minishell you run minishell in unexsited dir"), 1);
+		perror("minishell you run minishell in unexsited dir");
 	fd = open(".", __O_DIRECTORY);
 	if (fd != -1)
 		close(fd);

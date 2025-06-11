@@ -18,7 +18,7 @@ int	my_pwd(t_env **env)
 	int		fd;
 
 	if (!*((*env)->value + 1))
-		return (perror("minishell you run minishell in unexisted dir"), 1);
+		perror("minishell you run minishell in unexisted dir");
 	fd = open(".", O_WRONLY, __O_DIRECTORY, 0644);
 	if (fd != -1)
 		close(fd);
