@@ -6,7 +6,7 @@
 /*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 16:42:23 by abenkaro          #+#    #+#             */
-/*   Updated: 2025/06/10 16:31:14 by abenkaro         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:13:21 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ int		syntax_checker(t_token *token);
 int		ms_tokappend(t_token **lst, t_token *new);
 void	ms_tokclear(t_token **lst, void (*del)(void *));
 void	ms_tokdelone(t_token *lst, void (*del)(void *));
-void	ms_lstiter(t_token *lst, void (*f)(void *));
 t_token	*ms_toklast(t_token *lst);
-int		ms_toksize(t_token *lst);
 t_token	*ms_tokenizer(char *line);
 t_token	*ms_toknew(char *name, t_type type);
 t_cmds	*ms_cmdnew(void);
