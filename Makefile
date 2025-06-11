@@ -81,8 +81,9 @@ FILES = builtins/env.c \
     tools/safe_malloc.c \
 
 NAME = minishell
-cc = cc 
-FLAGS = -I. -I./parsing -I./tools -Wall -Wextra -Werror -g #-fsanitize=address
+CC = cc
+RM = rm -rf
+FLAGS = -I. -I./parsing -I./tools -Wall -Wextra -Werror
 OBJ = $(FILES:.c=.o)
 HEADER1 = builtins/builtins.h
 HEADER2 = struct.h 
@@ -97,7 +98,7 @@ all: $(NAME)
 	$(CC) $(FLAGS) -c $< -o $@ 
 
 $(NAME): $(OBJ)
-	$(cc) $(FLAGS) $(OBJ)  -lreadline -o   $(NAME) 
+	$(CC) $(FLAGS) $(OBJ)  -lreadline -o   $(NAME) 
 
 clean:
 	$(RM) $(OBJ)
