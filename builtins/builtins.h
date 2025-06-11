@@ -27,6 +27,5 @@ int		my_pwd(t_env **env);
 int		unset(t_env **env, char **splited);
 int		check_name(char *splited);
 void	export_without(t_env *env);
-int		check_name(char *splited);
 
 #endif
