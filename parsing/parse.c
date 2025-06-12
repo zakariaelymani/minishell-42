@@ -17,6 +17,8 @@ void	split_manager(char *s)
 	char	*close;
 
 	close = ft_strchr(s + 1, '\x1F');
+	if (!close)
+		return ;
 	*close = '\0';
 	if (ft_strnstr(s, "export", ft_strlen(s)))
 	{
@@ -42,7 +44,7 @@ void	split_manager(char *s)
 
 static int	add_cmd(t_cmds **chain, char **cmdstr, t_cmds *cmd)
 {
-	if ((*cmdstr)[1])
+	if (**cmdstr && (*cmdstr)[1])
 		split_manager(*cmdstr);
 	cmd->cmds = ft_split(*cmdstr, '\x1F');
 	if (!cmd->cmds)
