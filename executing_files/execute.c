@@ -16,17 +16,23 @@ void	execute_command(t_cmds *cmd, t_env **env, t_cmds *tmp)
 {
 	char	*path;
 	char	**env_to_excute;
+	int		status;
 
 	path = find_path_to_cmd(env, cmd->cmds[0], 0);
 	if (!path)
-		exit((*env)->exit_sta);
+	{
+		close_fds(tmp);
+		clear_commands(&tmp);
+		clear_and_exit(env);
+	}
 	env_to_excute = convert_strcut_array(*env);
 	dub_for_cmds(&cmd, env, tmp);
 	execve(path, cmd->cmds, env_to_excute);
-	free(path);
-	free_while(cmd->cmds);
+	free_while(env_to_excute);
+	clear_commands(&tmp);
+	clear_env(env, &status);
 	perror("minishell5");
-	exit(126);
+	exit(127);
 }
 
 void	wait_child(t_cmds *tmp, t_env **env)
