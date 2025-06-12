@@ -100,8 +100,8 @@ static void	dq_mode(char **str, ssize_t *len, t_env *env)
 	*str += 1;
 	while (**str && **str != '\"')
 	{
-		if (**str == '$' && (ft_isalnum(*(*str + 1)) ||
-				special_delim(*(*str + 1))))
+		if (**str == '$' && (ft_isalnum(*(*str + 1))
+				|| special_delim(*(*str + 1))))
 			*len += varsize(str, env);
 		else
 		{
@@ -125,8 +125,8 @@ ssize_t	expanded_size(char *str, t_env *env)
 			sq_mode(&str, &len);
 		else if (*str && *str == '\"')
 			dq_mode(&str, &len, env);
-		else if (*str == '$' && (ft_isalnum(*(str + 1)) ||
-				special_delim(*(str + 1))))
+		else if (*str == '$' && (ft_isalnum(*(str + 1))
+				|| special_delim(*(str + 1))))
 			len += varsize(&str, env);
 		else
 		{

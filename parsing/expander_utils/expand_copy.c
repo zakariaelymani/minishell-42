@@ -38,7 +38,7 @@ static int	special_symbol(char *dest, char **str, int code)
 	start = *str;
 	if (**str == '?')
 		return (exit_status(dest, str, code));
-	if(**str == '$')
+	if (**str == '$')
 		return (expand_pid(dest, str));
 	if (**str == '\'')
 	{
@@ -102,8 +102,8 @@ static void	dq_mode(char **str, char **dest, t_env *env)
 	*str += 1;
 	while (**str && **str != '\"')
 	{
-		if (**str == '$' && (ft_isalnum(*(*str + 1)) ||
-				special_delim(*(*str + 1))))
+		if (**str == '$' && (ft_isalnum(*(*str + 1))
+				|| special_delim(*(*str + 1))))
 			*dest += env_cpy(*dest, str, env);
 		else
 		{
@@ -123,8 +123,8 @@ int	fill(char *dest, char *str, t_env *env)
 			sq_mode(&str, &dest);
 		else if (*str && *str == '\"')
 			dq_mode(&str, &dest, env);
-		else if (*str == '$' && (ft_isalnum(*(str + 1)) ||
-				special_delim(*(str + 1))))
+		else if (*str == '$' && (ft_isalnum(*(str + 1))
+				|| special_delim(*(str + 1))))
 		{
 			env_cpy(dest, &str, env);
 			while (*dest)
