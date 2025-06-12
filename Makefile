@@ -75,7 +75,7 @@ FILES = builtins/env.c \
 	parsing/ms_expander.c \
 	parsing/expander_utils/expand_size.c \
 	parsing/expander_utils/expand_copy.c \
-	parsing/expander_utils/varlen.c \
+	parsing/expander_utils/expand_tools.c \
 	parsing/parse.c \
     tools/get_next_line.c \
     tools/safe_malloc.c \

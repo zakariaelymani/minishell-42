@@ -74,6 +74,8 @@ ssize_t	varsize(char **str, t_env *env)
 		{
 			*str += namelen + 1;
 			s[namelen] = tok;
+			if (!env->value)
+				return (0);
 			return ((ssize_t)ft_strlen(env->value + 1));
 		}
 		s[namelen] = tok;

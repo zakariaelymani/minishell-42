@@ -74,6 +74,8 @@ static int	env_cpy(char *d, char **str, t_env *env)
 		{
 			*str += namelen + 1;
 			s[namelen] = tok;
+			if (!env->value)
+				return (ft_strlcpy(d, "\0", 1));
 			return (ft_strlcpy(d, env->value + 1, ft_strlen(env->value) + 1));
 		}
 		s[namelen] = tok;
