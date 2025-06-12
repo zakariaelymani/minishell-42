@@ -21,6 +21,30 @@ static int	exit_status(char *dest, char **str, int code)
 	return (ft_strlcpy(dest, tmp, ft_strlen(tmp) + 1));
 }
 
+static int	special_symbol(char *dest, char **str, int code)
+{
+	char	*start;
+
+	*str += 1;
+	start = *str;
+	if (**str == '?')
+		return (exit_status(dest, str, code));
+	if (**str == '\'')
+	{
+		while (*++*str != '\'')
+			*dest++ = **str;
+		*str += 1;
+	}
+	else if (**str == '\"')
+	{
+		while (*++*str != '\"')
+			*dest++ = **str;
+		*str += 1;
+	}
+	*dest = '\0';
+	return (*str - start);
+}
+
 static int	env_cpy(char *d, char **str, t_env *env)
 {
 	size_t	namelen;
@@ -28,8 +52,8 @@ static int	env_cpy(char *d, char **str, t_env *env)
 	char	tok;
 
 	s = *str + 1;
-	if (*s == '?')
-		return (exit_status(d, str, env->exit_sta));
+	if (ft_strchr("?'\"$", *s))
+		return (special_symbol(d, str, env->exit_sta));
 	varlen(&namelen, s);
 	while (env)
 	{
@@ -68,7 +92,7 @@ static void	dq_mode(char **str, char **dest, t_env *env)
 	while (**str && **str != '\"')
 	{
 		if (**str == '$' && (ft_isalnum(*(*str + 1)) || *(*str + 1) == '?'
-				|| *(*str + 1) == '_'))
+				|| *(*str + 1) == '_' || *(*str +1) == '\'' || *(*str + 1) == '"'))
 			*dest += env_cpy(*dest, str, env);
 		else
 		{
@@ -89,7 +113,7 @@ int	fill(char *dest, char *str, t_env *env)
 		else if (*str && *str == '\"')
 			dq_mode(&str, &dest, env);
 		else if (*str == '$' && (ft_isalnum(*(str + 1)) || *(str + 1) == '?'
-				|| *(str + 1) == '_'))
+				|| *(str + 1) == '_' || *(str +1) == '\'' || *(str + 1) == '"'))
 		{
 			env_cpy(dest, &str, env);
 			while (*dest)
