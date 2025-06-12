@@ -44,13 +44,10 @@ void	print_export(t_env **env)
 	tmp = *env;
 	while (tmp)
 	{
-		if (compare(tmp->key, "_") != 0)
-		{
-			if (!tmp->value || !*tmp->value)
-				printf("declare -x %s\n", tmp->key);
-			else
-				printf("declare -x %s%s\n", tmp->key, tmp->value);
-		}
+		if (!tmp->value || !*tmp->value)
+			printf("declare -x %s\n", tmp->key);
+		else
+			printf("declare -x %s%s\n", tmp->key, tmp->value);
 		tmp = tmp->next;
 	}
 }
@@ -97,15 +94,12 @@ int	check_name(char *splited)
 	i++;
 	while (splited[i] != '=' && splited[i] != '\0')
 	{
-		if (ft_isalnum(splited[i]) == 0)
+		if (ft_isalnum(splited[i]) == 0
+			&& (splited[i] != '+' && splited[i + 1] != '='))
 		{
-			
-			if (splited[i] == '+' && splited[i + 1] && splited[i + 1] != '=')
-			{
-					my_perror("minishell: export: ", splited,
+			my_perror("minishell: export: ", splited,
 				" is not a valid identifier\n");
-				return (1);
-			}
+			return (1);
 		}
 		i++;
 	}

@@ -32,7 +32,7 @@ char	*exapnd_var_form_env(char *line, t_env *env, int *i)
 	{
 		if (compare("?", var_name) == 0)
 			return (free(var_name), var_name = NULL, ft_itoa(tmp->exit_sta));
-		if (compare(tmp->key, var_name) == 0 && tmp->status != -1)
+		if (compare(tmp->key, var_name) == 0)
 			return (free(var_name), var_name = NULL, ft_strdup(tmp->value + 1));
 		tmp = tmp->next;
 	}

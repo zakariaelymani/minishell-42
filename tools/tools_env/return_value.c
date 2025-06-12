@@ -19,7 +19,7 @@ char	*return_value(t_env *env, char *var_name, int flag)
 	tmp = env;
 	while (tmp)
 	{
-		if (compare(var_name, tmp->key) == 0 && tmp->status != -1)
+		if (compare(var_name, tmp->key) == 0)
 		{
 			if (flag == 1)
 				return (tmp->value + 1);

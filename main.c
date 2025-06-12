@@ -41,6 +41,7 @@ void	clear_and_exit(t_env **env)
 {
 	int	last_status;
 
+	rl_clear_history();
 	clear_env(env, &last_status);
 	exit(last_status);
 }
@@ -57,7 +58,6 @@ char	*read_input(t_env **env)
 	if (!line)
 	{
 		write(2, "exit\n", 6);
-		rl_clear_history();
 		clear_and_exit(env);
 	}
 	return (line);
