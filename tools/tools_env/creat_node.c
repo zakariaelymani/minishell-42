@@ -39,7 +39,6 @@ t_env	*node(char *value, int flag)
 	t_env	*node;
 	char	*val;
 
-	val = NULL;
 	node = NULL;
 	if (!value)
 		return (NULL);
@@ -50,14 +49,16 @@ t_env	*node(char *value, int flag)
 	ft_memset(node, 0, sizeof(node));
 	node->status = 1;
 	node->exit_sta = 0;
-	node->value = ft_strdup(val);
-	if (!val || !*val)
+	if (!val)
+	{
 		node->status = -1;
+		node->value = ft_strdup("");
+	}
+	else
+		node->value = ft_strdup(val);
 	node->key = extract_key(value);
 	if (flag == 1)
-	{
 		free(value);
-	}
 	node->next = NULL;
 	return (node);
 }
