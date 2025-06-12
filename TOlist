@@ -38,7 +38,7 @@ minishell$ echo $?
 minishell$ 
 ---------------------------------------------
 minishell$ export                                                                      
-declare -x PATH="/usr/local/sbin:/usr/local/bin:               /usr/sbin:/usr/bin:/sbin:/bin"
+declare -x PATH="/usr/local/sbin:/usr/local/bin:                /usr/sbin:/usr/bin:/sbin:/bin"
 declare -x PWD="/home/zel-yama/Desktop/mk"
 declare -x SHLVL="1"
 declare -x _="/usr/bin/env"
