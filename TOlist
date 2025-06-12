@@ -1,0 +1,46 @@
+minishell$ cat 
+
+
+minishell$ echo $?
+0
+minishell$ cat | ""
+
+minishell$ echo $?
+255
+minishell$ 
+----------------------------
+minishell$ cat | >
+Syntax error: No redirect destination
+minishell$ echo $?
+0
+minishell$ | >
+Syntax error: Invalid pipe |
+minishell$ echo $?
+0
+--------------------------------
+minishell$ echo $""
+$
+------------------------------
+minishell$ echo $$USER
+$zel-yama
+minishell$ 
+-------------------------------
+minishell$ touch ls
+minishell$ ./ls
+minishell: ./ls: command is not executble;
+minishell$ echo $?
+126
+minishell$ chmod +x ls
+minishell$ ./ls
+free(): double free detected in tcache 2
+minishell$ echo $?
+0
+minishell$ 
+---------------------------------------------
+minishell$ export                                                                      
+declare -x PATH="/usr/local/sbin:/usr/local/bin:                /usr/sbin:/usr/bin:/sbin:/bin"
+declare -x PWD="/home/zel-yama/Desktop/mk"
+declare -x SHLVL="1"
+declare -x _="/usr/bin/env"
+minishell$ unset PATH PWD SHLVL _ kjbn j oi dfg
+[1]    751791 segmentation fault (core dumped)  env -i ./minishell

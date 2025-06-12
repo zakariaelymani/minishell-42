@@ -1,0 +1,26 @@
+----------------------------------------------------------
+Ur minishell
+declare -x XDG_SESSION_PATH="/org/freedesktop/DisplayManager/Session9"
+declare -x XDG_SESSION_TYPE="x11"
+declare -x XMODIFIERS="@im=ibus"
+declare -x ZSH="/home/zel-yama/.oh-my-zsh"
+declare -x _="/home/zel-yama/Desktop/khall/./minishell"
+bash
+declare -x XDG_SESSION_DESKTOP="ubuntu"
+declare -x XDG_SESSION_PATH="/org/freedesktop/DisplayManager/Session9"
+declare -x XDG_SESSION_TYPE="x11"
+declare -x XMODIFIERS="@im=ibus"
+declare -x ZSH="/home/zel-yama/.oh-my-zsh"
+--------------------------------------------------------
+declare -x a="a b c"
+minishell$ export $a=$a
+--------------------------------------------------------
+declare -x m="a b c"
+minishell$ export fd++=jds
+--------------------------------------------------------
+minishell$ ll
+minishell: ll: command not found
+
+=================================================================
+==768286==ERROR: LeakSanitizer: detected memory leaks
+---------------------------------------------------------
