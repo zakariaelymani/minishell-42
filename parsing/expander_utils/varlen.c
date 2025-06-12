@@ -12,6 +12,13 @@
 
 #include "parsing.h"
 
+int	special_delim(int c)
+{
+	if (ft_strchr("'\"_?$", c))
+		return (1);
+	return (0);
+}
+
 void	varlen(size_t *len, char *str)
 {
 	*len = 0;

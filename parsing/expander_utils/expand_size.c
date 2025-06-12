@@ -21,6 +21,15 @@ static size_t	exit_status(char **str, int code)
 	return (ft_strlen(tmp));
 }
 
+static size_t	expand_pid(char **str)
+{
+	char	tmp[12];
+
+	*str += 2;
+	ft_cpynbr(tmp, 134237);
+	return (ft_strlen(tmp));
+}
+
 static size_t	special_symbol(char **str, int code)
 {
 	char	*start;
@@ -29,6 +38,8 @@ static size_t	special_symbol(char **str, int code)
 	start = *str;
 	if (**str == '?')
 		return (exit_status(str, code));
+	if (**str == '$')
+		return (expand_pid(str));
 	if (**str == '\'')
 	{
 		while (*++*str != '\'')
@@ -52,7 +63,7 @@ ssize_t	varsize(char **str, t_env *env)
 
 	namelen = 0;
 	s = *str + 1;
-	if (ft_strchr("?'\"", *s))
+	if (special_delim(*s))
 		return (special_symbol(str, env->exit_sta));
 	varlen(&namelen, s);
 	while (env)
@@ -89,8 +100,8 @@ static void	dq_mode(char **str, ssize_t *len, t_env *env)
 	*str += 1;
 	while (**str && **str != '\"')
 	{
-		if (**str == '$' && (ft_isalnum(*(*str + 1)) || *(*str + 1) == '?'
-				|| *(*str + 1) == '_' || *(*str +1) == '\'' || *(*str + 1) == '"'))
+		if (**str == '$' && (ft_isalnum(*(*str + 1)) ||
+				special_delim(*(*str + 1))))
 			*len += varsize(str, env);
 		else
 		{
@@ -114,8 +125,8 @@ ssize_t	expanded_size(char *str, t_env *env)
 			sq_mode(&str, &len);
 		else if (*str && *str == '\"')
 			dq_mode(&str, &len, env);
-		else if (*str == '$' && (ft_isalnum(*(str + 1)) || *(str + 1) == '?'
-				|| *(str + 1) == '_' || *(str +1) == '\'' || *(str + 1) == '"'))
+		else if (*str == '$' && (ft_isalnum(*(str + 1)) ||
+				special_delim(*(str + 1))))
 			len += varsize(&str, env);
 		else
 		{
