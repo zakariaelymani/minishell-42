@@ -18,7 +18,10 @@ t_env	*dup_list(t_env *env)
 	t_env	*tmp;
 	t_env	*hold_env;	
 
-	hold_env = env->next;
+	if (env->next)
+		hold_env = env->next;
+	else
+		hold_env = env;
 	tmp = NULL;
 	tmp = node(ft_strjoin(hold_env->key, hold_env->value), 1);
 	tmp_head = tmp;
