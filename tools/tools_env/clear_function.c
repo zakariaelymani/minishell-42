@@ -52,8 +52,9 @@ void	clear_env(t_env **env, int *last_status)
 {
 	t_env	*tmp;
 
-	if (!env || !*env)
+	if (!env)
 		return ;
+	
 	*last_status = (*env)->exit_sta;
 	while (*env)
 	{

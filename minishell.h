@@ -32,5 +32,7 @@
 # include "parsing.h"
 # include <sys/ioctl.h>
 
+
+void	clear_and_exit(t_env **env);
 extern int	g_global_status;
 #endif
