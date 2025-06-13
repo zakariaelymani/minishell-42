@@ -16,7 +16,7 @@ void	removenode(t_env **env, char *var)
 {
 	t_env	*tmp;
 	t_env	*prev;
-	
+
 	if (!(*env))
 		return ;
 	tmp = (*env);
@@ -41,8 +41,8 @@ void	removenode(t_env **env, char *var)
 
 int	unset(t_env **env, char **splited)
 {
-	int	i;
-	t_env *tmp;
+	int		i;
+	t_env	*tmp;
 
 	tmp = (*env)->next;
 	if (!splited[1])
