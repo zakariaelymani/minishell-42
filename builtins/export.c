@@ -95,25 +95,24 @@ int	export(t_env **env, char **splited)
 	int		i;
 	int		status;
 	int		stu;
+	t_env	*tmp;
 
 	if (!splited[1])
-	{
 		export_without(*env);
-		return (0);
-	}
 	i = 1;
 	status = 0;
 	stu = 0;
+	tmp = (*env);
 	while (splited[i])
 	{
-		if (modify_var(splited[i], env) == 0)
+		status = check_name(splited[i]);
+		if (status == 0)
 		{
-			status = check_name(splited[i]);
-			if (status == 0)
-				ft_lstadd_back(env, node(splited[i], 0));
-			else
-				stu = status;
+			if (modify_var(splited[i], env) == 0)
+				ft_lstadd_back(&tmp, node(splited[i], 0));
 		}
+		else
+			stu = status;
 		i++;
 	}
 	return (stu);
