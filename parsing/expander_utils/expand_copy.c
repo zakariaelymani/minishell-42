@@ -16,7 +16,7 @@ static int	exit_status(char *dest, char **str, int code)
 {
 	char	tmp[12];
 
-	*str += 2;
+	*str += 1;
 	ft_cpynbr(tmp, code);
 	return (ft_strlcpy(dest, tmp, ft_strlen(tmp) + 1));
 }
@@ -25,7 +25,7 @@ static size_t	expand_pid(char *dest, char **str)
 {
 	char	tmp[12];
 
-	*str += 2;
+	*str += 1;
 	ft_cpynbr(tmp, 134237);
 	return (ft_strlcpy(dest, tmp, ft_strlen(tmp) + 1));
 }
