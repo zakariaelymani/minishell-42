@@ -30,4 +30,5 @@
 # include "parsing.h"
 
 extern int	g_global_status;
+void	clear_and_exit(t_env **env);
 #endif
