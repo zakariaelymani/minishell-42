@@ -17,8 +17,11 @@ int	g_global_status;
 void	sanitize_input(char *line)
 {
 	while (*line)
+	{
 		if (ft_strchr("\x1F\x1D\x1E", *line))
-			*line++ = '\x1C';
+			*line = '\x1C';
+		line++;
+	}
 }
 
 static t_cmds	*process_input(char *line, t_env *env)
