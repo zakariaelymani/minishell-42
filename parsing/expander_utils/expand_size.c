@@ -16,7 +16,7 @@ static size_t	exit_status(char **str, int code)
 {
 	char	tmp[12];
 
-	*str += 2;
+	*str += 1;
 	ft_cpynbr(tmp, code);
 	return (ft_strlen(tmp));
 }
@@ -25,7 +25,7 @@ static size_t	expand_pid(char **str)
 {
 	char	tmp[12];
 
-	*str += 2;
+	*str += 1;
 	ft_cpynbr(tmp, 134237);
 	return (ft_strlen(tmp));
 }
@@ -63,7 +63,7 @@ ssize_t	varsize(char **str, t_env *env)
 
 	namelen = 0;
 	s = *str + 1;
-	if (special_delim(*s))
+	if (special_delim(*s) && *s != '_')
 		return (special_symbol(str, env->exit_sta));
 	varlen(&namelen, s);
 	while (env)

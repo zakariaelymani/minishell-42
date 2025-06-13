@@ -49,7 +49,7 @@ static int	add_cmd(t_cmds **chain, char **cmdstr, t_cmds *cmd)
 	if (ft_strncmp(*cmdstr, "\x1F\x1F", 2))
 		cmd->cmds = ft_split(*cmdstr, '\x1F');
 	else
-		cmd->cmds = ft_split(" c", 'c');
+		cmd->cmds = ft_split("\x1F\x1D", '\x1D');
 	if (!cmd->cmds)
 		return (1);
 	free(*cmdstr);

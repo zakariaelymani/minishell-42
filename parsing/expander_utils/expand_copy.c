@@ -63,7 +63,7 @@ static int	env_cpy(char *d, char **str, t_env *env)
 	char	tok;
 
 	s = *str + 1;
-	if (special_delim(*s))
+	if (special_delim(*s) && *s != '_')
 		return (special_symbol(d, str, env->exit_sta));
 	varlen(&namelen, s);
 	while (env)
