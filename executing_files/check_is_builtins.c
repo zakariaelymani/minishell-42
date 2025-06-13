@@ -6,7 +6,7 @@
 /*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:28:55 by zel-yama          #+#    #+#             */
-/*   Updated: 2025/06/10 16:46:44 by abenkaro         ###   ########.fr       */
+/*   Updated: 2025/06/13 14:30:03 by abenkaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_is_builtins(t_cmds *cmd)
 {
-	if (!cmd->cmds)
+	if (!*cmd->cmds || !cmd->cmds)
 		return (-2);
 	else if (compare(cmd->cmds[0], "echo") == 0)
 		return (1);

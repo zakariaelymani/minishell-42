@@ -16,10 +16,8 @@ void	removenode(t_env **env, char *var)
 {
 	t_env	*tmp;
 	t_env	*prev;
-	
-	if (!(*env))
-		return ;
-	tmp = (*env);
+
+	tmp = (*env)->next;
 	prev = NULL;
 	while (tmp)
 	{
@@ -29,8 +27,8 @@ void	removenode(t_env **env, char *var)
 				*env = tmp->next;
 			else
 				prev->next = tmp->next;
-			free_vars(tmp->value, tmp->key, NULL, NULL);
-			free(tmp);
+			free(tmp->key);
+			(free(tmp->value), free(tmp));
 			tmp = NULL;
 			return ;
 		}
@@ -42,18 +40,15 @@ void	removenode(t_env **env, char *var)
 int	unset(t_env **env, char **splited)
 {
 	int	i;
-	t_env *tmp;
 
-	tmp = (*env)->next;
 	if (!splited[1])
 		return (0);
 	i = 1;
 	while (splited[i])
 	{
-		removenode(&tmp, splited[i]);
+		removenode(env, splited[i]);
 		i++;
 	}
-	(*env)->next = tmp;
 	change_value_var(env, "_", "=unset");
 	return (0);
 }

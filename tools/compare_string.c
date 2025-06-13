@@ -18,10 +18,6 @@ int	compare(const char *str, const char *str1)
 
 	if (!str && !str1)
 		return (0);
-	if (!str && str1)
-		return (1);
-	if (str && !str1)
-		return (1);
 	i = 0;
 	while ((str[i] && str1[i]) && str[i] == str1[i])
 		i++;

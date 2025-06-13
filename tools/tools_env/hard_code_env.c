@@ -23,7 +23,7 @@ t_env	*hard_code_env(void)
 	if (tmp)
 		free(tmp);
 	tmp = NULL;
-	env = node(free_and_join("PWD", pwd, 2), 1);
+	env = node(ft_strjoin("PWD", pwd), 1);
 	env->next = node("PATH=/usr/local/sbin:/usr/local/bin: \
 		/usr/sbin:/usr/bin:/sbin:/bin", 0);
 	env->next->next = node("SHLVL=1", 0);

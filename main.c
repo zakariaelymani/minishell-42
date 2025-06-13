@@ -37,8 +37,6 @@ static t_cmds	*process_input(char *line, t_env *env)
 		env->exit_sta = 2;
 		return (NULL);
 	}
-	if (!syntax_checker(tokens))
-		return (NULL);
 	if (!syntax_checker(tokens) || !ms_expander(tokens, env))
 	{
 		env->exit_sta = 2;
