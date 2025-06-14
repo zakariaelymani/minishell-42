@@ -61,8 +61,8 @@ char	*find_path_to_cmd(t_env **env, char *cmd, int i)
 	char	**splited;
 	char	*joined;
 
-	if (!cmd || !*cmd)
-		return ((*env)->exit_sta = 127, NULL);
+	if (!cmd)
+		return (NULL);
 	if (ft_strchr(cmd, '/'))
 		return (check_is_exsist_or_excuteble(cmd, env));
 	path = return_value(*env, "PATH", 1);

@@ -69,7 +69,7 @@ void	copy_unquoted(char *dest, char *str)
 		{
 			if (*str == *(str + 1))
 			{
-				*dest++ = '\x1C';
+				*dest++ = '\0';
 				*dest = '\0';
 				return ;
 			}
@@ -81,7 +81,7 @@ void	copy_unquoted(char *dest, char *str)
 		{
 			if (*str == *(str + 1))
 			{
-				*dest++ = '\x1C';
+				*dest++ = '\0';
 				*dest = '\0';
 				return ;
 			}
