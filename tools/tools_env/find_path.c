@@ -14,8 +14,8 @@
 
 char	*check_is_exsist_or_excuteble(char *cmd, t_env **env)
 {
-	int fd;
-	
+	int	fd;
+
 	fd = open(cmd, __O_DIRECTORY);
 	close(fd);
 	if (access(cmd, F_OK) != 0)
