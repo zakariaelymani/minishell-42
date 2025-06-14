@@ -29,7 +29,7 @@ size_t	heredoc_limit(t_token *token)
 int	syntax_checker(t_token *token)
 {
 	if (heredoc_limit(token) > 16)
-		return (ft_putstr_fd("Syntax error: heredoc limit exceeded.\n", 2), 0);
+		return (ft_putstr_fd("Error: heredoc limit exceeded.\n", 2), 0);
 	while (token)
 	{
 		if (token->type == PIPE)

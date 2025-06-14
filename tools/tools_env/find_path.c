@@ -12,22 +12,6 @@
 
 #include "../tools.h"
 
-int	check_char_is_there(char *cmd, char c)
-{
-	int	i;
-
-	if (!cmd || !*cmd)
-		return (0);
-	i = 0;
-	while (cmd[i])
-	{
-		if (cmd[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 char	*check_is_exsist_or_excuteble(char *cmd, t_env **env)
 {
 	int fd;
