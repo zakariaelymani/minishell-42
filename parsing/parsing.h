@@ -49,5 +49,6 @@ void	varlen(size_t *len, char *str);
 int		special_delim(int c);
 int		remove_quotes(char **str);
 int		expand(char **str, t_env *env);
+int		heredoc_quotes(char **str);
 
 #endif
