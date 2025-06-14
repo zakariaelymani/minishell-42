@@ -89,17 +89,20 @@ ssize_t	varsize(char **str, t_env *env)
 static void	sq_mode(char **str, ssize_t *len)
 {
 	*str += 1;
+	*len += 1;
 	while (**str && **str != '\'')
 	{
-		*len += 1;
 		*str += 1;
+		*len += 1;
 	}
+	*len += 1;
 	*str += 1;
 }
 
 static void	dq_mode(char **str, ssize_t *len, t_env *env)
 {
 	*str += 1;
+	*len += 1;
 	while (**str && **str != '\"')
 	{
 		if (**str == '$' && (ft_isalnum(*(*str + 1))
@@ -111,6 +114,7 @@ static void	dq_mode(char **str, ssize_t *len, t_env *env)
 			*str += 1;
 		}
 	}
+	*len += 1;
 	*str += 1;
 }
 

@@ -89,19 +89,19 @@ static int	env_cpy(char *d, char **str, t_env *env)
 
 static void	sq_mode(char **str, char **dest)
 {
-	*str += 1;
+	*(*dest)++ = *(*str)++;
 	while (**str && **str != '\'')
 	{
 		**dest = **str;
 		*str += 1;
 		*dest += 1;
 	}
-	*str += 1;
+	*(*dest)++ = *(*str)++;
 }
 
 static void	dq_mode(char **str, char **dest, t_env *env)
 {
-	*str += 1;
+	*(*dest)++ = *(*str)++;
 	while (**str && **str != '\"')
 	{
 		if (**str == '$' && (ft_isalnum(*(*str + 1))
@@ -114,7 +114,7 @@ static void	dq_mode(char **str, char **dest, t_env *env)
 			*str += 1;
 		}
 	}
-	*str += 1;
+	*(*dest)++ = *(*str)++;
 }
 
 int	fill(char *dest, char *str, t_env *env)

@@ -38,12 +38,16 @@ size_t	unquoted_size(char *str)
 	{
 		if (*str == '\"')
 		{
+			if (*(str + 1) == *str)
+				return (2);
 			while (*++str != '\"')
 				len++;
 			str += 1;
 		}
 		else if (*str == '\'')
 		{
+			if (*(str + 1) == *str)
+				return (2);
 			while (*++str != '\'')
 				len++;
 			str += 1;
@@ -63,12 +67,24 @@ void	copy_unquoted(char *dest, char *str)
 	{
 		if (*str == '\"')
 		{
+			if (*str == *(str + 1))
+			{
+				*dest++ = '\x1C';
+				*dest = '\0';
+				return ;
+			}
 			while (*++str != '\"')
 				*dest++ = *str;
 			str += 1;
 		}
 		else if (*str == '\'')
 		{
+			if (*str == *(str + 1))
+			{
+				*dest++ = '\x1C';
+				*dest = '\0';
+				return ;
+			}
 			while (*++str != '\'')
 				*dest++ = *str;
 			str += 1;
@@ -94,7 +110,6 @@ int	remove_quotes(char **str)
 		copy_unquoted(unquoted, *str);
 		free(*str);
 		*str = unquoted;
-		*ft_strrchr(*str, '\x1F') = '\x1E';
 	}
 	return (0);
 }
@@ -110,7 +125,11 @@ int	ms_expander(t_token *tokens, t_env *env)
 		if (head->prev && head->prev->type == HEREDOC)
 			err = remove_quotes(&head->content);
 		else
+		{
 			err = expand(&head->content, env);
+			if (head ->prev && (head->prev->type & (APPEND | INPUT | OUTPUT)))
+				remove_quotes(&head->content);
+		}
 		if (err < 0)
 		{
 			if (err == -2)
