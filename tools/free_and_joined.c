@@ -17,12 +17,12 @@ char	*free_and_join(char *store, char *s, int i)
 	char	*str;
 
 	str = ft_strjoin(store, s);
-	if (i == 1 && store && *store)
+	if (i == 1 && store)
 	{
 		free(store);
 		store = NULL;
 	}
-	else if (i == 2 && s && *s)
+	else if (i == 2 && s)
 	{
 		free(s);
 		s = NULL;
