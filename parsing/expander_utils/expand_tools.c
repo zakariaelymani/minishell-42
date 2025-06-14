@@ -25,3 +25,18 @@ void	varlen(size_t *len, char *str)
 	while (str[*len] && (ft_isalnum(str[*len]) || str[*len] == '_'))
 		*len += 1;
 }
+
+int	key_found(char *s, char *key, size_t namelen)
+{
+	char	tok;
+
+	tok = s[namelen];
+	s[namelen] = '\0';
+	if (!ft_strncmp(s, key, namelen + 1))
+	{
+		s[namelen] = tok;
+		return (1);
+	}
+	s[namelen] = tok;
+	return (0);
+}

@@ -12,73 +12,24 @@
 
 #include "parsing.h"
 
-static int	exit_status(char *dest, char **str, int code)
-{
-	char	tmp[12];
-
-	*str += 1;
-	ft_cpynbr(tmp, code);
-	return (ft_strlcpy(dest, tmp, ft_strlen(tmp) + 1));
-}
-
-static size_t	expand_pid(char *dest, char **str)
-{
-	char	tmp[12];
-
-	*str += 1;
-	ft_cpynbr(tmp, 134237);
-	return (ft_strlcpy(dest, tmp, ft_strlen(tmp) + 1));
-}
-
-static int	special_symbol(char *dest, char **str, int code)
-{
-	char	*start;
-
-	*str += 1;
-	start = *str;
-	if (**str == '?')
-		return (exit_status(dest, str, code));
-	if (**str == '$')
-		return (expand_pid(dest, str));
-	if (**str == '\'')
-	{
-		while (*++*str != '\'')
-			*dest++ = **str;
-		*str += 1;
-	}
-	else if (**str == '\"')
-	{
-		while (*++*str != '\"')
-			*dest++ = **str;
-		*str += 1;
-	}
-	*dest = '\0';
-	return (*str - start);
-}
-
 static int	env_cpy(char *d, char **str, t_env *env)
 {
 	size_t	namelen;
 	char	*s;
-	char	tok;
 
 	s = *str + 1;
 	if (special_delim(*s) && *s != '_')
-		return (special_symbol(d, str, env->exit_sta));
+		return (symbol_copy(d, str, env->exit_sta));
 	varlen(&namelen, s);
 	while (env)
 	{
-		tok = s[namelen];
-		s[namelen] = '\0';
-		if (!ft_strncmp(s, env->key, namelen + 1))
+		if (key_found(s, env->key, namelen))
 		{
 			*str += namelen + 1;
-			s[namelen] = tok;
 			if (!env->value)
 				return (ft_strlcpy(d, "\0", 1));
 			return (ft_strlcpy(d, env->value + 1, ft_strlen(env->value) + 1));
 		}
-		s[namelen] = tok;
 		env = env->next;
 	}
 	while (*++*str && ft_isalnum(**str))

@@ -76,7 +76,9 @@ FILES = builtins/env.c \
 	parsing/quote_utils.c \
 	parsing/expander_utils/expand_size.c \
 	parsing/expander_utils/expand_copy.c \
-	parsing/expander_utils/expand_tools.c \
+    parsing/expander_utils/expand_tools.c \
+    parsing/expander_utils/copy_helpers.c \
+	parsing/expander_utils/size_helpers.c \
 	parsing/parse.c \
     tools/get_next_line.c \
     tools/safe_malloc.c \

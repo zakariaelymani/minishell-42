@@ -12,73 +12,25 @@
 
 #include "parsing.h"
 
-static size_t	exit_status(char **str, int code)
-{
-	char	tmp[12];
-
-	*str += 1;
-	ft_cpynbr(tmp, code);
-	return (ft_strlen(tmp));
-}
-
-static size_t	expand_pid(char **str)
-{
-	char	tmp[12];
-
-	*str += 1;
-	ft_cpynbr(tmp, 134237);
-	return (ft_strlen(tmp));
-}
-
-static size_t	special_symbol(char **str, int code)
-{
-	char	*start;
-
-	*str += 1;
-	start = *str;
-	if (**str == '?')
-		return (exit_status(str, code));
-	if (**str == '$')
-		return (expand_pid(str));
-	if (**str == '\'')
-	{
-		while (*++*str != '\'')
-			;
-		*str += 1;
-	}
-	else if (**str == '\"')
-	{
-		while (*++*str != '\"')
-			;
-		*str += 1;
-	}
-	return (*str - start);
-}
-
 ssize_t	varsize(char **str, t_env *env)
 {
 	size_t	namelen;
 	char	*s;
-	char	tok;
 
 	namelen = 0;
 	s = *str + 1;
 	if (special_delim(*s) && *s != '_')
-		return (special_symbol(str, env->exit_sta));
+		return (symbol_size(str, env->exit_sta));
 	varlen(&namelen, s);
 	while (env)
 	{
-		tok = s[namelen];
-		s[namelen] = '\0';
-		if (!ft_strncmp(s, env->key, namelen + 1))
+		if (key_found(s, env->key, namelen))
 		{
 			*str += namelen + 1;
-			s[namelen] = tok;
 			if (!env->value)
 				return (0);
 			return ((ssize_t)ft_strlen(env->value + 1));
 		}
-		s[namelen] = tok;
 		env = env->next;
 	}
 	while (*++*str && ft_isalnum(**str))

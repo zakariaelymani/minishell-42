@@ -50,5 +50,8 @@ int		special_delim(int c);
 int		remove_quotes(char **str);
 int		expand(char **str, t_env *env);
 int		heredoc_quotes(char **str);
+int		key_found(char *s, char *key, size_t namelen);
+size_t	symbol_copy(char *dest, char **str, int code);
+size_t	symbol_size(char **str, int code);
 
 #endif
