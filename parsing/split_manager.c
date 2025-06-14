@@ -39,6 +39,7 @@ void	split_manager(char *s)
 				if (*close == '\x1D')
 					*close = ' ';
 		}
+		inject_split(s);
 	}
 	else
 	{

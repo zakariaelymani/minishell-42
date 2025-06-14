@@ -99,7 +99,7 @@ int	check_name(char *splited)
 	{
 		if (ft_isalnum(splited[i]) == 0)
 		{
-			if (splited[i] == '+' && splited[i + 1] && splited[i + 1] != '=')
+			if (!(splited[i] == '+' && splited[i + 1] && splited[i + 1] != '='))
 			{
 				my_perror("minishell: export: ", splited,
 					" is not a valid identifier\n");
