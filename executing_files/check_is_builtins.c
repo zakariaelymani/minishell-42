@@ -14,6 +14,8 @@
 
 int	check_is_builtins(t_cmds *cmd)
 {
+	if (!*cmd->cmds && !cmd->redirection)
+		return (-1);
 	if (!*cmd->cmds || !cmd->cmds)
 		return (-2);
 	else if (compare(cmd->cmds[0], "echo") == 0)

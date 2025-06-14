@@ -25,7 +25,7 @@ void	execute_command(t_cmds *cmd, t_env **env, t_cmds *tmp)
 		clear_commands(&tmp);
 		clear_and_exit(env);
 	}
-	env_to_excute = convert_strcut_array(*env);
+	env_to_excute = convert_strcut_array((*env)->next);
 	dub_for_cmds(&cmd, env, tmp);
 	execve(path, cmd->cmds, env_to_excute);
 	free_while(env_to_excute);

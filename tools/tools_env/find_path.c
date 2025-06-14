@@ -30,6 +30,10 @@ int	check_char_is_there(char *cmd, char c)
 
 char	*check_is_exsist_or_excuteble(char *cmd, t_env **env)
 {
+	int fd;
+	
+	fd = open(cmd, __O_DIRECTORY);
+	close(fd);
 	if (access(cmd, F_OK) != 0)
 	{
 		(*env)->exit_sta = 127;
@@ -42,7 +46,7 @@ char	*check_is_exsist_or_excuteble(char *cmd, t_env **env)
 		(*env)->exit_sta = 126;
 		return (NULL);
 	}
-	else if (open(cmd, __O_DIRECTORY) != -1)
+	else if (fd != -1)
 	{
 		(*env)->exit_sta = 126;
 		my_perror("minishell: ", cmd, ": input is directory\n");
@@ -58,7 +62,7 @@ char	*find_path_to_cmd(t_env **env, char *cmd, int i)
 	char	*joined;
 
 	if (!cmd || !*cmd)
-		return ((*env)->exit_sta = 127, safe_write(2, "mininishell: '' command not found\n", 35), NULL);
+		return ((*env)->exit_sta = 127, NULL);
 	if (ft_strchr(cmd, '/'))
 		return (check_is_exsist_or_excuteble(cmd, env));
 	path = return_value(*env, "PATH", 1);
