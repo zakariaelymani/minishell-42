@@ -114,6 +114,26 @@ int	remove_quotes(char **str)
 	return (0);
 }
 
+int	heredoc_quotes(char **str)
+{
+	size_t	len;
+	char	*unquoted;
+
+	len = 0;
+	if (ft_strchr(*str, '"') || ft_strchr(*str, '\''))
+	{
+		len = unquoted_size(*str);
+		unquoted = ft_malloc(len + 1);
+		if (!unquoted)
+			return (-1);
+		copy_unquoted(unquoted, *str);
+		free(*str);
+		*str = unquoted;
+		*ft_strrchr(*str, '\x1F') = '\x1E';
+	}
+	return (0);
+}
+
 int	ms_expander(t_token *tokens, t_env *env)
 {
 	int		err;
@@ -123,7 +143,7 @@ int	ms_expander(t_token *tokens, t_env *env)
 	while (head)
 	{
 		if (head->prev && head->prev->type == HEREDOC)
-			err = remove_quotes(&head->content);
+			err = heredoc_quotes(&head->content);
 		else
 		{
 			err = expand(&head->content, env);
