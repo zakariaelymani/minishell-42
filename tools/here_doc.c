@@ -22,7 +22,7 @@ char	*exapnd_var_form_env(char *line, t_env *env, int *i)
 		return (NULL);
 	var_len = *i;
 	while (line[var_len] && (ft_isalnum(line[var_len]) == 1
-			|| line[var_len] == '_' || line[var_len] == '?'))
+			|| line[var_len] == '_' || line[var_len] == '?' ))
 		var_len++;
 	var_len = var_len - *i;
 	var_name = ft_substr(line, *i, var_len);
@@ -32,7 +32,7 @@ char	*exapnd_var_form_env(char *line, t_env *env, int *i)
 	{
 		if (compare("?", var_name) == 0)
 			return (free(var_name), var_name = NULL, ft_itoa(tmp->exit_sta));
-		if (compare(tmp->key, var_name) == 0)
+		if (compare(tmp->key, var_name) == 0 && tmp->status != -1)
 			return (free(var_name), var_name = NULL, ft_strdup(tmp->value + 1));
 		tmp = tmp->next;
 	}
@@ -53,11 +53,10 @@ char	*expantion(char *line, t_env *env, int i, int x)
 			x++;
 		if (line[x] == '$' && line[x + 1] && (ft_isalnum(line[x + 1])
 				== 0 && line[x + 1] != '_' && line[x + 1] != '?'))
-			x += 2;
+			x += 1;
 		len_sub = x - i;
 		string = ft_substr(line, i, len_sub);
-		if (line[x] == '$' && line[x + 1] && (ft_isalnum(line[x + 1])
-				== 1 && line[x + 1] != '_' && line[x + 1] != '?'))
+		if (line[x] == '$' && line[x + 1] && line[i + 1] != '$')
 			x++;
 		new_line = free_and_join(new_line, string, 3);
 		new_line = free_and_join(new_line,
@@ -80,7 +79,7 @@ int	read_conten(char *limiter, int fd, t_env *env, int flag)
 		safe_write(1, "> ", 3);
 		line = get_next_line(STDIN_FILENO);
 		if (!line && g_global_status == 3)
-			return (g_global_status = 1, -2);
+			return (g_global_status = 1, close(fd), -2);
 		if (!line)
 			return (write(2, "Delimiter not specified\n", 25), fd);
 		if (flag == -2)
@@ -122,7 +121,7 @@ int	here_document(char *limiter, int flag, t_env **env)
 		close(fd);
 	free(limiter);
 	limiter = NULL;
-	if (fd == -2)
+	if (fd == -2 || fd == -1)
 		return (unlink(name), free(name), -2);
 	fd = ft_open(name, INPUT);
 	unlink(name);
