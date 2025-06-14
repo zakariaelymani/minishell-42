@@ -40,6 +40,7 @@ static t_cmds	*process_input(char *line, t_env *env)
 	if (!syntax_checker(tokens) || !ms_expander(tokens, env))
 	{
 		env->exit_sta = 2;
+		ms_tokclear(&tokens, free);
 		return (NULL);
 	}
 	cmd = cmd_parser(tokens);
