@@ -12,36 +12,6 @@
 
 #include "parsing.h"
 
-void	split_manager(char *s)
-{
-	char	*close;
-
-	close = ft_strchr(s + 1, '\x1F');
-	if (!close)
-		return ;
-	*close = '\0';
-	if (ft_strnstr(s, "export", ft_strlen(s)))
-	{
-		*close = '\x1F';
-		while (1)
-		{
-			close = ft_strchr(close, '=');
-			if (!close)
-				break ;
-			while (*++close != '\x1F')
-				if (*close == '\x1D')
-					*close = ' ';
-		}
-	}
-	else
-	{
-		*close = '\x1F';
-		while (*++s)
-			if (*s == '\x1D')
-				*s = '\x1F';
-	}
-}
-
 static int	add_cmd(t_cmds **chain, char **cmdstr, t_cmds *cmd)
 {
 	int	i;

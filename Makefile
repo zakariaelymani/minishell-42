@@ -74,6 +74,7 @@ FILES = builtins/env.c \
 	parsing/get_word.c \
 	parsing/ms_expander.c \
 	parsing/quote_utils.c \
+	parsing/split_manager.c \
 	parsing/expander_utils/expand_size.c \
 	parsing/expander_utils/expand_copy.c \
     parsing/expander_utils/expand_tools.c \
