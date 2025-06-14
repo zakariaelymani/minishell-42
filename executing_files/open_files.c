@@ -97,16 +97,16 @@ int	read_heredoc(t_cmds **cmd, t_env **env)
 			{
 				rids->fd = here_document(rids->file_name, rids->fd, env);
 				if (rids->fd == -1)
-					return ((*env)->exit_sta = 1, close(fd), close_fds(*cmd), 1);
+					return (close(fd), close_fds(*cmd), 1);
 				if (rids->fd == -2)
 					return (dup2(fd, STDIN_FILENO),
-						close(fd), (*env)->exit_sta = 130, close_fds(*cmd), 1);
+						close(fd), close_fds(*cmd), 1);
 			}
 			rids = rids->next;
 		}
 		tmp = tmp->next;
 	}
-	return ((*env)->exit_sta = 0, close(fd), 0);
+	return (close(fd), 0);
 }
 
 int	open_files(t_cmds **cmds, t_env **env)

@@ -56,6 +56,8 @@ int	ft_exit(char **arguments, long status, t_env **env, t_cmds **cmds)
 
 	sing = 0;
 	i = 1;
+	if (!arguments[i])
+		status = (*env)->exit_sta;
 	if (arguments[i])
 	{
 		while (arguments[i])

@@ -122,11 +122,16 @@ int	here_document(char *limiter, int flag, t_env **env)
 		close(fd);
 	free(limiter);
 	limiter = NULL;
+	if (fd == -2)
+		(*env)->exit_sta = 130;
+	if (fd == -1)
+		(*env)->exit_sta = 1;
 	if (fd == -2 || fd == -1)
 		return (unlink(name), free(name), -2);
 	fd = ft_open(name, INPUT);
 	unlink(name);
 	free(name);
 	name = NULL;
+	(*env)->exit_sta = 0;
 	return (fd);
 }
