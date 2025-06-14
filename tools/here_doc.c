@@ -11,61 +11,62 @@
 /* ************************************************************************** */
 
 #include "tools.h"
+#include "parsing.h"
 
-char	*exapnd_var_form_env(char *line, t_env *env, int *i)
-{
-	int		var_len;
-	char	*var_name;
-	t_env	*tmp;
+// char	*exapnd_var_form_env(char *line, t_env *env, int *i)
+// {
+// 	int		var_len;
+// 	char	*var_name;
+// 	t_env	*tmp;
 
-	if (!line || !env || !line[*i])
-		return (NULL);
-	var_len = *i;
-	while (line[var_len] && (ft_isalnum(line[var_len]) == 1
-			|| line[var_len] == '_' || line[var_len] == '?' ))
-		var_len++;
-	var_len = var_len - *i;
-	var_name = ft_substr(line, *i, var_len);
-	*i += var_len;
-	tmp = env;
-	while (tmp)
-	{
-		if (compare("?", var_name) == 0)
-			return (free(var_name), var_name = NULL, ft_itoa(tmp->exit_sta));
-		if (compare(tmp->key, var_name) == 0 && tmp->status != -1)
-			return (free(var_name), var_name = NULL, ft_strdup(tmp->value + 1));
-		tmp = tmp->next;
-	}
-	return (free(var_name), var_name = NULL, NULL);
-}
+// 	if (!line || !env || !line[*i])
+// 		return (NULL);
+// 	var_len = *i;
+// 	while (line[var_len] && (ft_isalnum(line[var_len]) == 1
+// 			|| line[var_len] == '_' || line[var_len] == '?' ))
+// 		var_len++;
+// 	var_len = var_len - *i;
+// 	var_name = ft_substr(line, *i, var_len);
+// 	*i += var_len;
+// 	tmp = env;
+// 	while (tmp)
+// 	{
+// 		if (compare("?", var_name) == 0)
+// 			return (free(var_name), var_name = NULL, ft_itoa(tmp->exit_sta));
+// 		if (compare(tmp->key, var_name) == 0 && tmp->status != -1)
+// 			return (free(var_name), var_name = NULL, ft_strdup(tmp->value + 1));
+// 		tmp = tmp->next;
+// 	}
+// 	return (free(var_name), var_name = NULL, NULL);
+// }
 
-char	*expantion(char *line, t_env *env, int i, int x)
-{
-	char	*new_line;
-	char	*string;
-	int		len_sub;
+// char	*expantion(char *line, t_env *env, int i, int x)
+// {
+// 	char	*new_line;
+// 	char	*string;
+// 	int		len_sub;
 
-	(1) && (x = 0, new_line = NULL);
-	while (1)
-	{
-		i = x;
-		while (line[x] && line[x] != '$')
-			x++;
-		if (line[x] == '$' && line[x + 1] && (ft_isalnum(line[x + 1])
-				== 0 && line[x + 1] != '_' && line[x + 1] != '?'))
-			x += 1;
-		len_sub = x - i;
-		string = ft_substr(line, i, len_sub);
-		if (line[x] == '$' && line[x + 1] && line[i + 1] != '$')
-			x++;
-		new_line = free_and_join(new_line, string, 3);
-		new_line = free_and_join(new_line,
-				exapnd_var_form_env(line, env, &x), 3);
-		if (!line[x])
-			break ;
-	}
-	return (free(line), new_line);
-}
+// 	(1) && (x = 0, new_line = NULL);
+// 	while (1)
+// 	{
+// 		i = x;
+// 		while (line[x] && line[x] != '$')
+// 			x++;
+// 		if (line[x] == '$' && line[x + 1] && (ft_isalnum(line[x + 1])
+// 				== 0 && line[x + 1] != '_' && line[x + 1] != '?'))
+// 			x += 1;
+// 		len_sub = x - i;
+// 		string = ft_substr(line, i, len_sub);
+// 		if (line[x] == '$' && line[x + 1] && line[i + 1] != '$')
+// 			x++;
+// 		new_line = free_and_join(new_line, string, 3);
+// 		new_line = free_and_join(new_line,
+// 				exapnd_var_form_env(line, env, &x), 3);
+// 		if (!line[x])
+// 			break ;
+// 	}
+// 	return (free(line), new_line);
+// }
 
 int	read_conten(char *limiter, int fd, t_env *env, int flag)
 {
@@ -85,7 +86,7 @@ int	read_conten(char *limiter, int fd, t_env *env, int flag)
 		if (flag == -2)
 		{
 			if (ft_strncmp(line, limiter, ft_strlen(limiter)))
-				line = expantion(line, env, 0, 0);
+				expand(&line, env);
 		}
 		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 			return (free(line), fd);
