@@ -22,6 +22,6 @@ int	special_delim(int c)
 void	varlen(size_t *len, char *str)
 {
 	*len = 0;
-	while (str[*len] && ft_isalnum(str[*len]))
+	while (str[*len] && (ft_isalnum(str[*len]) || str[*len] == '_'))
 		*len += 1;
 }

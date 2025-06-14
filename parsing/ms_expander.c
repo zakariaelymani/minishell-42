@@ -38,8 +38,6 @@ size_t	unquoted_size(char *str)
 	{
 		if (*str == '\"')
 		{
-			if (*(str + 1) == *str)
-				return (2);
 			while (*++str != '\"')
 				len++;
 			str += 1;
@@ -67,12 +65,6 @@ void	copy_unquoted(char *dest, char *str)
 	{
 		if (*str == '\"')
 		{
-			if (*str == *(str + 1))
-			{
-				*dest++ = '\0';
-				*dest = '\0';
-				return ;
-			}
 			while (*++str != '\"')
 				*dest++ = *str;
 			str += 1;
@@ -103,6 +95,12 @@ int	remove_quotes(char **str)
 	len = 0;
 	if (ft_strchr(*str, '"') || ft_strchr(*str, '\''))
 	{
+		if (!ft_strncmp(*str, "\"\"", 3))
+		{
+			free(*str);
+			*str = ft_strdup("");
+			return (0);
+		}
 		len = unquoted_size(*str);
 		unquoted = ft_malloc(len + 1);
 		if (!unquoted)
@@ -122,6 +120,12 @@ int	heredoc_quotes(char **str)
 	len = 0;
 	if (ft_strchr(*str, '"') || ft_strchr(*str, '\''))
 	{
+		if (!ft_strncmp(*str, "\"\"", 3))
+		{
+			free(*str);
+			*str = ft_strdup("");
+			return (0);
+		}
 		len = unquoted_size(*str);
 		unquoted = ft_malloc(len + 1);
 		if (!unquoted)

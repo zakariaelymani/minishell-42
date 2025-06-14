@@ -83,7 +83,7 @@ FILES = builtins/env.c \
 NAME = minishell
 CC = cc
 RM = rm -rf
-FLAGS = -I. -I./parsing -I./tools -Wall -Wextra -Werror -g -fsanitize=address,undefined 
+FLAGS = -I. -I./parsing -I./tools -Wall -Wextra -Werror -g
 OBJ = $(FILES:.c=.o)
 HEADER1 = builtins/builtins.h
 HEADER2 = struct.h 
