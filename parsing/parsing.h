@@ -47,5 +47,6 @@ t_redir	*ms_redlast(t_redir *lst);
 void	ms_redappend(t_redir **lst, t_redir *new);
 void	varlen(size_t *len, char *str);
 int		special_delim(int c);
+int		remove_quotes(char **str);
 
 #endif

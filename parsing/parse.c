@@ -42,6 +42,17 @@ void	split_manager(char *s)
 	}
 }
 
+static int	unquote(char **args)
+{
+
+	while (*args)
+	{
+		remove_quotes(args);
+		args++;
+	}
+	return (1);
+}
+
 static int	add_cmd(t_cmds **chain, char **cmdstr, t_cmds *cmd)
 {
 	if (**cmdstr && (*cmdstr)[1])
@@ -51,6 +62,7 @@ static int	add_cmd(t_cmds **chain, char **cmdstr, t_cmds *cmd)
 		return (1);
 	free(*cmdstr);
 	*cmdstr = NULL;
+	unquote(cmd->cmds);
 	ms_cmdappend(chain, cmd);
 	return (0);
 }
