@@ -83,6 +83,13 @@ void	export_without(t_env *env)
 	clear_env(&tmp, &size);
 }
 
+int	error(char *name)
+{
+	my_perror("minishell: export: ", name,
+		" is not a valid identifier\n");
+	return (1);
+}
+
 int	check_name(char *splited)
 {
 	int	i;
@@ -99,12 +106,13 @@ int	check_name(char *splited)
 	{
 		if (ft_isalnum(splited[i]) == 0)
 		{
-			if (splited[i] == '+' && splited[i + 1] && splited[i + 1] != '=')
+			if (splited[i] == '+' && splited[i + 1] && splited[i + 1] == '=')
 			{
-				my_perror("minishell: export: ", splited,
-					" is not a valid identifier\n");
-				return (1);
+				i++;
+				continue ;
 			}
+			else
+				return (error(splited));
 		}
 		i++;
 	}
