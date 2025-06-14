@@ -31,7 +31,7 @@ void	execute_command(t_cmds *cmd, t_env **env, t_cmds *tmp)
 	free_while(env_to_excute);
 	clear_commands(&tmp);
 	clear_env(env, &status);
-	perror("minishell5");
+	perror("minishell");
 	exit(127);
 }
 

@@ -90,7 +90,7 @@ char	*update_store(char *store)
 	if (!temp)
 		return (free_if(store));
 	if (i >= ft_strlen(store))
-		return (free(store), free(temp), ft_strdup(""));
+		return (free(store), free(temp), NULL);
 	while (store[i])
 		temp[j++] = store[i++];
 	temp[j] = '\0';
