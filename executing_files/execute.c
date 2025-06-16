@@ -21,6 +21,7 @@ void	execute_command(t_cmds *cmd, t_env **env, t_cmds *tmp)
 	path = find_path_to_cmd(env, cmd->cmds[0], 0);
 	if (!path)
 	{
+		dub_for_cmds(&cmd, env, tmp);
 		close_fds(tmp);
 		clear_commands(&tmp);
 		clear_and_exit(env);
