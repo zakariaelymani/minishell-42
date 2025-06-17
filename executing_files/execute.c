@@ -18,6 +18,7 @@ void	execute_command(t_cmds *cmd, t_env **env, t_cmds *tmp)
 	char	**env_to_excute;
 	int		status;
 
+	dub_for_cmds(&cmd, env, tmp);
 	path = find_path_to_cmd(env, cmd->cmds[0], 0);
 	if (!path)
 	{
@@ -27,7 +28,6 @@ void	execute_command(t_cmds *cmd, t_env **env, t_cmds *tmp)
 		clear_and_exit(env);
 	}
 	env_to_excute = convert_strcut_array((*env)->next);
-	dub_for_cmds(&cmd, env, tmp);
 	execve(path, cmd->cmds, env_to_excute);
 	free_while(env_to_excute);
 	clear_commands(&tmp);
@@ -90,7 +90,8 @@ void	fork_and_execute(t_cmds **cmd, t_env **env)
 	tmp = (*cmd);
 	while (tmp)
 	{
-		pipe_cammand(&tmp);
+		if (pipe_cammand(&tmp) == -1)
+			break;
 		tmp->pid = fork();
 		if (tmp->pid == 0)
 		{
@@ -108,7 +109,6 @@ void	fork_and_execute(t_cmds **cmd, t_env **env)
 		tmp = tmp->next;
 	}
 	wait_child(*cmd, env);
-	return ;
 }
 
 void	execute_command_line(t_cmds **cmd, t_env **env)

@@ -112,10 +112,13 @@ char	*randomize_name(int fd)
 int	here_document(char *limiter, int flag, t_env **env)
 {
 	int		fd;
+	int		fd_input;
 	char	*name;
 
 	name = randomize_name(0);
 	fd = ft_open(name, OUTPUT);
+	fd_input = ft_open(name, INPUT);
+	unlink(name);
 	limiter = free_and_join(limiter, "\n", 0);
 	fd = read_conten(limiter, fd, *env, flag);
 	if (fd > -1)
@@ -127,11 +130,9 @@ int	here_document(char *limiter, int flag, t_env **env)
 	if (fd == -1)
 		(*env)->exit_sta = 1;
 	if (fd == -2 || fd == -1)
-		return (unlink(name), free(name), -2);
-	fd = ft_open(name, INPUT);
-	unlink(name);
+		return (unlink(name), free(name), close(fd_input), -2);
 	free(name);
 	name = NULL;
 	(*env)->exit_sta = 0;
-	return (fd);
+	return (fd_input);
 }

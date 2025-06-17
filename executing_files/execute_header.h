@@ -20,7 +20,7 @@
 
 void	dup_input_output(t_cmds **cmd, t_cmds *tmp);
 int		check_is_builtins(t_cmds *cmd);
-void	pipe_cammand(t_cmds **tmp);
+int		pipe_cammand(t_cmds **tmp);
 int		open_files(t_cmds **cmds, t_env **env);
 void	execute_builtins(t_cmds **cmd, t_env **env, int stat);
 int		read_heredoc(t_cmds **cmd, t_env **env);

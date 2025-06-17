@@ -64,7 +64,7 @@ void	close_fds(t_cmds *tmp)
 	}
 }
 
-void	pipe_cammand(t_cmds **tmp)
+int	pipe_cammand(t_cmds **tmp)
 {
 	int	pid[2];
 
@@ -73,11 +73,12 @@ void	pipe_cammand(t_cmds **tmp)
 		if (pipe(pid) == -1)
 		{
 			perror("pipe");
-			return ;
+			return (-1);
 		}
 		(*tmp)->output = pid[1];
 		(*tmp)->next->input = pid[0];
 	}
+	return (1);
 }
 
 int	read_heredoc(t_cmds **cmd, t_env **env)
