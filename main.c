@@ -65,6 +65,11 @@ char	*read_input(t_env **env)
 		write(2, "exit\n", 6);
 		clear_and_exit(env);
 	}
+	if (!*line)
+	{
+		free(line);
+		return (NULL);
+	}
 	return (line);
 }
 
@@ -83,7 +88,7 @@ int	main(int argc, char *argv[], char *env[])
 		line = read_input(&env_new);
 		if (!isatty(STDIN_FILENO))
 			break ;
-		if (!*line)
+		if (!line)
 			continue ;
 		add_history(line);
 		cmd = process_input(line, env_new);
