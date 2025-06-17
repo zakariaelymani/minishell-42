@@ -1,0 +1,12 @@
+      
+builtins
+executing_files
+main.c
+main.o
+Makefile
+minishell
+minishell.h
+parsing
+struct.h
+todolist
+tools

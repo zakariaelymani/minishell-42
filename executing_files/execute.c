@@ -18,7 +18,6 @@ void	execute_command(t_cmds *cmd, t_env **env, t_cmds *tmp)
 	char	**env_to_excute;
 	int		status;
 
-	dub_for_cmds(&cmd, env, tmp);
 	path = find_path_to_cmd(env, cmd->cmds[0], 0);
 	if (!path)
 	{
@@ -27,6 +26,7 @@ void	execute_command(t_cmds *cmd, t_env **env, t_cmds *tmp)
 		clear_commands(&tmp);
 		clear_and_exit(env);
 	}
+	dub_for_cmds(&cmd, env, tmp);
 	env_to_excute = convert_strcut_array((*env)->next);
 	execve(path, cmd->cmds, env_to_excute);
 	free_while(env_to_excute);
