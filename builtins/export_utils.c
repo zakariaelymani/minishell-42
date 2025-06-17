@@ -104,7 +104,7 @@ int	check_name(char *splited)
 	i++;
 	while (splited[i] != '=' && splited[i] != '\0')
 	{
-		if (ft_isalnum(splited[i]) == 0)
+		if (ft_isalnum(splited[i]) == 0 && splited[i] != '_')
 		{
 			if (splited[i] == '+' && splited[i + 1] && splited[i + 1] == '=')
 			{

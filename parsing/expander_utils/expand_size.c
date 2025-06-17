@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../parsing.h"
 
 ssize_t	varsize(char **str, t_env *env)
 {
@@ -33,7 +33,7 @@ ssize_t	varsize(char **str, t_env *env)
 		}
 		env = env->next;
 	}
-	while (*++*str && ft_isalnum(**str))
+	while (*++*str && (ft_isalnum(**str) || **str == '_'))
 		;
 	return (0);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../parsing.h"
 
 static int	env_cpy(char *d, char **str, t_env *env)
 {
@@ -32,7 +32,7 @@ static int	env_cpy(char *d, char **str, t_env *env)
 		}
 		env = env->next;
 	}
-	while (*++*str && ft_isalnum(**str))
+	while (*++*str && (ft_isalnum(**str) || **str == '_'))
 		;
 	*d = '\0';
 	return (0);
