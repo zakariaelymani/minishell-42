@@ -36,7 +36,7 @@ static ssize_t	calculate_size(char *str)
 	return (len);
 }
 
-char	*get_word(char *pos)
+char	*get_word(char *pos, t_env *env)
 {
 	char	*result;
 	ssize_t	len;
@@ -45,7 +45,7 @@ char	*get_word(char *pos)
 
 	len = calculate_size(pos);
 	if (len < 0)
-		return (NULL);
+		return (env->exit_sta = 2, NULL);
 	result = ft_malloc(len + 2);
 	if (!result)
 		return (NULL);

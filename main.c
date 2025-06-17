@@ -30,7 +30,7 @@ static t_cmds	*process_input(char *line, t_env *env)
 	t_cmds	*cmd;
 
 	sanitize_input(line);
-	tokens = ms_tokenizer(line);
+	tokens = ms_tokenizer(line, env);
 	free(line);
 	if (!syntax_checker(tokens) || !ms_expander(tokens, env))
 	{

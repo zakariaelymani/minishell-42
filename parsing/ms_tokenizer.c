@@ -35,13 +35,13 @@ static t_type	get_tok_type(char *pos)
 	return (type);
 }
 
-static t_token	*get_wtoken(char *line, int *i)
+static t_token	*get_wtoken(char *line, int *i, t_env *env)
 {
 	char	*content;
 	t_token	*new;
 	char	qpair;
 
-	content = get_word(line + *i);
+	content = get_word(line + *i, env);
 	if (!content)
 		return (NULL);
 	new = ms_toknew(content, WORD);
@@ -81,7 +81,7 @@ static t_token	*get_optoken(char *line, int *i)
 	return (token);
 }
 
-t_token	*ms_tokenizer(char *line)
+t_token	*ms_tokenizer(char *line, t_env *env)
 {
 	t_token	*tokenlist;
 	int		i;
@@ -95,7 +95,7 @@ t_token	*ms_tokenizer(char *line)
 		while (ft_isspace(line[i]))
 			i++;
 		if (line[i] && !ft_strchr("<>|", line[i]) && !ft_isspace(line[i]))
-			if (!ms_tokappend(&tokenlist, get_wtoken(line, &i)))
+			if (!ms_tokappend(&tokenlist, get_wtoken(line, &i, env)))
 				return (ms_tokclear(&tokenlist, free), NULL);
 		if (line[i] && ft_strchr("<>", line[i]))
 			if (!ms_tokappend(&tokenlist, get_optoken(line, &i)))
