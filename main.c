@@ -32,11 +32,6 @@ static t_cmds	*process_input(char *line, t_env *env)
 	sanitize_input(line);
 	tokens = ms_tokenizer(line);
 	free(line);
-	if (!tokens)
-	{
-		env->exit_sta = 2;
-		return (NULL);
-	}
 	if (!syntax_checker(tokens) || !ms_expander(tokens, env))
 	{
 		env->exit_sta = 2;

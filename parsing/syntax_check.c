@@ -34,7 +34,8 @@ int	syntax_checker(t_token *token)
 	{
 		if (token->type == PIPE)
 		{
-			if (!token->prev || !token->next)
+			if (!token->prev || !token->next
+				|| (token->next->type | token->prev->type) & PIPE)
 				return (ft_putstr_fd("Syntax error: Invalid pipe |\n", 2), 0);
 		}
 		else if ((token->type & (INPUT | OUTPUT | HEREDOC | APPEND)))
