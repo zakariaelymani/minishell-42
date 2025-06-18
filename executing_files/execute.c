@@ -91,7 +91,7 @@ void	fork_and_execute(t_cmds **cmd, t_env **env)
 	while (tmp)
 	{
 		if (pipe_cammand(&tmp) == -1)
-			break;
+			break ;
 		tmp->pid = fork();
 		if (tmp->pid == 0)
 		{

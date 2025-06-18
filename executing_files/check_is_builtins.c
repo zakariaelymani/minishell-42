@@ -77,9 +77,7 @@ void	execute_builtins_inchild(t_cmds **cmd, t_env **env,
 	else if (stat == 5)
 		close_and_exit(my_pwd(env), cmd);
 	else if (stat == 6)
-	{
-	   close_and_exit(ft_exit((*cmd)->cmds, 0, env, cmd), cmd);
-	}
+		close_and_exit(ft_exit((*cmd)->cmds, 0, env, cmd), cmd);
 	else if (stat == 7)
 		close_and_exit(change_dir((*cmd)->cmds, env), cmd);
 }
