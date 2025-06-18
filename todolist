@@ -26,4 +26,15 @@ minis
 
 
 minishell$ export $arr
-minishell: export: = a b c  is not a valid identifier
+minishell: export: = a b c  is not a valid identifier 
+exit
+minishell$ exit | exit 22 22
+exit
+ minshell too many argumets
+minishell$ exit
+minishell$ exit | exit 22 22
+exit
+ minshell too many argumets
+minishell$ exit
+minishell$ exit | exit 22 22
+exit`
