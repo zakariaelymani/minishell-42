@@ -55,7 +55,7 @@ static void	dq_mode(char **str, char **dest, t_env *env)
 	*(*dest)++ = *(*str)++;
 	while (**str && **str != '\"')
 	{
-		if (**str == '$' && (ft_isalnum(*(*str + 1))
+		if (**str == '$' && *(*str + 1) != '\"' && (ft_isalnum(*(*str + 1))
 				|| special_delim(*(*str + 1))))
 			*dest += env_cpy(*dest, str, env);
 		else

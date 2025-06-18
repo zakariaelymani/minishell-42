@@ -57,7 +57,7 @@ static void	dq_mode(char **str, ssize_t *len, t_env *env)
 	*len += 1;
 	while (**str && **str != '\"')
 	{
-		if (**str == '$' && (ft_isalnum(*(*str + 1))
+		if (**str == '$' && *(*str + 1) != '\"' && (ft_isalnum(*(*str + 1))
 				|| special_delim(*(*str + 1))))
 			*len += varsize(str, env);
 		else
