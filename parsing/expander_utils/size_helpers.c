@@ -32,25 +32,8 @@ static size_t	expand_pid(char **str)
 
 size_t	symbol_size(char **str, int code)
 {
-	char	*start;
-
 	*str += 1;
-	start = *str;
 	if (**str == '?')
 		return (exit_status(str, code));
-	if (**str == '$')
-		return (expand_pid(str));
-	if (**str == '\'')
-	{
-		while (*++*str != '\'')
-			;
-		*str += 1;
-	}
-	else if (**str == '\"')
-	{
-		while (*++*str != '\"')
-			;
-		*str += 1;
-	}
-	return (*str - start);
+	return (expand_pid(str));
 }

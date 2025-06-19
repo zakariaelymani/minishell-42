@@ -14,7 +14,7 @@
 
 int	special_delim(int c)
 {
-	if (ft_strchr("'\"_?$", c))
+	if (ft_strchr("_?$", c))
 		return (1);
 	return (0);
 }

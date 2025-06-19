@@ -21,7 +21,7 @@ static size_t	unquoted_size(char *str)
 	{
 		if (*str == '\"')
 		{
-			while (*++str != '\"')
+			while (*str && *++str != '\"')
 				len++;
 			str += 1;
 		}
@@ -46,8 +46,8 @@ static void	copy_unquoted(char *dest, char *str)
 	{
 		if (*str == '\"')
 		{
-			while (*++str != '\"')
-				*dest++ = *str;
+			while (*str && *++str != '\"')
+					*dest++ = *str;
 			str += 1;
 		}
 		else if (*str == '\'')
@@ -60,6 +60,21 @@ static void	copy_unquoted(char *dest, char *str)
 			*dest++ = *str++;
 	}
 	*dest = *str;
+}
+
+void finalize(char *str)
+{
+	int sq;
+	int dq;
+
+	dq = '"' * -1;
+	sq = '\'' * -1;
+	while (*str)
+	{
+		if (*str == sq || *str == dq)
+			*str *= -1;
+		str++;
+	}
 }
 
 int	remove_quotes(char **str)
@@ -85,6 +100,7 @@ int	remove_quotes(char **str)
 		free(*str);
 		*str = unquoted;
 	}
+	finalize(*str);
 	return (0);
 }
 
