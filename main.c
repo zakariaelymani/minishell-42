@@ -77,11 +77,9 @@ int	main(int argc, char *argv[], char *env[])
 {
 	t_env			*env_new;
 	t_cmds			*cmd;
-	struct termios	term;
 	char			*line;
 
 	env_new = get_env(argc, argv, env);
-	tcgetattr(STDIN_FILENO, &term);
 	while (1)
 	{
 		signals(1);
@@ -96,7 +94,6 @@ int	main(int argc, char *argv[], char *env[])
 			continue ;
 		execute_command_line(&cmd, &env_new);
 		clear_commands(&cmd);
-		tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	}
 	free_vars(line, NULL, NULL, NULL);
 	clear_and_exit(&env_new);
