@@ -13,9 +13,7 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include <stdio.h>
 # include <stdlib.h>
-# include <unistd.h>
 
 typedef struct s_env
 {
