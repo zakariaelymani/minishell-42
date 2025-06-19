@@ -16,8 +16,6 @@ void	dub_for_cmds(t_cmds **cmd, t_env **env, t_cmds *tmp)
 {
 	int	fd;
 
-	if (!(*cmd)->redirection)
-		return ;
 	fd = open_files(cmd, env);
 	if (fd == 1)
 		exit(1);

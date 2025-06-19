@@ -41,7 +41,7 @@ void	check_and_exit(long status, int sing, t_env **env, t_cmds **cmds)
 {
 	if (status > 255)
 		status = status % 256;
-	write(1, "exit\n", 6);
+	write(2, "exit\n", 6);
 	if (sing == -1)
 		safe_write(2, "minishell: exit: numeric argument required\n", 43);
 	(clear_commands(cmds), clear_env(env, &sing));
