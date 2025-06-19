@@ -22,7 +22,6 @@
 # include "struct.h"
 # include "builtins/builtins.h"
 # include <signal.h>
-# include <sys/types.h>
 # include <sys/wait.h>
 # include "executing_files/execute_header.h"
 # include "parsing.h"
