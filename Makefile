@@ -16,6 +16,7 @@ FILES = builtins/env.c \
 	tools/tools_libft/ft_lstadd_back.c \
     tools/tools_libft/ft_lstlast.c \
     tools/tools_libft/ft_lstsize.c \
+    tools/tools_libft/ft_strmove.c \
 	tools/atoi.c \
     tools/compare_string.c \
     tools/tools_env/env_dup.c \
