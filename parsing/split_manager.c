@@ -20,12 +20,12 @@ void split_keyvalue(char *eq)
 	both = 0;
 	p1 = eq;
 	while (*p1 && *p1 != '\x1F')
-		if (*--p1 == '\x1D')
+		if (*--p1 == '\x1D' || *p1 == '\x1E')
 			both++;
 	if (both > 0)
 	{
 		while(*++p1 && *p1 != '\x1F')
-			if (*p1 == '\x1D')
+			if (*p1 == '\x1D' || *p1 == '\x1E')
 				*p1 = '\x1F';
 	}
 	else

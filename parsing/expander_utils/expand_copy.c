@@ -92,7 +92,12 @@ int	fill(char *dest, char *str, t_env *env)
 			while (*dest)
 			{
 				if (ft_isspace(*dest))
-					*dest = '\x1D';
+				{
+					if (*dest == ' ')
+						*dest = '\x1D';
+					else
+						*dest = '\x1E';
+				}
 				else if (*dest == '"' || *dest == '\'')
 					*dest = *dest * -1;
 				dest++;
