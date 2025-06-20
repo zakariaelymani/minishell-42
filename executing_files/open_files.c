@@ -12,14 +12,14 @@
 
 #include "execute_header.h"
 
-void move(char *str)
+void	move(char *str)
 {
-	size_t movesize;
-	char *p;
+	size_t	movesize;
+	char	*p;
 
 	p = str;
 	movesize = 0;
-	while (*p == '\x1D')
+	while (*p && *p == '\x1D')
 		p++;
 	movesize = p - str;
 	if (movesize > 0)

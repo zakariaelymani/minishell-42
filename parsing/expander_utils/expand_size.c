@@ -75,13 +75,12 @@ ssize_t	expanded_size(char *str, t_env *env)
 	ssize_t	len;
 
 	len = 0;
-
 	while (*str)
 	{
 		if (*str == '$' && (*(str + 1) == '"' || *(str + 1) == '\''))
 		{
 			str++;
-			continue;
+			continue ;
 		}
 		if (len > 4000000)
 			return (-1);

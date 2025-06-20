@@ -55,19 +55,19 @@ static void	dq_mode(char **str, char **dest, t_env *env)
 	*(*dest)++ = *(*str)++;
 	while (**str && **str != '\"')
 	{
-	if (**str == '$' && *(*str + 1) != '\"' &&  (ft_isalnum(*(*str + 1))
-					|| special_delim(*(*str + 1))))
+		if (**str == '$' && *(*str + 1) != '\"' && (ft_isalnum(*(*str + 1))
+				|| special_delim(*(*str + 1))))
+		{
+			env_cpy(*dest, str, env);
+			while (**dest)
 			{
-				env_cpy(*dest, str, env);
-				while (**dest)
-				{
-					if (**dest == '"' || **dest == '\'')
-							**dest = **dest * -1;
-						*dest += 1;
-				}
+				if (**dest == '"' || **dest == '\'')
+					**dest = **dest * -1;
+				*dest += 1;
+			}
 		}
-	else
-		*(*dest)++ = *(*str)++;
+		else
+			*(*dest)++ = *(*str)++;
 	}
 	*(*dest)++ = *(*str)++;
 }
@@ -79,7 +79,7 @@ int	fill(char *dest, char *str, t_env *env)
 		if (*str == '$' && (*(str + 1) == '"' || *(str + 1) == '\''))
 		{
 			str++;
-			continue;
+			continue ;
 		}
 		if (*str == '\'')
 			sq_mode(&str, &dest);

@@ -55,10 +55,8 @@ char	*find_path_to_cmd(t_env **env, char *cmd, int i)
 	splited = ft_split(path, ':');
 	path = cmd;
 	joined = ft_strjoin("/", cmd);
-	while (splited[i])
+	while (*path && splited[i])
 	{
-		if (!*path)
-			break ;
 		cmd = ft_strjoin(splited[i], joined);
 		if (access(cmd, F_OK | X_OK) == 0)
 			return (free_while(splited), free(joined), joined = NULL, cmd);
