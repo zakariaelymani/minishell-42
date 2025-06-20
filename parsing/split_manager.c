@@ -12,47 +12,30 @@
 
 #include "parsing.h"
 
-// static void	inject_split(char *s)
-// {
-// 	while (*++s)
-// 		if (*s == '\x1D')
-// 			*s = '\x1F';
-// }
-
 void split_keyvalue(char *eq)
 {
-	int both;
 	char *p1;
-	char *p2;
+	int  both;
 
-	p1 = eq;
-	p2 = p1;
 	both = 0;
+	p1 = eq;
 	while (*p1 && *p1 != '\x1F')
 		if (*--p1 == '\x1D')
 			both++;
-	while (*p2 && *p2!= '\x1F')
-		if (*++p2== '\x1D')
-			both++;
-	if (both > 1)
+	if (both > 0)
 	{
-		while (*p1 && *p1 != '=')
-		{
+		while(*++p1 && *p1 != '\x1F')
 			if (*p1 == '\x1D')
 				*p1 = '\x1F';
-			p1++;
-		}
-		while (*p2 && *p2 != '=')
-		{
-			if (*p2 == '\x1D')
-				*p2 = '\x1F';
-			p2--;
-		}
 	}
 	else
+	{
 		while (*++eq && *eq != '\x1F')
 			if (*eq == '\x1D')
 				*eq = ' ';
+			else if (*eq == '\x1E')
+				*eq ='\t';
+	}
 }
 
 void	split_manager(char *s)
@@ -72,12 +55,9 @@ void	split_manager(char *s)
 			if (!close)
 				break ;
 			split_keyvalue(close);
+			close++;
 		}
-		// inject_split(s);
 	}
 	else
-	{
 		*close = '\x1F';
-		// inject_split(s);
-	}
 }
