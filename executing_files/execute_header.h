@@ -15,8 +15,6 @@
 # include "../struct.h"
 # include "../builtins/builtins.h"
 # include "../tools/tools.h"
-# include <sys/types.h>
-# include <signal.h>
 
 void	dup_input_output(t_cmds **cmd, t_cmds *tmp);
 int		check_is_builtins(t_cmds *cmd);
