@@ -12,6 +12,24 @@
 
 #include "execute_header.h"
 
+void move(char *str)
+{
+	size_t movesize;
+	char *p;
+
+	p = str;
+	movesize = 0;
+	while (*p == '\x1D')
+		p++;
+	movesize = p - str;
+	if (movesize > 0)
+	{
+		while (*p && *p != '\x1D')
+			*str++ = *p++;
+		*str = '\0';
+	}
+}
+
 int	open_redir(t_redir **tmp)
 {
 	char	*s;
@@ -22,14 +40,7 @@ int	open_redir(t_redir **tmp)
 	if (counterwords(s, '\x1D') != 1)
 		return (ft_putstr_fd("Syntax Error: Ambiguous redirect\n", 2), -2);
 	else
-	{
-		while (*s)
-		{
-			if (*s == '\x1D')
-				*s = ' ';
-			s++;
-		}
-	}
+		move(s);
 	if ((*tmp)->type == OUTPUT)
 		(*tmp)->fd = ft_open((*tmp)->file_name, OUTPUT);
 	else if ((*tmp)->type == INPUT)

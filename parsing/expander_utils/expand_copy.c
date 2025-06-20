@@ -61,9 +61,7 @@ static void	dq_mode(char **str, char **dest, t_env *env)
 				env_cpy(*dest, str, env);
 				while (**dest)
 				{
-					if (ft_isspace(**dest))
-						**dest = '\x1D';
-					else if (**dest == '"' || **dest == '\'')
+					if (**dest == '"' || **dest == '\'')
 							**dest = **dest * -1;
 						*dest += 1;
 				}
