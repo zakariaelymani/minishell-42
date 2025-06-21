@@ -1,0 +1,35 @@
+YOU NEED TO EXIT 
+minishell$ << 1 << 2 << 3 << 4 << 5 << 6 << 7 << 8 << 9 << 10 << 11 << 12 << 13 << 14 << 15 << 16 << 17
+Error: heredoc limit exceeded.
+minishell$ echo $?
+2
+
+
+<< a cat
+>  $USER
+> "$USER"
+> '$USER'
+> $"USER"
+> $'USER'        
+> a
+ zel-yama
+> "zel-yama"
+> '$USER'
+> "USER"
+>
+
+
+
+zel-yama@e1r6p2:~/Desktop/minishell-42$ touch ls
+zel-yama@e1r6p2:~/Desktop/minishell-42$ export PATH=.
+zel-yama@e1r6p2:~/Desktop/minishell-42$ ls
+bash: ./ls: Permission denied
+zel-yama@e1r6p2:~/Desktop/minishell-42$ /ls
+bash: /ls: No such file or directory
+zel-yama@e1r6p2:~/Desktop/minishell-42$ \ls
+bash: ./ls: Permission denied
+zel-yama@e1r6p2:~/Desktop/minishell-42$ ls
+bash: ./ls: Permission denied
+zel-yama@e1r6p2:~/Desktop/minishell-42$ ls
+bash: ./ls: Permission denied
+zel-yama@e1r6p2:~/Desktop/minis
