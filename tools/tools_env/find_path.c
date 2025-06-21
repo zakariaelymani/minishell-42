@@ -17,7 +17,8 @@ char	*check_is_exsist_or_excuteble(char *cmd, t_env **env)
 	int	fd;
 
 	fd = open(cmd, __O_DIRECTORY);
-	close(fd);
+	if (fd > -1)
+		close(fd);
 	if (access(cmd, F_OK) != 0)
 	{
 		(*env)->exit_sta = 127;
@@ -26,7 +27,7 @@ char	*check_is_exsist_or_excuteble(char *cmd, t_env **env)
 	}
 	else if (access(cmd, X_OK) != 0)
 	{
-		my_perror("minishell: ", cmd, ": command is not executble;\n");
+		my_perror("minishell: ", cmd, ": Permission denied \n");
 		(*env)->exit_sta = 126;
 		return (NULL);
 	}
@@ -55,10 +56,8 @@ char	*find_path_to_cmd(t_env **env, char *cmd, int i)
 	splited = ft_split(path, ':');
 	path = cmd;
 	joined = ft_strjoin("/", cmd);
-	while (splited[i])
+	while (*path && splited[i])
 	{
-		if (!*path)
-			break ;
 		cmd = ft_strjoin(splited[i], joined);
 		if (access(cmd, F_OK | X_OK) == 0)
 			return (free_while(splited), free(joined), joined = NULL, cmd);

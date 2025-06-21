@@ -38,15 +38,20 @@ void	change_pwd(t_env **env, char *input)
 int	change_dir_to_home(t_env *env, int fd)
 {
 	char	*value;
+	int		status;
 
+	status = 0;
 	if (fd == -1)
+	{
+		status = 1;
 		perror("you don't have Permission cwd ");
+	}
 	value = return_value(env, "HOME", 1);
 	if (!value)
 		return (perror("minishell cd don't unset HOME"), 1);
 	if (chdir(value) != 0)
 		return (perror("minishell cd"), 1);
-	return (0);
+	return (status);
 }
 
 int	change_dir(char **new_path, t_env **env)

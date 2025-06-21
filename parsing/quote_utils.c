@@ -47,7 +47,7 @@ static void	copy_unquoted(char *dest, char *str)
 		if (*str == '\"')
 		{
 			while (*str && *++str != '\"')
-					*dest++ = *str;
+				*dest++ = *str;
 			str += 1;
 		}
 		else if (*str == '\'')
@@ -62,10 +62,10 @@ static void	copy_unquoted(char *dest, char *str)
 	*dest = *str;
 }
 
-void finalize(char *str)
+void	finalize(char *str)
 {
-	int sq;
-	int dq;
+	int	sq;
+	int	dq;
 
 	dq = '"' * -1;
 	sq = '\'' * -1;

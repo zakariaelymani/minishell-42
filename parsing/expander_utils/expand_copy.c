@@ -55,21 +55,33 @@ static void	dq_mode(char **str, char **dest, t_env *env)
 	*(*dest)++ = *(*str)++;
 	while (**str && **str != '\"')
 	{
-	if (**str == '$' && *(*str + 1) != '\"' &&  (ft_isalnum(*(*str + 1))
-					|| special_delim(*(*str + 1))))
+		if (**str == '$' && *(*str + 1) != '\"' && (ft_isalnum(*(*str + 1))
+				|| special_delim(*(*str + 1))))
+		{
+			env_cpy(*dest, str, env);
+			while (**dest)
 			{
-				env_cpy(*dest, str, env);
-				while (**dest)
-				{
-					if (**dest == '"' || **dest == '\'')
-							**dest = **dest * -1;
-						*dest += 1;
-				}
+				if (**dest == '"' || **dest == '\'')
+					**dest = **dest * -1;
+				*dest += 1;
+			}
 		}
-	else
-		*(*dest)++ = *(*str)++;
+		else
+			*(*dest)++ = *(*str)++;
 	}
 	*(*dest)++ = *(*str)++;
+}
+
+void	preserve_sq(char **dest)
+{
+	while (**dest)
+	{
+		if (ft_isspace(**dest))
+			**dest = '\x1D';
+		else if (**dest == '"' || **dest == '\'')
+			**dest = **dest * -1;
+		*dest += 1;
+	}
 }
 
 int	fill(char *dest, char *str, t_env *env)
@@ -77,11 +89,8 @@ int	fill(char *dest, char *str, t_env *env)
 	while (*str)
 	{
 		if (*str == '$' && (*(str + 1) == '"' || *(str + 1) == '\''))
-		{
 			str++;
-			continue;
-		}
-		if (*str == '\'')
+		else if (*str == '\'')
 			sq_mode(&str, &dest);
 		else if (*str && *str == '\"')
 			dq_mode(&str, &dest, env);
@@ -89,19 +98,7 @@ int	fill(char *dest, char *str, t_env *env)
 				|| special_delim(*(str + 1))))
 		{
 			env_cpy(dest, &str, env);
-			while (*dest)
-			{
-				if (ft_isspace(*dest))
-				{
-					if (*dest == ' ')
-						*dest = '\x1D';
-					else
-						*dest = '\x1E';
-				}
-				else if (*dest == '"' || *dest == '\'')
-					*dest = *dest * -1;
-				dest++;
-			}
+			preserve_sq(&dest);
 		}
 		else
 			*dest++ = *str++;

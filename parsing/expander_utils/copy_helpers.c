@@ -32,7 +32,6 @@ static size_t	expand_pid(char *dest, char **str)
 
 size_t	symbol_copy(char *dest, char **str, int code)
 {
-
 	*str += 1;
 	if (**str == '?')
 		return (exit_status(dest, str, code));

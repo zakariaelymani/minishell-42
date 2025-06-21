@@ -76,5 +76,6 @@ unsigned long	counterwords(const char *str, char c);
 char			*get_next_line(int fd);
 void			*ft_malloc(size_t size);
 char			*ft_strnstr(const char *hay, const char *needle, size_t len);
+void			ft_strmove(char *str);
 
 #endif
