@@ -20,7 +20,7 @@ void	*ft_malloc(size_t size)
 	if (!content)
 	{
 		perror("malloc failed");
-		exit(1);
+		exit(2);
 	}
 	return (content);
 }

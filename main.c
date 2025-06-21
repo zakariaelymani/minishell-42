@@ -79,13 +79,14 @@ int	main(int argc, char *argv[], char *env[])
 	t_cmds			*cmd;
 	char			*line;
 
+	if (!isatty(STDIN_FILENO) || !isatty(STDOUT_FILENO))
+			return (0);
 	env_new = get_env(argc, argv, env);
 	while (1)
 	{
 		signals(1);
 		line = read_input(&env_new);
-		if (!isatty(STDIN_FILENO))
-			break ;
+	
 		if (!line)
 			continue ;
 		add_history(line);
