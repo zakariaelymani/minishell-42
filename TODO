@@ -33,3 +33,6 @@ bash: ./ls: Permission denied
 zel-yama@e1r6p2:~/Desktop/minishell-42$ ls
 bash: ./ls: Permission denied
 zel-yama@e1r6p2:~/Desktop/minis
+
+YOU MUST HANDLE MULTIPLE PIPES WITHOUT THIS ERROR :
+'pipe: Too many open files' :)
