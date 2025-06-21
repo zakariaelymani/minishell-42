@@ -77,7 +77,12 @@ void	preserve_sq(char **dest)
 	while (**dest)
 	{
 		if (ft_isspace(**dest))
-			**dest = '\x1D';
+		{
+			if (**dest == ' ')
+				**dest = '\x1D';
+			else
+				**dest = '\x1E';
+		}
 		else if (**dest == '"' || **dest == '\'')
 			**dest = **dest * -1;
 		*dest += 1;
