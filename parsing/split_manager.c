@@ -59,5 +59,12 @@ void	split_manager(char *s)
 		}
 	}
 	else
+	{
 		*close = '\x1F';
+		while (*++s)
+		{
+			if (*s == '\x1E' || *s == '\x1D')
+				*s = '\x1F';
+		}
+	}
 }
