@@ -78,10 +78,8 @@ long long	norm_atoi(const char *str, long long res, int *flag)
 	}
 	if (sing == 1 && check_longmax(str, i) == 1)
 		return (*flag = -1, 2);
-	while (str[i])
+	while (str[i] && ft_isdigit(str[i]) == 1)
 	{
-		if (res < LONG_MIN)
-			return (res * sing);
 		res *= 10;
 		res += (str[i] - '0');
 		i++;

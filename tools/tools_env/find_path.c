@@ -17,7 +17,8 @@ char	*check_is_exsist_or_excuteble(char *cmd, t_env **env)
 	int	fd;
 
 	fd = open(cmd, __O_DIRECTORY);
-	close(fd);
+	if (fd > -1)
+		close(fd);
 	if (access(cmd, F_OK) != 0)
 	{
 		(*env)->exit_sta = 127;
@@ -26,7 +27,7 @@ char	*check_is_exsist_or_excuteble(char *cmd, t_env **env)
 	}
 	else if (access(cmd, X_OK) != 0)
 	{
-		my_perror("minishell: ", cmd, ": command is not executble;\n");
+		my_perror("minishell: ", cmd, ": Permission denied \n");
 		(*env)->exit_sta = 126;
 		return (NULL);
 	}
