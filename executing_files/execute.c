@@ -29,7 +29,7 @@ void	execute_command(t_cmds *cmd, t_env **env, t_cmds *tmp)
 	dub_for_cmds(&cmd, env, tmp);
 	env_to_excute = convert_strcut_array((*env)->next);
 	execve(path, cmd->cmds, env_to_excute);
-	safe_write(2,"minishell :", 11);
+	safe_write(2, "minishell :", 11);
 	perror(cmd->cmds[0]);
 	free_while(env_to_excute);
 	clear_commands(&tmp);
