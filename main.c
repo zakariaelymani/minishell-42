@@ -16,9 +16,14 @@ int	g_global_status;
 
 void	sanitize_input(char *line)
 {
+	char	dq;
+	char	sq;
+
+	sq = '\'' * -1;
+	dq = '"' * -1;
 	while (*line)
 	{
-		if (ft_strchr("\x1F\x1D\x1E", *line))
+		if (ft_strchr("\x1F\x1D\x1E", *line) || (*line == dq || *line == sq))
 			*line = '\x1C';
 		line++;
 	}

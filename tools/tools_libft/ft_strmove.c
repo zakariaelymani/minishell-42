@@ -21,13 +21,17 @@ void	ft_strmove(char *str)
 		return ;
 	p = str;
 	movesize = 0;
-	while (*p && *p == '\x1D')
+	while (*p && ft_strchr("\x1D\x1E", *p))
 		p++;
 	movesize = p - str;
 	if (movesize > 0)
 	{
-		while (*p && *p != '\x1D')
+		while (*p && !ft_strchr("\x1D\x1E", *p))
 			*str++ = *p++;
 		*str = '\0';
 	}
+	else
+	while (*p && !ft_strchr("\x1D\x1E", *p))
+		p++;
+	*p = '\0';
 }
