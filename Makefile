@@ -83,7 +83,6 @@ FILES = builtins/env.c \
     parsing/expander_utils/copy_helpers.c \
 	parsing/expander_utils/size_helpers.c \
 	parsing/parse.c \
-    tools/get_next_line.c \
     tools/safe_malloc.c \
 
 NAME = minishell
