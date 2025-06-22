@@ -45,6 +45,7 @@ FILES = builtins/env.c \
 	tools/tools_libft/ft_memmove.c\
 	tools/tools_libft/ft_strrchr.c\
     tools/tools_libft/ft_strnstr.c\
+    tools/tools_libft/ft_countwords.c\
 	tools/tools_env/add_ifnot_exists.c \
     tools/tools_env/change_value_struct_env.c \
 	tools/here_doc.c \
@@ -88,7 +89,7 @@ FILES = builtins/env.c \
 NAME = minishell
 CC = cc
 RM = rm -rf
-FLAGS = -I. -I./parsing -I./tools -Wall -Wextra -Werror -g
+FLAGS = -I. -I./parsing -I./tools -Wall -Wextra -Werror
 OBJ = $(FILES:.c=.o)
 HEADER1 = builtins/builtins.h
 HEADER2 = struct.h 

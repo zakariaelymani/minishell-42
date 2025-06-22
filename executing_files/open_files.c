@@ -19,7 +19,7 @@ int	open_redir(t_redir **tmp)
 	s = (*tmp)->file_name;
 	if ((*tmp)->type == HEREDOC)
 		return (-1);
-	if (counterwords(s, '\x1D') != 1)
+	if (ft_countwords(s, "\x1D\x1E") != 1)
 		return (ft_putstr_fd("Syntax Error: Ambiguous redirect\n", 2), -2);
 	else
 		ft_strmove(s);

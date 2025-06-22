@@ -56,5 +56,6 @@ int		key_found(char *s, char *key, size_t namelen);
 size_t	symbol_copy(char *dest, char **str, int code);
 size_t	symbol_size(char **str, int code);
 void	split_manager(char *s);
+int		ft_countwords(char *str, char *charset);
 
 #endif

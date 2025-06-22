@@ -31,7 +31,7 @@ void	ft_strmove(char *str)
 		*str = '\0';
 	}
 	else
-	while (*p && !ft_strchr("\x1D\x1E", *p))
-		p++;
+		while (*p && !ft_strchr("\x1D\x1E", *p))
+			p++;
 	*p = '\0';
 }
