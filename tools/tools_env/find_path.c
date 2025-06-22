@@ -25,7 +25,7 @@ char	*check_is_exsist_or_excuteble(char *cmd, t_env **env)
 		my_perror("minishell: ", cmd, ": No such file or directory\n");
 		return (NULL);
 	}
-	else if (access(cmd, X_OK) != 0)
+	else if (access(cmd, X_OK | R_OK) != 0)
 	{
 		my_perror("minishell: ", cmd, ": Permission denied \n");
 		(*env)->exit_sta = 126;
@@ -59,7 +59,7 @@ char	*find_path_to_cmd(t_env **env, char *cmd, int i)
 	while (*path && splited[i])
 	{
 		cmd = ft_strjoin(splited[i], joined);
-		if (access(cmd, F_OK) == 0)
+		if (access(cmd, F_OK | R_OK) == 0)
 			return (free_while(splited), free(joined), joined = NULL, cmd);
 		free_vars(cmd, NULL, NULL, NULL);
 		i++;

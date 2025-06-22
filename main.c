@@ -100,6 +100,4 @@ int	main(int argc, char *argv[], char *env[])
 		execute_command_line(&cmd, &env_new);
 		clear_commands(&cmd);
 	}
-	free_vars(line, NULL, NULL, NULL);
-	clear_and_exit(&env_new);
 }
