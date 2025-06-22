@@ -12,18 +12,24 @@
 
 #include "parsing.h"
 
-int	expand(char **str, t_env *env)
+int	expand(char **str, t_env *env, int hd)
 {
 	ssize_t	len;
 	char	*result;
 
-	len = expanded_size(*str, env);
+	if (hd)
+		len = expanded_size_hd(*str, env);
+	else
+		len = expanded_size(*str, env);
 	if (len < 0)
 		return (-1);
 	result = ft_malloc(len + 1);
 	if (!result)
 		return (-2);
-	fill(result, *str, env);
+	if (hd)
+		fill_hd(result, *str, env);
+	else
+		fill(result, *str, env);
 	free(*str);
 	*str = result;
 	return (1);
@@ -41,7 +47,7 @@ int	ms_expander(t_token *tokens, t_env *env)
 			err = heredoc_quotes(&head->content);
 		else
 		{
-			err = expand(&head->content, env);
+			err = expand(&head->content, env, 0);
 			if (head ->prev && (head->prev->type & (APPEND | INPUT | OUTPUT)))
 				remove_quotes(&head->content);
 		}

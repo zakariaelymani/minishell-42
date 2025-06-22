@@ -12,13 +12,13 @@
 
 #include "parsing.h"
 
-void	split_keyvalue(char *eq)
+void	split_keyvalue(char **eq)
 {
 	char	*p1;
 	int		both;
 
 	both = 0;
-	p1 = eq;
+	p1 = *eq;
 	while (*p1 && *p1 != '\x1F')
 		if (*--p1 == '\x1D' || *p1 == '\x1E')
 			both++;
@@ -30,12 +30,12 @@ void	split_keyvalue(char *eq)
 	}
 	else
 	{
-		while (*++eq && *eq != '\x1F')
+		while (*++*eq && **eq != '\x1F')
 		{
-			if (*eq == '\x1D')
-				*eq = ' ';
-			else if (*eq == '\x1E')
-				*eq = '\t';
+			if (**eq == '\x1D')
+				**eq = ' ';
+			else if (**eq == '\x1E')
+				**eq = '\t';
 		}
 	}
 }
@@ -56,8 +56,7 @@ void	split_manager(char *s)
 			close = ft_strchr(close, '=');
 			if (!close)
 				break ;
-			split_keyvalue(close);
-			close++;
+			split_keyvalue(&close);
 		}
 	}
 	else
