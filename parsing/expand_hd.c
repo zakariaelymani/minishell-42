@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_hd.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abenkaro <abenkaro@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/22 18:26:02 by abenkaro          #+#    #+#             */
+/*   Updated: 2025/06/22 18:26:03 by abenkaro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
 static ssize_t	varsize_hd(char **str, t_env *env)
@@ -37,7 +49,7 @@ ssize_t	expanded_size_hd(char *str, t_env *env)
 			return (-1);
 		if (*str == '$' && (*(str + 1) == '"' || *(str + 1) == '\''))
 		{
-		  len++;
+			len++;
 			str++;
 		}
 		else if (*str == '$' && (ft_isalnum(*(str + 1))
@@ -51,6 +63,7 @@ ssize_t	expanded_size_hd(char *str, t_env *env)
 	}
 	return (len);
 }
+
 static int	env_cpy_hd(char *d, char **str, t_env *env)
 {
 	size_t	namelen;
