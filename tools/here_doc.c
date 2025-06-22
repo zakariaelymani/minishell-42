@@ -30,8 +30,9 @@ int	read_conten(char *limiter, int fd, t_env *env, int flag)
 		if (flag == -2)
 		{
 			if (ft_strncmp(line, limiter, ft_strlen(limiter)))
-				expand(&line, env);
-		}signal(SIGINT, SIG_DFL);
+				signal(SIGINT, SIG_DFL);
+				expand(&line, env, 1);
+		}
 		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 			return (free(line), fd);
 		else
