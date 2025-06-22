@@ -43,10 +43,8 @@ void	heredoc_handle(int sig)
 {
 	if (sig == SIGINT)
 	{
-		g_global_status = 3;-
+		g_global_status = 3;
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
-		close(0);
-		close(1);
 		return ;
 	}
 }
