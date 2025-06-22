@@ -23,15 +23,15 @@ int	read_conten(char *limiter, int fd, t_env *env, int flag)
 		(signal(SIGINT, heredoc_handle), signal(SIGQUIT, SIG_IGN));
 		line = readline(">");
 		if (g_global_status == 3)
-			return (close(fd), -2);
+			return (close(fd) , -2);
 		if (!line)
-			return (write(2, "Delimiter not specified", 25), fd);
+			return (write(2, "Delimiter not specified\n", 25), fd);
 		line = free_and_join(line, "\n", 1);
 		if (flag == -2)
 		{
 			if (ft_strncmp(line, limiter, ft_strlen(limiter)))
 				expand(&line, env);
-		}
+		}signal(SIGINT, SIG_DFL);
 		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 			return (free(line), fd);
 		else
@@ -39,6 +39,16 @@ int	read_conten(char *limiter, int fd, t_env *env, int flag)
 		(1) && (free(line), line = NULL);
 	}
 	return (fd);
+}
+
+void	change_fds(int input, int output, int fdf)
+{
+	dup2(input, STDIN_FILENO);
+	close(input);
+	dup2(output, STDOUT_FILENO);
+	close(output);
+	if (fdf > 1)
+		close(fdf);
 }
 
 char	*randomize_name(int fd)
@@ -58,20 +68,21 @@ int	here_document(char *limiter, int flag, t_env **env)
 	int		fd;
 	int		fd_input;
 	char	*name;
+	int	 	tmp_fd;
+	int		tmp_fd2;
 
+	tmp_fd = dup(STDIN_FILENO);
+	tmp_fd2 = dup(STDOUT_FILENO);
 	name = randomize_name(0);
 	fd = ft_open(name, OUTPUT);
 	fd_input = ft_open(name, INPUT);
 	unlink(name);
 	limiter = free_and_join(limiter, "\n", 0);
 	fd = read_conten(limiter, fd, *env, flag);
-	close(fd);
+	change_fds(tmp_fd, tmp_fd2, fd);
 	free(limiter);
-	limiter = NULL;
 	if (fd == -2)
 		(*env)->exit_sta = 130;
-	if (fd == -1)
-		(*env)->exit_sta = 1;
 	if (fd == -2 || fd == -1)
 		return (unlink(name), free(name), close(fd_input), -2);
 	free(name);
