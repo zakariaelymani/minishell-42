@@ -78,10 +78,9 @@ int	read_heredoc(t_cmds **cmd, t_env **env)
 {
 	t_redir		*rids;
 	t_cmds		*tmp;
-	int			fd;
+
 
 	tmp = (*cmd);
-	fd = dup(STDIN_FILENO);
 	while (tmp)
 	{
 		rids = tmp->redirection;
@@ -91,16 +90,15 @@ int	read_heredoc(t_cmds **cmd, t_env **env)
 			{
 				rids->fd = here_document(rids->file_name, rids->fd, env);
 				if (rids->fd == -1)
-					return (close(fd), close_fds(*cmd), 1);
+					return (close_fds(*cmd), 1);
 				if (rids->fd == -2)
-					return (dup2(fd, STDIN_FILENO),
-						close(fd), close_fds(*cmd), 1);
+					return (1);
 			}
 			rids = rids->next;
 		}
 		tmp = tmp->next;
 	}
-	return (close(fd), 0);
+	return (0);
 }
 
 int	open_files(t_cmds **cmds, t_env **env)

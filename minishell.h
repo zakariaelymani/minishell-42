@@ -25,6 +25,7 @@
 # include <sys/wait.h>
 # include "executing_files/execute_header.h"
 # include "parsing.h"
+# include <sys/ioctl.h> 
 
 extern int	g_global_status;
 void	clear_and_exit(t_env **env);

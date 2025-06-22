@@ -21,12 +21,12 @@ int	read_conten(char *limiter, int fd, t_env *env, int flag)
 	while (1)
 	{
 		(signal(SIGINT, heredoc_handle), signal(SIGQUIT, SIG_IGN));
-		safe_write(1, "> ", 3);
-		line = get_next_line(STDIN_FILENO);
-		if (!line && g_global_status == 3)
-			return (g_global_status = 1, close(fd), -2);
+		line = readline(">");
+		if (g_global_status == 3)
+			return (close(fd), -2);
 		if (!line)
-			return (write(2, "Delimiter not specified\n", 25), fd);
+			return (write(2, "Delimiter not specified", 25), fd);
+		line = free_and_join(line, "\n", 1);
 		if (flag == -2)
 		{
 			if (ft_strncmp(line, limiter, ft_strlen(limiter)))
@@ -65,8 +65,7 @@ int	here_document(char *limiter, int flag, t_env **env)
 	unlink(name);
 	limiter = free_and_join(limiter, "\n", 0);
 	fd = read_conten(limiter, fd, *env, flag);
-	if (fd > -1)
-		close(fd);
+	close(fd);
 	free(limiter);
 	limiter = NULL;
 	if (fd == -2)

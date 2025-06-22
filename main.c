@@ -80,13 +80,12 @@ int	main(int argc, char *argv[], char *env[])
 	char			*line;
 
 	if (!isatty(STDIN_FILENO) || !isatty(STDOUT_FILENO))
-			return (0);
+		return (0);
 	env_new = get_env(argc, argv, env);
 	while (1)
 	{
 		signals(1);
 		line = read_input(&env_new);
-	
 		if (!line)
 			continue ;
 		add_history(line);

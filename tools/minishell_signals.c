@@ -38,14 +38,13 @@ void	signals(int flag)
 		signal(SIGQUIT, SIG_DFL);
 	}
 }
-
+ 
 void	heredoc_handle(int sig)
 {
 	if (sig == SIGINT)
 	{
-		safe_write(1, "\n", 1);
 		g_global_status = 3;
-		close(STDIN_FILENO);
+		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		return ;
 	}
 }
