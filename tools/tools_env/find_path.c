@@ -59,7 +59,7 @@ char	*find_path_to_cmd(t_env **env, char *cmd, int i)
 	while (*path && splited[i])
 	{
 		cmd = ft_strjoin(splited[i], joined);
-		if (access(cmd, F_OK ) == 0)
+		if (access(cmd, F_OK) == 0)
 			return (free_while(splited), free(joined), joined = NULL, cmd);
 		free_vars(cmd, NULL, NULL, NULL);
 		i++;

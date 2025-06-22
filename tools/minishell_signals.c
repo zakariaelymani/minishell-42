@@ -38,7 +38,7 @@ void	signals(int flag)
 		signal(SIGQUIT, SIG_DFL);
 	}
 }
- 
+
 void	heredoc_handle(int sig)
 {
 	if (sig == SIGINT)

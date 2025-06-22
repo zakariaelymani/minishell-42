@@ -79,7 +79,6 @@ int	read_heredoc(t_cmds **cmd, t_env **env)
 	t_redir		*rids;
 	t_cmds		*tmp;
 
-
 	tmp = (*cmd);
 	while (tmp)
 	{
